@@ -1,7 +1,7 @@
 # NotionSharp
 Unofficial Notion APIv3 library
 
-![](https://img.shields.io/nuget/v/Softlion.NotionSharp)
+![https://www.nuget.org/packages/Softlion.NotionSharp/](https://img.shields.io/nuget/v/Softlion.NotionSharp)
 
 ## Usage
 
