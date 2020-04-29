@@ -1,5 +1,5 @@
 # NotionSharp
-Unofficial Notion APIv3 library
+Unofficial [notion.so](https://notion.so) APIv3 library
 
 [![NuGet][nuget-img]][nuget-link]
 
