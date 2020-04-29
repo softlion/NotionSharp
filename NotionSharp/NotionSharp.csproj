@@ -10,4 +10,38 @@
     <PackageReference Include="System.Text.Json" Version="4.7.1" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <!--  nuget configurable properties -->
+    <Version>0.0.1</Version>
+    <VersionSuffix></VersionSuffix>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!--  nuget properties -->
+    <PackageId>Softlion.NotionSharp</PackageId>
+    <!-- PackageIcon>icon.png</PackageIcon -->
+    <!--<PackageIconUrl>https://raw.githubusercontent.com/softlion/NotionSharp/master/Assets/nuget_icon_128x128.png</PackageIconUrl>-->
+    <Summary>Notion.so api client library (netstandard)</Summary>
+    <PackageTags>notion api client library</PackageTags>
+    <Title>Notion.so api client library</Title>
+    <Description>Notion.so is a nice tool to write blogs among other things</Description>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
+    <Authors>Benjamin Mayrargue</Authors>
+    <Owners>Benjamin Mayrargue</Owners>
+    <Copyright>Benjamin Mayrargue</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+    <RepositoryUrl>https://github.com/softlion/NotionSharp</RepositoryUrl>
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
+    <PackageReleaseNotes>
+      0.0.1
+      initial version
+    </PackageReleaseNotes>
+    <Company />
+  </PropertyGroup>
+
 </Project>
