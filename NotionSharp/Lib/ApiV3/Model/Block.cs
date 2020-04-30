@@ -11,20 +11,20 @@ namespace NotionSharp.Lib.ApiV3.Model
         /// page, collection_view_page
         /// </summary>
         public string Type => (string)Value["type"];
-        public JObject Properties => (JObject)Value["properties"];
+        public JObject Properties => Value.ContainsKey("properties") ? (JObject)Value["properties"] : null;
 
         #region type=page
-        public string Title => Properties["title"].ToObject<List<List<string>>>()[0][0];
-        public List<Guid> Content => Value["content"].ToObject<List<Guid>>();
+        public string Title => Value.ContainsKey("title") ? Properties["title"].ToObject<List<List<string>>>()[0][0] : null;
+        public List<Guid> Content => Value.ContainsKey("content") ? Value["content"].ToObject<List<Guid>>() : null;
         #endregion
 
         #region type=collection_view_page
-        public List<Guid> ViewIds => Value["view_ids"].ToObject<List<Guid>>();
+        public List<Guid> ViewIds => Value.ContainsKey("view_ids") ? Value["view_ids"].ToObject<List<Guid>>() : null;
         public Guid CollectionId => (Guid)Value["collection_id"];
 
         #endregion
 
-        public List<Permission> Permissions => Value["email_domains"].ToObject<List<Permission>>();
+        public List<Permission> Permissions => Value.ContainsKey("email_domains") ? Value["email_domains"].ToObject<List<Permission>>() : null;
 
         //  "format": {
         // "page_full_width": true
@@ -49,7 +49,7 @@ namespace NotionSharp.Lib.ApiV3.Model
         /// collection_view_page only
         /// </summary>
         public Guid CopiedFrom => (Guid)Value["copied_from"];
-        public ParentTable ParentTable => Value["parent_table"].ToObject<ParentTable>();
+        public ParentTable ParentTable => Value.ContainsKey("parent_table") ? Value["parent_table"].ToObject<ParentTable>() : ParentTable.Unknown;
         // "created_by_table": "notion_user",
         // "last_edited_by_table": "notion_user",
     }

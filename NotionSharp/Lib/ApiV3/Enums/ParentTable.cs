@@ -2,6 +2,7 @@
 {
     public enum ParentTable
     {
+        Unknown,
         user_root,
         block,
         collection,

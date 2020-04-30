@@ -1,8 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.ServiceModel.Syndication;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using NotionSharp;
 using NotionSharp.Lib;
+using NotionSharp.Lib.ApiV3.Model;
+using NotionSharp.Lib.ApiV3.Results;
 
 namespace NotionSharpTest
 {
@@ -24,6 +33,54 @@ namespace NotionSharpTest
 
             var userContent = await session.LoadUserContent();
             Assert.IsNotNull(userContent);
+        }
+
+
+
+        [TestMethod]
+        public void TestGetHtml()
+        {
+            var json = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"..\..\..\JsonData", "LoadPageChunkResult1.json"));
+            var chunks = JsonConvert.DeserializeObject<LoadPageChunkResult>(json);
+            Assert.IsNotNull(chunks);
+            var content = chunks.RecordMap.GetHtml(throwIfBlockMissing: false);
+            Assert.IsNotNull(content);
+            Assert.AreEqual(content.Length, 5428);
+        }
+
+        [TestMethod]
+        public void TestGetHtmlAbstract()
+        {
+            var json = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"..\..\..\JsonData", "LoadPageChunkResult1.json"));
+            var chunks = JsonConvert.DeserializeObject<LoadPageChunkResult>(json);
+            Assert.IsNotNull(chunks);
+            var content = chunks.RecordMap.GetHtmlAbstract();
+            Assert.IsNotNull(content);
+            Assert.AreEqual(@"<p>Creating a good Xamarin Forms control - Part 3 - UI Day 4
+</p>
+<p>In 
+<a href=""https://medium.com/@bigoudi/creating-a-good-xamarin-forms-control-part-2-ui-day-3-688bd0b3333d"">the previous article</a> I proposed the foundations of a win-win architecture for a good Xamarin Forms control using a multi targeting project. 
+</p>
+<p>Today I am presenting a way to create a control with a renderer that auto register itself, greatly simplifying the control&#39;s usage in teams, but also its documentation and its maintenance.
+</p>
+<p></p>
+", content);
+        }
+
+        [TestMethod]
+        public async Task TestGetRssFeed()
+        {
+            var sessionInfo = GetTestInfo();
+            var session = new NotionSession(sessionInfo);
+            var feed = await session.GetSyndicationFeed();
+            Assert.IsNotNull(feed);
+        }
+
+
+        [TestMethod]
+        public void TestEpoch()
+        {
+            Assert.AreEqual(new DateTimeOffset(2020,03,16,15,25,0, TimeSpan.Zero), 1584372300000.EpochToDateTimeOffset());
         }
 
         private NotionSessionInfo GetTestInfo()
