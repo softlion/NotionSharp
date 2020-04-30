@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace NotionSharp
 {
     public static class NotionUtils
     {
+        //RegexOptions options = RegexOptions.None;
+        static readonly Regex TrimSpaces = new Regex(@"[\s-]+", RegexOptions.None);
+        //sentence = regex.Replace(sentence, " ");
+
         public static Uri GetPageUri(Guid pageId, string title)
-            => new Uri(new Uri(Constants.BaseUrl), Uri.EscapeUriString(title ?? "") + $"-{pageId:D}");
+            => new Uri(new Uri(Constants.BaseUrl), $"{Uri.EscapeUriString(TrimSpaces.Replace(title ?? "", "-"))}-{pageId:N}");
 
         /// <summary>
         /// Extract the block/page ID from a Notion.so URL

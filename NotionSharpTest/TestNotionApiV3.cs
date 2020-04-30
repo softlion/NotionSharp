@@ -120,6 +120,13 @@ namespace NotionSharpTest
             Assert.AreEqual(new DateTimeOffset(2020,03,16,15,25,0, TimeSpan.Zero), 1584372300000.EpochToDateTimeOffset());
         }
 
+        [TestMethod]
+        public void TestGetPageUri()
+        {
+            var uri = NotionUtils.GetPageUri(new Guid("e238fae31112431696d4b192b4c87f4c"), "Creating a good Xamarin Forms control - UI Day 2");
+            Assert.AreEqual("https://www.notion.so/Creating-a-good-Xamarin-Forms-control-UI-Day-2-e238fae31112431696d4b192b4c87f4c", uri.ToString());
+        }
+
         private NotionSessionInfo GetTestInfo()
         {
             //notioncsharp@yopmail.com

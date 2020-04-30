@@ -55,7 +55,7 @@ namespace NotionSharp
             var pages = space.Pages.Where(pageId => userContent.RecordMap.Block[pageId].Type == "page");
 
             var feed = await session.GetSyndicationFeed(pages, maxBlocks, cancel);
-            feed.Id = space.Id.ToString("D");
+            feed.Id = space.Id.ToString("N");
             feed.Title = new TextSyndicationContent(space.Name);
             feed.Description = new TextSyndicationContent(space.Domain);
             return feed;
@@ -89,7 +89,7 @@ namespace NotionSharp
 
                     feedItems.Add(new SyndicationItem(pageBlock.Title, content, pageUri)
                     {
-                        Id = pageId.ToString("D"),
+                        Id = pageId.ToString("N"),
                         BaseUri = pageUri,
                         Summary = new TextSyndicationContent(content),
                         PublishDate = pageBlock.CreatedTime.EpochToDateTimeOffset(),
