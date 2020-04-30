@@ -18,8 +18,17 @@ public async Task GetUserContent()
         NotionUserId = Guid.Parse("00000000-0000-0000-0000-000000000000") //paste the content of the notion_user_id cookie
     };
 
+    //create a session
     var session = new NotionSession(sessionInfo);
+
+    //demo: load all root content of main space
     var userContent = await session.LoadUserContent();
-    return userContent;
+    var html = userContent.RecordMap.GetHtml(throwIfBlockMissing: false);
+    
+    //demo: get a RSS representation of all root pages in the main space.
+    //This transforms notion data to HTML.
+    var rssFeed = await session.GetSyndicationFeed();
+    
+    
 }
 ```
