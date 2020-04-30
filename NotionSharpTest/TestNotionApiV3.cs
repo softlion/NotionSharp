@@ -78,14 +78,21 @@ namespace NotionSharpTest
         }
 
         [TestMethod]
-        public async Task TestGetRssFeed()
+        public async Task TestGetRssFeedOfFirstSpace()
         {
             var sessionInfo = GetTestInfo();
             var session = new NotionSession(sessionInfo);
+
             var feed = await session.GetSyndicationFeed();
             Assert.IsNotNull(feed);
-        }
+            Assert.IsTrue(feed.Items.Any());
 
+            var userContent = await session.LoadUserContent();
+            var space = userContent.RecordMap.Space.First().Value;
+            var feedPublicBlog = await session.GetSyndicationFeed(space.Pages);
+            Assert.IsNotNull(feedPublicBlog);
+            Assert.IsTrue(feedPublicBlog.Items.Any());
+        }
 
         [TestMethod]
         public void TestEpoch()

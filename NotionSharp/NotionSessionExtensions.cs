@@ -47,24 +47,49 @@ namespace NotionSharp
             }, cancel).ReceiveJson<LoadPageChunkResult>();
         }
 
-        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, CancellationToken cancel = default)
+        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, int maxBlocks = 20, CancellationToken cancel = default)
         {
             var userContent = await session.LoadUserContent(cancel);
-
             var space = userContent.RecordMap.Space.First().Value;
 
+            //Skip collections
+            //collection_view_page not supported
+            var pages = space.Pages.Where(pageId => userContent.RecordMap.Block[pageId].Type == "page");
+
+            var feed = await session.GetSyndicationFeed(pages, maxBlocks, cancel);
+            feed.Title = new TextSyndicationContent(space.Name);
+            feed.Description = new TextSyndicationContent(space.Domain);
+            return feed;
+        }
+
+        /// <summary>
+        /// Create a syndication feed from a list of page
+        /// </summary>
+        /// <param name="session">a session</param>
+        /// <param name="pages">the pages</param>
+        /// <param name="maxBlocks">limits the parsing of each page to the 1st 20 blocks</param>
+        /// <param name="cancel"></param>
+        /// <returns>A SyndicationFeed containing one SyndicationItem per page</returns>
+        /// <remarks>
+        /// The created feed has no title/description
+        /// </remarks>
+        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, IEnumerable<Guid> pages, int maxBlocks = 20, CancellationToken cancel = default)
+        {
+            //var userContent = await session.LoadUserContent(cancel);
+            //var space = userContent.RecordMap.Space.First().Value;
+
             var feedItems = new List<SyndicationItem>();
-            foreach (var pageId in space.Pages)
+            foreach (var pageId in pages)
             {
                 //Skip collections
-                if(userContent.RecordMap.Block[pageId].Type != "page") //collection_view_page not supported
-                    continue;
+                //if (userContent.RecordMap.Block[pageId].Type != "page") //collection_view_page not supported
+                //    continue;
 
                 //get blocks and extract an html content
-                var chunks = await session.LoadPageChunk(pageId, 0, 20, cancel);
+                var chunks = await session.LoadPageChunk(pageId, 0, maxBlocks, cancel);
                 var pageBlock = chunks.RecordMap.Block[pageId]; //Get the latest version of the page block
 
-                if (pageBlock.Alive)
+                if (pageBlock.Alive && pageBlock.Type == "page") //collection_view_page (sub collections) not supported
                 {
                     var content = chunks.RecordMap.GetHtmlAbstract(pageId);
 
@@ -79,8 +104,9 @@ namespace NotionSharp
                 }
             }
 
-            var feed = new SyndicationFeed(space.Name, space.Domain, null, feedItems)
+            var feed = new SyndicationFeed(feedItems)
             {
+                LastUpdatedTime = feedItems.DefaultIfEmpty().Max(item => item.LastUpdatedTime),
                 //Copyright = 
             };
 
