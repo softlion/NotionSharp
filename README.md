@@ -1,5 +1,8 @@
 # NotionSharp
-Unofficial [notion.so](https://notion.so) APIv3 library
+
+[Notion.so](https://notion.so) is an all-in-one workspace to write things, with the best simple and powerful "wysiwyg" editor, with color highlightning for code blocks, easy video interations, and much more. It includes an offline windows application to peacefully write your blog's content.
+
+This is an unofficial [notion.so](https://notion.so) APIv3 library that enables you, among other things, to get a list of pages as a RSS feed, as notion has no RSS feed as of 2020/04/30.
 
 [![NuGet][nuget-img]][nuget-link]
 
