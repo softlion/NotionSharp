@@ -6,8 +6,11 @@ This is an unofficial [notion.so](https://notion.so) APIv3 library that enables 
 
 [![NuGet][nuget-img]][nuget-link]
 
+![notion-img]
+
 [nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp/
 [nuget-img]: https://img.shields.io/nuget/v/Softlion.NotionSharp
+[notion-img]: https://github.com/softlion/NotionSharp/raw/master/cover.png
 
 ## Notion high-level model
 
