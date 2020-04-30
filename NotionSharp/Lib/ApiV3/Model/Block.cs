@@ -14,7 +14,7 @@ namespace NotionSharp.Lib.ApiV3.Model
         public JObject Properties => Value.ContainsKey("properties") ? (JObject)Value["properties"] : null;
 
         #region type=page
-        public string Title => Value.ContainsKey("title") ? Properties["title"].ToObject<List<List<string>>>()[0][0] : null;
+        public string Title => Properties?.ContainsKey("title") == true ? Properties["title"].ToObject<List<List<string>>>()[0][0] : null;
         public List<Guid> Content => Value.ContainsKey("content") ? Value["content"].ToObject<List<Guid>>() : null;
         #endregion
 

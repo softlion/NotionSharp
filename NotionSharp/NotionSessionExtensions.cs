@@ -43,7 +43,7 @@ namespace NotionSharp
                 Cursor = new Cursor { Stack = new List<List<CursorStack>> { new List<CursorStack> { new CursorStack { Id = pageId, Index = chunkNumber, Table = "block" } } } },
                 Limit = limit,
                 PageId = pageId,
-                VerticalColumn = false
+                VerticalColumns = false
             }, cancel).ReceiveJson<LoadPageChunkResult>();
         }
 
@@ -56,6 +56,10 @@ namespace NotionSharp
             var feedItems = new List<SyndicationItem>();
             foreach (var pageId in space.Pages)
             {
+                //Skip collections
+                if(userContent.RecordMap.Block[pageId].Type != "page") //collection_view_page not supported
+                    continue;
+
                 //get blocks and extract an html content
                 var chunks = await session.LoadPageChunk(pageId, 0, 20, cancel);
                 var pageBlock = chunks.RecordMap.Block[pageId]; //Get the latest version of the page block

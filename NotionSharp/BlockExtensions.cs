@@ -119,26 +119,40 @@ namespace NotionSharp
             {
                 if (textPart[1] is JArray subParts)
                 {
-                    if (subParts.Count == 1 && subParts[0] is JArray outerTag && outerTag.All(t => !(t is JArray)))
+                    var sbBefore = new StringBuilder();
+                    var sbAfter = new StringBuilder();
+
+                    foreach (var subPart in subParts)
                     {
-                        var outerTagValue = (string) outerTag[0];
-                        if (outerTagValue == "a" && outerTag.Count == 2)
+                        if (subPart is JArray outerTag && outerTag.All(t => !(t is JArray)))
                         {
-                            sb.Append("<a href=\"").Append(outerTag[1]).Append("\">")
-                                .Append(WebUtility.HtmlEncode((string)textPart[0]))
-                                .Append("</a>");
-                        }
-                        else if(outerTag.Count == 1 && (outerTagValue == "i" || outerTagValue == "b"))
-                        {
-                            sb.Append("<").Append(outerTagValue).Append(">")
-                                .Append(WebUtility.HtmlEncode((string) textPart[0]))
-                                .Append("</").Append(outerTagValue).Append(">");
+                            var outerTagValue = (string) outerTag[0];
+                            if (outerTagValue == "a" && outerTag.Count == 2)
+                            {
+                                //hyperlink
+                                sbBefore.Append($"<a href=\"{outerTag[1]}\">");
+                                sbAfter.Insert(0, "</a>");
+                            }
+                            else if (outerTagValue == "h" && outerTag.Count == 2)
+                            {
+                                //color
+                                sbBefore.Append($"<span style=\"color:{outerTag[1]}\">");
+                                sbAfter.Insert(0, "</span>");
+                            }
+                            else if(outerTag.Count == 1 && (outerTagValue == "i" || outerTagValue == "b"))
+                            {
+                                //bold, italic
+                                sbBefore.Append($"<{outerTagValue}>");
+                                sbAfter.Insert(0, $"</{outerTagValue}>");
+                            }
+                            else
+                                throw new NotSupportedException($"unknown outer tag {outerTag[0]} with counts:{outerTag.Count}");
                         }
                         else
-                            throw new NotSupportedException($"unknown outer tag {outerTag[0]} with counts:{outerTag.Count}");
+                            throw new NotSupportedException($"unknown subParts {subParts}");
                     }
-                    else
-                        throw new NotSupportedException($"unknown subParts {subParts}");
+                    
+                    sb.Append(sbBefore).Append(WebUtility.HtmlEncode((string)textPart[0])).Append(sbAfter);
                 }
                 else
                     throw new NotSupportedException($"unknown subParts structure {textPart[1]}");

@@ -6,7 +6,7 @@ namespace NotionSharp
     public static class NotionUtils
     {
         public static Uri GetPageUri(Guid pageId, string title)
-            => new Uri(new Uri(Constants.BaseUrl), Uri.EscapeUriString(title) + $"-{pageId:D}");
+            => new Uri(new Uri(Constants.BaseUrl), Uri.EscapeUriString(title ?? "") + $"-{pageId:D}");
 
         /// <summary>
         /// Extract the block/page ID from a Notion.so URL

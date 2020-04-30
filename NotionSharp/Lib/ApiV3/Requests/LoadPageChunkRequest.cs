@@ -14,7 +14,7 @@ namespace NotionSharp.Lib.ApiV3.Requests
         public int Limit { get; set; }
         [JsonProperty("pageId")]
         public Guid PageId { get; set; }
-        [JsonProperty("verticalColumn")]
-        public bool VerticalColumn { get; set; }
+        [JsonProperty("verticalColumns")]
+        public bool VerticalColumns { get; set; }
     }
 }

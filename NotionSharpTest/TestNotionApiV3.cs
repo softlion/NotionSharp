@@ -35,6 +35,16 @@ namespace NotionSharpTest
             Assert.IsNotNull(userContent);
         }
 
+        [TestMethod]
+        public async Task TestLoadPageChunkResult()
+        {
+            var sessionInfo = GetTestInfo();
+            var session = new NotionSession(sessionInfo);
+
+            var pageChunk = await session.LoadPageChunk(Guid.Parse("4e4999b4-161a-449d-bbd1-bdbce690c7cb"), 0, 50);
+            Assert.IsNotNull(pageChunk);
+            Assert.IsTrue(pageChunk.RecordMap.Block.Count > 0);
+        }
 
 
         [TestMethod]
@@ -89,8 +99,8 @@ namespace NotionSharpTest
             //http://yopmail.com/notioncsharp
             return new NotionSessionInfo
             {
-                TokenV2 = "f8bd7892dcdaa690df1dc36f2a4e306b23563564d9950a734460868e878c36d835868f79bc649faca0a40885b26c4886fa57c9ecc0e3413719ef17128c941c2fb62dbdf7533cf427f39e22ed5449",
-                NotionBrowserId = Guid.Parse("deff37ea-82a6-4a67-a112-00dc73043c75"),
+                TokenV2 = "198f2adfc90e1a91d7b8cc8a63272e1cc75ef9bfdacd35f9e0a3fcf3b28cd817ec427f72be3c2634c75c7f4401d6061c13852725c855c844b6bf8d2c677ac25c52d5ce76caa3c3bc215487587c7c",
+                NotionBrowserId = Guid.Parse("f8a52372-15da-494f-ae3f-54ea2f80fe6b"),
                 NotionUserId = Guid.Parse("ab9257e1-d027-4494-8792-71d90b63dd35")
             };
         }
