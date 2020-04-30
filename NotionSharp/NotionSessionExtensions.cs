@@ -98,6 +98,7 @@ namespace NotionSharp
 
                     feedItems.Add(new SyndicationItem(pageBlock.Title, content, pageUri)
                     {
+                        Summary = new TextSyndicationContent(content),
                         PublishDate = pageBlock.CreatedTime.EpochToDateTimeOffset(),
                         LastUpdatedTime = pageBlock.LastEditedTime.EpochToDateTimeOffset(),
                     });
