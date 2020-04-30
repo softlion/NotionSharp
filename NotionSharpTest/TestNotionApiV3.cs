@@ -125,6 +125,9 @@ namespace NotionSharpTest
         {
             var uri = NotionUtils.GetPageUri(new Guid("e238fae31112431696d4b192b4c87f4c"), "Creating a good Xamarin Forms control - UI Day 2");
             Assert.AreEqual("https://www.notion.so/Creating-a-good-Xamarin-Forms-control-UI-Day-2-e238fae31112431696d4b192b4c87f4c", uri.ToString());
+            
+            uri = NotionUtils.GetPageUri(new Guid("7ac0d129bdfe419c975328961d74f7bc"), "VSCode success: manage Windows Server 2019 (Core) remotely");
+            Assert.AreEqual("https://www.notion.so/VSCode-success-manage-Windows-Server-2019-Core-remotely-7ac0d129bdfe419c975328961d74f7bc", uri.ToString());
         }
 
         private NotionSessionInfo GetTestInfo()

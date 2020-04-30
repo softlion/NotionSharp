@@ -13,7 +13,7 @@
 
   <PropertyGroup>
     <!--  nuget configurable properties -->
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <VersionSuffix></VersionSuffix>
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>

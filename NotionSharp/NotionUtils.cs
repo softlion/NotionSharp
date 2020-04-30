@@ -7,7 +7,7 @@ namespace NotionSharp
     public static class NotionUtils
     {
         //RegexOptions options = RegexOptions.None;
-        static readonly Regex TrimSpaces = new Regex(@"[\s-]+", RegexOptions.None);
+        static readonly Regex TrimSpaces = new Regex(@"[\s-:()/\\\W]+", RegexOptions.None);
         //sentence = regex.Replace(sentence, " ");
 
         public static Uri GetPageUri(Guid pageId, string title)
