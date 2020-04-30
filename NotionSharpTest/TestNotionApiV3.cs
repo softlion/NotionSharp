@@ -77,8 +77,11 @@ namespace NotionSharpTest
 ", content);
         }
 
+        /// <summary>
+        /// get root pages of 1st space and put them in a RSS feed
+        /// </summary>
         [TestMethod]
-        public async Task TestGetRssFeedOfFirstSpace()
+        public async Task GetRssFeedFromRootPagesOfFirstSpace()
         {
             var sessionInfo = GetTestInfo();
             var session = new NotionSession(sessionInfo);
@@ -86,11 +89,28 @@ namespace NotionSharpTest
             var feed = await session.GetSyndicationFeed();
             Assert.IsNotNull(feed);
             Assert.IsTrue(feed.Items.Any());
+        }
 
+
+        /// <summary>
+        /// get 1st page of 1st space, then get all sub-pages of this page and put them in a RSS feed
+        /// </summary>
+        [TestMethod]
+        public async Task GetRssFeedFromSubPagesOfFirstPageOfFirstSpace()
+        {
+            var sessionInfo = GetTestInfo();
+            var session = new NotionSession(sessionInfo);
+
+            //Get first space
             var userContent = await session.LoadUserContent();
             var space = userContent.RecordMap.Space.First().Value;
-            var feedPublicBlog = await session.GetSyndicationFeed(space.Pages);
-            Assert.IsNotNull(feedPublicBlog);
+            //Get sub-pages of first page
+            var firstPage = userContent.RecordMap.Block[space.Pages[0]];
+            var subPages = firstPage.Content;
+
+            var feedPublicBlog = await session.GetSyndicationFeed(subPages);
+            feedPublicBlog.Title = new TextSyndicationContent(firstPage.Title);
+            Assert.IsNotNull(feedPublicBlog);   
             Assert.IsTrue(feedPublicBlog.Items.Any());
         }
 
