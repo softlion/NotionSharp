@@ -1,0 +1,1507 @@
+{
+    "recordMap": {
+        "block": {
+            "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa": {
+                "role": "editor",
+                "value": {
+                    "id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "version": 637,
+                    "type": "page",
+                    "properties": {
+                        "title": [
+                            [
+                                "Secret feature❣ Xamarin Forms control's auto registration "
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "220da26d-271b-46d6-b406-512827ed2b11",
+                        "0e61c0c6-d0f1-46d9-975b-b9b0a2f856ab",
+                        "a23c4469-9399-4ea4-a284-c944fb4a2d89",
+                        "32297a2f-7ff2-4478-b182-2db36ab63878",
+                        "f59d73fe-eb86-4417-bb17-7a1f8791145f",
+                        "4a1192e3-f59e-4384-a868-73eb7a98fccc",
+                        "f8c63d86-a956-43fd-881d-0822445d7475",
+                        "f4be5163-3238-47a6-918b-d70994eaab9e",
+                        "41c186ba-143f-4221-838c-72ac7cb886f1",
+                        "f2f996bd-fc15-4538-87f7-014595d80d1e",
+                        "17b850da-6819-4922-a862-d346c4061253",
+                        "35a4d6ca-8f8c-406a-8a71-36829ba6398c",
+                        "4c10106e-9061-44cc-89f4-7e0e24d2fdd9",
+                        "9cabda29-fd8c-4e30-b7fd-6b8232199e14",
+                        "2df20079-6e6e-4d90-86a6-aa7ea3818c66",
+                        "1678f28a-66d7-486b-93c4-c98a1caf7967",
+                        "76ae7fd0-6083-4efd-ac84-56375d80ade0",
+                        "c97ab28a-e025-4434-b6ad-550560a9eb30",
+                        "7b470c20-84bb-49ad-9fcc-ec57d0eca96b",
+                        "50a8578e-325c-4461-989b-11596d5e95a7",
+                        "ae4c6795-9dd8-42de-a357-1dbb5c81da05",
+                        "c3f8a1f2-31f7-4c57-80ef-80526dcfe2dc",
+                        "b955bb02-859a-44e5-9d67-127feda05629",
+                        "3b812dc5-f74e-4f45-a9f2-437979f114e5",
+                        "a7cd7f2f-fcc6-49ce-8c17-7ce96729d631",
+                        "4b83a85c-f7dd-4f63-9ac3-97fbed102a59",
+                        "733ec3e1-4e17-44d2-bbac-1f56fd3f29d4",
+                        "7d755ed8-830e-4a77-9a5e-0514bbb6c9b0",
+                        "62de27ce-68a4-468c-94df-07c0ce60d178",
+                        "2b609065-1fd5-40ed-855f-669000a9700b",
+                        "7542df11-7862-4d98-8f46-9ce41afb479b",
+                        "e55c274a-f8da-45cb-b6f4-b717e37270c6",
+                        "39dc23f9-003a-48d0-bc25-3dcf8b78044c",
+                        "3b6c5841-601e-41fb-9fb6-3eb203ccecc2",
+                        "ab81b86b-547c-4d8f-aa8d-0831a9fab07f",
+                        "15d41349-bfb4-4742-a11f-d163e1faa67f",
+                        "8b3d9ab7-994a-4e1d-84dd-5e4447a2893e",
+                        "aeca8510-e265-4c86-8365-7e83bbaa4d53",
+                        "aa0f0c56-ee0d-4390-897b-5f35c368bb77",
+                        "8fb4721f-1731-4aed-9019-b78ebf5c41f3",
+                        "aae18983-ef93-4f8c-a6e7-0cf977ea14fa",
+                        "d74ee3f0-c5ee-4dbc-b13f-e6c16ba6a8e4",
+                        "8b0294bc-7d9e-479d-9a56-f58893617939",
+                        "0313b4ed-a088-4a58-8ddd-97ae73cec4de",
+                        "0774f79a-b1cb-4474-83e2-11a918fd4966",
+                        "bc27b1d6-3919-4f62-a569-ce65cc09b2cc",
+                        "0c02743f-42cb-47c5-9f84-a70c8aff46b2",
+                        "c2d9844c-c64e-45b5-b5b7-d450f7a58d86",
+                        "c570350d-050b-4e4a-b1ca-3382f3473054",
+                        "3242f7f2-1fc3-43de-8c83-6e7aeec036fd",
+                        "62220b3f-7c82-4894-9167-66b48f74a1cc",
+                        "01db5abd-1413-475c-9757-1e3501b76255",
+                        "a69744d0-3ed0-49a0-a15c-5494abf99af3",
+                        "560f7160-915c-46fd-a6ba-29777e17c0ac",
+                        "04850e4e-1f8a-41cb-82c3-f46f3c27c273",
+                        "9e9ff1f3-f83b-4bbf-adb2-db9087028678",
+                        "f77b10d9-0b76-4e68-bbab-5d194be1a516",
+                        "1fad2ddc-88b5-47f4-81f1-5ada18892d16",
+                        "48a84652-dca8-4a5d-843d-6d57244a2387",
+                        "ac3fcdda-cbf4-4bb2-94e7-6c1743e2912f",
+                        "378a1962-4953-4e3c-80d4-ba2708374de3",
+                        "55e7951c-c1e4-4666-9768-23c984985be9",
+                        "556d4f36-683e-40be-a8ca-0639eeebb0a3",
+                        "371fc150-6401-4d8a-a86a-a70af1377556",
+                        "07e59c50-f0df-461c-8ebf-bc771462b8d2",
+                        "0823a0d2-7014-4c6b-b96c-b66bc2417d47",
+                        "e8adf9bb-84e4-4b1a-8127-1789ddc34473",
+                        "62499af0-5c32-4e35-8276-5239b2dfd201",
+                        "ee2fb821-59ab-4a2d-8aeb-243640c69c4f",
+                        "1bd7119c-75f8-4a4e-882e-9ef785c8a396",
+                        "af5a0335-2124-462f-a5bd-8e24b249d21d",
+                        "635ecbfc-e24a-4c9d-97a5-c8f005eb5a2f",
+                        "fbb5e4bc-d803-4d59-96ba-731147dce10e",
+                        "eeea8137-b4fa-4692-b1d4-548295c1149e",
+                        "e780cc64-4b5e-4ac1-9ec2-b06b5078646a",
+                        "4c1640b7-40ef-4649-91d8-4f59827f28ca",
+                        "40f94a85-3664-414f-81df-eb13d033cdbc",
+                        "be6eac17-af07-45c9-8db3-1db75174daa8",
+                        "4954731b-1377-48c3-af82-ec6b2e5a9a89"
+                    ],
+                    "permissions": [
+                        {
+                            "role": "editor",
+                            "type": "user_permission",
+                            "user_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                        },
+                        {
+                            "role": "comment_only",
+                            "type": "public_permission",
+                            "allow_duplicate": false,
+                            "allow_search_engine_indexing": true
+                        }
+                    ],
+                    "created_time": 1584372300000,
+                    "last_edited_time": 1588081800000,
+                    "parent_id": "d0811b52-7a9c-4f03-a1de-e261c5555318",
+                    "parent_table": "space",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "220da26d-271b-46d6-b406-512827ed2b11": {
+                "role": "editor",
+                "value": {
+                    "id": "220da26d-271b-46d6-b406-512827ed2b11",
+                    "version": 35,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "Creating a good Xamarin Forms control - Part 3 - UI Day 4"
+                            ]
+                        ]
+                    },
+                    "created_time": 1584372360000,
+                    "last_edited_time": 1587277500000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "0e61c0c6-d0f1-46d9-975b-b9b0a2f856ab": {
+                "role": "editor",
+                "value": {
+                    "id": "0e61c0c6-d0f1-46d9-975b-b9b0a2f856ab",
+                    "version": 50,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "In "
+                            ],
+                            [
+                                "the previous article",
+                                [
+                                    [
+                                        "a",
+                                        "https://medium.com/@bigoudi/creating-a-good-xamarin-forms-control-part-2-ui-day-3-688bd0b3333d"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " I proposed the foundations of a win-win architecture for a good Xamarin Forms control using a multi targeting project. "
+                            ]
+                        ]
+                    },
+                    "created_time": 1587277500000,
+                    "last_edited_time": 1587310080000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "a23c4469-9399-4ea4-a284-c944fb4a2d89": {
+                "role": "editor",
+                "value": {
+                    "id": "a23c4469-9399-4ea4-a284-c944fb4a2d89",
+                    "version": 260,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "Today I am presenting a way to create a control with a renderer that auto register itself, greatly simplifying the control's usage in teams, but also its documentation and its maintenance."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587310080000,
+                    "last_edited_time": 1587310260000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "32297a2f-7ff2-4478-b182-2db36ab63878": {
+                "role": "editor",
+                "value": {
+                    "id": "32297a2f-7ff2-4478-b182-2db36ab63878",
+                    "version": 13,
+                    "type": "image",
+                    "properties": {
+                        "source": [
+                            [
+                                "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6ea6e3a6-2a17-44f1-a25f-7e09b6114035/download.png"
+                            ]
+                        ]
+                    },
+                    "format": {
+                        "block_width": 347,
+                        "block_height": 145,
+                        "display_source": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6ea6e3a6-2a17-44f1-a25f-7e09b6114035/download.png",
+                        "block_full_width": false,
+                        "block_page_width": false,
+                        "block_aspect_ratio": 0.41786743515850144,
+                        "block_preserve_scale": true
+                    },
+                    "created_time": 1587309600000,
+                    "last_edited_time": 1587309600000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "file_ids": [
+                        "6ea6e3a6-2a17-44f1-a25f-7e09b6114035"
+                    ],
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "f59d73fe-eb86-4417-bb17-7a1f8791145f": {
+                "role": "editor",
+                "value": {
+                    "id": "f59d73fe-eb86-4417-bb17-7a1f8791145f",
+                    "version": 97,
+                    "type": "sub_header",
+                    "properties": {
+                        "title": [
+                            [
+                                "Before we start, a quick summary of the previous article"
+                            ]
+                        ]
+                    },
+                    "created_time": 1584372420000,
+                    "last_edited_time": 1588081800000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "4a1192e3-f59e-4384-a868-73eb7a98fccc": {
+                "role": "editor",
+                "value": {
+                    "id": "4a1192e3-f59e-4384-a868-73eb7a98fccc",
+                    "version": 946,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "A multi-targeting project generates one library for each target platform (iOS, Android, ...), as if you were compiling the project for each individual platform. It is NOT a \"shared project\", but it contains the source code for every platform it supports. It has the "
+                            ],
+                            [
+                                "MSBuildSdkExtras ",
+                                [
+                                    [
+                                        "a",
+                                        "https://github.com/novotnyllc/MSBuildSdkExtras"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "SDK type."
+                            ]
+                        ]
+                    },
+                    "created_time": 1584372540000,
+                    "last_edited_time": 1588081800000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "f8c63d86-a956-43fd-881d-0822445d7475": {
+                "role": "editor",
+                "value": {
+                    "id": "f8c63d86-a956-43fd-881d-0822445d7475",
+                    "version": 438,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "For Xamarin Forms projects, you only need to add a reference to this multi-targeting project from your netstandard project. References are transitive and the Xamarin Forms platform projects will automatically reference the matching platform library."
+                            ]
+                        ]
+                    },
+                    "created_time": 1584372900000,
+                    "last_edited_time": 1587309960000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "f4be5163-3238-47a6-918b-d70994eaab9e": {
+                "role": "editor",
+                "value": {
+                    "id": "f4be5163-3238-47a6-918b-d70994eaab9e",
+                    "version": 19,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "See "
+                            ],
+                            [
+                                "the previous article",
+                                [
+                                    [
+                                        "a",
+                                        "https://medium.com/@bigoudi/creating-a-good-xamarin-forms-control-part-2-ui-day-3-688bd0b3333d"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " for details."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587281880000,
+                    "last_edited_time": 1587310020000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "41c186ba-143f-4221-838c-72ac7cb886f1": {
+                "role": "editor",
+                "value": {
+                    "id": "41c186ba-143f-4221-838c-72ac7cb886f1",
+                    "version": 14,
+                    "type": "bookmark",
+                    "properties": {
+                        "link": [
+                            [
+                                "https://github.com/novotnyllc/MSBuildSdkExtras"
+                            ]
+                        ],
+                        "title": [
+                            [
+                                "novotnyllc/MSBuildSdkExtras"
+                            ]
+                        ],
+                        "description": [
+                            [
+                                "This package contains a few extra extensions to the SDK-style projects that are currently not available in Microsoft.NET.Sdk SDK. This feature is tracked in dotnet/sdk#491 The primary goal of this project is to enable multi-targeting without you having to enter in tons of properties within your csproj, vbproj, fsproj, thus keeping it nice and clean."
+                            ]
+                        ]
+                    },
+                    "format": {
+                        "bookmark_icon": "https://github.com/favicon.ico",
+                        "bookmark_cover": "https://avatars1.githubusercontent.com/u/58307267?s=400&v=4"
+                    },
+                    "created_time": 1587309660000,
+                    "last_edited_time": 1587309660000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "f2f996bd-fc15-4538-87f7-014595d80d1e": {
+                "role": "editor",
+                "value": {
+                    "id": "f2f996bd-fc15-4538-87f7-014595d80d1e",
+                    "version": 148,
+                    "type": "text",
+                    "created_time": 1587310380000,
+                    "last_edited_time": 1587310380000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "17b850da-6819-4922-a862-d346c4061253": {
+                "role": "editor",
+                "value": {
+                    "id": "17b850da-6819-4922-a862-d346c4061253",
+                    "version": 3,
+                    "type": "sub_header",
+                    "properties": {
+                        "title": [
+                            [
+                                "The Xamarin Forms control's secrets"
+                            ]
+                        ]
+                    },
+                    "created_time": 1584373260000,
+                    "last_edited_time": 1587310380000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "35a4d6ca-8f8c-406a-8a71-36829ba6398c": {
+                "role": "editor",
+                "value": {
+                    "id": "35a4d6ca-8f8c-406a-8a71-36829ba6398c",
+                    "version": 158,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "I'm gonna show you 2 ways to registrer a renderer: the official and the secret way. First the official way."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587310680000,
+                    "last_edited_time": 1587310740000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "4c10106e-9061-44cc-89f4-7e0e24d2fdd9": {
+                "role": "editor",
+                "value": {
+                    "id": "4c10106e-9061-44cc-89f4-7e0e24d2fdd9",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1587310740000,
+                    "last_edited_time": 1587310740000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "9cabda29-fd8c-4e30-b7fd-6b8232199e14": {
+                "role": "editor",
+                "value": {
+                    "id": "9cabda29-fd8c-4e30-b7fd-6b8232199e14",
+                    "version": 234,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "A \"forms\" control is a class with properties and events that can be used in XAML code. For example the Label.cs class that you use in XAML like this: <Label />."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587275760000,
+                    "last_edited_time": 1587276180000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "2df20079-6e6e-4d90-86a6-aa7ea3818c66": {
+                "role": "editor",
+                "value": {
+                    "id": "2df20079-6e6e-4d90-86a6-aa7ea3818c66",
+                    "version": 233,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "This control class is shared on all platforms (android, ios, ...). Obviously it contains only codes that can be common to all platforms. Natively, on iOS for example, it is mapped to a UILabel from UIKit. On Android its a TextView from the Android SDK. "
+                            ]
+                        ]
+                    },
+                    "created_time": 1587275880000,
+                    "last_edited_time": 1587276180000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "1678f28a-66d7-486b-93c4-c98a1caf7967": {
+                "role": "editor",
+                "value": {
+                    "id": "1678f28a-66d7-486b-93c4-c98a1caf7967",
+                    "version": 242,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "Each mapping must be declared to the Xamarin Forms runtime. This can be done in 2 way: the official way and the secret way."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587276180000,
+                    "last_edited_time": 1587310800000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "76ae7fd0-6083-4efd-ac84-56375d80ade0": {
+                "role": "editor",
+                "value": {
+                    "id": "76ae7fd0-6083-4efd-ac84-56375d80ade0",
+                    "version": 336,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "For both ways you need a class called a "
+                            ],
+                            [
+                                "custom renderer",
+                                [
+                                    [
+                                        "i"
+                                    ]
+                                ]
+                            ],
+                            [
+                                ", which often inherits from the platform's UI control (UILabel for iOS) and an interface. A helper class ViewRenderer<Xaml,Platform>  implements the interface and can be used directly."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587276420000,
+                    "last_edited_time": 1587276660000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "c97ab28a-e025-4434-b6ad-550560a9eb30": {
+                "role": "editor",
+                "value": {
+                    "id": "c97ab28a-e025-4434-b6ad-550560a9eb30",
+                    "version": 67,
+                    "type": "text",
+                    "content": [
+                        "5ee8a45f-caa7-462e-9f9f-a3a20073e7be"
+                    ],
+                    "created_time": 1587276300000,
+                    "last_edited_time": 1587310320000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "5ee8a45f-caa7-462e-9f9f-a3a20073e7be": {
+                "role": "editor",
+                "value": {
+                    "id": "5ee8a45f-caa7-462e-9f9f-a3a20073e7be",
+                    "version": 138,
+                    "type": "quote",
+                    "properties": {
+                        "title": [
+                            [
+                                "This can be done in 2 way: the official way and the secret way.",
+                                [
+                                    [
+                                        "b"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    },
+                    "format": {
+                        "block_color": "teal_background"
+                    },
+                    "created_time": 1587276300000,
+                    "last_edited_time": 1587310800000,
+                    "parent_id": "c97ab28a-e025-4434-b6ad-550560a9eb30",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "7b470c20-84bb-49ad-9fcc-ec57d0eca96b": {
+                "role": "editor",
+                "value": {
+                    "id": "7b470c20-84bb-49ad-9fcc-ec57d0eca96b",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1587276660000,
+                    "last_edited_time": 1587276660000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "50a8578e-325c-4461-989b-11596d5e95a7": {
+                "role": "editor",
+                "value": {
+                    "id": "50a8578e-325c-4461-989b-11596d5e95a7",
+                    "version": 199,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "The official way to map a custom renderer to a xaml control is to add metadata to the assembly containing the renderer:"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587276660000,
+                    "last_edited_time": 1587310860000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "ae4c6795-9dd8-42de-a357-1dbb5c81da05": {
+                "role": "editor",
+                "value": {
+                    "id": "ae4c6795-9dd8-42de-a357-1dbb5c81da05",
+                    "version": 22,
+                    "type": "code",
+                    "properties": {
+                        "title": [
+                            [
+                                "[assembly: ExportRenderer (typeof(SvgImage), typeof(SvgImageRenderer))]"
+                            ]
+                        ],
+                        "language": [
+                            [
+                                "C#"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587276720000,
+                    "last_edited_time": 1587310800000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "c3f8a1f2-31f7-4c57-80ef-80526dcfe2dc": {
+                "role": "editor",
+                "value": {
+                    "id": "c3f8a1f2-31f7-4c57-80ef-80526dcfe2dc",
+                    "version": 214,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "⚠This line have to lie outside any namespace declaration, otherwise the C# compiler silently ignores it."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587276720000,
+                    "last_edited_time": 1587277620000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "b955bb02-859a-44e5-9d67-127feda05629": {
+                "role": "editor",
+                "value": {
+                    "id": "b955bb02-859a-44e5-9d67-127feda05629",
+                    "version": 10,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "When your app calls Forms.Init(), it will scan for this metadata in all "
+                            ],
+                            [
+                                "loaded",
+                                [
+                                    [
+                                        "b"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " assemblies. In .NET apps assemblies are loaded on demand, as soon as a method contained in this assembly is called."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587310860000,
+                    "last_edited_time": 1587310860000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "3b812dc5-f74e-4f45-a9f2-437979f114e5": {
+                "role": "editor",
+                "value": {
+                    "id": "3b812dc5-f74e-4f45-a9f2-437979f114e5",
+                    "version": 393,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "There is little chance that the assembly containing your custom renderer will be loaded between the app's entry point and the Forms.Init() call. "
+                            ]
+                        ]
+                    },
+                    "created_time": 1587277080000,
+                    "last_edited_time": 1587277320000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "a7cd7f2f-fcc6-49ce-8c17-7ce96729d631": {
+                "role": "editor",
+                "value": {
+                    "id": "a7cd7f2f-fcc6-49ce-8c17-7ce96729d631",
+                    "version": 185,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "As a consequence, most of the existing Forms control libraries out in the wild requires you to initialize them by calling a static init method (like SvgImageRenderer.Init()) before calling Forms.Init() in each platform's project. And often this dummy static method is empty."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587277320000,
+                    "last_edited_time": 1587280620000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "4b83a85c-f7dd-4f63-9ac3-97fbed102a59": {
+                "role": "editor",
+                "value": {
+                    "id": "4b83a85c-f7dd-4f63-9ac3-97fbed102a59",
+                    "version": 31,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "Complicated isn't it ?"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587277380000,
+                    "last_edited_time": 1587277380000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "733ec3e1-4e17-44d2-bbac-1f56fd3f29d4": {
+                "role": "editor",
+                "value": {
+                    "id": "733ec3e1-4e17-44d2-bbac-1f56fd3f29d4",
+                    "version": 55,
+                    "type": "text",
+                    "created_time": 1587310380000,
+                    "last_edited_time": 1587310380000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "7d755ed8-830e-4a77-9a5e-0514bbb6c9b0": {
+                "role": "editor",
+                "value": {
+                    "id": "7d755ed8-830e-4a77-9a5e-0514bbb6c9b0",
+                    "version": 7,
+                    "type": "sub_header",
+                    "properties": {
+                        "title": [
+                            [
+                                "Now the secret way"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587277380000,
+                    "last_edited_time": 1587310860000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "62de27ce-68a4-468c-94df-07c0ce60d178": {
+                "role": "editor",
+                "value": {
+                    "id": "62de27ce-68a4-468c-94df-07c0ce60d178",
+                    "version": 15,
+                    "type": "image",
+                    "properties": {
+                        "source": [
+                            [
+                                "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5dcd7466-6093-4299-abf8-6fd13e2ee926/lockekey-bd-netflix.webp"
+                            ]
+                        ]
+                    },
+                    "format": {
+                        "block_width": 800,
+                        "display_source": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5dcd7466-6093-4299-abf8-6fd13e2ee926/lockekey-bd-netflix.webp",
+                        "block_full_width": false,
+                        "block_page_width": true,
+                        "block_aspect_ratio": 0.5,
+                        "block_preserve_scale": true
+                    },
+                    "created_time": 1587310920000,
+                    "last_edited_time": 1587310920000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "file_ids": [
+                        "5dcd7466-6093-4299-abf8-6fd13e2ee926"
+                    ],
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "2b609065-1fd5-40ed-855f-669000a9700b": {
+                "role": "editor",
+                "value": {
+                    "id": "2b609065-1fd5-40ed-855f-669000a9700b",
+                    "version": 340,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "Yes there is a secret: you can bypass this call to Init(). Internally, Xamarin Forms maintains a dictionary of mappings from a xaml control (ex: SvgImage) to a custom renderer (ex: (SvgImageRenderer). This mapping is built by Forms.Init() ... but is mutable !"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587277620000,
+                    "last_edited_time": 1587280620000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "7542df11-7862-4d98-8f46-9ce41afb479b": {
+                "role": "editor",
+                "value": {
+                    "id": "7542df11-7862-4d98-8f46-9ce41afb479b",
+                    "version": 84,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "You add a custom renderer mapping at runtime by calling:"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587278760000,
+                    "last_edited_time": 1587278760000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "e55c274a-f8da-45cb-b6f4-b717e37270c6": {
+                "role": "editor",
+                "value": {
+                    "id": "e55c274a-f8da-45cb-b6f4-b717e37270c6",
+                    "version": 25,
+                    "type": "code",
+                    "properties": {
+                        "title": [
+                            [
+                                "Xamarin.Forms.Internals.Registrar.Registered.Register(typeof(SvgImage), typeof(SvgImageRenderer));"
+                            ]
+                        ],
+                        "language": [
+                            [
+                                "XML"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587277800000,
+                    "last_edited_time": 1587280620000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "39dc23f9-003a-48d0-bc25-3dcf8b78044c": {
+                "role": "editor",
+                "value": {
+                    "id": "39dc23f9-003a-48d0-bc25-3dcf8b78044c",
+                    "version": 184,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "In older versions of Xamarin Forms, this method was available only on Android. Recent versions of Forms make it available on all platforms !"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587277380000,
+                    "last_edited_time": 1587278700000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "3b6c5841-601e-41fb-9fb6-3eb203ccecc2": {
+                "role": "editor",
+                "value": {
+                    "id": "3b6c5841-601e-41fb-9fb6-3eb203ccecc2",
+                    "version": 598,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "Don't forget the goal : simplify the usage of your custom control as much as possible to list the barriers that may block developers from using it. You really don't want any call to an Init() method!"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587278760000,
+                    "last_edited_time": 1587279000000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "ab81b86b-547c-4d8f-aa8d-0831a9fab07f": {
+                "role": "editor",
+                "value": {
+                    "id": "ab81b86b-547c-4d8f-aa8d-0831a9fab07f",
+                    "version": 120,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "So the question that remains is: can we call this register method automatically ? The answer is yes!"
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "ff594f7e-8831-4f54-a98c-34ed2510b1dc",
+                        "dd2420de-0161-41ef-aaef-51619d97c596"
+                    ],
+                    "created_time": 1587279000000,
+                    "last_edited_time": 1587283080000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "ff594f7e-8831-4f54-a98c-34ed2510b1dc": {
+                "role": "editor",
+                "value": {
+                    "id": "ff594f7e-8831-4f54-a98c-34ed2510b1dc",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1587279120000,
+                    "last_edited_time": 1587279120000,
+                    "parent_id": "ab81b86b-547c-4d8f-aa8d-0831a9fab07f",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "dd2420de-0161-41ef-aaef-51619d97c596": {
+                "role": "editor",
+                "value": {
+                    "id": "dd2420de-0161-41ef-aaef-51619d97c596",
+                    "version": 26,
+                    "type": "quote",
+                    "properties": {
+                        "title": [
+                            [
+                                "T"
+                            ],
+                            [
+                                "he question is: can we call this register method automatically ? The answer is yes!",
+                                [
+                                    [
+                                        "b"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    },
+                    "format": {
+                        "block_color": "teal_background"
+                    },
+                    "created_time": 1587279091650,
+                    "last_edited_time": 1587279120000,
+                    "parent_id": "ab81b86b-547c-4d8f-aa8d-0831a9fab07f",
+                    "parent_table": "block",
+                    "alive": true,
+                    "copied_from": "5ee8a45f-caa7-462e-9f9f-a3a20073e7be",
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "15d41349-bfb4-4742-a11f-d163e1faa67f": {
+                "role": "editor",
+                "value": {
+                    "id": "15d41349-bfb4-4742-a11f-d163e1faa67f",
+                    "version": 18,
+                    "type": "text",
+                    "created_time": 1587279120000,
+                    "last_edited_time": 1587279120000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "8b3d9ab7-994a-4e1d-84dd-5e4447a2893e": {
+                "role": "editor",
+                "value": {
+                    "id": "8b3d9ab7-994a-4e1d-84dd-5e4447a2893e",
+                    "version": 226,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "For this trick to work, you need to have setup the project containing the custom control as a multi targeting project, like explained in "
+                            ],
+                            [
+                                "the previous article",
+                                [
+                                    [
+                                        "a",
+                                        "https://medium.com/@bigoudi/creating-a-good-xamarin-forms-control-part-2-ui-day-3-688bd0b3333d"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "."
+                            ]
+                        ]
+                    },
+                    "created_time": 1587279060000,
+                    "last_edited_time": 1587279180000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "aeca8510-e265-4c86-8365-7e83bbaa4d53": {
+                "role": "editor",
+                "value": {
+                    "id": "aeca8510-e265-4c86-8365-7e83bbaa4d53",
+                    "version": 53,
+                    "type": "text",
+                    "created_time": 1587310380000,
+                    "last_edited_time": 1587310380000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "aa0f0c56-ee0d-4390-897b-5f35c368bb77": {
+                "role": "editor",
+                "value": {
+                    "id": "aa0f0c56-ee0d-4390-897b-5f35c368bb77",
+                    "version": 17,
+                    "type": "image",
+                    "properties": {
+                        "source": [
+                            [
+                                "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/899e144e-8018-4acd-b98e-786137792e8c/download.jpg"
+                            ]
+                        ]
+                    },
+                    "format": {
+                        "block_width": 275,
+                        "block_height": 183,
+                        "display_source": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/899e144e-8018-4acd-b98e-786137792e8c/download.jpg",
+                        "block_full_width": false,
+                        "block_page_width": false,
+                        "block_aspect_ratio": 0.6654545454545454,
+                        "block_preserve_scale": true
+                    },
+                    "created_time": 1587311040000,
+                    "last_edited_time": 1587311040000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "file_ids": [
+                        "899e144e-8018-4acd-b98e-786137792e8c"
+                    ],
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "8fb4721f-1731-4aed-9019-b78ebf5c41f3": {
+                "role": "editor",
+                "value": {
+                    "id": "8fb4721f-1731-4aed-9019-b78ebf5c41f3",
+                    "version": 6,
+                    "type": "sub_header",
+                    "properties": {
+                        "title": [
+                            [
+                                "Trick 1: automagic registration"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587279283885,
+                    "last_edited_time": 1587310860000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "copied_from": "733ec3e1-4e17-44d2-bbac-1f56fd3f29d4",
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "aae18983-ef93-4f8c-a6e7-0cf977ea14fa": {
+                "role": "editor",
+                "value": {
+                    "id": "aae18983-ef93-4f8c-a6e7-0cf977ea14fa",
+                    "version": 148,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "The idea is to register the renderer the first time the xaml class is used by xamarin forms. Yes it works !"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587279240000,
+                    "last_edited_time": 1587279780000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "d74ee3f0-c5ee-4dbc-b13f-e6c16ba6a8e4": {
+                "role": "editor",
+                "value": {
+                    "id": "d74ee3f0-c5ee-4dbc-b13f-e6c16ba6a8e4",
+                    "version": 576,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "The implementation uses a static boolean to detect if we already made the call to register, and a call to the register method in each underlying platform class. I created for you the "
+                            ],
+                            [
+                                "ControlDeclarationHelper ",
+                                [
+                                    [
+                                        "i"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "class. Simply add this line to your xaml's control's constructor:"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587279300000,
+                    "last_edited_time": 1587279960000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "8b0294bc-7d9e-479d-9a56-f58893617939": {
+                "role": "editor",
+                "value": {
+                    "id": "8b0294bc-7d9e-479d-9a56-f58893617939",
+                    "version": 36,
+                    "type": "text",
+                    "created_time": 1587279840000,
+                    "last_edited_time": 1587279900000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "0313b4ed-a088-4a58-8ddd-97ae73cec4de": {
+                "role": "editor",
+                "value": {
+                    "id": "0313b4ed-a088-4a58-8ddd-97ae73cec4de",
+                    "version": 34,
+                    "type": "code",
+                    "properties": {
+                        "title": [
+                            [
+                                "\t\tpublic SvgImage()\n\t\t{\n\t\t\t\tControlDeclarationHelper.MakeSureRendererIsRegistered();\n    }"
+                            ]
+                        ],
+                        "language": [
+                            [
+                                "C#"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587279879966,
+                    "last_edited_time": 1587280620000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "0774f79a-b1cb-4474-83e2-11a918fd4966": {
+                "role": "editor",
+                "value": {
+                    "id": "0774f79a-b1cb-4474-83e2-11a918fd4966",
+                    "version": 2,
+                    "type": "text",
+                    "created_time": 1587279780000,
+                    "last_edited_time": 1587279840000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "bc27b1d6-3919-4f62-a569-ce65cc09b2cc": {
+                "role": "editor",
+                "value": {
+                    "id": "bc27b1d6-3919-4f62-a569-ce65cc09b2cc",
+                    "version": 945,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "The ControlDeclarationHelper class is straightforward but in 2 parts (it is a partial class). The first part is below. NETSTANDARD is automatically defined by the muti-targeting project (see previous article). It is required for the compilation to succeed, but is really defined in each platform version of our library. Thus the partial keyword."
+                            ]
+                        ]
+                    },
+                    "created_time": 1584373260000,
+                    "last_edited_time": 1587280440000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "0c02743f-42cb-47c5-9f84-a70c8aff46b2": {
+                "role": "editor",
+                "value": {
+                    "id": "0c02743f-42cb-47c5-9f84-a70c8aff46b2",
+                    "version": 127,
+                    "type": "code",
+                    "properties": {
+                        "title": [
+                            [
+                                "internal static partial class ControlDeclarationHelper\n{\n    static ControlDeclarationHelper()\n    {\n         DeclareInternal();\n    }\n\n    public static void MakeSureRendererIsRegistered()\n    {\n    }\n\n#if NETSTANDARD\n    private static void DeclareInternal() => throw new NotSupportedException();\n#endif\n}"
+                            ]
+                        ],
+                        "language": [
+                            [
+                                "C#"
+                            ]
+                        ]
+                    },
+                    "created_time": 1587280020000,
+                    "last_edited_time": 1587475620000,
+                    "parent_id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            }
+        },
+        "space": {
+            "d0811b52-7a9c-4f03-a1de-e261c5555318": {
+                "role": "editor",
+                "value": {
+                    "id": "d0811b52-7a9c-4f03-a1de-e261c5555318",
+                    "version": 23,
+                    "name": "Vapolia",
+                    "domain": "vapolia",
+                    "permissions": [
+                        {
+                            "role": "editor",
+                            "type": "user_permission",
+                            "user_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                        }
+                    ],
+                    "email_domains": [
+                        "vapolia.fr"
+                    ],
+                    "beta_enabled": false,
+                    "pages": [
+                        "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                        "a1744f66-81bf-41a5-b93d-70cbdf6bc3db",
+                        "7ac0d129-bdfe-419c-9753-28961d74f7bc",
+                        "e238fae3-1112-4316-96d4-b192b4c87f4c",
+                        "636db02f-243d-49ad-8c45-a99df0e97b34",
+                        "3c515e7a-93c8-4804-b985-04bb98c10745",
+                        "e1b2d8df-ae60-4d12-8b76-3a6284307146",
+                        "aea6cda1-63e1-4f88-a1c5-df14437c78c9"
+                    ],
+                    "created_by": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "created_time": 1574244000000,
+                    "last_edited_by": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_time": 1584372300000,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "invite_link_code": "4defcb38fcd51e4f93511d9c92d843c17a958bb5",
+                    "invite_link_enabled": false
+                }
+            }
+        },
+        "notion_user": {
+            "7ca80c8c-71ac-4f04-b5ec-ef5280ced804": {
+                "role": "editor",
+                "value": {
+                    "id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "version": 3,
+                    "email": "benjamin@vapolia.fr",
+                    "given_name": "Benjamin",
+                    "family_name": "Mayrargue",
+                    "profile_photo": "https://lh4.googleusercontent.com/-EaN5LoxN3Ws/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcgV1QjWE-_F6Pq3WmJ5L8RchqXmA/photo.jpg",
+                    "onboarding_completed": true
+                }
+            }
+        }
+    },
+    "cursor": {
+        "stack": [
+            [
+                {
+                    "table": "block",
+                    "id": "1fd6f1b0-d98d-4aab-b2de-fa0eb14961fa",
+                    "index": 47
+                }
+            ],
+            [
+                {
+                    "table": "block",
+                    "id": "0c02743f-42cb-47c5-9f84-a70c8aff46b2",
+                    "index": 0
+                }
+            ]
+        ]
+    }
+}

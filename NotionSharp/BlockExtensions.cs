@@ -85,14 +85,34 @@ namespace NotionSharp
             if (imageBlock.Type != "image")
                 throw new ArgumentException($"textBlock.Type must be image, currently is {imageBlock.Type}", nameof(imageBlock));
 
-            if (imageBlock.Properties != null && imageBlock.Properties.ContainsKey("format"))
+            if (imageBlock.Properties != null)
             {
-                var imageFormat = imageBlock.Properties["format"].ToObject<BlockImageFormat>();
-                mainSb.Append("<img width=\"").Append(imageFormat.BlockWidth).Append("\" src=\"").Append(imageFormat.DisplaySource).Append("\"/>");
+                if (imageBlock.Properties.ContainsKey("format"))
+                {
+                    var imageFormat = imageBlock.Properties["format"].ToObject<BlockImageFormat>();
+                    mainSb.Append("<img width=\"").Append(imageFormat.BlockWidth).Append("\" src=\"").Append(imageFormat.DisplaySource).Append("\"/>");
+                }
+                else if (imageBlock.Properties.ContainsKey("source"))
+                {
+                    var imagePrivateUrl = (string)imageBlock.Properties["source"][0][0];
+                    var imageUrl = $"https://notion.so/image/{Uri.EscapeDataString(imagePrivateUrl)}";
+                    mainSb.Append("<img src=\"").Append(imageUrl).Append("\"/>");
+                }
             }
 
             return mainSb;
         }
+
+        public class BlockImageSource
+        {
+            public int BlockWidth { get; set; }
+            public string DisplaySource { get; set; }
+            public bool BlockFullWidth { get; set; }
+            public bool BlockPageWidth { get; set; }
+            public float BlockAspectRatio { get; set; }
+            public bool BlockPreserveScale { get; set; }
+        }
+
 
         public static StringBuilder AppendText(this StringBuilder mainSb, Block textBlock)
         {

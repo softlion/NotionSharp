@@ -16,9 +16,10 @@ namespace NotionSharpTest
             var json = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"..\..\..\JsonData", "LoadPageChunkResult1.json"));
             var chunks = JsonConvert.DeserializeObject<LoadPageChunkResult>(json);
             Assert.IsNotNull(chunks);
+
             var content = chunks.RecordMap.GetHtml(throwIfBlockMissing: false);
             Assert.IsNotNull(content);
-            Assert.AreEqual(content.Length, 5428);
+            Assert.AreEqual(content.Length, 5914);
         }
 
         [TestMethod]
@@ -36,8 +37,20 @@ namespace NotionSharpTest
 </p>
 <p>Today I am presenting a way to create a control with a renderer that auto register itself, greatly simplifying the control&#39;s usage in teams, but also its documentation and its maintenance.
 </p>
-<p></p>
+<p><img src=""https://notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6ea6e3a6-2a17-44f1-a25f-7e09b6114035%2Fdownload.png""/></p>
 ", content);
+        }
+        
+        [TestMethod]
+        public void TestGetHtml_BlogTestPage1()
+        {
+            var json = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"..\..\..\JsonData", "BlogTestPage1.json"));
+            var chunks = JsonConvert.DeserializeObject<LoadPageChunkResult>(json);
+            Assert.IsNotNull(chunks);
+
+            var content = chunks.RecordMap.GetHtml(throwIfBlockMissing: false);
+            Assert.IsNotNull(content);
+            Assert.IsTrue(content.StartsWith("<p>Creating a good Xamarin Forms control - Part 3 - UI Day 4"));
         }
     }
 }
