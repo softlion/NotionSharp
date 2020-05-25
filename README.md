@@ -4,7 +4,7 @@
 
 This is an unofficial [Notion](https://notion.so) APIv3 library that enables you, among other things, to get a list of pages as a RSS feed, as notion has no RSS feed as of 2020/04/30.
 
-You can ulso use it as a CMS for his nice editing capabilities.
+You can ulso use it as a CMS (Content Management System) for his nice editing capabilities.
 
 [![NuGet][nuget-img]][nuget-link]
 
