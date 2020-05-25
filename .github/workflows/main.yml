@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: publish to nuget
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish:
+    name: build, pack & publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # - name: Setup dotnet
+      #   uses: actions/setup-dotnet@v1
+      #   with:
+      #     dotnet-version: 3.1.200
+
+      # Publish
+      - name: publish on version change
+        id: publish_nuget
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: NotionSharp/NotionSharp.csproj
+          
+          # NuGet package id, used for version detection & defaults to project name
+          # PACKAGE_NAME: Core
+
+          # API key to authenticate with NuGet server
+          # NUGET_KEY: ${{secrets.NUGET_API_KEY}}
