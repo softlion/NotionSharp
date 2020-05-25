@@ -49,10 +49,10 @@ namespace NotionSharp
 
             var html = (from block in blocks
                     let separator = block.Type == "sub_header" ? "h2" : "p"
-                    select (separator, block: block.ToHtml())
+                    select (separator, block)
                 ).Aggregate(new StringBuilder(), (sb, tuple) =>
-                    sb.Append("<").Append(tuple.separator).Append(">")
-                        .Append(tuple.block)
+                    sb.Append($"<{tuple.separator} class='notion_{tuple.block.Type}'>")
+                        .Append(tuple.block.ToHtml())
                         .Append("</").Append(tuple.separator).AppendLine(">"))
                 .ToString();
 
