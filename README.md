@@ -8,6 +8,8 @@ You can ulso use it as a CMS (Content Management System) for his nice editing ca
 
 [![NuGet][nuget-img]][nuget-link]
 
+![publish to nuget](https://github.com/softlion/NotionSharp/workflows/publish%20to%20nuget/badge.svg)
+
 ![notion-img]
 
 [nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp/
