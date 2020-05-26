@@ -22,21 +22,12 @@ namespace NotionSharp.Lib.ApiV3.Model
         #region type=collection_view_page
         public List<Guid> ViewIds => Value.ContainsKey("view_ids") ? Value["view_ids"].ToObject<List<Guid>>() : null;
         public Guid CollectionId => (Guid)Value["collection_id"];
-
         #endregion
+
+        public PageFormat Format => Value.ContainsKey("format") ? Value["format"].ToObject<PageFormat>() : null;
 
         public List<Permission> Permissions => Value.ContainsKey("email_domains") ? Value["email_domains"].ToObject<List<Permission>>() : null;
 
-        //  "format": {
-        // "page_full_width": true
-        // },
-
-        //collection_view_page
-        // "format": {
-        // "page_icon": "📓",
-        // "block_locked": false,
-        // "block_locked_by": "d0a8cba1-b998-46a3-bcd1-0efb420410b1"
-        // },
 
         public long CreatedTime => (long)Value["created_time"];
         public long LastEditedTime => (long)Value["last_edited_time"];

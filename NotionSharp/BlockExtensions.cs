@@ -28,11 +28,18 @@ namespace NotionSharp
         /// Optional
         /// </summary>
         public Func<BlockTextData, Block, bool> TransformText { get; set; }
-
         /// <summary>
-        /// Optional
+        /// Optional. H1.
+        /// </summary>
+        public Func<BlockTextData, Block, bool> TransformHeader { get; set; }
+        /// <summary>
+        /// Optional. H2.
         /// </summary>
         public Func<BlockTextData, Block, bool> TransformSubHeader { get; set; }
+        /// <summary>
+        /// Optional. UL+LI.
+        /// </summary>
+        public Func<BlockTextData, Block, bool> TransformBulletedList { get; set; }
 
         /// <summary>
         /// Optional
@@ -111,7 +118,9 @@ namespace NotionSharp
                 var okToContinue = block.Type switch
                 {
                     "text" => transformOptions.TransformText?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                    "header" => transformOptions.TransformHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "sub_header" => transformOptions.TransformSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                    "bulleted_list" => transformOptions.TransformBulletedList?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "image" => transformOptions.TransformImage?.Invoke(block.ToImageData(), block),
                     _ => transformOptions.TransformOther?.Invoke(block)
                 };
@@ -138,7 +147,7 @@ namespace NotionSharp
                 else if (imageBlock.Properties.ContainsKey("source"))
                 {
                     data.ImagePrivateUrl = (string)imageBlock.Properties["source"][0][0];
-                    data.ImageUrl = $"https://notion.so/image/{Uri.EscapeDataString(data.ImagePrivateUrl)}";
+                    data.ImageUrl = $"https://www.notion.so/image/{Uri.EscapeDataString(data.ImagePrivateUrl)}";
                 }
                 else
                     return null;

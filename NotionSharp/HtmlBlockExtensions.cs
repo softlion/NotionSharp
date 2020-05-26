@@ -34,15 +34,25 @@ namespace NotionSharp
             var transformOptions = new TransformOptions
             {
                 //Exclude quote, code, page, bookmark
-                AcceptedBlockTypes = new List<string> { "text", "image", "sub_header" },
+                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "bulleted_list", "image" },
                 ThrowIfBlockMissing = throwIfBlockMissing,
                 ThrowIfCantDecodeTextData = throwIfCantDecodeTextData,
                 MaxBlocks = maxBlocks,
+                TransformHeader = (data, block) =>
+                {
+                    sb.Append("<h1 class='notion_header'>").AppendText(data).AppendLine("</h1>");
+                    return true;
+                },
                 TransformSubHeader = (data, block) =>
                 {
                     if (stopBeforeFirstSubHeader)
                         return false;
                     sb.Append("<h2 class='notion_sub_header'>").AppendText(data).AppendLine("</h2>");
+                    return true;
+                },
+                TransformBulletedList = (data, block) =>
+                {
+                    sb.Append("<ul><li class='notion_bulleted_list'>").AppendText(data).AppendLine("</li></ul>");
                     return true;
                 },
                 TransformText = (data, block) =>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using Flurl.Http;
 using NotionSharp.Lib;
 using NotionSharp.Lib.ApiV3.Model;
@@ -87,14 +88,19 @@ namespace NotionSharp
                     var content = chunks.RecordMap.GetHtmlAbstract(pageId);
                     var pageUri = NotionUtils.GetPageUri(pageId, pageBlock.Title);
 
-                    feedItems.Add(new SyndicationItem(pageBlock.Title, content, pageUri)
+                    var item = new SyndicationItem(pageBlock.Title, content, pageUri)
                     {
                         Id = pageId.ToString("N"),
                         BaseUri = pageUri,
                         Summary = new TextSyndicationContent(content),
                         PublishDate = pageBlock.CreatedTime.EpochToDateTimeOffset(),
                         LastUpdatedTime = pageBlock.LastEditedTime.EpochToDateTimeOffset(),
-                    });
+                    };
+
+                    if (!String.IsNullOrWhiteSpace(pageBlock.Format?.PageIcon))
+                        item.AttributeExtensions.Add(new XmlQualifiedName("iconUrl"), pageBlock.Format.PageIcon);
+
+                    feedItems.Add(item);
                 }
             }
 
