@@ -1,186 +1,214 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
 using Newtonsoft.Json.Linq;
 using NotionSharp.Lib.ApiV3.Model;
 
 namespace NotionSharp
 {
-    public static class BlockExtensions
+    public class TransformOptions
     {
         /// <summary>
-        /// Shortcut of GetHtml to get an extract containing only an abstract, for rss feeds.
-        /// </summary>
-        /// <param name="recordMap">the record map containing page data</param>
-        /// <param name="pageId">the id of the page to extract. Set to null to get the 1st block.</param>
-        public static string GetHtmlAbstract(this RecordMap recordMap, Guid pageId = default)
-            => recordMap.GetHtml(pageId, throwIfBlockMissing: false, stopBeforeFirstSubHeader: true);
-
-        /// <summary>
-        /// Get an HTML extract of the page
-        /// </summary>
-        /// <param name="recordMap">the record map containing page data</param>
-        /// <param name="pageId">the id of the page to extract. Set to null to get the 1st block.</param>
-        /// <param name="maxBlocks">set to the max number of blocks to process</param>
-        /// <param name="throwIfBlockMissing">false to prevent an exception if a block is missing from the record map</param>
-        /// <param name="stopBeforeFirstSubHeader">true to return only all html before the first sub-header</param>
-        /// <returns></returns>
-        public static string GetHtml(this RecordMap recordMap, Guid pageId = default, int maxBlocks = 0, bool throwIfBlockMissing = true, bool stopBeforeFirstSubHeader = false)
-        {
-            var pageBlock = pageId != default ? 
-                recordMap.Block[pageId] 
-                : recordMap.Block.First(b => b.Value.Type == "page").Value;
-
-            //Exclude quote, code, page, bookmark
-            var acceptedBlockTypes = new List<string> { "text", "image", "sub_header" };
-
-            var blocks = from itemId in pageBlock.Content
-                let block = !throwIfBlockMissing && !recordMap.Block.ContainsKey(itemId) ? null : recordMap.Block[itemId]
-                where block != null && acceptedBlockTypes.Contains(block.Type)
-                select block;
-
-            if (maxBlocks > 0)
-                blocks = blocks.Take(maxBlocks);
-
-            if(stopBeforeFirstSubHeader)
-                blocks = blocks.TakeWhile(block => block.Type != "sub_header");
-
-            var html = (from block in blocks
-                    let separator = block.Type == "sub_header" ? "h2" : "p"
-                    select (separator, block)
-                ).Aggregate(new StringBuilder(), (sb, tuple) =>
-                    sb.Append($"<{tuple.separator} class='notion_{tuple.block.Type}'>")
-                        .Append(tuple.block.ToHtml())
-                        .Append("</").Append(tuple.separator).AppendLine(">"))
-                .ToString();
-
-            return html;
-        }
-
-        /// <summary>
-        /// Convert a block to an html representation
+        /// block types that are selected
         /// </summary>
         /// <remarks>
-        /// All block types: quote, code, page, bookmark, "text", "image", "sub_header"
-        ///
-        /// Supported block types: "text", "image", "sub_header"
+        /// null = all types accepted
         /// </remarks>
-        public static string ToHtml(this Block block, bool throwIfNotSupported = true)
-        {
-            var sb = new StringBuilder();
+        public IList<string> AcceptedBlockTypes { get; set; }
 
-            return block.Type switch
+        /// <summary>
+        /// Maximum blocks to transform (from AcceptedBlockTypes)
+        /// </summary>
+        /// <remarks>
+        /// 0 = all blocks
+        /// </remarks>
+        public int MaxBlocks { get; set; }
+
+        /// <summary>
+        /// Optional
+        /// </summary>
+        public Func<BlockTextData, Block, bool> TransformText { get; set; }
+
+        /// <summary>
+        /// Optional
+        /// </summary>
+        public Func<BlockTextData, Block, bool> TransformSubHeader { get; set; }
+
+        /// <summary>
+        /// Optional
+        /// </summary>
+        /// <remarks>
+        /// BlockImageData can be null
+        /// </remarks>
+        public Func<BlockImageData, Block, bool> TransformImage { get; set; }
+
+        /// <summary>
+        /// Optional
+        /// </summary>
+        public Func<Block, bool> TransformOther { get; set; }
+
+        /// <summary>
+        /// If a block in the selected page is missing (ie: page content is not fully loaded), throw an exception
+        /// </summary>
+        public bool ThrowIfBlockMissing { get; set; } = true;
+
+        public bool ThrowIfCantDecodeTextData { get; set; } = true;
+    }
+
+    public class BlockTextData
+    {
+        public IList<BlockTextPart> Lines { get; set; }
+    }
+
+    public class BlockTextPart
+    {
+        public string Text { get; set; }
+        public bool HasProperty => HyperlinkUrl != null || HasStyle;
+        public bool HasStyle => IsItalic || IsBold || HtmlColor != null;
+
+        public string HyperlinkUrl { get; set; }
+        public bool IsItalic { get; set; }
+        public bool IsBold { get; set; }
+        public string HtmlColor { get; set; }
+    }
+
+    public class BlockImageData
+    {
+        /// <summary>
+        /// Can not be null
+        /// </summary>
+        public string ImageUrl { get; set; }
+
+        /// <summary>
+        /// Can be null
+        /// </summary>
+        public string ImagePrivateUrl { get; set; }
+
+        /// <summary>
+        /// Can be null
+        /// </summary>
+        public BlockImageFormat Format { get; set; }
+    }
+
+    public static class BlockExtensions
+    {
+        public static void Transform(this RecordMap recordMap, TransformOptions transformOptions,  Guid pageId = default)
+        {
+            var pageBlock = pageId != default ?
+                recordMap.Block[pageId]
+                : recordMap.Block.First(b => b.Value.Type == "page").Value;
+
+            var blocks = from itemId in pageBlock.Content
+                         let block = !transformOptions.ThrowIfBlockMissing && !recordMap.Block.ContainsKey(itemId) ? null : recordMap.Block[itemId]
+                         where block != null && (transformOptions == null || transformOptions.AcceptedBlockTypes.Contains(block.Type))
+                         select block;
+
+            if (transformOptions.MaxBlocks > 0)
+                blocks = blocks.Take(transformOptions.MaxBlocks);
+
+            foreach (var block in blocks)
             {
-                "text" => AppendText(sb, block).ToString(),
-                "sub_header" => AppendText(sb, block).ToString(),
-                "image" => AppendImage(sb, block).ToString(),
-                _ => throwIfNotSupported ? throw new NotSupportedException($"block type {block.Type} not supported") : String.Empty
-            };
+                var okToContinue = block.Type switch
+                {
+                    "text" => transformOptions.TransformText?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                    "sub_header" => transformOptions.TransformSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                    "image" => transformOptions.TransformImage?.Invoke(block.ToImageData(), block),
+                    _ => transformOptions.TransformOther?.Invoke(block)
+                };
+
+                if (!(okToContinue != false))
+                    break;
+            }
         }
 
-        public static StringBuilder AppendImage(this StringBuilder mainSb, Block imageBlock)
+        internal static BlockImageData ToImageData(this Block imageBlock)
         {
             if (imageBlock.Type != "image")
                 throw new ArgumentException($"textBlock.Type must be image, currently is {imageBlock.Type}", nameof(imageBlock));
 
             if (imageBlock.Properties != null)
             {
+                var data = new BlockImageData();
+
                 if (imageBlock.Properties.ContainsKey("format"))
                 {
-                    var imageFormat = imageBlock.Properties["format"].ToObject<BlockImageFormat>();
-                    mainSb.Append("<img width=\"").Append(imageFormat.BlockWidth).Append("\" src=\"").Append(imageFormat.DisplaySource).Append("\"/>");
+                    data.Format = imageBlock.Properties["format"].ToObject<BlockImageFormat>();
+                    data.ImageUrl = data.Format.DisplaySource;
                 }
                 else if (imageBlock.Properties.ContainsKey("source"))
                 {
-                    var imagePrivateUrl = (string)imageBlock.Properties["source"][0][0];
-                    var imageUrl = $"https://notion.so/image/{Uri.EscapeDataString(imagePrivateUrl)}";
-                    mainSb.Append("<img src=\"").Append(imageUrl).Append("\"/>");
+                    data.ImagePrivateUrl = (string)imageBlock.Properties["source"][0][0];
+                    data.ImageUrl = $"https://notion.so/image/{Uri.EscapeDataString(data.ImagePrivateUrl)}";
                 }
+                else
+                    return null;
+
+                return data;
             }
 
-            return mainSb;
+            return null;
         }
 
-        public class BlockImageSource
+        internal static BlockTextData ToTextData(this Block textBlock, bool throwIfCantDecodeTextData)
         {
-            public int BlockWidth { get; set; }
-            public string DisplaySource { get; set; }
-            public bool BlockFullWidth { get; set; }
-            public bool BlockPageWidth { get; set; }
-            public float BlockAspectRatio { get; set; }
-            public bool BlockPreserveScale { get; set; }
-        }
+            if (textBlock.Type != "text" && textBlock.Type != "sub_header")
+                throw new ArgumentException($"textBlock.Type must be text or sub_header, currently is {textBlock.Type}", nameof(textBlock));
 
-
-        public static StringBuilder AppendText(this StringBuilder mainSb, Block textBlock)
-        {
-            if(textBlock.Type != "text" && textBlock.Type != "sub_header")
-                throw new ArgumentException($"textBlock.Type must be text, currently is {textBlock.Type}", nameof(textBlock));
+            var data = new BlockTextData { Lines = new List<BlockTextPart>() };
 
             if (textBlock.Properties != null && textBlock.Properties.ContainsKey("title"))
             {
                 var textParts = ((JArray)textBlock.Properties["title"]).Cast<JArray>();
 
                 foreach (var textPart in textParts)
-                    mainSb.AppendTextPart(textPart);
+                    data.Lines.Add(ToTextData(textPart, throwIfCantDecodeTextData));
             }
 
-            return mainSb;
+            return data;
         }
 
-        static StringBuilder AppendTextPart(this StringBuilder sb, JArray textPart)
+        static BlockTextPart ToTextData(JArray textPart, bool throwIfCantDecodeTextData)
         {
+            var blockTextPart = new BlockTextPart { Text = (string)textPart[0] };
+
             if (textPart.Count == 1)
-                return sb.AppendLine(WebUtility.HtmlEncode((string)textPart[0]));
+                return blockTextPart;
 
             if (textPart.Count == 2)
             {
                 if (textPart[1] is JArray subParts)
                 {
-                    var sbBefore = new StringBuilder();
-                    var sbAfter = new StringBuilder();
-
                     foreach (var subPart in subParts)
                     {
                         if (subPart is JArray outerTag && outerTag.All(t => !(t is JArray)))
                         {
-                            var outerTagValue = (string) outerTag[0];
+                            var outerTagValue = (string)outerTag[0];
                             if (outerTagValue == "a" && outerTag.Count == 2)
-                            {
-                                //hyperlink
-                                sbBefore.Append($"<a href=\"{outerTag[1]}\">");
-                                sbAfter.Insert(0, "</a>");
-                            }
+                                blockTextPart.HyperlinkUrl = (string)outerTag[1];
                             else if (outerTagValue == "h" && outerTag.Count == 2)
-                            {
-                                //color
-                                sbBefore.Append($"<span style=\"color:{outerTag[1]}\">");
-                                sbAfter.Insert(0, "</span>");
-                            }
-                            else if(outerTag.Count == 1 && (outerTagValue == "i" || outerTagValue == "b"))
+                                blockTextPart.HtmlColor = (string)outerTag[1];
+                            else if (outerTag.Count == 1 && (outerTagValue == "i" || outerTagValue == "b"))
                             {
                                 //bold, italic
-                                sbBefore.Append($"<{outerTagValue}>");
-                                sbAfter.Insert(0, $"</{outerTagValue}>");
+                                if(outerTagValue == "b")
+                                    blockTextPart.IsBold = true;
+                                else if (outerTagValue == "i")
+                                    blockTextPart.IsItalic = true;
                             }
-                            else
+                            else if(throwIfCantDecodeTextData)
                                 throw new NotSupportedException($"unknown outer tag {outerTag[0]} with counts:{outerTag.Count}");
                         }
-                        else
+                        else if (throwIfCantDecodeTextData)
                             throw new NotSupportedException($"unknown subParts {subParts}");
                     }
-                    
-                    sb.Append(sbBefore).Append(WebUtility.HtmlEncode((string)textPart[0])).Append(sbAfter);
                 }
-                else
+                else if (throwIfCantDecodeTextData)
                     throw new NotSupportedException($"unknown subParts structure {textPart[1]}");
             }
-            else
+            else if (throwIfCantDecodeTextData)
                 throw new NotSupportedException($"this decoder supports only 1 or 2 textParts. This block has {textPart.Count} parts. textPart: {textPart}");
 
-            return sb;
+            return blockTextPart;
         }
     }
 }

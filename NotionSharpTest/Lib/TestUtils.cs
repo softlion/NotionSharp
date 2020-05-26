@@ -1,4 +1,4 @@
-﻿using NotionSharp.Lib;
+﻿using NotionSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;

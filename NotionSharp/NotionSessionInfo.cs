@@ -1,6 +1,6 @@
 using System;
 
-namespace NotionSharp.Lib
+namespace NotionSharp
 {
     /// <summary>
     /// From local Cookie, sent with every request
