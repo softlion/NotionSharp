@@ -73,26 +73,26 @@ namespace NotionSharp
             return sb.ToString();
         }
 
-        /// <summary>
-        /// Convert a block to an html representation
-        /// </summary>
-        /// <remarks>
-        /// All block types: quote, code, page, bookmark, "text", "image", "sub_header"
-        ///
-        /// Supported block types: "text", "image", "sub_header"
-        /// </remarks>
-        public static string ToHtml(this Block block, bool throwIfNotSupported = true, bool throwIfCantDecodeText = true)
-        {
-            var sb = new StringBuilder();
+        ///// <summary>
+        ///// Convert a block to an html representation
+        ///// </summary>
+        ///// <remarks>
+        ///// Supported block types: "text", "image", "sub_header", "header", "bulleted_list"
+        ///// </remarks>
+        //public static string ToHtml(this Block block, bool throwIfNotSupported = true, bool throwIfCantDecodeText = true)
+        //{
+        //    var sb = new StringBuilder();
 
-            return block.Type switch
-            {
-                "text" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
-                "sub_header" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
-                "image" => sb.AppendImage(block.ToImageData()).ToString(),
-                _ => throwIfNotSupported ? throw new NotSupportedException($"block type {block.Type} not supported") : String.Empty
-            };
-        }
+        //    return block.Type switch
+        //    {
+        //        "text" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
+        //        "header" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
+        //        "sub_header" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
+        //        "bulleted_list" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
+        //        "image" => sb.AppendImage(block.ToImageData()).ToString(),
+        //        _ => throwIfNotSupported ? throw new NotSupportedException($"block type {block.Type} not supported") : String.Empty
+        //    };
+        //}
 
         static StringBuilder AppendText(this StringBuilder sb, BlockTextData data)
         {

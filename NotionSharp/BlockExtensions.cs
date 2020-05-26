@@ -130,10 +130,10 @@ namespace NotionSharp
             }
         }
 
-        internal static BlockImageData ToImageData(this Block imageBlock)
+        static BlockImageData ToImageData(this Block imageBlock)
         {
-            if (imageBlock.Type != "image")
-                throw new ArgumentException($"textBlock.Type must be image, currently is {imageBlock.Type}", nameof(imageBlock));
+            //if (imageBlock.Type != "image")
+            //    throw new ArgumentException($"textBlock.Type must be image, currently is {imageBlock.Type}", nameof(imageBlock));
 
             if (imageBlock.Properties != null)
             {
@@ -158,10 +158,10 @@ namespace NotionSharp
             return null;
         }
 
-        internal static BlockTextData ToTextData(this Block textBlock, bool throwIfCantDecodeTextData)
+        static BlockTextData ToTextData(this Block textBlock, bool throwIfCantDecodeTextData)
         {
-            if (textBlock.Type != "text" && textBlock.Type != "sub_header")
-                throw new ArgumentException($"textBlock.Type must be text or sub_header, currently is {textBlock.Type}", nameof(textBlock));
+            //if (textBlock.Type != "text" && textBlock.Type != "sub_header")
+            //    throw new ArgumentException($"textBlock.Type must be text or sub_header, currently is {textBlock.Type}", nameof(textBlock));
 
             var data = new BlockTextData { Lines = new List<BlockTextPart>() };
 
