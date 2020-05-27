@@ -37,6 +37,25 @@ Get a RSS representation from the sub-pages of a page:
     feedPublicBlog.Title = new TextSyndicationContent(firstPage.Title);
 ```
 
+## Testing the Notion blog demo
+
+- Get your Notion's credentials using fiddler (TokenV2 => key, browserId and userId)
+- Create a public page at the root of Notion, then add subpages to this page with title and icon.
+
+Issue these commands to create your own notion blog demo. Replace the fake credentials with yours.
+
+```
+md DemoNotionBlog
+cd DemoNotionBlog
+dotnet new -i Softlion.NotionSharp.TemplateProjects
+dotnet new blazorblog -p "MySite CMS"
+dotnet user-secrets init
+dotnet user-secrets set "Notion:Key" "xxXxxXXxxXxxxXXxxx...xxXxxX"
+dotnet user-secrets set "Notion:BrowserId" "BB083879-F2DA-4DF6-ADFB-C26344981DC3"
+dotnet user-secrets set "Notion:UserId" "BB083879-F2DA-4DF6-ADFB-C26344981DC3"
+dotnet run
+```
+
 ## Usage
 
 Create a session:
