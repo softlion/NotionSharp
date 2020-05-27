@@ -86,7 +86,7 @@
   <ItemGroup>
     <Compile Remove="**\*" />
     <Content Remove="**\*" />
-    <Content Include="DemoNotionBlogTemplate\**" Exclude="**\bin\**;**\obj\**;**\*.user;**\*.local.json" />
+    <Content Include="DemoNotionBlog\**" Exclude="**\bin\**;**\obj\**;**\*.user;**\*.local.json" />
   </ItemGroup>
 
 </Project>
