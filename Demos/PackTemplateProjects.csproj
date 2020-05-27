@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!--  nuget configurable properties -->
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!--  nuget properties -->
+    <PackageId>Softlion.NotionSharp.TemplateProjects</PackageId>
+    <!-- PackageIcon>icon.png</PackageIcon -->
+    <!--<PackageIconUrl>https://raw.githubusercontent.com/softlion/NotionSharp/master/Assets/nuget_icon_128x128.png</PackageIconUrl>-->
+    <PackageTags>blog notion</PackageTags>
+    <Title>Blazor blog template using NotionSharp</Title>
+    <Summary>Template to create a blog site using blazor and notion.so as the CMS</Summary>
+    <Description>
+      <![CDATA[
+      Install the template (it will download from nuget automatically):
+      > dotnet new -i Softlion.NotionSharp.TemplateProjects
+      
+      Get help on parameters for this template:
+      > dotnet new blazorblog --help
+      
+      -p|--page       Title of a page on Notion which contains all the pages of the blog
+                      string - Required
+
+      -k|--key        value of the notion tokenV2 cookie
+                      string - Optional
+                      Default: __YourNotionKey__
+
+      -b|--browserId  value of the notion browserId cookie
+                      Guid - Optional
+                      Default: __YourNotionBrowserId__
+
+      -us|--userId    value of the notion userId cookie
+                      Guid - Optional
+                      Default: __YourNotionUserId__
+      
+      Create a new website in the current folder, using this template:
+      > dotnet new blazorblog --page "My Public Blog" --key xxXxxXXxxXxxxXXxxx...xxXxxX --browserId BB083879-F2DA-4DF6-ADFB-C26344981DC3 --userId BB083879-F2DA-4DF6-ADFB-C26344981DC3
+      
+      You can also use this simple command:
+      > dotnet new blazorblog --page "My Public Blog"
+      
+      But if you do so, you must add the values as user secrets:
+      > dotnet user-secrets init
+      > dotnet user-secrets set "Notion:Key" "xxXxxXXxxXxxxXXxxx...xxXxxX"
+      > dotnet user-secrets set "Notion:BrowserId" "BB083879-F2DA-4DF6-ADFB-C26344981DC3"
+      > dotnet user-secrets set "Notion:UserId" "BB083879-F2DA-4DF6-ADFB-C26344981DC3"
+  
+      To uninstall this template:
+      > dotnet new -u Softlion.NotionSharp.TemplateProject.Blog
+      
+      To list all installed templates and get uninstall instructions:
+      > dotnet new --uninstall --help
+    ]]>
+    </Description>
+
+    <PackageType>Template</PackageType>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <PackageVersion>$(Version)</PackageVersion>
+    <Authors>Benjamin Mayrargue</Authors>
+    <Owners>Benjamin Mayrargue</Owners>
+    <Copyright>Benjamin Mayrargue</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+    <RepositoryUrl>https://github.com/softlion/NotionSharp</RepositoryUrl>
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
+    <PackageReleaseNotes>
+      1.0.0
+      initial version
+    </PackageReleaseNotes>
+    <Company />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="**\*" />
+    <Content Remove="**\*" />
+    <Content Include="DemoNotionBlogTemplate\**" Exclude="**\bin\**;**\obj\**;**\*.user;**\*.local.json" />
+  </ItemGroup>
+
+</Project>

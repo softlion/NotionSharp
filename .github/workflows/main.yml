@@ -21,8 +21,8 @@ jobs:
       #     dotnet-version: 3.1.200
 
       # Publish
-      - name: publish on version change
-        id: publish_nuget
+      - name: publish NotionSharp on nuget on change
+        id: publish_nuget_notionsharp
         uses: rohith/publish-nuget@v2
         with:
           # Filepath of the project to be packaged, relative to root of repository
@@ -30,6 +30,19 @@ jobs:
           
           # NuGet package id, used for version detection & defaults to project name
           PACKAGE_NAME: Softlion.NotionSharp
+
+          # API key to authenticate with NuGet server
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+
+      - name: publish NotionSharp project templates on nuget on change
+        id: publish_nuget_notionsharp_projecttemplates
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Demos/PackTemplateProjects.csproj
+          
+          # NuGet package id, used for version detection & defaults to project name
+          PACKAGE_NAME: Softlion.NotionSharp.TemplateProjects
 
           # API key to authenticate with NuGet server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}

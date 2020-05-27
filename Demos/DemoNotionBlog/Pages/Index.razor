@@ -1,0 +1,70 @@
+﻿@page "/"
+@page "/pages/{PageLinkTitle}"
+@inject DemoNotionBlog.Libs.Services.NotionCmsService CmsService
+@implements IDisposable
+@inject NavigationManager navigationManager
+@using System.ServiceModel.Syndication
+@using Microsoft.AspNetCore.WebUtilities
+
+@if (Item?.Summary != null)
+{
+    <div class="notion" style="margin-bottom: 2em">
+        @((MarkupString)Item.Summary.Text)
+    </div>
+}
+else if (!isLoaded)
+{
+    <div class="notion" style="margin: 2em">
+        Loading ...<br />
+    </div>
+}
+else
+{
+    <div class="notion" style="margin: 2em">
+        Page not found<br />
+        <br />
+        You can try to reload the page.<br />
+    </div>
+}
+
+
+@code
+{
+    [Parameter]
+    public string PageLinkTitle { get; set; }
+
+    bool isLoaded;
+    SyndicationItem Item;
+    IDisposable articlesSubscription;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("forcerefresh", out var token) && token == "true")
+            Task.Run(() => CmsService.RefreshNotionData());
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        articlesSubscription?.Dispose();
+        articlesSubscription = CmsService.CmsArticles.Subscribe(items =>
+        {
+            if (items != null)
+            {
+                Item = PageLinkTitle != null ? items.FirstOrDefault(item => DemoNotionBlog.Libs.Services.NotionCmsServiceExtensions.ToLink(item.Title.Text) == PageLinkTitle)
+                       : items.FirstOrDefault();
+                isLoaded = true;
+                InvokeAsync(() => StateHasChanged());
+            }
+        });
+    }
+
+    public void Dispose()
+    {
+        articlesSubscription.Dispose();
+    }
+}

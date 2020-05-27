@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  //https://devblogs.microsoft.com/dotnet/how-to-create-your-own-templates-for-dotnet-new/
+  //dotnet new --install ..\DemoNotionBlog\
+  //dotnet new blazorblog --help
+  //dotnet new blazorblog
+  //dotnet new --debug:reinit
+  "identity": "Vapolia.NotionSharp.ProjectTemplate.Blog",
+  "author": "Benjamin Mayrargue",
+  "classifications": [ "Web/Blazor" ],
+  "name": "Blazor Web Server: Notion Blog",
+  "shortName": "blazorblog",
+  "tags": {
+    "language": "C#"
+  },
+  "sourceName": "DemoNotionBlog",
+  "preferNameDirectory": "true",
+
+  "symbols": {
+    "page": {
+      "type": "parameter",
+      "isRequired": true,
+      "description": "Title of a page on Notion which contains all the pages of the blog",
+      "replaces": "__YourNotionRootPageTitleForThisBlog__"
+    },
+    "key": {
+      "type": "parameter",
+      "description": "value of the notion tokenV2 cookie",
+      "replaces": "__YourNotionKey__"
+    },
+    "browserId": {
+      "type": "parameter",
+      "dataType": "Guid",
+      "description": "value of the notion browserId cookie",
+      "replaces": "__YourNotionBrowserId__"
+    },
+    "userId": {
+      "type": "parameter",
+      "dataType": "Guid",
+      //"defaultValue": "(required)",
+      "description": "value of the notion userId cookie",
+      "replaces": "__YourNotionUserId__"
+    }
+  }
+}
