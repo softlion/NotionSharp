@@ -1,4 +1,4 @@
-# NotionSharp - Notion API client en C# (csharp)
+# NotionSharp - Notion API client for C#
 
 [Notion](https://notion.so) is an all-in-one workspace to write things, with the best simple and powerful "wysiwyg" editor, with color highlightning for code blocks, easy video interations, and much more. It includes an offline windows application to peacefully write your blog's content.
 
