@@ -39,7 +39,7 @@ namespace NotionSharp
         /// <summary>
         /// Optional. UL+LI.
         /// </summary>
-        public Func<BlockTextData, Block, bool> TransformBulletedList { get; set; }
+        public Func<BlockTextData, Block, (bool Ok, Action ContentTransformed)> TransformBulletedList { get; set; }
 
         /// <summary>
         /// Optional
@@ -105,10 +105,15 @@ namespace NotionSharp
                 recordMap.Block[pageId]
                 : recordMap.Block.First(b => b.Value.Type == "page").Value;
 
-            var blocks = from itemId in pageBlock.Content
-                         let block = !transformOptions.ThrowIfBlockMissing && !recordMap.Block.ContainsKey(itemId) ? null : recordMap.Block[itemId]
-                         where block != null && (transformOptions == null || transformOptions.AcceptedBlockTypes.Contains(block.Type))
-                         select block;
+            Transform(pageBlock.Content, recordMap.Block, transformOptions);
+        }
+
+        static void Transform(List<Guid> contentIds, Dictionary<Guid,Block> allBlocks, TransformOptions transformOptions)
+        {
+            var blocks = from itemId in contentIds
+                let block = !transformOptions.ThrowIfBlockMissing && !allBlocks.ContainsKey(itemId) ? null : allBlocks[itemId]
+                where block != null && (transformOptions == null || transformOptions.AcceptedBlockTypes.Contains(block.Type))
+                select block;
 
             if (transformOptions.MaxBlocks > 0)
                 blocks = blocks.Take(transformOptions.MaxBlocks);
@@ -120,14 +125,28 @@ namespace NotionSharp
                     "text" => transformOptions.TransformText?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "header" => transformOptions.TransformHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "sub_header" => transformOptions.TransformSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
-                    "bulleted_list" => transformOptions.TransformBulletedList?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                    "bulleted_list" => TransformBulletedList(transformOptions, block, allBlocks),
                     "image" => transformOptions.TransformImage?.Invoke(block.ToImageData(), block),
                     _ => transformOptions.TransformOther?.Invoke(block)
                 };
 
-                if (!(okToContinue != false))
+                if (okToContinue == false)
                     break;
             }
+        }
+
+        static bool TransformBulletedList(TransformOptions transformOptions, Block block, Dictionary<Guid, Block> allBlocks)
+        {
+            if (transformOptions.TransformBulletedList == null)
+                return true;
+
+            var result = transformOptions.TransformBulletedList.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block);
+            
+            if (block.Content?.Count > 0)
+                Transform(block.Content, allBlocks, transformOptions);
+            
+            result.ContentTransformed();
+            return result.Ok;
         }
 
         static BlockImageData ToImageData(this Block imageBlock)

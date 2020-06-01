@@ -53,7 +53,10 @@ namespace NotionSharp
                 TransformBulletedList = (data, block) =>
                 {
                     sb.Append("<ul><li class='notion_bulleted_list'>").AppendText(data).AppendLine("</li></ul>");
-                    return true;
+                    var hasContent = block.Content?.Count > 0;
+                    if(hasContent)
+                        sb.Append("<p class='notion_bulleted_list_content'>");
+                    return (true, () => { if(hasContent) sb.Append("</p>"); });
                 },
                 TransformText = (data, block) =>
                 {

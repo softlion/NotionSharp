@@ -48,5 +48,24 @@ namespace NotionSharpTest
             Assert.IsNotNull(content);
             Assert.IsTrue(content.StartsWith("<p class='notion_text'>Creating a good Xamarin Forms control - Part 3 - UI Day 4"));
         }
+
+        [TestMethod]
+        public void TestGetHtml_SubBullets()
+        {
+            var json = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"..\..\..\JsonData", "SubBullets.json"));
+            var chunks = JsonConvert.DeserializeObject<LoadPageChunkResult>(json);
+            Assert.IsNotNull(chunks);
+
+            var content = chunks.RecordMap.GetHtml(throwIfBlockMissing: false);
+            Assert.IsNotNull(content);
+            Assert.IsTrue(content.StartsWith(@"<h1 class='notion_header'>⚡Welcome ⚡</h1>
+<p class='notion_text'>Here at Vapolia we are fond of coding. With 25 years of experience within small and large companies, we are particulary good at understanding your needs !</p>
+<p class='notion_text'></p>
+<p class='notion_text'>&#129311; Our main services:</p>
+<p class='notion_text'></p>
+<ul><li class='notion_bulleted_list'>Gather your ideas into an understandable specification</li></ul>
+<p class='notion_bulleted_list_content'><p class='notion_text'>&#127774; we convert your vision into a specification understandable by everyone - from the product owner to the developer&#39;s team.</p>
+"));
+        }
     }
 }

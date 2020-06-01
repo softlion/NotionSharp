@@ -1,0 +1,951 @@
+﻿{
+    "recordMap": {
+        "block": {
+            "fb6203f9-c037-4277-8ef6-4d6c42839acc": {
+                "role": "editor",
+                "value": {
+                    "id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "version": 112,
+                    "type": "page",
+                    "properties": {
+                        "title": [
+                            [
+                                "Welcome"
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "a160994a-66f2-4921-b3b3-b6f742c6983b",
+                        "4f35f062-cebf-44a4-9b64-0646670a837a",
+                        "c57460b9-714e-4dd9-9e05-b8fe31bec81c",
+                        "f08a4d07-3129-44db-bdbb-db291f70f303",
+                        "b0b1c9b9-f11b-496c-b755-f61fe08a4053",
+                        "073f3213-7f51-41ce-a103-71be764c6938",
+                        "4ca3e583-c55b-4f2a-b46a-1225909f5947",
+                        "a34d62cb-27aa-43a5-945f-ef3ea363e39d",
+                        "9c29e5f9-64d0-4980-811f-ac035f767d53",
+                        "63fc437f-08a9-4e02-bc76-a12a0fbb4e7e",
+                        "9375fc6e-93dd-4197-8d12-8f16fc139f96",
+                        "3a48254a-95da-413f-af1b-852fcd839ffa",
+                        "8806ea99-33db-4cfe-8bf3-c4b497c00ec2",
+                        "763401c0-f649-4b32-9b43-4ec2d5be7c10",
+                        "2421a6b0-3594-4df2-9992-207fe555a307",
+                        "41766caa-0910-400d-acfd-79bb269660ed",
+                        "fa54d9c0-a86e-4e90-bb20-c452ffa6f2d8",
+                        "d07ca572-0840-454a-90c9-3a3fc62ee9e0",
+                        "964bbaf0-3302-4a17-a450-40535eaaec0d"
+                    ],
+                    "format": {
+                        "page_icon": "https://vapolia.eu/a/i/services.svg",
+                        "page_cover_position": 0.8
+                    },
+                    "permissions": [
+                        {
+                            "role": "reader",
+                            "type": "public_permission",
+                            "allow_duplicate": false
+                        }
+                    ],
+                    "created_time": 1590402780000,
+                    "last_edited_time": 1590532320000,
+                    "parent_id": "9662b7ae-cb70-438f-a618-a58d76ba0127",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "9662b7ae-cb70-438f-a618-a58d76ba0127": {
+                "role": "editor",
+                "value": {
+                    "id": "9662b7ae-cb70-438f-a618-a58d76ba0127",
+                    "version": 53,
+                    "type": "page",
+                    "properties": {
+                        "title": [
+                            [
+                                "Vapolia CMS"
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "d1daf0ba-3776-4772-b9c8-d63fa101cdc9",
+                        "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                        "260d3b13-99ea-4cb8-af02-9b24c4c72e07",
+                        "9dd80c5c-6f84-48cd-be0f-c1a837b9f294"
+                    ],
+                    "permissions": [
+                        {
+                            "role": "editor",
+                            "type": "user_permission",
+                            "user_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                        },
+                        {
+                            "role": "reader",
+                            "type": "public_permission",
+                            "allow_duplicate": false
+                        }
+                    ],
+                    "created_time": 1590402720000,
+                    "last_edited_time": 1590496560000,
+                    "parent_id": "d0811b52-7a9c-4f03-a1de-e261c5555318",
+                    "parent_table": "space",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "a160994a-66f2-4921-b3b3-b6f742c6983b": {
+                "role": "editor",
+                "value": {
+                    "id": "a160994a-66f2-4921-b3b3-b6f742c6983b",
+                    "version": 14,
+                    "type": "header",
+                    "properties": {
+                        "title": [
+                            [
+                                "⚡Welcome ⚡"
+                            ]
+                        ]
+                    },
+                    "created_time": 1590402780000,
+                    "last_edited_time": 1590510720000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "4f35f062-cebf-44a4-9b64-0646670a837a": {
+                "role": "editor",
+                "value": {
+                    "id": "4f35f062-cebf-44a4-9b64-0646670a837a",
+                    "version": 133,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "Here at Vapolia we are fond of coding. With 25 years of experience within small and large companies, we are particulary good at understanding your needs !"
+                            ]
+                        ]
+                    },
+                    "created_time": 1590402780000,
+                    "last_edited_time": 1590510480000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "c57460b9-714e-4dd9-9e05-b8fe31bec81c": {
+                "role": "editor",
+                "value": {
+                    "id": "c57460b9-714e-4dd9-9e05-b8fe31bec81c",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1590501480000,
+                    "last_edited_time": 1590501480000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "f08a4d07-3129-44db-bdbb-db291f70f303": {
+                "role": "editor",
+                "value": {
+                    "id": "f08a4d07-3129-44db-bdbb-db291f70f303",
+                    "version": 13,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "🤟 Our main services:"
+                            ]
+                        ]
+                    },
+                    "created_time": 1590402835745,
+                    "last_edited_time": 1590510240000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "b0b1c9b9-f11b-496c-b755-f61fe08a4053": {
+                "role": "editor",
+                "value": {
+                    "id": "b0b1c9b9-f11b-496c-b755-f61fe08a4053",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1590501480000,
+                    "last_edited_time": 1590501480000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "073f3213-7f51-41ce-a103-71be764c6938": {
+                "role": "editor",
+                "value": {
+                    "id": "073f3213-7f51-41ce-a103-71be764c6938",
+                    "version": 296,
+                    "type": "bulleted_list",
+                    "properties": {
+                        "title": [
+                            [
+                                "Gather your ideas into an understandable specification"
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "8032799b-ac9a-41a0-93dc-fcc29a50d9f2",
+                        "b5f57788-25ee-4fc2-ac79-36ec22fdf76c"
+                    ],
+                    "created_time": 1590402835747,
+                    "last_edited_time": 1590532200000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "8032799b-ac9a-41a0-93dc-fcc29a50d9f2": {
+                "role": "editor",
+                "value": {
+                    "id": "8032799b-ac9a-41a0-93dc-fcc29a50d9f2",
+                    "version": 29,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "🌞 we convert your vision into a specification understandable by everyone - from the product owner to the developer's team."
+                            ]
+                        ]
+                    },
+                    "created_time": 1590531300000,
+                    "last_edited_time": 1590532260000,
+                    "parent_id": "073f3213-7f51-41ce-a103-71be764c6938",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "b5f57788-25ee-4fc2-ac79-36ec22fdf76c": {
+                "role": "editor",
+                "value": {
+                    "id": "b5f57788-25ee-4fc2-ac79-36ec22fdf76c",
+                    "version": 8,
+                    "type": "text",
+                    "created_time": 1590531420000,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "073f3213-7f51-41ce-a103-71be764c6938",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "4ca3e583-c55b-4f2a-b46a-1225909f5947": {
+                "role": "editor",
+                "value": {
+                    "id": "4ca3e583-c55b-4f2a-b46a-1225909f5947",
+                    "version": 161,
+                    "type": "bulleted_list",
+                    "properties": {
+                        "title": [
+                            [
+                                "You need a mobile app"
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "667f951a-e3a4-4ca7-9180-6ae5b506b3c4",
+                        "27f5f157-9104-4a42-a5a7-6cf51198799b"
+                    ],
+                    "created_time": 1590402835747,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "667f951a-e3a4-4ca7-9180-6ae5b506b3c4": {
+                "role": "editor",
+                "value": {
+                    "id": "667f951a-e3a4-4ca7-9180-6ae5b506b3c4",
+                    "version": 58,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "📱 let us create it for you, we use the lastest cross platform technologies. You want it connected to the cloud? No problem!"
+                            ]
+                        ]
+                    },
+                    "created_time": 1590531360000,
+                    "last_edited_time": 1590532320000,
+                    "parent_id": "4ca3e583-c55b-4f2a-b46a-1225909f5947",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "27f5f157-9104-4a42-a5a7-6cf51198799b": {
+                "role": "editor",
+                "value": {
+                    "id": "27f5f157-9104-4a42-a5a7-6cf51198799b",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1590531420000,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "4ca3e583-c55b-4f2a-b46a-1225909f5947",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "a34d62cb-27aa-43a5-945f-ef3ea363e39d": {
+                "role": "editor",
+                "value": {
+                    "id": "a34d62cb-27aa-43a5-945f-ef3ea363e39d",
+                    "version": 152,
+                    "type": "bulleted_list",
+                    "properties": {
+                        "title": [
+                            [
+                                "You need an API ? "
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "a8a197c7-a9f5-432c-be49-c1c884fd92a9",
+                        "568bcfad-5814-4d7a-9798-6e197143cfaa"
+                    ],
+                    "created_time": 1590402835748,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "a8a197c7-a9f5-432c-be49-c1c884fd92a9": {
+                "role": "editor",
+                "value": {
+                    "id": "a8a197c7-a9f5-432c-be49-c1c884fd92a9",
+                    "version": 16,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "🌟 We can analyze the feasability by auditing your existing platform and  providing a concrete plan."
+                            ]
+                        ]
+                    },
+                    "created_time": 1590531360000,
+                    "last_edited_time": 1590531780000,
+                    "parent_id": "a34d62cb-27aa-43a5-945f-ef3ea363e39d",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "568bcfad-5814-4d7a-9798-6e197143cfaa": {
+                "role": "editor",
+                "value": {
+                    "id": "568bcfad-5814-4d7a-9798-6e197143cfaa",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1590531420000,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "a34d62cb-27aa-43a5-945f-ef3ea363e39d",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "9c29e5f9-64d0-4980-811f-ac035f767d53": {
+                "role": "editor",
+                "value": {
+                    "id": "9c29e5f9-64d0-4980-811f-ac035f767d53",
+                    "version": 111,
+                    "type": "bulleted_list",
+                    "properties": {
+                        "title": [
+                            [
+                                "You are migrating to the cloud ? "
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "33992b1f-bb5e-4ec2-a8b8-e400d67772ec",
+                        "007590e7-3137-42c4-92c3-591234465a50"
+                    ],
+                    "created_time": 1590402835748,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "33992b1f-bb5e-4ec2-a8b8-e400d67772ec": {
+                "role": "editor",
+                "value": {
+                    "id": "33992b1f-bb5e-4ec2-a8b8-e400d67772ec",
+                    "version": 16,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "🌥 Let us propose a DevOps compatible architecture using kubernetes and any cloud."
+                            ]
+                        ]
+                    },
+                    "created_time": 1590531360000,
+                    "last_edited_time": 1590531960000,
+                    "parent_id": "9c29e5f9-64d0-4980-811f-ac035f767d53",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "007590e7-3137-42c4-92c3-591234465a50": {
+                "role": "editor",
+                "value": {
+                    "id": "007590e7-3137-42c4-92c3-591234465a50",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1590531420000,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "9c29e5f9-64d0-4980-811f-ac035f767d53",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "63fc437f-08a9-4e02-bc76-a12a0fbb4e7e": {
+                "role": "editor",
+                "value": {
+                    "id": "63fc437f-08a9-4e02-bc76-a12a0fbb4e7e",
+                    "version": 143,
+                    "type": "bulleted_list",
+                    "properties": {
+                        "title": [
+                            [
+                                "You have a security issue ?"
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "249c4b32-5cf3-4894-92a0-4f17b76544d0",
+                        "89e5a419-1dbd-47f5-ba0f-46d36582a46e"
+                    ],
+                    "created_time": 1590402835748,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "249c4b32-5cf3-4894-92a0-4f17b76544d0": {
+                "role": "editor",
+                "value": {
+                    "id": "249c4b32-5cf3-4894-92a0-4f17b76544d0",
+                    "version": 16,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "🪓 We can fix it. In your architecture as well as in your codes."
+                            ]
+                        ]
+                    },
+                    "created_time": 1590531360000,
+                    "last_edited_time": 1590532020000,
+                    "parent_id": "63fc437f-08a9-4e02-bc76-a12a0fbb4e7e",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "89e5a419-1dbd-47f5-ba0f-46d36582a46e": {
+                "role": "editor",
+                "value": {
+                    "id": "89e5a419-1dbd-47f5-ba0f-46d36582a46e",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1590531420000,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "63fc437f-08a9-4e02-bc76-a12a0fbb4e7e",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "9375fc6e-93dd-4197-8d12-8f16fc139f96": {
+                "role": "editor",
+                "value": {
+                    "id": "9375fc6e-93dd-4197-8d12-8f16fc139f96",
+                    "version": 133,
+                    "type": "bulleted_list",
+                    "properties": {
+                        "title": [
+                            [
+                                "You need technical training or expertise on any .net related technologies ? "
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "fc41d086-cd5a-4bdb-a8aa-1735e1fd22aa",
+                        "d0dbb6c5-6cfa-4024-845b-776373da49f5"
+                    ],
+                    "created_time": 1590402835749,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "fc41d086-cd5a-4bdb-a8aa-1735e1fd22aa": {
+                "role": "editor",
+                "value": {
+                    "id": "fc41d086-cd5a-4bdb-a8aa-1735e1fd22aa",
+                    "version": 16,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "👨\u200d🏫 We have experts in a wide areas."
+                            ]
+                        ]
+                    },
+                    "created_time": 1590531360000,
+                    "last_edited_time": 1590532020000,
+                    "parent_id": "9375fc6e-93dd-4197-8d12-8f16fc139f96",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "d0dbb6c5-6cfa-4024-845b-776373da49f5": {
+                "role": "editor",
+                "value": {
+                    "id": "d0dbb6c5-6cfa-4024-845b-776373da49f5",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1590531420000,
+                    "last_edited_time": 1590531420000,
+                    "parent_id": "9375fc6e-93dd-4197-8d12-8f16fc139f96",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "3a48254a-95da-413f-af1b-852fcd839ffa": {
+                "role": "editor",
+                "value": {
+                    "id": "3a48254a-95da-413f-af1b-852fcd839ffa",
+                    "version": 105,
+                    "type": "bulleted_list",
+                    "properties": {
+                        "title": [
+                            [
+                                "You want to expand your social impact by bossting your digital marketing ?"
+                            ]
+                        ]
+                    },
+                    "content": [
+                        "acda94ec-cf47-4dd8-bace-62d164f42a74"
+                    ],
+                    "created_time": 1590402835749,
+                    "last_edited_time": 1590531360000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "acda94ec-cf47-4dd8-bace-62d164f42a74": {
+                "role": "editor",
+                "value": {
+                    "id": "acda94ec-cf47-4dd8-bace-62d164f42a74",
+                    "version": 16,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "✨ We have some experts too."
+                            ]
+                        ]
+                    },
+                    "created_time": 1590531360000,
+                    "last_edited_time": 1590532080000,
+                    "parent_id": "3a48254a-95da-413f-af1b-852fcd839ffa",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "8806ea99-33db-4cfe-8bf3-c4b497c00ec2": {
+                "role": "editor",
+                "value": {
+                    "id": "8806ea99-33db-4cfe-8bf3-c4b497c00ec2",
+                    "version": 10,
+                    "type": "text",
+                    "created_time": 1590501480000,
+                    "last_edited_time": 1590501480000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "763401c0-f649-4b32-9b43-4ec2d5be7c10": {
+                "role": "editor",
+                "value": {
+                    "id": "763401c0-f649-4b32-9b43-4ec2d5be7c10",
+                    "version": 98,
+                    "type": "text",
+                    "properties": {
+                        "title": [
+                            [
+                                "👋 Don't wait: chat with one of us "
+                            ],
+                            [
+                                "now ",
+                                [
+                                    [
+                                        "b"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "using the messenger icon (look at the bottom right)"
+                            ]
+                        ]
+                    },
+                    "created_time": 1590402835749,
+                    "last_edited_time": 1590532140000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "2421a6b0-3594-4df2-9992-207fe555a307": {
+                "role": "editor",
+                "value": {
+                    "id": "2421a6b0-3594-4df2-9992-207fe555a307",
+                    "version": 9,
+                    "type": "text",
+                    "created_time": 1590501480000,
+                    "last_edited_time": 1590501480000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "41766caa-0910-400d-acfd-79bb269660ed": {
+                "role": "editor",
+                "value": {
+                    "id": "41766caa-0910-400d-acfd-79bb269660ed",
+                    "version": 65,
+                    "type": "text",
+                    "created_time": 1590402835750,
+                    "last_edited_time": 1590529080000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+                }
+            },
+            "fa54d9c0-a86e-4e90-bb20-c452ffa6f2d8": {
+                "role": "editor",
+                "value": {
+                    "id": "fa54d9c0-a86e-4e90-bb20-c452ffa6f2d8",
+                    "version": 8,
+                    "type": "text",
+                    "created_time": 1590402840000,
+                    "last_edited_time": 1590402840000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "d07ca572-0840-454a-90c9-3a3fc62ee9e0": {
+                "role": "editor",
+                "value": {
+                    "id": "d07ca572-0840-454a-90c9-3a3fc62ee9e0",
+                    "version": 13,
+                    "type": "image",
+                    "properties": {
+                        "source": [
+                            [
+                                "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2206ad9c-1de9-45f2-b019-62aec587f41d/Untitled.png"
+                            ]
+                        ]
+                    },
+                    "format": {
+                        "block_width": 817,
+                        "display_source": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2206ad9c-1de9-45f2-b019-62aec587f41d/Untitled.png",
+                        "block_full_width": false,
+                        "block_page_width": true,
+                        "block_aspect_ratio": 0.6217870257037944,
+                        "block_preserve_scale": true
+                    },
+                    "created_time": 1590402840000,
+                    "last_edited_time": 1590402840000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "file_ids": [
+                        "2206ad9c-1de9-45f2-b019-62aec587f41d"
+                    ],
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            },
+            "964bbaf0-3302-4a17-a450-40535eaaec0d": {
+                "role": "editor",
+                "value": {
+                    "id": "964bbaf0-3302-4a17-a450-40535eaaec0d",
+                    "version": 8,
+                    "type": "text",
+                    "created_time": 1590402840000,
+                    "last_edited_time": 1590402840000,
+                    "parent_id": "fb6203f9-c037-4277-8ef6-4d6c42839acc",
+                    "parent_table": "block",
+                    "alive": true,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                }
+            }
+        },
+        "notion_user": {
+            "7ca80c8c-71ac-4f04-b5ec-ef5280ced804": {
+                "role": "editor",
+                "value": {
+                    "id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "version": 3,
+                    "email": "benjamin@vapolia.fr",
+                    "given_name": "Benjamin",
+                    "family_name": "Mayrargue",
+                    "profile_photo": "https://lh4.googleusercontent.com/-EaN5LoxN3Ws/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcgV1QjWE-_F6Pq3WmJ5L8RchqXmA/photo.jpg",
+                    "onboarding_completed": true
+                }
+            }
+        },
+        "space": {
+            "d0811b52-7a9c-4f03-a1de-e261c5555318": {
+                "role": "editor",
+                "value": {
+                    "id": "d0811b52-7a9c-4f03-a1de-e261c5555318",
+                    "version": 43,
+                    "name": "Vapolia",
+                    "domain": "vapolia",
+                    "permissions": [
+                        {
+                            "role": "editor",
+                            "type": "user_permission",
+                            "user_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804"
+                        }
+                    ],
+                    "email_domains": [
+                        "vapolia.fr"
+                    ],
+                    "beta_enabled": false,
+                    "pages": [
+                        "9662b7ae-cb70-438f-a618-a58d76ba0127",
+                        "10ab7c62-dcbd-41cb-b387-96c1c97d52b6",
+                        "3c515e7a-93c8-4804-b985-04bb98c10745",
+                        "e1b2d8df-ae60-4d12-8b76-3a6284307146",
+                        "2e555936-791a-45e5-afa8-47d3b91811af",
+                        "aea6cda1-63e1-4f88-a1c5-df14437c78c9"
+                    ],
+                    "created_by": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "created_time": 1574244000000,
+                    "last_edited_by": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_time": 1590402780000,
+                    "created_by_table": "notion_user",
+                    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "last_edited_by_table": "notion_user",
+                    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+                    "shard_id": 348952,
+                    "plan_type": "personal",
+                    "invite_link_code": "4defcb38fcd51e4f93511d9c92d843c17a958bb5",
+                    "invite_link_enabled": false
+                }
+            }
+        }
+    },
+    "cursor": {
+        "stack": []
+    }
+}
