@@ -84,7 +84,7 @@ namespace NotionSharp
                 var pageBlock = chunks.RecordMap.Block[pageId];
 
                 //collection_view_page not supported
-                if (pageBlock.Permissions?.Any(p => p.Role == Role.reader && p.Type == Permission.TypePublic) == true
+                if (pageBlock.Permissions?.Any(p => p.Role == Permission.RoleReader && p.Type == Permission.TypePublic) == true
                     && pageBlock.Type == "page") 
                 {
                     var content = chunks.RecordMap.GetHtmlAbstract(pageId);

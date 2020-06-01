@@ -65,6 +65,11 @@ namespace NotionSharpTest
 <p class='notion_text'></p>
 <ul><li class='notion_bulleted_list'>Gather your ideas into an understandable specification</li></ul>
 <p class='notion_bulleted_list_content'><p class='notion_text'>&#127774; we convert your vision into a specification understandable by everyone - from the product owner to the developer&#39;s team.</p>
+<p class='notion_text'></p>
+</p><ul><li class='notion_bulleted_list'>You need a mobile app</li></ul>
+<p class='notion_bulleted_list_content'><p class='notion_text'>&#128241; let us create it for you, we use the lastest cross platform technologies. You want it connected to the cloud? No problem!</p>
+<p class='notion_text'></p>
+</p><ul><li class='notion_bulleted_list'>You need an API ? </li></ul>
 "));
         }
     }
