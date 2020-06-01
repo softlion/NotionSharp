@@ -13,7 +13,7 @@
 
   <PropertyGroup>
     <!--  nuget configurable properties -->
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <VersionSuffix></VersionSuffix>
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
@@ -39,16 +39,19 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
     <PackageReleaseNotes>
-      1.01
+      1.0.2
+      RSS: private page are no more included
+
+      1.0.1
       HTML: bullets can have sub content
 
       0.08
       add classes on each p
-      
+
       0.0.7
       update how images are transformed to HTML
       refactor unit tests to make them more readable
-      
+
       0.0.1
       initial version
     </PackageReleaseNotes>
