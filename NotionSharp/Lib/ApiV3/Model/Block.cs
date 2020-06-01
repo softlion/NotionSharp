@@ -26,8 +26,8 @@ namespace NotionSharp.Lib.ApiV3.Model
 
         public PageFormat Format => Value.ContainsKey("format") ? Value["format"].ToObject<PageFormat>() : null;
 
-        public List<Permission> Permissions => Value.ContainsKey("email_domains") ? Value["email_domains"].ToObject<List<Permission>>() : null;
-
+        public List<Permission> Permissions => Value.ContainsKey("permissions") ? Value["permissions"].ToObject<List<Permission>>() : null;
+        public List<string> EmailDomains => Value.ContainsKey("email_domains") ? Value["email_domains"].ToObject<List<string>>() : null;
 
         public long CreatedTime => (long)Value["created_time"];
         public long LastEditedTime => (long)Value["last_edited_time"];

@@ -49,8 +49,7 @@ namespace NotionSharpTest
 
             Assert.IsNotNull(feed);
             Assert.IsTrue(feed.Items.Any());
+            Assert.IsFalse(feed.Items.Any(item => item.Title?.Text == "Work In Progress"));
         }
-
-
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Flurl.Http;
 using NotionSharp.Lib;
+using NotionSharp.Lib.ApiV3.Enums;
 using NotionSharp.Lib.ApiV3.Model;
 using NotionSharp.Lib.ApiV3.Requests;
 using NotionSharp.Lib.ApiV3.Results;
@@ -83,7 +84,8 @@ namespace NotionSharp
                 var pageBlock = chunks.RecordMap.Block[pageId];
 
                 //collection_view_page not supported
-                if (pageBlock.Alive && pageBlock.Type == "page") 
+                if (pageBlock.Permissions?.Any(p => p.Role == Role.reader && p.Type == Permission.TypePublic) == true
+                    && pageBlock.Type == "page") 
                 {
                     var content = chunks.RecordMap.GetHtmlAbstract(pageId);
                     var pageUri = NotionUtils.GetPageUri(pageId, pageBlock.Title);
