@@ -40,34 +40,38 @@ namespace NotionSharp
                 MaxBlocks = maxBlocks,
                 TransformHeader = (data, block) =>
                 {
-                    sb.Append("<h1 class='notion_header'>").AppendText(data).AppendLine("</h1>");
+                    sb.Append("<h1 class=\"notion_header\">").AppendText(data).AppendLine("</h1>");
                     return true;
                 },
                 TransformSubHeader = (data, block) =>
                 {
                     if (stopBeforeFirstSubHeader)
                         return false;
-                    sb.Append("<h2 class='notion_sub_header'>").AppendText(data).AppendLine("</h2>");
+                    sb.Append("<h2 class=\"notion_sub_header\">").AppendText(data).AppendLine("</h2>");
                     return true;
                 },
                 TransformBulletedList = (data, block) =>
                 {
-                    sb.Append("<ul><li class='notion_bulleted_list'>").AppendText(data).AppendLine("</li></ul>");
+                    sb.Append("<ul><li class=\"notion_bulleted_list\">").AppendText(data).AppendLine("</li>");
                     var hasContent = block.Content?.Count > 0;
                     if(hasContent)
-                        sb.Append("<p class='notion_bulleted_list_content'>");
-                    return (true, () => { if(hasContent) sb.Append("</p>"); });
+                        sb.AppendLine("<p class=\"notion_bulleted_list\">");
+                    return (true, () =>
+                    {
+                        if(hasContent) sb.Append("</div>");
+                        sb.AppendLine("</ul>");
+                    });
                 },
                 TransformText = (data, block) =>
                 {
                     if (data != null)
-                        sb.Append("<p class='notion_text'>").AppendText(data).AppendLine("</p>");
+                        sb.Append("<p class=\"notion_text\">").AppendText(data).AppendLine("</p>");
                     return true;
                 },
                 TransformImage = (data, block) =>
                 {
                     if(data != null)
-                        sb.Append("<p class='notion_image'>").AppendImage(data).AppendLine("</p>");
+                        sb.Append("<p class=\"notion_image\">").AppendImage(data).AppendLine("</p>");
                     return true;
                 }
             };
