@@ -40,38 +40,34 @@ namespace NotionSharp
                 MaxBlocks = maxBlocks,
                 TransformHeader = (data, block) =>
                 {
-                    sb.Append("<h1 class=\"notion_header\">").AppendText(data).AppendLine("</h1>");
+                    sb.Append("<h1 class=\"notion-header-block\">").AppendText(data).AppendLine("</h1>");
                     return true;
                 },
                 TransformSubHeader = (data, block) =>
                 {
                     if (stopBeforeFirstSubHeader)
                         return false;
-                    sb.Append("<h2 class=\"notion_sub_header\">").AppendText(data).AppendLine("</h2>");
+                    sb.Append("<h2 class=\"notion-sub_header-block\">").AppendText(data).AppendLine("</h2>");
                     return true;
                 },
                 TransformBulletedList = (data, block) =>
                 {
-                    sb.Append("<ul><li class=\"notion_bulleted_list\">").AppendText(data).AppendLine("</li>");
-                    var hasContent = block.Content?.Count > 0;
-                    if(hasContent)
-                        sb.AppendLine("<p class=\"notion_bulleted_list\">");
+                    sb.Append("<ul class=\"notion-bulleted_list-block\"><li>").AppendText(data).AppendLine("</li>");
                     return (true, () =>
                     {
-                        if(hasContent) sb.Append("</div>");
                         sb.AppendLine("</ul>");
                     });
                 },
                 TransformText = (data, block) =>
                 {
                     if (data != null)
-                        sb.Append("<p class=\"notion_text\">").AppendText(data).AppendLine("</p>");
+                        sb.Append("<div class=\"notion-text-block\">").AppendText(data).AppendLine("</div>");
                     return true;
                 },
                 TransformImage = (data, block) =>
                 {
                     if(data != null)
-                        sb.Append("<p class=\"notion_image\">").AppendImage(data).AppendLine("</p>");
+                        sb.Append("<div class=\"notion-image-block\">").AppendImage(data).AppendLine("</div>");
                     return true;
                 }
             };
@@ -101,7 +97,7 @@ namespace NotionSharp
         //    };
         //}
 
-        static StringBuilder AppendText(this StringBuilder sb, BlockTextData data)
+        public static StringBuilder AppendText(this StringBuilder sb, BlockTextData data)
         {
             foreach(var line in data.Lines.Where(l => l != null))
             {
@@ -137,7 +133,7 @@ namespace NotionSharp
             return sb;
         }
 
-        static StringBuilder AppendImage(this StringBuilder sb, BlockImageData data)
+        public static StringBuilder AppendImage(this StringBuilder sb, BlockImageData data)
         {
             if (data != null)
             {
