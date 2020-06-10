@@ -1,5 +1,6 @@
 {{- if .Values.ingress.enabled -}}
 {{- $serviceName := include "chart.fullname" . -}}
+{{- $servicePath := .Values.ingress.path -}}
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -22,10 +23,10 @@ spec:
   - host: {{ $host }}
     http:
       paths:
-      - backend:
+      - path: {{ $servicePath }}
+        backend:
           serviceName: {{ $serviceName }}
           servicePort: http
-        path: {{ .Values.ingress.path }}
   {{- end }}
   tls:
   - hosts:

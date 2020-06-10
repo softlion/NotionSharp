@@ -33,8 +33,10 @@ namespace NotionSharp
 
             var transformOptions = new TransformOptions
             {
-                //Exclude quote, code, page, bookmark
-                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "bulleted_list", "image" },
+                //Exclude code, page, bookmark
+#if !DEBUG
+                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "bulleted_list", "image", "quote" },
+#endif
                 ThrowIfBlockMissing = throwIfBlockMissing,
                 ThrowIfCantDecodeTextData = throwIfCantDecodeTextData,
                 MaxBlocks = maxBlocks,
@@ -50,18 +52,20 @@ namespace NotionSharp
                     sb.Append("<h2 class=\"notion-sub_header-block\">").AppendText(data).AppendLine("</h2>");
                     return true;
                 },
+                TransformText = (data, block) =>
+                {
+                    //if (data != null)
+                        sb.Append("<div class=\"notion-text-block\">").AppendText(data).AppendLine("</div>");
+                    return true;
+                },
                 TransformBulletedList = (data, block) =>
                 {
                     sb.Append("<ul class=\"notion-bulleted_list-block\"><li>").AppendText(data).AppendLine("</li>");
-                    return (true, () =>
-                    {
-                        sb.AppendLine("</ul>");
-                    });
+                    return (true, () => sb.AppendLine("</ul>"));
                 },
-                TransformText = (data, block) =>
+                TransformQuote = (data, block) =>
                 {
-                    if (data != null)
-                        sb.Append("<div class=\"notion-text-block\">").AppendText(data).AppendLine("</div>");
+                    sb.Append("<div class=\"notion-quote-block\">").AppendText(data).AppendLine("</div>");
                     return true;
                 },
                 TransformImage = (data, block) =>
@@ -69,7 +73,13 @@ namespace NotionSharp
                     if(data != null)
                         sb.Append("<div class=\"notion-image-block\">").AppendImage(data).AppendLine("</div>");
                     return true;
+                },
+#if DEBUG
+                TransformOther = block =>
+                {
+                    return true;
                 }
+#endif
             };
 
             recordMap.Transform(transformOptions, pageId);
@@ -99,34 +109,37 @@ namespace NotionSharp
 
         public static StringBuilder AppendText(this StringBuilder sb, BlockTextData data)
         {
-            foreach(var line in data.Lines.Where(l => l != null))
+            if (data != null)
             {
-                var tag = line.HasProperty ? (line.HyperlinkUrl != null ? "a" : "span") : null;
-
-                if(tag != null)
+                foreach (var line in data.Lines.Where(l => l != null))
                 {
-                    sb.Append("<").Append(tag);
+                    var tag = line.HasProperty ? (line.HyperlinkUrl != null ? "a" : "span") : null;
 
-                    if (line.HyperlinkUrl != null)
-                        sb.Append(" href=\"").Append(Uri.EscapeUriString(line.HyperlinkUrl)).Append("\"");
-
-                    if(line.HasStyle)
+                    if (tag != null)
                     {
-                        sb.Append(" style=\"");
-                        if (line.HtmlColor != null)
-                            sb.Append("color: ").Append(line.HtmlColor).Append(";");
-                        if(line.IsBold)
-                            sb.Append("font-weight: bold;");
-                        if (line.IsItalic)
-                            sb.Append("font-style: italic;");
-                        sb.Append("\"");
-                    }
+                        sb.Append("<").Append(tag);
 
-                    sb.Append(">").Append(WebUtility.HtmlEncode(line.Text)).Append("</").Append(tag).Append(">");
-                }
-                else
-                {
-                    sb.Append(WebUtility.HtmlEncode(line.Text));
+                        if (line.HyperlinkUrl != null)
+                            sb.Append(" href=\"").Append(Uri.EscapeUriString(line.HyperlinkUrl)).Append("\"");
+
+                        if (line.HasStyle)
+                        {
+                            sb.Append(" style=\"");
+                            if (line.HtmlColor != null)
+                                sb.Append("color: ").Append(line.HtmlColor).Append(";");
+                            if (line.IsBold)
+                                sb.Append("font-weight: bold;");
+                            if (line.IsItalic)
+                                sb.Append("font-style: italic;");
+                            sb.Append("\"");
+                        }
+
+                        sb.Append(">").Append(WebUtility.HtmlEncode(line.Text)).Append("</").Append(tag).Append(">");
+                    }
+                    else
+                    {
+                        sb.Append(WebUtility.HtmlEncode(line.Text));
+                    }
                 }
             }
 

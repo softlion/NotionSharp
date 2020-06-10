@@ -25,7 +25,7 @@ namespace NotionSharp
         public int MaxBlocks { get; set; }
 
         /// <summary>
-        /// Optional
+        /// Optional. DIV.
         /// </summary>
         public Func<BlockTextData, Block, bool> TransformText { get; set; }
         /// <summary>
@@ -40,6 +40,10 @@ namespace NotionSharp
         /// Optional. UL+LI.
         /// </summary>
         public Func<BlockTextData, Block, (bool Ok, Action ContentTransformed)> TransformBulletedList { get; set; }
+        /// <summary>
+        /// Optional. DIV.
+        /// </summary>
+        public Func<BlockTextData, Block, bool> TransformQuote { get; set; }
 
         /// <summary>
         /// Optional
@@ -112,7 +116,7 @@ namespace NotionSharp
         {
             var blocks = from itemId in contentIds
                 let block = !transformOptions.ThrowIfBlockMissing && !allBlocks.ContainsKey(itemId) ? null : allBlocks[itemId]
-                where block != null && (transformOptions == null || transformOptions.AcceptedBlockTypes.Contains(block.Type))
+                where block != null && (transformOptions?.AcceptedBlockTypes == null || transformOptions.AcceptedBlockTypes.Contains(block.Type))
                 select block;
 
             if (transformOptions.MaxBlocks > 0)
@@ -123,6 +127,7 @@ namespace NotionSharp
                 var okToContinue = block.Type switch
                 {
                     "text" => transformOptions.TransformText?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                    "quote" => transformOptions.TransformQuote?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "header" => transformOptions.TransformHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "sub_header" => transformOptions.TransformSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "bulleted_list" => TransformBulletedList(transformOptions, block, allBlocks),
@@ -179,9 +184,6 @@ namespace NotionSharp
 
         static BlockTextData ToTextData(this Block textBlock, bool throwIfCantDecodeTextData)
         {
-            //if (textBlock.Type != "text" && textBlock.Type != "sub_header")
-            //    throw new ArgumentException($"textBlock.Type must be text or sub_header, currently is {textBlock.Type}", nameof(textBlock));
-
             var data = new BlockTextData { Lines = new List<BlockTextPart>() };
 
             if (textBlock.Properties != null && textBlock.Properties.ContainsKey("title"))

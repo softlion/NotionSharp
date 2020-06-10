@@ -15,7 +15,11 @@
                 <NavLink class="nav-link" href="@link">
                     @if (item.AttributeExtensions.TryGetValue(new System.Xml.XmlQualifiedName("iconUrl"), out var iconUrl))
                     {
-                        <img src="@iconUrl" style="height: 2em" />
+                        <img class="notion-page-icon" src="@iconUrl" style="height: 2em" />
+                    }
+                    else if (item.AttributeExtensions.TryGetValue(new System.Xml.XmlQualifiedName("iconString"), out var iconString))
+                    {
+                        <span class="notion-page-emoji">@iconString</span>
                     }
                     @item.Title.Text
                 </NavLink>

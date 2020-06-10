@@ -9,7 +9,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
-    <PackageReference Include="Softlion.NotionSharp" Version="1.0.5" />
+    <PackageReference Include="Softlion.NotionSharp" Version="1.0.6" />
+    <!--<ProjectReference Include="..\..\NotionSharp\NotionSharp.csproj" />-->
     <PackageReference Include="System.Reactive" Version="4.4.1" />
   </ItemGroup>
 

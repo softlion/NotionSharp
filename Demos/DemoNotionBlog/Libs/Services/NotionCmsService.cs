@@ -63,7 +63,7 @@ namespace DemoNotionBlog.Libs.Services
                 //Refresh CMS
                 var cmsPageId = spacePages.First(pageId => userContent.RecordMap.Block[pageId].Title == notionOptions.CmsPageTitle);
                 var cmsPages = userContent.RecordMap.Block[cmsPageId].Content;
-                var cmsItems = await notionSession.GetSyndicationFeed(cmsPages, 100000).ConfigureAwait(false);
+                var cmsItems = await notionSession.GetSyndicationFeed(cmsPages, maxBlocks: 100000, stopBeforeFirstSubHeader: false).ConfigureAwait(false);
                 CmsArticles.OnNext(cmsItems.Items.ToList());
             }
             catch (Exception e)

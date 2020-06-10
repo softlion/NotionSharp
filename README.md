@@ -161,6 +161,9 @@ All pages are blocks. All paragraphs, photos, items in a page are also blocks. `
 For a `page` block, `Block.Content` contains the ids of the child pages.  
 All item's ids are Guids.
 
-Known block types are:
+Rendered block types:
 - page, collection_view_page
-- text, image, header, sub_header, quote, code, bookmark
+- text, image, header, sub_header, bulleted_list, quote, 
+
+Unimplemented block types:
+- code, bookmark

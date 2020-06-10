@@ -13,7 +13,7 @@
 
   <PropertyGroup>
     <!--  nuget configurable properties -->
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <VersionSuffix></VersionSuffix>
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
@@ -39,6 +39,10 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
     <PackageReleaseNotes>
+      1.0.6
+      new block type support: quote
+      new parameter for get feed: disable stop parsing before the 1st heading2 line, which is by default set to true.
+
       1.0.5
       html generator: replace p by divs; replace class names to match what notion is using
 

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using Flurl.Http;
 using NotionSharp.Lib;
-using NotionSharp.Lib.ApiV3.Enums;
 using NotionSharp.Lib.ApiV3.Model;
 using NotionSharp.Lib.ApiV3.Requests;
 using NotionSharp.Lib.ApiV3.Results;
@@ -48,7 +47,7 @@ namespace NotionSharp
             }, cancel).ReceiveJson<LoadPageChunkResult>();
         }
 
-        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, int maxBlocks = 20, CancellationToken cancel = default)
+        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
         {
             var userContent = await session.LoadUserContent(cancel);
             var space = userContent.RecordMap.Space.First().Value;
@@ -56,7 +55,7 @@ namespace NotionSharp
             //collection_view_page not supported
             var pages = space.Pages.Where(pageId => userContent.RecordMap.Block[pageId].Type == "page");
 
-            var feed = await session.GetSyndicationFeed(pages, maxBlocks, cancel);
+            var feed = await session.GetSyndicationFeed(pages, maxBlocks, stopBeforeFirstSubHeader, cancel);
             feed.Id = space.Id.ToString("N");
             feed.Title = new TextSyndicationContent(space.Name);
             feed.Description = new TextSyndicationContent(space.Domain);
@@ -69,12 +68,13 @@ namespace NotionSharp
         /// <param name="session">a session</param>
         /// <param name="pages">the pages</param>
         /// <param name="maxBlocks">limits the parsing of each page to the 1st 20 blocks</param>
+        /// <param name="stopBeforeFirstSubHeader">when true, stop parsing a page when a line containing a sub_header is found</param>
         /// <param name="cancel"></param>
         /// <returns>A SyndicationFeed containing one SyndicationItem per page</returns>
         /// <remarks>
         /// The created feed has no title/description
         /// </remarks>
-        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, IEnumerable<Guid> pages, int maxBlocks = 20, CancellationToken cancel = default)
+        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, IEnumerable<Guid> pages, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
         {
             var feedItems = new List<SyndicationItem>();
             foreach (var pageId in pages)
@@ -87,7 +87,8 @@ namespace NotionSharp
                 if (pageBlock.Permissions?.Any(p => p.Role == Permission.RoleReader && p.Type == Permission.TypePublic) == true
                     && pageBlock.Type == "page") 
                 {
-                    var content = chunks.RecordMap.GetHtmlAbstract(pageId);
+                    //var content = chunks.RecordMap.GetHtmlAbstract(pageId);
+                    var content = chunks.RecordMap.GetHtml(pageId, throwIfBlockMissing: false, stopBeforeFirstSubHeader: stopBeforeFirstSubHeader, throwIfCantDecodeTextData: false);
                     var pageUri = NotionUtils.GetPageUri(pageId, pageBlock.Title);
 
                     var item = new SyndicationItem(pageBlock.Title, content, pageUri)
@@ -100,7 +101,12 @@ namespace NotionSharp
                     };
 
                     if (!String.IsNullOrWhiteSpace(pageBlock.Format?.PageIcon))
-                        item.AttributeExtensions.Add(new XmlQualifiedName("iconUrl"), pageBlock.Format.PageIcon);
+                    {
+                        if(Uri.TryCreate(pageBlock.Format.PageIcon, UriKind.Absolute, out _))
+                            item.AttributeExtensions.Add(new XmlQualifiedName("iconUrl"), pageBlock.Format.PageIcon);
+                        else
+                            item.AttributeExtensions.Add(new XmlQualifiedName("iconString"), pageBlock.Format.PageIcon);
+                    }
 
                     feedItems.Add(item);
                 }
@@ -108,7 +114,7 @@ namespace NotionSharp
 
             var feed = new SyndicationFeed(feedItems)
             {
-                LastUpdatedTime = feedItems.DefaultIfEmpty().Max(item => item.LastUpdatedTime),
+                LastUpdatedTime = feedItems.DefaultIfEmpty().Max(item => item?.LastUpdatedTime ?? DateTimeOffset.MinValue),
                 //Copyright = 
             };
 
