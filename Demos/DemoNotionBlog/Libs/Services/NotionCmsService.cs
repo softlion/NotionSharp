@@ -26,6 +26,7 @@ namespace DemoNotionBlog.Libs.Services
         private readonly NotionOptions notionOptions;
 
         public BehaviorSubject<List<SyndicationItem>> CmsArticles { get; }
+        public string CmsTitle { get; set; }
 
         public NotionCmsService(ILogger<NotionCmsService> logger, IOptions<NotionOptions> notionOptions)
         {
@@ -64,6 +65,7 @@ namespace DemoNotionBlog.Libs.Services
                 var cmsPageId = spacePages.First(pageId => userContent.RecordMap.Block[pageId].Title == notionOptions.CmsPageTitle);
                 var cmsPages = userContent.RecordMap.Block[cmsPageId].Content;
                 var cmsItems = await notionSession.GetSyndicationFeed(cmsPages, maxBlocks: 100000, stopBeforeFirstSubHeader: false).ConfigureAwait(false);
+                CmsTitle = userContent.RecordMap.Block[cmsPageId].Title;
                 CmsArticles.OnNext(cmsItems.Items.ToList());
             }
             catch (Exception e)

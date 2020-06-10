@@ -3,7 +3,7 @@
 @implements IDisposable
 
 <div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Notion Blog Demo</a>
+    <a class="navbar-brand" href="">@BlogTitle</a>
 </div>
 
 <div>
@@ -38,6 +38,7 @@
     IDisposable articlesSubscription;
 
     List<SyndicationItem> CmsItems = new List<SyndicationItem>();
+    string BlogTitle = "";
 
 
     protected override void OnInitialized()
@@ -48,6 +49,7 @@
             if (items != null)
             {
                 CmsItems = items;
+                BlogTitle = CmsService.CmsTitle;
                 InvokeAsync(() => StateHasChanged());
             }
         });
