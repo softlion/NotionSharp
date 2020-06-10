@@ -39,7 +39,7 @@ Get a RSS representation from the sub-pages of a page:
 
 ## Testing the Notion blog demo
 
-- Get your Notion's credentials using fiddler (TokenV2 => key, browserId and userId)
+- Get your Notion's credentials using [fiddler](https://www.telerik.com/fiddler) (TokenV2 => key, browserId and userId)
 - Create a public page at the root of Notion, then add subpages to this page with title and icon.
 
 Issue these commands to create your own notion blog demo. Replace the fake credentials with yours.
@@ -50,9 +50,12 @@ cd DemoNotionBlog
 dotnet new -i Softlion.NotionSharp.TemplateProjects
 dotnet new blazorblog -p "MySite CMS"
 dotnet user-secrets init
+
 dotnet user-secrets set "Notion:Key" "xxXxxXXxxXxxxXXxxx...xxXxxX"
-dotnet user-secrets set "Notion:BrowserId" "BB083879-F2DA-4DF6-ADFB-C26344981DC3"
-dotnet user-secrets set "Notion:UserId" "BB083879-F2DA-4DF6-ADFB-C26344981DC3"
+dotnet user-secrets set "Notion:BrowserId" "aabbccdd-aabb-aabb-aabb-aabbccddaabb"
+dotnet user-secrets set "Notion:UserId" "eeffeeff-eeff-eeff-eeff-eeffeeffeeff"
+dotnet user-secrets set "Notion:CmsPageTitle" "Public CMS"
+
 dotnet run
 ```
 
@@ -91,4 +94,4 @@ All item's ids are Guids.
 
 Known block types are:
 - page, collection_view_page
-- text, image, sub_header, quote, code, bookmark
+- text, image, header, sub_header, quote, code, bookmark
