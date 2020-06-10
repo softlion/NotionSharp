@@ -30,6 +30,14 @@ namespace DemoNotionBlog.Libs.Services
         public NotionCmsService(ILogger<NotionCmsService> logger, IOptions<NotionOptions> notionOptions)
         {
             this.logger = logger;
+
+            //If you crash here, make sure you either:
+            //- updated the notion session keys in appsettings-secrets.json
+            //- or created user secrets :
+            //  dotnet user-secrets init
+            //  dotnet user-secrets set "Notion:Key" "xxXxxXXxxXxxxXXxxx...xxXxxX"
+            //  dotnet user-secrets set "Notion:BrowserId" "aabbccdd-aabb-aabb-aabb-aabbccddaabb"
+            //  dotnet user-secrets set "Notion:UserId" "eeffeeff-eeff-eeff-eeff-eeffeeffeeff"
             this.notionOptions = notionOptions.Value;
 
             //Load Startup Data

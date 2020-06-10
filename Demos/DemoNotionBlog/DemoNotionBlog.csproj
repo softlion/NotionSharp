@@ -3,10 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>d3ee1fbc-fd2c-4ce9-9756-e439a73af1b6</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
-    <PackageReference Include="Softlion.NotionSharp" Version="1.0.0" />
+    <PackageReference Include="Softlion.NotionSharp" Version="1.0.5" />
     <PackageReference Include="System.Reactive" Version="4.4.1" />
   </ItemGroup>
 

@@ -1,0 +1,11 @@
+{{- if .Values.appSettings }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "chart.fullname" . }}-appsettings
+data:
+{{- range $key, $val := .Values.appSettings }}
+  {{ $key }}: |-
+{{ $val | indent 4}}
+{{- end }}
+{{- end -}}

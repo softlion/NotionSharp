@@ -1,0 +1,36 @@
+{{- if .Values.ingress.enabled -}}
+{{- $serviceName := include "chart.fullname" . -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "chart.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ template "chart.name" . }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    app.kubernetes.io/component: {{ .Values.component }}
+    app.kubernetes.io/part-of: {{ .Values.application }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}    
+spec:
+  rules:
+  {{- range $host := .Values.ingress.hosts }}
+  - host: {{ $host }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ $serviceName }}
+          servicePort: http
+        path: {{ .Values.ingress.path }}
+  {{- end }}
+  tls:
+  - hosts:
+    {{- range $host := .Values.ingress.hosts }}
+    - {{ $host }}
+    {{- end }}
+    secretName: {{ .Values.ingress.secretName }}
+{{- end }}

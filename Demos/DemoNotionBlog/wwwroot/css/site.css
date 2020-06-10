@@ -181,3 +181,24 @@ app {
         display: block;
     }
 }
+
+.notion div.notion-text-block {
+    text-align: justify;
+    max-width: 750px;
+    margin-bottom: 0;
+    min-height: 1.5em;
+    line-height: 1.5;
+}
+
+.notion div.notion-image-block {
+    text-align: center;
+}
+
+.notion div.notion-image-block > img {
+    max-width: 100%;
+    max-height: 400px;
+}
+
+.notion ul {
+    margin-bottom: 0;
+}

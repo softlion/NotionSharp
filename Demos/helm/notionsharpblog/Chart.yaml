@@ -1,0 +1,13 @@
+apiVersion: v1
+description: A Helm chart for the notionsharp blog
+name: notionsharpblog
+version: 1.0.0
+appVersion: 3.0.0
+home: https://vapolia.eu/
+icon: https://hub.docker.com/public/images/logos/mini-logo.svg
+sources:
+  - https://github.com/softlion/
+maintainers:
+  - name: softlion
+    email: benjamin@vapolia.fr
+

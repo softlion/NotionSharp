@@ -1,0 +1,61 @@
+#usage:
+#helm upgrade demonotionblog helm\notionsharpblog --install -f values.yaml
+#where values.yaml is NOT this file.
+
+component: frontend
+application: notionsharpblog
+
+# You can define additional appsettings here
+# appSettings:
+#   appsettings.Production.json: |-
+#     {
+#     }
+
+# You must either set your own keys here, 
+# or create a secret with the same format containing those keys
+# BEFORE applying the chart. The expected name of the secret is
+# {{ include "chart.fullname" . }}-appsettings-secrets
+appSettingsSecrets:
+  appsettings-secrets.Production.json: |-
+    {
+      "Notion": {
+        "Key": "__YourNotionKey__",
+        "BrowserId": "__YourNotionBrowserId__",
+        "UserId": "__YourNotionUserId__",
+        "CmsPageTitle": "__YourNotionRootPageTitleForThisBlog__"
+      }
+    }
+
+service:
+  #For minikube: use LoadBalancer instead
+  type: ClusterIP
+  port: 5080
+
+ingress:
+  enabled: false
+  secretName: cert-{{- include "chart.fullname" . }}
+  hosts:
+  - blog.notionsharp.eu
+  - www.blog.notionsharp.eu
+  mainhost: blog.notionsharp.eu
+  path: /
+  annotations:
+    cert-manager.io/cluster-issuer: acme-issuer
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($host != '{{ .Values.ingress.mainhost }}' ) {
+        rewrite ^ https://{{ .Values.ingress.mainhost }}$request_uri permanent;
+      }
+
+image:
+  repository: vapolia/demonotionblog
+  tag: latest
+  pullPolicy: IfNotPresent
+
+deployment:
+  replicaCount: 1
+  #nodeSelector:
+  #- ...
+  #affinity:
+  #- ...
+  #tolerations:
+  #- ...

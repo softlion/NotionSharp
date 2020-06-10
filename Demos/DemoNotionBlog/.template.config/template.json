@@ -1,5 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/template",
+  //See PackTemplateProjects.csproj for how to use this template
   //https://devblogs.microsoft.com/dotnet/how-to-create-your-own-templates-for-dotnet-new/
   //dotnet new --install ..\DemoNotionBlog\
   //dotnet new blazorblog --help

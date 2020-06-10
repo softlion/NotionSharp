@@ -41,22 +41,55 @@
                       Default: __YourNotionUserId__
       
       Create a new website in the current folder, using this template:
-      > dotnet new blazorblog --page "My Public Blog" --key xxXxxXXxxXxxxXXxxx...xxXxxX --browserId BB083879-F2DA-4DF6-ADFB-C26344981DC3 --userId BB083879-F2DA-4DF6-ADFB-C26344981DC3
+      > dotnet new blazorblog --page "My Public Blog" --key xxXxxXXxxXxxxXXxxx...xxXxxX --browserId aabbccdd-aabb-aabb-aabb-aabbccddaabb --userId eeffeeff-eeff-eeff-eeff-eeffeeffeeff
       
       You can also use this simple command:
       > dotnet new blazorblog --page "My Public Blog"
       
-      But if you do so, you must add the values as user secrets:
+      But if you do so, you should add the values as user secrets (remember that secrets work in debug mode only):
       > dotnet user-secrets init
       > dotnet user-secrets set "Notion:Key" "xxXxxXXxxXxxxXXxxx...xxXxxX"
-      > dotnet user-secrets set "Notion:BrowserId" "BB083879-F2DA-4DF6-ADFB-C26344981DC3"
-      > dotnet user-secrets set "Notion:UserId" "BB083879-F2DA-4DF6-ADFB-C26344981DC3"
+      > dotnet user-secrets set "Notion:BrowserId" "aabbccdd-aabb-aabb-aabb-aabbccddaabb"
+      > dotnet user-secrets set "Notion:UserId" "eeffeeff-eeff-eeff-eeff-eeffeeffeeff"
+      > dotnet user-secrets set "Notion:CmsPageTitle" "Public blog"
   
       To uninstall this template:
       > dotnet new -u Softlion.NotionSharp.TemplateProject.Blog
       
       To list all installed templates and get uninstall instructions:
       > dotnet new --uninstall --help
+
+      To build a docker image of the blazor blog and test it:
+      right clic the project, clic Publish then choose Docker.
+      Or use these commands:
+      > docker build -t yourdockerhub.com/demonotionblog:1.0.0 .
+      > docker run -p8080:5000 yourdockerhub.com/demonotionblog:1.0.0
+      > start http://localhost:8080/
+      Don't forget to set up your notion keys in appsettings.Production.json before, as user secrets are not used in Release mode.
+
+      To push the blog to a kubernetes cluster:
+      > helm upgrade demonotionblog helm\notionsharpblog --install -f your-value.yaml --dry-run
+      > start http://localhost:5080/
+      Check helm\notionsharpblog\values.yaml for the available values.
+
+      Example of a simple your-values.yaml file suitable for minikube:
+
+          appSettingsSecrets:
+            appsettings-secrets.Production.json: |-
+              {
+                "Notion": {
+                  "Key": "aabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccdd",
+                  "BrowserId": "aabbccdd-aabb-aabb-aabb-aabbccddaabb",
+                  "UserId": "eeffeeff-eeff-eeff-eeff-eeffeeffeeff",
+                  "CmsPageTitle": "My Blog"
+                }
+              }
+
+          #For minikube only
+          service:
+            type: LoadBalancer
+            port: 5080
+
     ]]>
     </Description>
 
