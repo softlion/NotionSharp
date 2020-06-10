@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <!--  nuget configurable properties -->
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -111,6 +111,9 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
     <PackageReleaseNotes>
+      1.0.5
+      remove link to SDK
+
       1.0.4
       styles now match Notion's
 
