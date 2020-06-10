@@ -39,8 +39,39 @@ Get a RSS representation from the sub-pages of a page:
 
 ## Testing the Notion blog demo
 
-- Get your Notion's credentials using [fiddler](https://www.telerik.com/fiddler) (TokenV2 => key, browserId and userId)
-- Create a public page at the root of Notion, then add subpages to this page with title and icon.
+### Setup your Notion pages and get your credentials
+
+- Create a public page at the root of Notion.so, then add subpages to this page with a title and an icon.
+- Get your Notion's credentials using [fiddler](https://www.telerik.com/fiddler) by examining the cookies (TokenV2 => key, browserId and userId)
+
+### Using kubernetes
+
+```
+helm upgrade demonotionblog helm\notionsharpblog --install -f your-value.yaml
+start http://localhost:5080/
+```
+
+This is an example of a simple `your-values.yaml` file suitable for minikube. Check `helm\notionsharpblog\values.yaml` for the configurable values.
+
+```yaml
+appSettingsSecrets:
+  appsettings-secrets.Production.json: |-
+    {
+      "Notion": {
+        "Key": "aabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccddaabbccdd",
+        "BrowserId": "aabbccdd-aabb-aabb-aabb-aabbccddaabb",
+        "UserId": "eeffeeff-eeff-eeff-eeff-eeffeeffeeff",
+        "CmsPageTitle": "My Blog"
+      }
+    }
+
+#For minikube only
+service:
+  type: LoadBalancer
+  port: 5080
+```
+
+### Cloning the template using dotnetcore
 
 Issue these commands to create your own notion blog demo. Replace the fake credentials with yours.
 
@@ -48,18 +79,56 @@ Issue these commands to create your own notion blog demo. Replace the fake crede
 md DemoNotionBlog
 cd DemoNotionBlog
 dotnet new -i Softlion.NotionSharp.TemplateProjects
+
 dotnet new blazorblog -p "MySite CMS"
 dotnet user-secrets init
-
 dotnet user-secrets set "Notion:Key" "xxXxxXXxxXxxxXXxxx...xxXxxX"
 dotnet user-secrets set "Notion:BrowserId" "aabbccdd-aabb-aabb-aabb-aabbccddaabb"
 dotnet user-secrets set "Notion:UserId" "eeffeeff-eeff-eeff-eeff-eeffeeffeeff"
-dotnet user-secrets set "Notion:CmsPageTitle" "Public CMS"
+
+or
+
+dotnet new blazorblog -p "MySite CMS" --key xxXxxXXxxXxxxXXxxx...xxXxxX --browserId aabbccdd-aabb-aabb-aabb-aabbccddaabb --userId eeffeeff-eeff-eeff-eeff-eeffeeffeeff
 
 dotnet run
 ```
 
-## Usage
+To uninstall the template:
+```
+dotnet new -u Softlion.NotionSharp.TemplateProject.Blog
+```
+
+### Cloning the git repo
+
+```
+//Install the template
+dotnet new -i Demos\DemoNotionBlog
+
+dotnet new blazorblog -p "MySite CMS" --key xxXxxXXxxXxxxXXxxx...xxXxxX --browserId aabbccdd-aabb-aabb-aabb-aabbccddaabb --userId eeffeeff-eeff-eeff-eeff-eeffeeffeeff
+
+dotnet run
+```
+
+To uninstall the template:
+```
+dotnet new -u Softlion.NotionSharp.TemplateProject.Blog
+```
+
+### Using Docker
+
+A dockerfile is included with the demo/template project.
+Right clic the demo project and choose "publish" to publish it using the UI.
+Or use these commands:
+
+```
+docker build -t yourdockerhub.com/demonotionblog:1.0.0 .
+docker run -p8080:5000 yourdockerhub.com/demonotionblog:1.0.0
+start http://localhost:8080/
+```
+
+Note: the prebuilt docker image vapolia/demonotionblog:latest is made for helm and is missing the appsettings-secrets.Production.json file.
+
+## SDK Usage
 
 Create a session:
 
