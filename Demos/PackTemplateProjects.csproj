@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <!--  nuget configurable properties -->
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -66,6 +66,7 @@
       > docker run -p8080:5000 yourdockerhub.com/demonotionblog:1.0.0
       > start http://localhost:8080/
       Don't forget to set up your notion keys in appsettings.Production.json before, as user secrets are not used in Release mode.
+      Note: the prebuilt docker image vapolia/demonotionblog:latest is made for helm and is missing the appsettings-secrets.Production.json file.
 
       To push the blog to a kubernetes cluster:
       > helm upgrade demonotionblog helm\notionsharpblog --install -f your-value.yaml --dry-run
