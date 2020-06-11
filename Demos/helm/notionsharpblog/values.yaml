@@ -46,7 +46,7 @@ ingress:
 image:
   repository: vapolia/demonotionblog
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 deployment:
   replicaCount: 1
