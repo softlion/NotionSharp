@@ -12,6 +12,7 @@
     <PackageReference Include="Softlion.NotionSharp" Version="1.0.6" />
     <!--<ProjectReference Include="..\..\NotionSharp\NotionSharp.csproj" />-->
     <PackageReference Include="System.Reactive" Version="4.4.1" />
+    <PackageReference Include="Toolbelt.Blazor.HeadElement" Version="1.2.0" />
   </ItemGroup>
 
 </Project>

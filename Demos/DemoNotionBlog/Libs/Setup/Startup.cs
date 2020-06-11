@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace DemoNotionBlog
 {
@@ -20,6 +21,7 @@ namespace DemoNotionBlog
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddHeadElementHelper();
 
             services.Configure<NotionOptions>(Configuration.GetSection("Notion"));
 

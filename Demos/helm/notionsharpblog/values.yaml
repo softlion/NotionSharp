@@ -33,7 +33,7 @@ service:
 
 ingress:
   enabled: false
-  secretName: cert-{{- include "chart.fullname" . }}
+# secretName: cert-{{- include "chart.fullname" . }}
   hosts:
   - blog.notionsharp.eu
   - www.blog.notionsharp.eu
@@ -41,10 +41,7 @@ ingress:
   path: /
   annotations:
     cert-manager.io/cluster-issuer: acme-issuer
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($host != '{{ .Values.ingress.mainhost }}' ) {
-        rewrite ^ https://{{ .Values.ingress.mainhost }}$request_uri permanent;
-      }
+    ingress.kubernetes.io/ssl-redirect: "true"
 
 image:
   repository: vapolia/demonotionblog

@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $serviceName := include "chart.fullname" . -}}
 {{- $servicePath := .Values.ingress.path -}}
+{{- $servicePort := .Values.service.port -}}
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -13,8 +14,8 @@ metadata:
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
     app.kubernetes.io/component: {{ .Values.component }}
     app.kubernetes.io/part-of: {{ .Values.application }}
-  {{- with .Values.ingress.annotations }}
   annotations:
+  {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}    
 spec:
@@ -26,12 +27,16 @@ spec:
       - path: {{ $servicePath }}
         backend:
           serviceName: {{ $serviceName }}
-          servicePort: http
+          servicePort: {{ $servicePort }}
   {{- end }}
   tls:
   - hosts:
     {{- range $host := .Values.ingress.hosts }}
     - {{ $host }}
     {{- end }}
+    {{- if .Values.ingress.secretName }}
     secretName: {{ .Values.ingress.secretName }}
+    {{- else }}
+    secretName: cert-{{- include "chart.fullname" . }}
+    {{- end }}
 {{- end }}

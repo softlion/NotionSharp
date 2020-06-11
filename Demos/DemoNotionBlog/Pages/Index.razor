@@ -5,9 +5,12 @@
 @inject NavigationManager navigationManager
 @using System.ServiceModel.Syndication
 @using Microsoft.AspNetCore.WebUtilities
+@using Toolbelt.Blazor.HeadElement
 
 @if (Item?.Summary != null)
 {
+    <Title>@Item.Title.Text - @CmsService.CmsTitle</Title>
+
     <div class="notion" style="margin-bottom: 2em">
         @((MarkupString)Item.Summary.Text)
     </div>
