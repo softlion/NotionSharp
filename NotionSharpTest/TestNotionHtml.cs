@@ -30,10 +30,10 @@ namespace NotionSharpTest
             Assert.IsNotNull(chunks);
             var content = chunks.RecordMap.GetHtmlAbstract();
             Assert.IsNotNull(content);
-            Assert.AreEqual(@"<p class=""notion_text"">Creating a good Xamarin Forms control - Part 3 - UI Day 4</p>
-<p class=""notion_text"">In <a href=""https://medium.com/@bigoudi/creating-a-good-xamarin-forms-control-part-2-ui-day-3-688bd0b3333d"">the previous article</a> I proposed the foundations of a win-win architecture for a good Xamarin Forms control using a multi targeting project. </p>
-<p class=""notion_text"">Today I am presenting a way to create a control with a renderer that auto register itself, greatly simplifying the control&#39;s usage in teams, but also its documentation and its maintenance.</p>
-<p class=""notion_image""><img src=""https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6ea6e3a6-2a17-44f1-a25f-7e09b6114035%2Fdownload.png""/></p>
+            Assert.AreEqual(@"<div class=""notion-text-block"">Creating a good Xamarin Forms control - Part 3 - UI Day 4</div>
+<div class=""notion-text-block"">In <a href=""https://medium.com/@bigoudi/creating-a-good-xamarin-forms-control-part-2-ui-day-3-688bd0b3333d"">the previous article</a> I proposed the foundations of a win-win architecture for a good Xamarin Forms control using a multi targeting project. </div>
+<div class=""notion-text-block"">Today I am presenting a way to create a control with a renderer that auto register itself, greatly simplifying the control&#39;s usage in teams, but also its documentation and its maintenance.</div>
+<div class=""notion-image-block""><img width=""347"" src=""https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6ea6e3a6-2a17-44f1-a25f-7e09b6114035/download.png""/></div>
 ", content);
         }
         
@@ -46,7 +46,7 @@ namespace NotionSharpTest
 
             var content = chunks.RecordMap.GetHtml(throwIfBlockMissing: false);
             Assert.IsNotNull(content);
-            Assert.IsTrue(content.StartsWith(@"<p class=""notion_text"">Creating a good Xamarin Forms control - Part 3 - UI Day 4"));
+            Assert.IsTrue(content.StartsWith(@"<div class=""notion-text-block"">Creating a good Xamarin Forms control - Part 3 - UI Day 4</div>"));
         }
 
         [TestMethod]
@@ -58,17 +58,19 @@ namespace NotionSharpTest
 
             var content = chunks.RecordMap.GetHtml(throwIfBlockMissing: false);
             Assert.IsNotNull(content);
-            Assert.IsTrue(content.StartsWith(@"<h1 class=""notion_header"">⚡Welcome ⚡</h1>
-<p class=""notion_text"">Here at Vapolia we are fond of coding. With 25 years of experience within small and large companies, we are particulary good at understanding your needs !</p>
-<p class=""notion_text""></p>
-<p class=""notion_text"">&#129311; Our main services:</p>
-<p class=""notion_text""></p>
-<ul><li class=""notion_bulleted_list"">Gather your ideas into an understandable specification</li>
-<p class=""notion_bulleted_list"">
-<p class=""notion_text"">&#127774; we convert your vision into a specification understandable by everyone - from the product owner to the developer&#39;s team.</p>
-<p class=""notion_text""></p>
-</div></ul>
-<ul><li class=""notion_bulleted_list"">You need a mobile app</li>
+            Assert.IsTrue(content.StartsWith(@"<h1 class=""notion-header-block"">⚡Welcome ⚡</h1>
+<div class=""notion-text-block"">Here at Vapolia we are fond of coding. With 25 years of experience within small and large companies, we are particulary good at understanding your needs !</div>
+<div class=""notion-text-block""></div>
+<div class=""notion-text-block"">&#129311; Our main services:</div>
+<div class=""notion-text-block""></div>
+<ul class=""notion-bulleted_list-block""><li>Gather your ideas into an understandable specification</li>
+<div class=""notion-text-block"">&#127774; we convert your vision into a specification understandable by everyone - from the product owner to the developer&#39;s team.</div>
+<div class=""notion-text-block""></div>
+</ul>
+<ul class=""notion-bulleted_list-block""><li>You need a mobile app</li>
+<div class=""notion-text-block"">&#128241; let us create it for you, we use the lastest cross platform technologies. You want it connected to the cloud? No problem!</div>
+<div class=""notion-text-block""></div>
+</ul>
 "));
         }
     }

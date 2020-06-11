@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Linq;
 using NotionSharp.Lib.ApiV3.Model;
+
+[assembly:InternalsVisibleTo("NotionSharpTest")]
 
 namespace NotionSharp
 {
@@ -36,6 +39,10 @@ namespace NotionSharp
         /// Optional. H2.
         /// </summary>
         public Func<BlockTextData, Block, bool> TransformSubHeader { get; set; }
+        /// <summary>
+        /// Optional. H3.
+        /// </summary>
+        public Func<BlockTextData, Block, bool> TransformSubSubHeader { get; set; }
         /// <summary>
         /// Optional. UL+LI.
         /// </summary>
@@ -99,6 +106,11 @@ namespace NotionSharp
         /// Can be null
         /// </summary>
         public BlockImageFormat Format { get; set; }
+
+        /// <summary>
+        /// Can be null
+        /// </summary>
+        public string Caption { get; set; }
     }
 
     public static class BlockExtensions
@@ -130,6 +142,7 @@ namespace NotionSharp
                     "quote" => transformOptions.TransformQuote?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "header" => transformOptions.TransformHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "sub_header" => transformOptions.TransformSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                    "sub_sub_header" => transformOptions.TransformSubSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
                     "bulleted_list" => TransformBulletedList(transformOptions, block, allBlocks),
                     "image" => transformOptions.TransformImage?.Invoke(block.ToImageData(), block),
                     _ => transformOptions.TransformOther?.Invoke(block)
@@ -154,7 +167,7 @@ namespace NotionSharp
             return result.Ok;
         }
 
-        static BlockImageData ToImageData(this Block imageBlock)
+        internal static BlockImageData ToImageData(this Block imageBlock)
         {
             //if (imageBlock.Type != "image")
             //    throw new ArgumentException($"textBlock.Type must be image, currently is {imageBlock.Type}", nameof(imageBlock));
@@ -163,17 +176,23 @@ namespace NotionSharp
             {
                 var data = new BlockImageData();
 
-                if (imageBlock.Properties.ContainsKey("format"))
+                if (imageBlock.Value.ContainsKey("format"))
                 {
-                    data.Format = imageBlock.Properties["format"].ToObject<BlockImageFormat>();
+                    data.Format = imageBlock.Value["format"].ToObject<BlockImageFormat>();
                     data.ImageUrl = data.Format.DisplaySource;
                 }
-                else if (imageBlock.Properties.ContainsKey("source"))
+                
+                if (imageBlock.Properties.ContainsKey("source"))
                 {
                     data.ImagePrivateUrl = (string)imageBlock.Properties["source"][0][0];
+                    //This url has priority over the one in "format"
                     data.ImageUrl = $"https://www.notion.so/image/{Uri.EscapeDataString(data.ImagePrivateUrl)}";
                 }
-                else
+
+                if (imageBlock.Properties.ContainsKey("caption"))
+                    data.Caption = (string)imageBlock.Properties["caption"][0][0];
+
+                if (data.ImageUrl == null)
                     return null;
 
                 return data;

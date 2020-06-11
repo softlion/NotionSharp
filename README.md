@@ -165,7 +165,7 @@ All item's ids are Guids.
 
 Rendered block types:
 - page, collection_view_page
-- text, image, header, sub_header, bulleted_list, quote, 
+- text, image, header, sub_header, sub_sub_header, bulleted_list, quote
 
 Unimplemented block types:
 - code, bookmark

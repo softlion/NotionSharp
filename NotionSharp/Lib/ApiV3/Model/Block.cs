@@ -9,7 +9,7 @@ namespace NotionSharp.Lib.ApiV3.Model
     {
         /// <summary>
         /// page, collection_view_page
-        /// text, image, sub_header, quote, code, bookmark
+        /// text, image, sub_header, sub_sub_header, quote, code, bookmark
         /// </summary>
         public string Type => (string)Value["type"];
         public JObject Properties => Value.ContainsKey("properties") ? (JObject)Value["properties"] : null;

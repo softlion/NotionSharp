@@ -1,0 +1,43 @@
+{
+  "role": "editor",
+  "value": {
+    "id": "50151d32-e817-4039-aef9-10eb8ba87448",
+    "version": 49,
+    "type": "image",
+    "properties": {
+      "source": [
+        [
+          "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/44a4d46c-1144-4530-b6e8-384c3e6f861f/Untitled.png"
+        ]
+      ],
+      "caption": [
+        [
+          "Ce schéma montre que la ...."
+        ]
+      ]
+    },
+    "format": {
+      "block_width": 453,
+      "block_height": 339,
+      "display_source": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/44a4d46c-1144-4530-b6e8-384c3e6f861f/Untitled.png",
+      "block_full_width": false,
+      "block_page_width": false,
+      "block_aspect_ratio": 0.7483443708609272,
+      "block_preserve_scale": true
+    },
+    "created_time": 1591881180000,
+    "last_edited_time": 1591881180000,
+    "parent_id": "a1f51bfd-ff33-4058-917e-1e0e80491e90",
+    "parent_table": "block",
+    "alive": true,
+    "file_ids": [
+      "44a4d46c-1144-4530-b6e8-384c3e6f861f"
+    ],
+    "created_by_table": "notion_user",
+    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+    "last_edited_by_table": "notion_user",
+    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+    "shard_id": 657686,
+    "space_id": "0adbdba8-95a1-4dce-ab24-56b7452a0916"
+  }
+}

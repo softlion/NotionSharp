@@ -35,7 +35,7 @@ namespace NotionSharp
             {
                 //Exclude code, page, bookmark
 #if !DEBUG
-                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "bulleted_list", "image", "quote" },
+                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "sub_sub_header" "bulleted_list", "image", "quote" },
 #endif
                 ThrowIfBlockMissing = throwIfBlockMissing,
                 ThrowIfCantDecodeTextData = throwIfCantDecodeTextData,
@@ -50,6 +50,11 @@ namespace NotionSharp
                     if (stopBeforeFirstSubHeader)
                         return false;
                     sb.Append("<h2 class=\"notion-sub_header-block\">").AppendText(data).AppendLine("</h2>");
+                    return true;
+                },
+                TransformSubSubHeader = (data, block) =>
+                {
+                    sb.Append("<h3 class=\"notion-sub_sub_header-block\">").AppendText(data).AppendLine("</h3>");
                     return true;
                 },
                 TransformText = (data, block) =>
@@ -70,8 +75,9 @@ namespace NotionSharp
                 },
                 TransformImage = (data, block) =>
                 {
-                    if(data != null)
+                    if (data != null)
                         sb.Append("<div class=\"notion-image-block\">").AppendImage(data).AppendLine("</div>");
+
                     return true;
                 },
 #if DEBUG
@@ -85,27 +91,6 @@ namespace NotionSharp
             recordMap.Transform(transformOptions, pageId);
             return sb.ToString();
         }
-
-        ///// <summary>
-        ///// Convert a block to an html representation
-        ///// </summary>
-        ///// <remarks>
-        ///// Supported block types: "text", "image", "sub_header", "header", "bulleted_list"
-        ///// </remarks>
-        //public static string ToHtml(this Block block, bool throwIfNotSupported = true, bool throwIfCantDecodeText = true)
-        //{
-        //    var sb = new StringBuilder();
-
-        //    return block.Type switch
-        //    {
-        //        "text" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
-        //        "header" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
-        //        "sub_header" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
-        //        "bulleted_list" => sb.AppendText(block.ToTextData(throwIfCantDecodeText)).ToString(),
-        //        "image" => sb.AppendImage(block.ToImageData()).ToString(),
-        //        _ => throwIfNotSupported ? throw new NotSupportedException($"block type {block.Type} not supported") : String.Empty
-        //    };
-        //}
 
         public static StringBuilder AppendText(this StringBuilder sb, BlockTextData data)
         {
@@ -128,7 +113,7 @@ namespace NotionSharp
                             if (line.HtmlColor != null)
                                 sb.Append("color: ").Append(line.HtmlColor).Append(";");
                             if (line.IsBold)
-                                sb.Append("font-weight: bold;");
+                                sb.Append("font-weight: 600;");
                             if (line.IsItalic)
                                 sb.Append("font-style: italic;");
                             sb.Append("\"");
@@ -154,6 +139,9 @@ namespace NotionSharp
                     sb.Append("<img width=\"").Append(data.Format.BlockWidth).Append("\" src=\"").Append(data.ImageUrl).Append("\"/>");
                 else
                     sb.Append("<img src=\"").Append(data.ImageUrl).Append("\"/>");
+
+                if (!String.IsNullOrWhiteSpace(data.Caption))
+                    sb.Append("<div>").Append(data.Caption).Append("</div>");
             }
 
             return sb;
