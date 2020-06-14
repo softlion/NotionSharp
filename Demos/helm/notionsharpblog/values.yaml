@@ -1,6 +1,5 @@
 #usage:
-#helm upgrade demonotionblog helm\notionsharpblog --install -f values.yaml
-#where values.yaml is NOT this file.
+#helm upgrade demonotionblog helm\notionsharpblog --install -f my-values.yaml
 
 component: frontend
 application: notionsharpblog

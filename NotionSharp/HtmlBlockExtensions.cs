@@ -35,7 +35,7 @@ namespace NotionSharp
             {
                 //Exclude code, page, bookmark
 #if !DEBUG
-                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "sub_sub_header" "bulleted_list", "image", "quote" },
+                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "sub_sub_header", "bulleted_list", "image", "quote" },
 #endif
                 ThrowIfBlockMissing = throwIfBlockMissing,
                 ThrowIfCantDecodeTextData = throwIfCantDecodeTextData,
