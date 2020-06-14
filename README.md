@@ -2,11 +2,10 @@
 
 New! Notion powered Website Demo [here](https://raids.notionsharp.eu/).
 
-[Notion](https://notion.so) is an all-in-one workspace to write things, with the best simple and powerful "wysiwyg" editor, with color highlightning for code blocks, easy video interations, and much more. It includes an offline windows application to peacefully write your blog's content.
+[Notion](https://notion.so) is an app to write things. It has the most simple "wysiwyg" editor i ever seen. Add photo, video, tables and more in one drag/drop or one click. For devs it features code blocks with highlightning. The app works both offline and online, is multi user and historize all your changes making it easy to revert them.  
+The app is also available in the Windows Store to peacefully write your content.
 
-This is an unofficial [Notion](https://notion.so) APIv3 library that enables you, among other things, to get a list of pages as a RSS feed, as notion has no RSS feed as of 2020/04/30.
-
-You can ulso use it as a CMS (Content Management System) for his nice editing capabilities.
+This is an unofficial [Notion](https://notion.so) APIv3 library and website template. You can, for example, get notion pages as a RSS feed. You can also use it as a simple CMS (Content Management System).
 
 [![NuGet][nuget-img]][nuget-link]
 
