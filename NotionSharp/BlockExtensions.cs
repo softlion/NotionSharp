@@ -61,6 +61,11 @@ namespace NotionSharp
         public Func<BlockImageData, Block, bool> TransformImage { get; set; }
 
         /// <summary>
+        /// Optional. Columns.
+        /// </summary>
+        public Func<BlockColumnListData, Block, (bool Ok,Func<int, BlockColumnData,Action> StartColumn, Action<int> TransformColumnSeparator, Action EndColumnList)> TransformColumnList { get; internal set; }
+
+        /// <summary>
         /// Optional
         /// </summary>
         public Func<Block, bool> TransformOther { get; set; }
@@ -71,6 +76,17 @@ namespace NotionSharp
         public bool ThrowIfBlockMissing { get; set; } = true;
 
         public bool ThrowIfCantDecodeTextData { get; set; } = true;
+    }
+
+    public class BlockColumnListData
+    {
+        public IList<BlockColumnData> Columns { get; set; }
+    }
+
+    public class BlockColumnData
+    {
+        public Block ColumnBlock { get; set; }
+        public float Ratio { get; set; }
     }
 
     public class BlockTextData
@@ -124,7 +140,7 @@ namespace NotionSharp
             Transform(pageBlock.Content, recordMap.Block, transformOptions);
         }
 
-        static void Transform(List<Guid> contentIds, Dictionary<Guid,Block> allBlocks, TransformOptions transformOptions)
+        static bool Transform(List<Guid> contentIds, Dictionary<Guid,Block> allBlocks, TransformOptions transformOptions)
         {
             var blocks = from itemId in contentIds
                 let block = !transformOptions.ThrowIfBlockMissing && !allBlocks.ContainsKey(itemId) ? null : allBlocks[itemId]
@@ -136,21 +152,29 @@ namespace NotionSharp
 
             foreach (var block in blocks)
             {
-                var okToContinue = block.Type switch
-                {
-                    "text" => transformOptions.TransformText?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
-                    "quote" => transformOptions.TransformQuote?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
-                    "header" => transformOptions.TransformHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
-                    "sub_header" => transformOptions.TransformSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
-                    "sub_sub_header" => transformOptions.TransformSubSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
-                    "bulleted_list" => TransformBulletedList(transformOptions, block, allBlocks),
-                    "image" => transformOptions.TransformImage?.Invoke(block.ToImageData(), block),
-                    _ => transformOptions.TransformOther?.Invoke(block)
-                };
-
-                if (okToContinue == false)
-                    break;
+                if (!Transform(block, allBlocks, transformOptions))
+                    return false;
             }
+
+            return true;
+        }
+
+        static bool Transform(Block block, Dictionary<Guid, Block> allBlocks, TransformOptions transformOptions)
+        {
+            var okToContinue = block.Type switch
+            {
+                "text" => transformOptions.TransformText?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                "quote" => transformOptions.TransformQuote?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                "header" => transformOptions.TransformHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                "sub_header" => transformOptions.TransformSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                "sub_sub_header" => transformOptions.TransformSubSubHeader?.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block),
+                "bulleted_list" => TransformBulletedList(transformOptions, block, allBlocks),
+                "image" => transformOptions.TransformImage?.Invoke(block.ToImageData(), block),
+                "column_list" => TransformColumnList(transformOptions, block, allBlocks),
+                _ => transformOptions.TransformOther?.Invoke(block)
+            };
+
+            return okToContinue ?? true;
         }
 
         static bool TransformBulletedList(TransformOptions transformOptions, Block block, Dictionary<Guid, Block> allBlocks)
@@ -158,12 +182,51 @@ namespace NotionSharp
             if (transformOptions.TransformBulletedList == null)
                 return true;
 
-            var result = transformOptions.TransformBulletedList.Invoke(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block);
+            var result = transformOptions.TransformBulletedList(block.ToTextData(transformOptions.ThrowIfCantDecodeTextData), block);
             
             if (block.Content?.Count > 0)
                 Transform(block.Content, allBlocks, transformOptions);
             
             result.ContentTransformed();
+            return result.Ok;
+        }
+
+        static bool TransformColumnList(TransformOptions transformOptions, Block block, Dictionary<Guid, Block> allBlocks)
+        {
+            if (transformOptions.TransformColumnList == null || (block.Content?.Count ?? 0) == 0)
+                return true;
+
+            var data = new BlockColumnListData
+            {
+                Columns = block.Content
+                    .Select(blockId => allBlocks.TryGetValue(blockId, out var b) ? b : null)
+                    .Where(b => b != null)
+                    .Select(b => new BlockColumnData { ColumnBlock = b, Ratio = b.ColumnFormat?.Ratio ?? 0 })
+                    .ToList()
+            };
+            var result = transformOptions.TransformColumnList(data, block);
+
+            var columnIndex = 0;
+            var totalColumns = data.Columns.Count;
+            foreach (var column in data.Columns)
+            {
+                var endColumnAction = result.StartColumn(columnIndex, column);
+                var ok = Transform(column.ColumnBlock.Content, allBlocks, transformOptions);
+                endColumnAction();
+                
+                if (!ok)
+                {
+                    result.Ok = false;
+                    break;
+                }
+
+                if (columnIndex < totalColumns - 1)
+                    result.TransformColumnSeparator(columnIndex);
+
+                columnIndex++;
+            }
+
+            result.EndColumnList();
             return result.Ok;
         }
 

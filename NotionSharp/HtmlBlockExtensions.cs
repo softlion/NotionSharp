@@ -35,7 +35,7 @@ namespace NotionSharp
             {
                 //Exclude code, page, bookmark
 #if !DEBUG
-                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "sub_sub_header", "bulleted_list", "image", "quote" },
+                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "sub_sub_header", "bulleted_list", "image", "quote", "column_list", "column" },
 #endif
                 ThrowIfBlockMissing = throwIfBlockMissing,
                 ThrowIfCantDecodeTextData = throwIfCantDecodeTextData,
@@ -79,6 +79,21 @@ namespace NotionSharp
                         sb.Append("<div class=\"notion-image-block\">").AppendImage(data).AppendLine("</div>");
 
                     return true;
+                },
+                TransformColumnList = (data, block) =>
+                {
+                    //Start of notion-column_list-block
+                    sb.Append("<div class=\"notion-column_list-block\"><div style=\"display: flex\">");
+                    var totalColumns = data.Columns.Count;
+
+                    return (true,
+                        StartColumn: (columnIndex, column) =>
+                        {
+                            sb.Append(FormattableString.Invariant($"<div class=\"notion-column\" style=\"width: calc((100% - {46*(totalColumns-1)}px) * {column.Ratio});\">"));
+                            return () => sb.Append("</div>");
+                        },
+                        TransformColumnSeparator: columnIndex => sb.Append("<div class=\"notion-column-separator\"><div class=\"notion-column-separator-line\"></div></div>"),
+                        EndColumnList: () => sb.Append("</div></div>"));
                 },
 #if DEBUG
                 TransformOther = block =>
@@ -136,12 +151,12 @@ namespace NotionSharp
             if (data != null)
             {
                 if (data.Format != null)
-                    sb.Append("<img width=\"").Append(data.Format.BlockWidth).Append("\" src=\"").Append(data.ImageUrl).Append("\"/>");
+                    sb.Append("<img style=\"width:").Append(data.Format.BlockWidth).Append("px\" src=\"").Append(data.ImageUrl).Append("\"/>");
                 else
                     sb.Append("<img src=\"").Append(data.ImageUrl).Append("\"/>");
 
                 if (!String.IsNullOrWhiteSpace(data.Caption))
-                    sb.Append("<div>").Append(data.Caption).Append("</div>");
+                    sb.Append("<div class=\"notion-text-block notion-image-caption\">").Append(data.Caption).Append("</div>");
             }
 
             return sb;

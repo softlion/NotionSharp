@@ -25,6 +25,7 @@ namespace NotionSharp.Lib.ApiV3.Model
         #endregion
 
         public PageFormat Format => Value.ContainsKey("format") ? Value["format"].ToObject<PageFormat>() : null;
+        public ColumnFormat ColumnFormat => Value.ContainsKey("format") ? Value["format"].ToObject<ColumnFormat>() : null;
 
         public List<Permission> Permissions => Value.ContainsKey("permissions") ? Value["permissions"].ToObject<List<Permission>>() : null;
         public List<string> EmailDomains => Value.ContainsKey("email_domains") ? Value["email_domains"].ToObject<List<string>>() : null;
