@@ -6,6 +6,7 @@
 @using System.ServiceModel.Syndication
 @using Microsoft.AspNetCore.WebUtilities
 @using Toolbelt.Blazor.HeadElement
+@using DemoNotionBlog.Libs.Services
 
 @if (Item?.Summary != null)
 {
@@ -58,7 +59,8 @@ else
         {
             if (items != null)
             {
-                Item = PageLinkTitle != null ? items.FirstOrDefault(item => DemoNotionBlog.Libs.Services.NotionCmsServiceExtensions.ToLink(item.Title.Text) == PageLinkTitle)
+                var escapedTitle = PageLinkTitle.ToLink();
+                Item = PageLinkTitle != null ? items.FirstOrDefault(item => item.Title.Text.ToLink() == escapedTitle)
                        : items.FirstOrDefault();
                 isLoaded = true;
                 InvokeAsync(() => StateHasChanged());
