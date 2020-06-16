@@ -2,8 +2,9 @@
 
 New! Notion powered Website Demo [here](https://raids.notionsharp.eu/).
 
-[Notion](https://notion.so) is an app to write things. It has the most simple "wysiwyg" editor i ever seen. Add photo, video, tables and more in one drag/drop or one click. For devs it features code blocks with highlightning. The app works both offline and online, is multi user and historize all your changes making it easy to revert them.  
-The app is also available in the Windows Store to peacefully write your content.
+[Notion](https://notion.so) is an app to write things. It has the most simple "wysiwyg" editor i have ever seen. Add photo, video, tables and more in one drag/drop or one click. For devs it features code blocks with highlightning.  
+The app works both offline and online, is multi user and historize all your changes making it easy to revert them.  
+The app is also available in the Windows Store to peacefully write your content offline.
 
 This is an unofficial [Notion](https://notion.so) APIv3 library and website template. You can, for example, get notion pages as a RSS feed. You can also use it as a simple CMS (Content Management System).
 
@@ -18,6 +19,8 @@ This is an unofficial [Notion](https://notion.so) APIv3 library and website temp
 [notion-img]: https://github.com/softlion/NotionSharp/raw/master/cover.png
 
 ## Use Cases
+
+Spawn a Website displaying the pages built with Notion in a few seconds. See below 'kubernetes'.
 
 Get a RSS representation of all root pages of the main space.  
 This also transforms notion data to HTML:
@@ -38,21 +41,24 @@ Get a RSS representation from the sub-pages of a page:
     feedPublicBlog.Title = new TextSyndicationContent(firstPage.Title);
 ```
 
-## Testing the Notion blog demo
+## Spawn a website displaying Notion pages in a few minutes
 
 ### Setup your Notion pages and get your credentials
 
 - Create a public page at the root of Notion.so, then add subpages to this page with a title and an icon.
 - Get your Notion's credentials using [fiddler](https://www.telerik.com/fiddler) by examining the cookies (TokenV2 => key, browserId and userId)
 
-### Using kubernetes
+### Spawn the website with [kubernetes](https://kubernetes.io/)
+
+Run these commands after having setup kubernetes:
 
 ```
 helm upgrade demonotionblog helm\notionsharpblog --install -f your-value.yaml
 start http://localhost:5080/
 ```
 
-This is an example of a simple `your-values.yaml` file suitable for minikube. Check `helm\notionsharpblog\values.yaml` for the configurable values.
+Example of a simple `your-values.yaml` file suitable for [minikube](https://kubernetes.io/fr/docs/setup/learning-environment/minikube/).  
+Check `helm\notionsharpblog\values.yaml` for all the configurable values.
 
 ```yaml
 appSettingsSecrets:
@@ -72,9 +78,9 @@ service:
   port: 5080
 ```
 
-### Cloning the template using dotnetcore
+### Cloning the website template
 
-Issue these commands to create your own notion blog demo. Replace the fake credentials with yours.
+Issue these commands to create your customized notion website. Replace the fake credentials with yours.
 
 ```
 md DemoNotionBlog
@@ -98,6 +104,8 @@ To uninstall the template:
 ```
 dotnet new -u Softlion.NotionSharp.TemplateProject.Blog
 ```
+
+Use Visual Studio or VS Code to open the solution (.sln) file and customize the website.
 
 ### Cloning the git repo
 
@@ -164,7 +172,7 @@ All item's ids are Guids.
 
 Rendered block types:
 - page, collection_view_page
-- text, image, header, sub_header, sub_sub_header, bulleted_list, quote,  column_list, column
+- text, image, header, sub_header, sub_sub_header, bulleted_list, quote, column_list, column
 
 Unimplemented block types (yet):
 - code, bookmark
