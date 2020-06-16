@@ -45,8 +45,8 @@ Get a RSS representation from the sub-pages of a page:
 
 ### Setup your Notion pages and get your credentials
 
-- Create a public page at the root of Notion.so, then add subpages to this page with a title and an icon.
-- Get your Notion's credentials using the Chrome extension [cookie-editor](https://chrome.google.com/webstore/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) by examining the cookies (TokenV2 => key, browserId and userId)
+- Create a page at the root of Notion.so (the root page), then add subpages to this page with a title and an icon. For each subpage, check "shared". Don't check "Shared" on the root page.
+- Get your Notion's credentials using the Chrome extension [cookie-editor](https://chrome.google.com/webstore/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) by examining the cookies (TokenV2 => key, browserId and userId). Replace CmsPageTitle below with the exact title of your root page.
 
 ### Spawn the website with [kubernetes](https://kubernetes.io/)
 
