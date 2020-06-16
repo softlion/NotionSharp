@@ -234,7 +234,6 @@ app {
 
 .notion div.notion-image-block > img {
     max-width: 100%;
-    max-height: 750px;
 }
 
 .notion .notion-image-block .notion-image-caption {
@@ -287,4 +286,17 @@ span.notion-page-emoji {
 
 .notion .notion-column_list-block .notion-column * {
     width: 100% !important;
+}
+
+.notion .notion-column_list-block .notion-column > * {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.notion .notion-column_list-block .notion-column :first-child {
+    padding-top: 2px;
+}
+
+.notion .notion-column_list-block .notion-column :last-child {
+    padding-bottom: 0;
 }
