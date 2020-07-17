@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <!--  nuget configurable properties -->
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
   </PropertyGroup>
 
   <PropertyGroup>
