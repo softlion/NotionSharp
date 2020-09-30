@@ -73,5 +73,13 @@ namespace NotionSharpTest
 </ul>
 "));
         }
+
+        [TestMethod]
+        public void TestEmoji()
+        {
+            var emojiString = "🇫🇷";
+            var url = HtmlBlockExtensions.GetTwitterEmojiUrl(emojiString).ToString();
+            Assert.AreEqual("//cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/1f1eb-1f1f7.svg", url);
+        }
     }
 }

@@ -111,6 +111,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
     <PackageReleaseNotes>
+      1.0.11 upgrade libraries.
       1.0.10 upgrade libraries. better styles.
       1.0.9 better styles
       1.0.8 helm: force image pull.

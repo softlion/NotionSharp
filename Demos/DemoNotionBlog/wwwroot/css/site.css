@@ -1,302 +1,271 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-
+@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a, .btn-link {
-    color: #0366d6;
+  color: #0366d6;
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
 }
 
 app {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .top-row {
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .main {
-    flex: 1;
+  flex: 1;
 }
-
-    .main .top-row {
-        background-color: #f7f7f7;
-        border-bottom: 1px solid #d6d5d5;
-        justify-content: flex-end;
-    }
-
-        .main .top-row > a, .main .top-row .btn-link {
-            white-space: nowrap;
-            margin-left: 1.5rem;
-        }
-
+.main .top-row {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #d6d5d5;
+  justify-content: flex-end;
+}
+.main .top-row > a, .main .top-row .btn-link {
+  white-space: nowrap;
+  margin-left: 1.5rem;
+}
 .main .top-row a:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+  background-image: linear-gradient(180deg, #052767 0%, #3a0647 70%);
+}
+.sidebar .top-row {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.sidebar .navbar-brand {
+  font-size: 1.1rem;
+}
+.sidebar .oi {
+  width: 2rem;
+  font-size: 1.1rem;
+  vertical-align: text-top;
+  top: -2px;
+}
+.sidebar .nav-item {
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem;
+}
+.sidebar .nav-item:first-of-type {
+  padding-top: 1rem;
+}
+.sidebar .nav-item:last-of-type {
+  padding-bottom: 1rem;
+}
+.sidebar .nav-item a {
+  color: #d7d7d7;
+  border-radius: 4px;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  line-height: 3rem;
+}
+.sidebar .nav-item a.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+.sidebar .nav-item a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
-    .sidebar .top-row {
-        background-color: rgba(0,0,0,0.4);
-    }
-
-    .sidebar .navbar-brand {
-        font-size: 1.1rem;
-    }
-
-    .sidebar .oi {
-        width: 2rem;
-        font-size: 1.1rem;
-        vertical-align: text-top;
-        top: -2px;
-    }
-
-    .sidebar .nav-item {
-        font-size: 0.9rem;
-        padding-bottom: 0.5rem;
-    }
-
-        .sidebar .nav-item:first-of-type {
-            padding-top: 1rem;
-        }
-
-        .sidebar .nav-item:last-of-type {
-            padding-bottom: 1rem;
-        }
-
-        .sidebar .nav-item a {
-            color: #d7d7d7;
-            border-radius: 4px;
-            height: 3rem;
-            display: flex;
-            align-items: center;
-            line-height: 3rem;
-        }
-
-            .sidebar .nav-item a.active {
-                background-color: rgba(255,255,255,0.25);
-                color: white;
-            }
-
-            .sidebar .nav-item a:hover {
-                background-color: rgba(255,255,255,0.1);
-                color: white;
-            }
-
 .content {
-    padding-top: 1.1rem;
+  padding-top: 1.1rem;
 }
 
 .navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
+  outline: 1px solid #26b050;
 }
 
 .invalid {
-    outline: 1px solid red;
+  outline: 1px solid red;
 }
 
 .validation-message {
-    color: red;
+  color: red;
 }
 
 #blazor-error-ui {
-    background: lightyellow;
-    bottom: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-    display: none;
-    left: 0;
-    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
+  background: lightyellow;
+  bottom: 0;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+  display: none;
+  left: 0;
+  padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
 }
-
 #blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.5rem;
 }
 
 @media (max-width: 767.98px) {
-    .main .top-row:not(.auth) {
-        display: none;
-    }
+  .main .top-row:not(.auth) {
+    display: none;
+  }
 
-    .main .top-row.auth {
-        justify-content: space-between;
-    }
+  .main .top-row.auth {
+    justify-content: space-between;
+  }
 
-    .main .top-row a, .main .top-row .btn-link {
-        margin-left: 0;
-    }
+  .main .top-row a, .main .top-row .btn-link {
+    margin-left: 0;
+  }
 }
-
 @media (min-width: 768px) {
-    app {
-        flex-direction: row;
-    }
+  app {
+    flex-direction: row;
+  }
 
-    .sidebar {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
+  .sidebar {
+    width: 232px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+  .sidebar .collapse {
+    /* Never collapse the sidebar for wide screens */
+    display: block;
+  }
 
-    .main .top-row {
-        position: sticky;
-        top: 0;
-    }
+  .main .top-row {
+    position: sticky;
+    top: 0;
+  }
+  .main > div {
+    padding-left: 2rem !important;
+    padding-right: 1.5rem !important;
+  }
 
-    .main > div {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
-    }
-
-    .navbar-toggler {
-        display: none;
-    }
-
-    .sidebar .collapse {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
-    }
+  .navbar-toggler {
+    display: none;
+  }
 }
-
+.notion ul .notion-bulleted_list-block > li, .notion h3.notion-sub_sub_header-block, .notion h2.notion-sub_header-block, .notion h1.notion-header-block, .notion div.notion-quote-block, .notion div.notion-text-block {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+}
 .notion div.notion-text-block {
-    text-align: justify;
-    max-width: 750px;
-    margin-bottom: 0;
-    margin-top: .4em;
-    min-height: 1.5em;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-break: break-word;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    color: rgb(55, 53, 47);
+  text-align: justify;
+  max-width: 750px;
+  margin-bottom: 0;
+  margin-top: 0.4em;
+  min-height: 1.5em;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #37352f;
 }
-
 .notion div.notion-quote-block {
-    max-width: 750px;
-    border-left: 3px solid currentColor;
-    padding-left: 0.9em;
-    padding-right: 0.9em;
-    font-size: 1.2em;
-    line-height: 1.5;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    -webkit-font-smoothing: auto;
+  max-width: 750px;
+  border-left: 3px solid currentColor;
+  padding-left: 0.9em;
+  padding-right: 0.9em;
+  font-size: 1.2em;
+  line-height: 1.5;
 }
-
 .notion h1.notion-header-block {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 600;
-    font-size: 1.875em;
-    line-height: 1.3;
+  font-weight: 600;
+  font-size: 1.875em;
+  line-height: 1.3;
 }
-
 .notion h2.notion-sub_header-block {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 600;
-    font-size: 1.5em;
-    line-height: 1.3;
+  font-weight: 600;
+  font-size: 1.5em;
+  line-height: 1.3;
 }
-
 .notion h3.notion-sub_sub_header-block {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 600;
-    font-size: 1.25em;
-    line-height: 1.3;
+  font-weight: 600;
+  font-size: 1.25em;
+  line-height: 1.3;
 }
-
 .notion div.notion-image-block {
-    text-align: center;
-    max-width: 750px;
+  text-align: center;
+  max-width: 750px;
 }
-
 .notion div.notion-image-block > img {
-    max-width: 100%;
+  max-width: 100%;
+  max-height: 750px;
 }
-
-.notion .notion-image-block .notion-image-caption {
-    color: rgba(55, 53, 47, 0.6);
-    font-size: 14px;
-    line-height: 1.4;
-    text-align: center;
+.notion div.notion-image-block .notion-image-caption {
+  color: rgba(55, 53, 47, 0.6);
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
 }
-
-.notion ul.notion-bulleted_list-block {
-    margin-top: 0.6em;
-    margin-bottom: 0;
-    max-width: 750px;
+.notion ul {
+  margin-bottom: 0;
 }
-
-.notion ul.notion-bulleted_list-block > li {
-    line-height: 1.5;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    -webkit-font-smoothing: auto;
-    color: rgb(55, 53, 47);
+.notion ul .notion-bulleted_list-block {
+  margin-top: 0.6em;
+  margin-bottom: 0;
+  max-width: 750px;
 }
-
-span.notion-page-emoji {
-    padding-right: .5em;
+.notion ul .notion-bulleted_list-block > li {
+  line-height: 1.5;
+  color: #37352f;
 }
-
+.notion img.notion-page-icon, .notion img.notion-page-emoji {
+  margin-right: 0.5em;
+  width: 2em;
+  height: 2em;
+}
 .notion .notion-column_list-block {
-    box-sizing: border-box;
-    display: flex;
-    max-width: 750px;
+  box-sizing: border-box;
+  display: flex;
+  max-width: 750px;
 }
-
 .notion .notion-column_list-block .notion-column {
-    box-sizing: border-box;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    flex-grow: 0;
-    flex-shrink: 0;
-    width: calc((100% - 46px) * 0.5);
+  box-sizing: border-box;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: calc((100% - 46px) * 0.5);
 }
-
-.notion .notion-column_list-block .notion-column-separator {
-    box-sizing: border-box;
-    position: relative;
-    width: 46px;
-    flex-grow: 0;
-    flex-shrink: 0;
-    opacity: 0;
-}
-
 .notion .notion-column_list-block .notion-column * {
-    width: 100% !important;
+  width: 100% !important;
 }
-
 .notion .notion-column_list-block .notion-column > * {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
-
 .notion .notion-column_list-block .notion-column :first-child {
-    padding-top: 2px;
+  padding-top: 2px;
+}
+.notion .notion-column_list-block .notion-column :last-child {
+  padding-bottom: 0;
+}
+.notion .notion-column_list-block .notion-column-separator {
+  box-sizing: border-box;
+  position: relative;
+  width: 46px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  opacity: 0;
 }
 
-.notion .notion-column_list-block .notion-column :last-child {
-    padding-bottom: 0;
-}
+/*# sourceMappingURL=site.css.map */
