@@ -76,7 +76,7 @@ namespace NotionSharp
                 TransformImage = (data, block) =>
                 {
                     if (data != null)
-                        sb.Append("<div class=\"notion-image-block\">").AppendImage(data).AppendLine("</div>");
+                        sb.Append("<div class=\"notion-image-block\">").AppendImage(data, block.Id).AppendLine("</div>");
 
                     return true;
                 },
@@ -146,14 +146,15 @@ namespace NotionSharp
             return sb;
         }
 
-        public static StringBuilder AppendImage(this StringBuilder sb, BlockImageData data)
+        public static StringBuilder AppendImage(this StringBuilder sb, BlockImageData data, Guid blockId)
         {
             if (data != null)
             {
+                var imageUrl = $"{data.ImageUrl}?table=block&id={blockId:D}&cache=v2";
                 if (data.Format != null)
-                    sb.Append("<img style=\"width:").Append(data.Format.BlockWidth).Append("px\" src=\"").Append(data.ImageUrl).Append("\"/>");
+                    sb.Append("<img style=\"width:").Append(data.Format.BlockWidth).Append("px\" src=\"").Append(imageUrl).Append("\"/>");
                 else
-                    sb.Append("<img src=\"").Append(data.ImageUrl).Append("\"/>");
+                    sb.Append("<img src=\"").Append(imageUrl).Append("\"/>");
 
                 if (!String.IsNullOrWhiteSpace(data.Caption))
                     sb.Append("<div class=\"notion-text-block notion-image-caption\">").Append(data.Caption).Append("</div>");

@@ -7,10 +7,9 @@
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
-    <PackageReference Include="Softlion.NotionSharp" Version="1.0.8" />
-    <!--<ProjectReference Include="..\..\NotionSharp\NotionSharp.csproj" />-->
+<!--    <PackageReference Include="Softlion.NotionSharp" Version="1.0.8" />-->
+    <ProjectReference Include="..\..\NotionSharp\NotionSharp.csproj" />
     <PackageReference Include="System.Reactive" Version="4.4.1" />
     <PackageReference Include="Toolbelt.Blazor.HeadElement" Version="1.2.0" />
   </ItemGroup>
