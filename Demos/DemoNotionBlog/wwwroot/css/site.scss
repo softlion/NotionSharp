@@ -286,11 +286,34 @@ app {
         }
         }
     }
-
-    img.notion-page-icon, img.notion-page-emoji { 
+    
+    img.notion-page-icon, img.notion-page-emoji, img.notion-icon, img.notion-emoji { 
         margin-right: .5em;
         width: 2em;
         height: 2em;
+    }
+    
+    .notion-callout-block {
+        padding: 1em 1.2em;
+        display: flex;
+        border-radius: 4px;
+        max-width: $width;
+        
+        > img {
+            margin-right: 1em;
+        }
+        
+        > div {
+            flex-grow: 1;
+            
+            &.notion-text-block, .notion-text-block {
+                color: white;
+            }
+        }
+    }
+
+    .notion-block-color-gray_background {
+        background-color: darkslategray;
     }
 
     .notion-column_list-block {

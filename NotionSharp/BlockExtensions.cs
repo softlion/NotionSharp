@@ -66,6 +66,11 @@ namespace NotionSharp
         public Func<BlockColumnListData, Block, (bool Ok,Func<int, BlockColumnData,Action> StartColumn, Action<int> TransformColumnSeparator, Action EndColumnList)> TransformColumnList { get; internal set; }
 
         /// <summary>
+        /// Optional. Callouts.
+        /// </summary>
+        public Func<BlockCalloutData, Block, bool> TransformCallout { get; set; }
+
+        /// <summary>
         /// Optional
         /// </summary>
         public Func<Block, bool> TransformOther { get; set; }
@@ -94,6 +99,12 @@ namespace NotionSharp
         public IList<BlockTextPart> Lines { get; set; }
     }
 
+    public class BlockCalloutData
+    {
+        public BlockTextData Text { get; set; }
+        public PageFormat Format { get; set; }
+    }
+    
     public class BlockTextPart
     {
         public string Text { get; set; }
@@ -171,6 +182,7 @@ namespace NotionSharp
                 "bulleted_list" => TransformBulletedList(transformOptions, block, allBlocks),
                 "image" => transformOptions.TransformImage?.Invoke(block.ToImageData(), block),
                 "column_list" => TransformColumnList(transformOptions, block, allBlocks),
+                "callout" => transformOptions.TransformCallout?.Invoke(block.ToCalloutData(transformOptions.ThrowIfCantDecodeTextData), block),
                 _ => transformOptions.TransformOther?.Invoke(block)
             };
 
@@ -262,6 +274,17 @@ namespace NotionSharp
             }
 
             return null;
+        }
+
+        internal static BlockCalloutData ToCalloutData(this Block calloutBlock, bool throwIfCantDecodeTextData)
+        {
+            var blockTextData = calloutBlock.ToTextData(throwIfCantDecodeTextData);
+            
+            return new BlockCalloutData
+            {
+                Text = blockTextData,
+                Format = calloutBlock.Format
+            };
         }
 
         static BlockTextData ToTextData(this Block textBlock, bool throwIfCantDecodeTextData)

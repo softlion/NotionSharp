@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -31,11 +33,12 @@ namespace NotionSharp
         {
             var sb = new StringBuilder();
 
-            var transformOptions = new TransformOptions
+            TransformOptions transformOptions = null!;
+            transformOptions = new TransformOptions
             {
                 //Exclude code, page, bookmark
 #if !DEBUG
-                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "sub_sub_header", "bulleted_list", "image", "quote", "column_list", "column" },
+                AcceptedBlockTypes = new List<string> { "text", "header", "sub_header", "sub_sub_header", "bulleted_list", "image", "quote", "column_list", "column", "callout" },
 #endif
                 ThrowIfBlockMissing = throwIfBlockMissing,
                 ThrowIfCantDecodeTextData = throwIfCantDecodeTextData,
@@ -94,6 +97,19 @@ namespace NotionSharp
                         },
                         TransformColumnSeparator: columnIndex => sb.Append("<div class=\"notion-column-separator\"><div class=\"notion-column-separator-line\"></div></div>"),
                         EndColumnList: () => sb.Append("</div></div>"));
+                },
+                TransformCallout = (data, block) =>
+                {
+                    sb.AppendLine(@$"<div class=""notion-callout-block notion-block-color-{data.Format.BlockColor}"">");
+
+                    if (Uri.TryCreate(data.Format.PageIcon, UriKind.Absolute, out var iconUrl))
+                        sb.AppendLine(@$"<img class=""notion-icon"" src=""{iconUrl}"" />");
+                    else
+                        sb.AppendLine(@$"<img class=""notion-emoji"" src=""{GetTwitterEmojiUrl(data.Format.PageIcon)}"" />");
+                    
+                    transformOptions.TransformText(data.Text, block);
+                    sb.AppendLine("</div>");
+                    return true;
                 },
 #if DEBUG
                 TransformOther = block =>
@@ -163,7 +179,7 @@ namespace NotionSharp
             return sb;
         }
 
-        public static StringBuilder GetTwitterEmojiUrl(string emojiString)
+        public static StringBuilder? GetTwitterEmojiUrl(string emojiString)
         {
             var enc = new UTF32Encoding(true, false);
             var bytes = enc.GetBytes(emojiString);

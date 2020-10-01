@@ -1,0 +1,31 @@
+{
+  "role": "editor",
+  "value": {
+    "id": "78d0d7f0-2485-4bf7-8f6d-f186b7480dcf",
+    "version": 7,
+    "type": "callout",
+    "properties": {
+      "title": [
+        [
+          "Cout de dev d'un écran simple: 1J\nCout de dev d'un écran complexe: 5 à 30J, moyenne 15J\nCout de dev des animations, interactions spéciales et autres: 5 à 30J, moyenne 10J"
+        ]
+      ]
+    },
+    "format": {
+      "page_icon": "💶",
+      "block_color": "gray_background"
+    },
+    "created_time": 1601479332402,
+    "last_edited_time": 1601530500000,
+    "parent_id": "65dbfc1e-3c7a-48a5-a2b4-32f233ec121a",
+    "parent_table": "block",
+    "alive": true,
+    "copied_from": "9f2aa514-bc60-48ba-8f70-796f8f48f728",
+    "created_by_table": "notion_user",
+    "created_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+    "last_edited_by_table": "notion_user",
+    "last_edited_by_id": "7ca80c8c-71ac-4f04-b5ec-ef5280ced804",
+    "shard_id": 348952,
+    "space_id": "d0811b52-7a9c-4f03-a1de-e261c5555318"
+  }
+}

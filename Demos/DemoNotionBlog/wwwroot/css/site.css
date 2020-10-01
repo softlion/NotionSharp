@@ -228,10 +228,28 @@ app {
   line-height: 1.5;
   color: #37352f;
 }
-.notion img.notion-page-icon, .notion img.notion-page-emoji {
+.notion img.notion-page-icon, .notion img.notion-page-emoji, .notion img.notion-icon, .notion img.notion-emoji {
   margin-right: 0.5em;
   width: 2em;
   height: 2em;
+}
+.notion .notion-callout-block {
+  padding: 1em 1.2em;
+  display: flex;
+  border-radius: 4px;
+  max-width: 750px;
+}
+.notion .notion-callout-block > img {
+  margin-right: 1em;
+}
+.notion .notion-callout-block > div {
+  flex-grow: 1;
+}
+.notion .notion-callout-block > div.notion-text-block, .notion .notion-callout-block > div .notion-text-block {
+  color: white;
+}
+.notion .notion-block-color-gray_background {
+  background-color: darkslategray;
 }
 .notion .notion-column_list-block {
   box-sizing: border-box;

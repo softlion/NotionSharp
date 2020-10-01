@@ -14,6 +14,12 @@ namespace NotionSharp.Lib.ApiV3.Model
         [JsonProperty("page_cover_position")]
         public double PageCoverPositon { get; set; }
 
+        /// <summary>
+        /// type=callout
+        /// </summary>
+        [JsonProperty("block_color")]
+        public string BlockColor { get; set; }
+
         [JsonProperty("block_locked")]
         public bool BlockLocked { get; set; }
 
