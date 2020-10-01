@@ -78,8 +78,12 @@ namespace NotionSharpTest
         public void TestEmoji()
         {
             var emojiString = "🇫🇷";
-            var url = HtmlBlockExtensions.GetTwitterEmojiUrl(emojiString).ToString();
+            var url = emojiString.GetTwitterEmojiUrl().ToString();
             Assert.AreEqual("//cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/1f1eb-1f1f7.svg", url);
+
+             emojiString = "♻️";
+             url = emojiString.GetTwitterEmojiUrl().ToString();
+            Assert.AreEqual("//cdn.jsdelivr.net/gh/twitter/twemoji/assets/svg/267b.svg", url);
         }
     }
 }

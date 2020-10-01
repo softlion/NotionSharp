@@ -179,14 +179,19 @@ namespace NotionSharp
             return sb;
         }
 
-        public static StringBuilder? GetTwitterEmojiUrl(string emojiString)
+        public static StringBuilder? GetTwitterEmojiUrl(this string emojiString)
         {
             var enc = new UTF32Encoding(true, false);
             var bytes = enc.GetBytes(emojiString);
 
             var sbCodepointEmoji = new StringBuilder();
             for (var i = 0; i < bytes.Length; i += 4)
-                sbCodepointEmoji.Append($"{bytes[i]:x2}{bytes[i+1]:x2}{bytes[i+2]:x2}{bytes[i+3]:x2}-".TrimStart('0'));
+            {
+                var value = bytes[i]<<24 | bytes[i + 1]<<16 | bytes[i + 2]<<8 | bytes[i + 3];
+                if(value == 0xFE0E || value == 0xFE0F)
+                    continue;
+                sbCodepointEmoji.Append($"{value:x}-");
+            }
 
             if (sbCodepointEmoji.Length > 0 && sbCodepointEmoji[^1] == '-')
                 sbCodepointEmoji.Remove(sbCodepointEmoji.Length - 1, 1);
