@@ -8,7 +8,8 @@ The app is also available in the Windows Store to peacefully write your content 
 
 This is an unofficial [Notion](https://notion.so) APIv3 library and website template. You can, for example, get notion pages as a RSS feed. You can also use it as a simple CMS (Content Management System).
 
-[![NuGet][nuget-img]][nuget-link]
+[![NuGet][nuget-img]][nuget-link]  
+![Nuget](https://img.shields.io/nuget/dt/Softlion.NotionSharp)
 
 ![publish to nuget](https://github.com/softlion/NotionSharp/workflows/publish%20to%20nuget/badge.svg)
 
