@@ -13,6 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{D7BC1C12
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackTemplateProjects", "Demos\PackTemplateProjects.csproj", "{E5BA76B5-E6CA-4054-9C68-808BA2229608}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{86F9F72D-4539-4D23-B735-DC480D4DE2C3}"
+	ProjectSection(SolutionItems) = preProject
+		NotionSharp\pack.ps1 = NotionSharp\pack.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

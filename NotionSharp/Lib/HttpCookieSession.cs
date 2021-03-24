@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -7,23 +8,25 @@ using Flurl.Http;
 using Polly;
 using Polly.Retry;
 
-namespace NotionSharp.Lib
+namespace NotionSharp
 {
-    public class HttpSession
+    public class HttpCookieSession
     {
         private readonly FlurlClient flurlClient;
+        
+        public CookieJar Cookies { get; } = new CookieJar();
 
-        public HttpSession(Action<FlurlClient> configure)
+        public HttpCookieSession(Action<FlurlClient> configure)
         {
             flurlClient = new FlurlClient(new HttpClient(new PolicyHandler()));
             configure(flurlClient);
         }
 
-        public FlurlRequest CreateRequest(Uri uri)
-            => new FlurlRequest(uri) { Client = flurlClient };
+        public IFlurlRequest CreateRequest(Uri uri)
+            => new FlurlRequest(uri) { Client = flurlClient }.WithCookies(Cookies);
 
-        public FlurlRequest CreateRequest(string uri)
-            => new FlurlRequest(uri) { Client = flurlClient };
+        public IFlurlRequest CreateRequest(string uri)
+            => new FlurlRequest(uri) { Client = flurlClient }.WithCookies(Cookies);
 
         class PolicyHandler : DelegatingHandler
         {
@@ -41,6 +44,14 @@ namespace NotionSharp.Lib
 
             protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
                 => retryPolicy.ExecuteAsync(ct => base.SendAsync(request, ct), cancellationToken);
+        }
+
+        public HttpCookieSession WithCookies(string originUrl, Dictionary<string, string> dictionary)
+        {
+            foreach (var kp in dictionary)
+                Cookies.AddOrReplace(kp.Key, kp.Value, originUrl);
+
+            return this;
         }
     }
 }
