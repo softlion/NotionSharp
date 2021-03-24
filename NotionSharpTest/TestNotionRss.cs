@@ -44,7 +44,7 @@ namespace NotionSharpTest
             var blogPages = blog.Content;
 
             //Convert the blogPages into a RSS feed
-            var feed = await notionSession.GetSyndicationFeed(blogPages);
+            var feed = await notionSession.GetSyndicationFeed(blogPages, maxBlocks: 100);
             feed.Title = new TextSyndicationContent(blog.Title);
 
             Assert.IsNotNull(feed);

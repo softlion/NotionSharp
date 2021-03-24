@@ -39,6 +39,9 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
     <PackageReleaseNotes>
+      1.0.14
+      Bump versions.
+
       1.0.13
       Update nugets
 

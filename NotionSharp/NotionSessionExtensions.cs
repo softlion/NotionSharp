@@ -67,7 +67,7 @@ namespace NotionSharp
         /// </summary>
         /// <param name="session">a session</param>
         /// <param name="pages">the pages</param>
-        /// <param name="maxBlocks">limits the parsing of each page to the 1st 20 blocks</param>
+        /// <param name="maxBlocks">limits the parsing of each page to the 1st 20 blocks. Max value: 100</param>
         /// <param name="stopBeforeFirstSubHeader">when true, stop parsing a page when a line containing a sub_header is found</param>
         /// <param name="cancel"></param>
         /// <returns>A SyndicationFeed containing one SyndicationItem per page</returns>
@@ -76,6 +76,10 @@ namespace NotionSharp
         /// </remarks>
         public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, IEnumerable<Guid> pages, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
         {
+            //notion's limitation
+            if (maxBlocks > 100)
+                throw new ArgumentOutOfRangeException(nameof(maxBlocks));
+
             var feedItems = new List<SyndicationItem>();
             foreach (var pageId in pages)
             {
