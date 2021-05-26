@@ -1,7 +1,5 @@
 # NotionSharp - Notion API client for C#
 
-New! Notion powered Website Demo [here](https://raids.notionsharp.eu/).
-
 [Notion](https://notion.so) is an app to write things. It has the most simple "wysiwyg" editor i have ever seen. Add photo, video, tables and more in one drag/drop or one click. For devs it features code blocks with highlightning.  
 The app works both offline and online, is multi user and historize all your changes making it easy to revert them.  
 The app is also available in the Windows Store to peacefully write your content offline.
