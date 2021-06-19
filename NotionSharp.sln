@@ -16,6 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{86F9F72D-4539-4D23-B735-DC480D4DE2C3}"
 	ProjectSection(SolutionItems) = preProject
 		NotionSharp\pack.ps1 = NotionSharp\pack.ps1
+		README.md = README.md
+		README official.md = README official.md
+		README unofficial.md = README unofficial.md
 	EndProjectSection
 EndProject
 Global

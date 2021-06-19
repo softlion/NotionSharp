@@ -6,9 +6,12 @@ namespace NotionSharp
 {
     public class NotionSession
     {
-        public NotionSessionInfo SessionInfo { get; }
+        public NotionSessionInfo? SessionInfo { get; }
         public HttpCookieSession HttpSession { get; }
 
+        /// <summary>
+        /// Unofficial integration
+        /// </summary>
         public NotionSession(NotionSessionInfo sessionInfo)
         {
             SessionInfo = sessionInfo;
@@ -19,7 +22,7 @@ namespace NotionSharp
                 {
                     { "x-notion-active-user-header", sessionInfo.NotionUserId.ToString("D") },
                     { "notion-client-version", Constants.ClientVersion },
-                    { "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" },
+                    { "User-Agent", Constants.UserAgent },
                 });
             })
             .WithCookies("https://www.notion.so", new Dictionary<string, string>

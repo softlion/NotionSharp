@@ -15,7 +15,7 @@ namespace NotionSharpTest
         [TestMethod]
         public async Task GetRssFeedFromRootPagesOfFirstSpace()
         {
-            var sessionInfo = TestUtils.CreateNotionSessionInfo();
+            var sessionInfo = TestUtils.CreateUnofficialNotionSessionInfo();
             var session = new NotionSession(sessionInfo);
 
             var feed = await session.GetSyndicationFeed();
@@ -31,7 +31,7 @@ namespace NotionSharpTest
         public async Task GetRssFeedFromSubPagesOfFirstPageOfFirstSpace()
         {
             //Connect to the Notion account
-            var sessionInfo = TestUtils.CreateNotionSessionInfo();
+            var sessionInfo = TestUtils.CreateUnofficialNotionSessionInfo();
             var notionSession = new NotionSession(sessionInfo);
 
             //Get first notion "space"
