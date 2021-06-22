@@ -86,13 +86,49 @@ namespace NotionSharp.ApiClient
                 request.SetQueryParam("start_cursor", (string)result.NextCursor);
             }
         }
-        
+
+        /// <summary>
+        /// Get a user
+        /// </summary>
         public static async Task<User?> GetUser(this NotionSession session, string userId, CancellationToken cancel = default)
         {
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "users/" + userId);
             return await request.GetJsonAsync<User>(cancel).ConfigureAwait(false);
         }
-        
+
+        /// <summary>
+        /// Get the properties of a page
+        /// TODO
+        /// </summary>
+        public static async Task<JsonElement?> GetPage(this NotionSession session, string pageId, CancellationToken cancel = default)
+        {
+            var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "pages/" + pageId);
+            return await request.GetJsonAsync<JsonElement>(cancel).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get children of a block
+        /// TODO 
+        /// </summary>
+        public static async IAsyncEnumerable<JsonElement>? GetBlockChildren(this NotionSession session, string blockId, int pageSize = Constants.DefaultPageSize, [EnumeratorCancellation] CancellationToken cancel = default)
+        {
+            var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "blocks/" + blockId + "/children")
+                .SetQueryParam("page_size", pageSize);
+            
+            while(true)
+            {
+                var result = await request.GetJsonAsync<PaginationResult<JsonElement>>(cancel).ConfigureAwait(false);
+                if(result?.Results == null)
+                    yield break;
+                foreach (var item in result.Results)
+                    yield return item;
+                if(!result.HasMore)
+                    yield break;
+
+                request.SetQueryParam("start_cursor", (string)result.NextCursor);
+            }
+        }
+
         // public static async Task<GetClientExperimentsResult> GetClientExperiments(this NotionSession session, Guid deviceId, CancellationToken cancel = default)
         // {
         //     var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "getClientExperiments");
