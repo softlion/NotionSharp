@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotionSharp.ApiClient.Lib
+namespace NotionSharp.ApiClient.Lib.Helpers
 {
     public static class EpochExtensions
     {

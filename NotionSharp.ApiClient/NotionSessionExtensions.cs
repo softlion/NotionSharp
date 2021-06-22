@@ -15,6 +15,7 @@ namespace NotionSharp.ApiClient
         /// The filter parameter can be used to query specifically for only pages or only databases.
         /// </summary>
         /// <remarks>
+        /// The query parameter matches against the page titles.
         /// pageSize max is 100. Default is 10.
         /// Search indexing is not immediate.
         /// You should use HasMore+NextCursor to get more paged results with the same options.
@@ -39,6 +40,7 @@ namespace NotionSharp.ApiClient
         /// The filter parameter can be used to query specifically for only pages or only databases.
         /// </summary>
         /// <remarks>
+        /// The query parameter matches against the page titles.
         /// pageSize max is 100. Default is 10.
         /// Search indexing is not immediate.
         /// Pages are fetched automatically when needed.
@@ -100,6 +102,13 @@ namespace NotionSharp.ApiClient
         /// Get the properties of a page
         /// TODO
         /// </summary>
+        /// <remarks>
+        /// (from API doc)
+        /// Each page property is computed with a limit of 25 page references.
+        /// Therefore relation property values feature a maximum of 25 relations,
+        /// rollup property values are calculated based on a maximum of 25 relations,
+        /// and rich text property values feature a maximum of 25 page mentions.
+        /// </remarks>
         public static async Task<JsonElement?> GetPage(this NotionSession session, string pageId, CancellationToken cancel = default)
         {
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "pages/" + pageId);

@@ -86,14 +86,20 @@ namespace NotionSharp.ApiClient.Tests
             Assert.IsTrue(user1a.Equals(user1b));
         }
         
-        // [TestMethod]
-        // public async Task TestLoadPageChunkResult()
-        // {
-        //     var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
-        //
-        //     var pageChunk = await session.LoadPageChunk(Guid.Parse("4e4999b4-161a-449d-bbd1-bdbce690c7cb"), 0, 50);
-        //     Assert.IsNotNull(pageChunk);
-        //     Assert.IsTrue(pageChunk.RecordMap.Block.Count > 0);
-        // }
+        [TestMethod]
+        public async Task TestGetPage()
+        {
+            var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+            //Get any page returned by search
+            var page = await session.Search(pageSize: 1, filterOptions: FilterOptions.ObjectPage).FirstAsync();
+            Assert.IsNotNull(page);
+
+            var pageId = page.GetProperty("id").GetString();
+            Assert.IsNotNull(pageId);
+
+            //Get the page details
+            var pageProperties = await session.GetPage(pageId);
+            Assert.IsNotNull(pageProperties);
+        }
     }
 }
