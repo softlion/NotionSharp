@@ -17,11 +17,9 @@ namespace NotionSharp.ApiClient.Tests
         {
             var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
 
-            var pagingOptions = new PagingOptions {PageSize = 2};
             var totalItems = 0;
-            await foreach (var item in session.Search(pagingOptions: pagingOptions))
+            await foreach (var item in session.Search(pageSize: 2))
             {
-                Assert.IsTrue(item is JsonElement);
                 totalItems++;
             }
 
@@ -51,6 +49,28 @@ namespace NotionSharp.ApiClient.Tests
             }
             Assert.AreNotEqual(0, i);
             Assert.AreEqual(4, totalItems);
+        }
+
+        [TestMethod]
+        public async Task TestGetUsers()
+        {
+            var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+            var users = session.GetUsers();
+            Assert.IsNotNull(users);
+            int i, iBot, iPerson;
+            i = iBot = iPerson = 0;
+            await foreach (var user in users)
+            {
+                i++;
+                if (user.UserType == UserTypeConst.Bot)
+                    iBot++;
+                if (user.UserType == UserTypeConst.Person)
+                    iPerson++;
+            }
+            
+            Assert.AreEqual(2, i);
+            Assert.AreEqual(1, iBot);
+            Assert.AreEqual(1, iPerson);
         }
         
         // [TestMethod]

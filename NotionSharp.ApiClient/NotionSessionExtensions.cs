@@ -1,84 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
 
 namespace NotionSharp.ApiClient
 {
-    public enum SortDirection
-    {
-        Ascending,
-        Descending
-    }
-
-    public enum SortTimestamp
-    {
-        [JsonPropertyName("last_edited_time")]
-        LastEditedTime
-    }
-    
-    public struct SortOptions
-    {
-        public SortDirection Direction { get; set; } //"ascending", "descending"
-        public SortTimestamp Timestamp { get; set; } //"last_edited_time";
-    }
-
-    public class FilterOptions
-    {
-        /// <summary>
-        /// Value: Possible Properties
-        /// object: page, database
-        /// </summary>
-        public string Value { get; set; } = "object";
-        public string Property { get; set; } = "page";
-    }
-
-    public struct PagingOptions
-    {
-        private int pageSize;
-        
-        public string? StartCursor { get; set; }
-
-        /// <summary>
-        /// max: 100
-        /// </summary>
-        public int PageSize
-        {
-            get => pageSize;
-            set
-            {
-                if (value < 0 || value > 100)
-                    throw new ArgumentOutOfRangeException(nameof(PageSize));
-                pageSize = value;
-            }
-        }
-    }
-
-    public struct SearchRequest
-    {
-        public string? Query { get; set; }
-        public SortOptions? Sort { get; set; }
-        public FilterOptions? Filter { get; set; }
-        [JsonPropertyName("start_cursor")]
-        public string? StartCursor { get; set; }
-        [JsonPropertyName("page_size")]
-        public int PageSize { get; set; }
-    }
-
-    public class SearchResult
-    {
-        public string Object { get; set; } = null!; //"list"
-        public List<object>? Results { get; set; }
-        [JsonPropertyName("next_cursor")]
-        public string? NextCursor { get; set; }
-        [JsonPropertyName("has_more")]
-        public bool HasMore { get; set; }
-    }
-    
     public static class NotionSessionExtensions
     {
         /// <summary>
@@ -119,11 +47,11 @@ namespace NotionSharp.ApiClient
         /// await foreach(var item in SearchAsync().WithCancellation(cancel).ConfigureAwait(false))
         ///    DoSomething(item);
         /// </example>
-        public static async IAsyncEnumerable<object> Search(this NotionSession session,
-            string? query = null, SortOptions? sortOptions = null, FilterOptions? filterOptions = null, PagingOptions? pagingOptions = null,
+        public static async IAsyncEnumerable<JsonElement> Search(this NotionSession session,
+            string? query = null, SortOptions? sortOptions = null, FilterOptions? filterOptions = null, int pageSize = Constants.DefaultPageSize,
             [EnumeratorCancellation] CancellationToken cancel = default)
         {
-            var searchRequest = new SearchRequest { Query = query, Sort = sortOptions, Filter = filterOptions, StartCursor = pagingOptions?.StartCursor, PageSize = pagingOptions?.PageSize ?? Constants.DefaultPageSize };
+            var searchRequest = new SearchRequest { Query = query, Sort = sortOptions, Filter = filterOptions, PageSize = pageSize };
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "search");
             
             while(true)
@@ -137,6 +65,25 @@ namespace NotionSharp.ApiClient
                     yield break;
                 
                 searchRequest.StartCursor = result.NextCursor;
+            }
+        }
+
+        public static async IAsyncEnumerable<User> GetUsers(this NotionSession session, int pageSize = Constants.DefaultPageSize, [EnumeratorCancellation] CancellationToken cancel = default)
+        {
+            var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "users")
+                .SetQueryParam("page_size", pageSize);
+            
+            while(true)
+            {
+                var result = await request.GetJsonAsync<PaginationResult<User>>(cancel).ConfigureAwait(false);
+                if(result?.Results == null)
+                    yield break;
+                foreach (var item in result.Results)
+                    yield return item;
+                if(!result.HasMore)
+                    yield break;
+
+                request.SetQueryParam("start_cursor", (string)result.NextCursor);
             }
         }
         
