@@ -33,7 +33,7 @@ namespace NotionSharpTest
             Assert.AreEqual(@"<div class=""notion-text-block"">Creating a good Xamarin Forms control - Part 3 - UI Day 4</div>
 <div class=""notion-text-block"">In <a href=""https://medium.com/@bigoudi/creating-a-good-xamarin-forms-control-part-2-ui-day-3-688bd0b3333d"">the previous article</a> I proposed the foundations of a win-win architecture for a good Xamarin Forms control using a multi targeting project. </div>
 <div class=""notion-text-block"">Today I am presenting a way to create a control with a renderer that auto register itself, greatly simplifying the control&#39;s usage in teams, but also its documentation and its maintenance.</div>
-<div class=""notion-image-block""><img width=""347"" src=""https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6ea6e3a6-2a17-44f1-a25f-7e09b6114035/download.png""/></div>
+<div class=""notion-image-block""><img style=""width:347px"" src=""https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6ea6e3a6-2a17-44f1-a25f-7e09b6114035%2Fdownload.png?table=block&id=32297a2f-7ff2-4478-b182-2db36ab63878&cache=v2""/></div>
 ", content);
         }
         

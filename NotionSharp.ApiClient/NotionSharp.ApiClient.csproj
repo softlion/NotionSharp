@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>8</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Lib\PublicApi\Enums" />
+      <Folder Include="Lib\PublicApi\Model" />
+      <Folder Include="Lib\PublicApi\Requests" />
+      <Folder Include="Lib\PublicApi\Results" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Flurl.Http" Version="3.2.0" />
+        <PackageReference Include="Polly" Version="7.2.2" />
+        <PackageReference Include="System.ServiceModel.Syndication" Version="5.0.0" />
+        <PackageReference Include="System.Text.Json" Version="5.0.2" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <!--  nuget configurable properties -->
+        <Version>1.0.0</Version>
+        <VersionSuffix></VersionSuffix>
+        <DefineConstants>$(DefineConstants);</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!--  nuget properties -->
+        <PackageId>Softlion.NotionSharp</PackageId>
+        <!-- PackageIcon>icon.png</PackageIcon -->
+        <!--<PackageIconUrl>https://raw.githubusercontent.com/softlion/NotionSharp/master/Assets/nuget_icon_128x128.png</PackageIconUrl>-->
+        <Summary>Notion.so api client library (netstandard)</Summary>
+        <PackageTags>notion api client library</PackageTags>
+        <Title>Notion.so api client library</Title>
+        <Description>Notion.so is a nice tool to write blogs among other things</Description>
+        <Product>$(AssemblyName) ($(TargetFramework))</Product>
+        <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
+        <Authors>Benjamin Mayrargue</Authors>
+        <Owners>Benjamin Mayrargue</Owners>
+        <Copyright>Benjamin Mayrargue</Copyright>
+        <NeutralLanguage>en</NeutralLanguage>
+        <RepositoryUrl>https://github.com/softlion/NotionSharp</RepositoryUrl>
+        <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
+        <PackageReleaseNotes>
+            1.0.0
+            initial version
+        </PackageReleaseNotes>
+        <Company />
+    </PropertyGroup>
+    
+</Project>

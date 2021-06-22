@@ -18,15 +18,5 @@ namespace NotionSharpTest
                 NotionUserId = Guid.Parse("ab9257e1-d027-4494-8792-71d90b63dd35")
             };
         }
-
-        public static NotionSessionInfo2 CreateOfficialNotionSessionInfo()
-        {
-            //notioncsharp@yopmail.com
-            //http://yopmail.com/notioncsharp
-            return new NotionSessionInfo2
-            {
-                Token = "secret_jbPRU7vdj8hmpKFnT3ntld4mcXg4dTOYuqsVc7hj9KF",
-            };
-        }
     }
 }
