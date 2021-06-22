@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -71,6 +72,18 @@ namespace NotionSharp.ApiClient.Tests
             Assert.AreEqual(2, i);
             Assert.AreEqual(1, iBot);
             Assert.AreEqual(1, iPerson);
+        }
+        
+        [TestMethod]
+        public async Task TestGetUser()
+        {
+            var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+            var user1a = await session.GetUsers().FirstAsync();
+            Assert.IsNotNull(user1a);
+            
+            var user1b = await session.GetUser(user1a.Id);
+            
+            Assert.IsTrue(user1a.Equals(user1b));
         }
         
         // [TestMethod]

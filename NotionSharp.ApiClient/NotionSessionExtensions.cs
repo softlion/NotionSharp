@@ -87,6 +87,12 @@ namespace NotionSharp.ApiClient
             }
         }
         
+        public static async Task<User?> GetUser(this NotionSession session, string userId, CancellationToken cancel = default)
+        {
+            var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "users/" + userId);
+            return await request.GetJsonAsync<User>(cancel).ConfigureAwait(false);
+        }
+        
         // public static async Task<GetClientExperimentsResult> GetClientExperiments(this NotionSession session, Guid deviceId, CancellationToken cancel = default)
         // {
         //     var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "getClientExperiments");
