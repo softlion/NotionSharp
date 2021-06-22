@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -86,21 +87,57 @@ namespace NotionSharp.ApiClient
         /// The filter parameter can be used to query specifically for only pages or only databases.
         /// </summary>
         /// <remarks>
-        /// pageSize max is 100.
+        /// pageSize max is 100. Default is 10.
         /// Search indexing is not immediate.
+        /// You should use HasMore+NextCursor to get more paged results with the same options.
         /// </remarks>
         /// <returns></returns>
-        public static async Task<SearchResult?> Search(this NotionSession session, PagingOptions pagingOptions,
-            string? query = null, SortOptions? sortOptions = null, FilterOptions? filterOptions = null,
+        public static async Task<SearchResult?> SearchPaged(this NotionSession session,
+            string? query = null, SortOptions? sortOptions = null, FilterOptions? filterOptions = null, PagingOptions? pagingOptions = null,
             CancellationToken cancel = default)
         {
             var searchRequest = new SearchRequest
             {
-                Query = query, Sort = sortOptions, Filter = filterOptions, StartCursor = pagingOptions.StartCursor, PageSize = pagingOptions.PageSize
+                Query = query, Sort = sortOptions, Filter = filterOptions, StartCursor = pagingOptions?.StartCursor, PageSize = pagingOptions?.PageSize ?? Constants.DefaultPageSize
             };
             
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "search");
-            return await request.PostJsonAsync(searchRequest, cancel).ReceiveJson<SearchResult>();
+            return await request.PostJsonAsync(searchRequest, cancel).ReceiveJson<SearchResult>().ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Searches all pages and child pages that are shared with the integration. The results may include databases.
+        /// The query parameter matches against the page titles. If the query parameter is not provided, the response will contain all pages (and child pages) in the results.
+        /// The filter parameter can be used to query specifically for only pages or only databases.
+        /// </summary>
+        /// <remarks>
+        /// pageSize max is 100. Default is 10.
+        /// Search indexing is not immediate.
+        /// Pages are fetched automatically when needed.
+        /// </remarks>
+        /// <example>
+        /// await foreach(var item in SearchAsync().WithCancellation(cancel).ConfigureAwait(false))
+        ///    DoSomething(item);
+        /// </example>
+        public static async IAsyncEnumerable<object> Search(this NotionSession session,
+            string? query = null, SortOptions? sortOptions = null, FilterOptions? filterOptions = null, PagingOptions? pagingOptions = null,
+            [EnumeratorCancellation] CancellationToken cancel = default)
+        {
+            var searchRequest = new SearchRequest { Query = query, Sort = sortOptions, Filter = filterOptions, StartCursor = pagingOptions?.StartCursor, PageSize = pagingOptions?.PageSize ?? Constants.DefaultPageSize };
+            var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "search");
+            
+            while(true)
+            {
+                var result = await request.PostJsonAsync(searchRequest, cancel).ReceiveJson<SearchResult>().ConfigureAwait(false);
+                if(result?.Results == null)
+                    yield break;
+                foreach (var item in result.Results)
+                    yield return item;
+                if(!result.HasMore)
+                    yield break;
+                
+                searchRequest.StartCursor = result.NextCursor;
+            }
         }
         
         // public static async Task<GetClientExperimentsResult> GetClientExperiments(this NotionSession session, Guid deviceId, CancellationToken cancel = default)
