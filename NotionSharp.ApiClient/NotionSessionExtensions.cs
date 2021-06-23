@@ -4,12 +4,15 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
+using NotionSharp.ApiClient.Lib;
 
 namespace NotionSharp.ApiClient
 {
     public static class NotionSessionExtensions
     {
         /// <summary>
+        /// Use Search instead. I'm keeping this method around to see if it may have some use case. Comment on github's issues plz.
+        /// 
         /// Searches all pages and child pages that are shared with the integration. The results may include databases.
         /// The query parameter matches against the page titles. If the query parameter is not provided, the response will contain all pages (and child pages) in the results.
         /// The filter parameter can be used to query specifically for only pages or only databases.
@@ -20,7 +23,6 @@ namespace NotionSharp.ApiClient
         /// Search indexing is not immediate.
         /// You should use HasMore+NextCursor to get more paged results with the same options.
         /// </remarks>
-        /// <returns></returns>
         public static async Task<SearchResult?> SearchPaged(this NotionSession session,
             string? query = null, SortOptions? sortOptions = null, FilterOptions? filterOptions = null, PagingOptions? pagingOptions = null,
             CancellationToken cancel = default)
@@ -95,12 +97,11 @@ namespace NotionSharp.ApiClient
         public static async Task<User?> GetUser(this NotionSession session, string userId, CancellationToken cancel = default)
         {
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "users/" + userId);
-            return await request.GetJsonAsync<User>(cancel).ConfigureAwait(false);
+            return await request.GetJson<User>(cancel).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get the properties of a page
-        /// TODO
         /// </summary>
         /// <remarks>
         /// (from API doc)
@@ -109,21 +110,22 @@ namespace NotionSharp.ApiClient
         /// rollup property values are calculated based on a maximum of 25 relations,
         /// and rich text property values feature a maximum of 25 page mentions.
         /// </remarks>
-        public static async Task<JsonElement?> GetPage(this NotionSession session, string pageId, CancellationToken cancel = default)
+        public static async Task<Page?> GetPage(this NotionSession session, string pageId, CancellationToken cancel = default)
         {
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "pages/" + pageId);
-            return await request.GetJsonAsync<JsonElement>(cancel).ConfigureAwait(false);
+            return await request.GetJson<Page>(cancel).ConfigureAwait(false);
         }
+
 
         /// <summary>
         /// Get children of a block
-        /// TODO 
+        /// TODO: polymorphism?
         /// </summary>
         public static async IAsyncEnumerable<JsonElement>? GetBlockChildren(this NotionSession session, string blockId, int pageSize = Constants.DefaultPageSize, [EnumeratorCancellation] CancellationToken cancel = default)
         {
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "blocks/" + blockId + "/children")
                 .SetQueryParam("page_size", pageSize);
-            
+
             while(true)
             {
                 var result = await request.GetJsonAsync<PaginationResult<JsonElement>>(cancel).ConfigureAwait(false);

@@ -40,18 +40,20 @@ namespace NotionSharp.ApiClient.Lib
     public class HttpNotionSession
     {
         private readonly FlurlClient flurlClient;
+
+        public static readonly JsonSerializerOptions NotionJsonSerializationOptions = new JsonSerializerOptions()
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = new JsonLowerCaseNamingPolicy()
+        };
         
         public HttpNotionSession(Action<FlurlClient> configure)
         {
             flurlClient = new FlurlClient(new HttpClient(new PolicyHandler()))
             {
                 Settings = new ClientFlurlHttpSettings { 
-                    JsonSerializer = new TextJsonSerializer(new JsonSerializerOptions()
-                    {
-                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-                        PropertyNameCaseInsensitive = true,
-                        PropertyNamingPolicy = new JsonLowerCaseNamingPolicy()
-                    }),
+                    JsonSerializer = new TextJsonSerializer(NotionJsonSerializationOptions),
 #if DEBUG
                     BeforeCall = call =>
                     {
