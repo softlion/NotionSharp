@@ -118,7 +118,8 @@ namespace NotionSharp.ApiClient
 
 
         /// <summary>
-        /// Get children of a block
+        /// Get children of a block (ie: its content)
+        /// A block is any object having an Id.
         /// TODO: polymorphism?
         /// </summary>
         public static async IAsyncEnumerable<JsonElement>? GetBlockChildren(this NotionSession session, string blockId, int pageSize = Constants.DefaultPageSize, [EnumeratorCancellation] CancellationToken cancel = default)

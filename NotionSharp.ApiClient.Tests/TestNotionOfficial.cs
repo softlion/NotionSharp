@@ -108,7 +108,20 @@ namespace NotionSharp.ApiClient.Tests
             Assert.IsNotNull(title);
             Assert.IsNotNull(title.Title);
             Assert.AreNotEqual(0, title.Title.Count);
+            var id = pageProperties.Id;
         }
+
+        [TestMethod]
+        public async Task TestGetBlock()
+        {
+            var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+            var blockId = "18dfbe55-5d7c-416e-9485-7855d4a3949e"; //from TestGetPage()
+            await foreach (var block in session.GetBlockChildren(blockId))
+            {
+                var i = 0;
+            }
+        }
+
 
         [TestMethod]
         public void TestDeserializeDictionary()
