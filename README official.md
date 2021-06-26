@@ -172,7 +172,7 @@ Example: load content as an xml feed:
 
 ## References
 
-[Notion official API docs](https://developers.notion.com/reference/intro)
-[Notion official API guides](https://developers.notion.com/docs)
-[Notion official API changelog](https://developers.notion.com/changelog)
+* [Notion official API docs](https://developers.notion.com/reference/intro)
+* [Notion official API guides](https://developers.notion.com/docs)
+* [Notion official API changelog](https://developers.notion.com/changelog)
 
