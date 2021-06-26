@@ -153,7 +153,7 @@ Note: the prebuilt docker image vapolia/demonotionblog:latest is made only for `
 Create a session:
 
 ```csharp
-    var sessionInfo = new NotionSessionInfo2 
+    var sessionInfo = new NotionSessionInfo 
     {
         Token = "secret_9BXXXxxxxxxxxxXXXXXXXXXXXxxxxxxxxxxxxxxx"
     };
@@ -161,11 +161,11 @@ Create a session:
     var session = new NotionSession(sessionInfo);
 ```
 
-Example: load content and info of main `space`:
+Example: load content as an xml feed:
 
 ```csharp
-    var userContent = await session.LoadUserContent();
-    var html = userContent.RecordMap.GetHtml(throwIfBlockMissing: false);
+    var pages = await session.GetTopLevelPages().ToListAsync();
+    var feed = await session.GetSyndicationFeed(pages[0]);
 ```
 
 ## References
