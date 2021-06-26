@@ -164,6 +164,19 @@ namespace NotionSharp.ApiClient.Tests
         }
         
         [TestMethod]
+        public async Task TestGetHtml()
+        {
+            var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+            var page = await session.Search(filterOptions: FilterOptions.ObjectPage)
+                .FirstAsync(p => p.Title?.Title?.FirstOrDefault().PlainText == "Procrastination");
+            Assert.IsNotNull(page);
+
+            var html = await session.GetHtml(page);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(html));
+        }
+
+        
+        [TestMethod]
         public async Task TestGetPublicBlogContent()
         {
             var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());

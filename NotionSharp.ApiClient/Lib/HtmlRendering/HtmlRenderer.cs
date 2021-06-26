@@ -13,7 +13,7 @@ namespace NotionSharp.ApiClient.Lib.HtmlRendering
         /// <param name="blocks">the page's child blocks</param>
         /// <param name="stopBeforeFirstSubHeader">true to return only all html before the first sub-header</param>
         /// <returns>An HTML string</returns>
-        public virtual string GetHtml(IEnumerable<Block> blocks, bool stopBeforeFirstSubHeader)
+        public virtual string GetHtml(IEnumerable<Block> blocks, bool stopBeforeFirstSubHeader = false)
         {
             var sb = new StringBuilder();
 

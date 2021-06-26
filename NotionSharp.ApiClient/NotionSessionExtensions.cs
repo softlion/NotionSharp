@@ -148,6 +148,20 @@ namespace NotionSharp.ApiClient
                 request.SetQueryParam("start_cursor", result.NextCursor);
             }
         }
+        
+        public static async Task<string> GetHtml(this NotionSession session, Page page, CancellationToken cancel = default)
+        {
+            var blocks = await session.GetBlockChildren(page.Id, cancel: cancel)
+                .Where(b => b.Type != BlockTypes.ChildPage)
+                .ToListAsync(cancel).ConfigureAwait(false);
+
+            if (blocks.Count == 0)
+                return string.Empty;
+
+            var htmlRenderer = new HtmlRenderer();
+            return htmlRenderer.GetHtml(blocks);
+        }
+
 
         /// <summary>
         /// Create a syndication feed from the child pages of this page.
