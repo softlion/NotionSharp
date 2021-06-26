@@ -118,7 +118,20 @@ namespace NotionSharp.ApiClient.Tests
             var blockId = "18dfbe55-5d7c-416e-9485-7855d4a3949e"; //from TestGetPage()
             await foreach (var block in session.GetBlockChildren(blockId))
             {
-                var i = 0;
+                Assert.IsNotNull(block.Type);
+                switch (block.Type)
+                {
+                    case BlockTypes.Paragraph:
+                        Assert.IsNotNull(block.Paragraph);
+                        break;
+
+                    case BlockTypes.ChildPage:
+                        Assert.IsNotNull(block.ChildPage);
+                        break;
+                    
+                    default:
+                        break;
+                }
             }
         }
 

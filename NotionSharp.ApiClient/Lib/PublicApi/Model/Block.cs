@@ -4,6 +4,22 @@ using System.Text.Json.Serialization;
 
 namespace NotionSharp.ApiClient
 {
+    public static class BlockTypes
+    {
+        public const string Unsupported = "unsupported";
+        public const string Paragraph = "paragraph";
+        public const string Heading1 = "heading_1";
+        public const string Heading2 = "heading_2";
+        public const string Heading3 = "heading_3";
+        public const string BulletedListItem = "bulleted_list_item";
+        public const string NumberedListItem = "numbered_list_item";
+        public const string ToDo = "to_do";
+        public const string Toggle = "toggle";
+        public const string ChildPage = "child_page";
+
+        public static readonly string[] Types = {Unsupported,Paragraph, Heading1, Heading2, Heading3, BulletedListItem, NumberedListItem, ToDo, Toggle, ChildPage};
+    }
+    
     public class Block : BaseObject, IBlockId
     {
         #region common props
@@ -11,11 +27,8 @@ namespace NotionSharp.ApiClient
         
         public string Id { get; set; }
 
-        [JsonIgnore]
-        public static readonly string[] Types = {"unsupported","paragraph", "heading_1", "heading_2", "heading_3", "bulleted_list_item", "numbered_list_item", "to_do", "toggle", "child_page"};
-
         /// <summary>
-        /// One of Block.Types
+        /// One of BlockTypes.*
         /// </summary>
         public string Type { get; set; }
         
