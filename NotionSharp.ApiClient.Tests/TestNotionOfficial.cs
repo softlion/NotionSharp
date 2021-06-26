@@ -137,13 +137,40 @@ namespace NotionSharp.ApiClient.Tests
         }
 
 
+        
+        [TestMethod]
+        public async Task TestGetTopLevelPages()
+        {
+            var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+            var pages = await session.GetTopLevelPages().ToListAsync();
+            Assert.IsNotNull(pages);
+            Assert.AreNotEqual(0, pages.Count);
+            Assert.IsNotNull(pages[0].Title.Title[0].PlainText);
+        }
+        
+        
         [TestMethod]
         public async Task TestGetSyndicationFeed()
         {
             var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
-            var feed = await session.GetSyndicationFeed();
+            var pages = await session.GetTopLevelPages().ToListAsync();
+            Assert.IsNotNull(pages);
+            var page = pages.Where(p => p.Title?.Title?.FirstOrDefault().PlainText == "Public blog").FirstOrDefault();
+            Assert.IsNotNull(page);
+
+            var feed = await session.GetSyndicationFeed(page);
             Assert.IsNotNull(feed?.Items);
             Assert.AreNotEqual(0, feed.Items.Count());
+        }
+        
+        [TestMethod]
+        public async Task TestGetPublicBlogContent()
+        {
+            var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+            var pages = await session.GetTopLevelPages().ToListAsync();
+            Assert.IsNotNull(pages);
+            Assert.AreNotEqual(0, pages.Count);
+            Assert.IsNotNull(pages[0].Title.Title[0].PlainText);
         }
 
 

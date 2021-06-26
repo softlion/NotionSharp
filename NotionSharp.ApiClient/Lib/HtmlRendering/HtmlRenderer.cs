@@ -67,6 +67,9 @@ namespace NotionSharp.ApiClient.Lib.HtmlRendering
                 case BlockTypes.NumberedListItem:
                     TransformNumberedListItem(block, sb);
                     break;
+                
+                case BlockTypes.Unsupported:
+                    break;
 #if DEBUG
                 default:
                     throw new ArgumentException($"Unknown block type {block.Type}");
