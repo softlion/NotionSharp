@@ -164,8 +164,10 @@ Create a session:
 Example: load content as an xml feed:
 
 ```csharp
-    var pages = await session.GetTopLevelPages().ToListAsync();
-    var feed = await session.GetSyndicationFeed(pages[0]);
+    var page = await session.Search(filterOptions: FilterOptions.ObjectPage)
+        .FirstAsync(p => p.Title?.Title?.FirstOrDefault().PlainText == "Procrastination");
+
+    var html = await session.GetHtml(page);
 ```
 
 ## References
