@@ -1,18 +1,24 @@
 # WORK IN PROGRESS  
-WARNING  
-** THE CLIENT FOR THE OFFICIAL API IS NOT YET AVAILABLE **
 
-# NotionSharp - Notion API client for C#
+State 2021/06/26: all APIs are working except:
+- block/append
+- page/create and update
+- database/get, query and list
+
+Those are not priority and up for grabs.
+
+
+# NotionSharp.ApiClient - client for official Notion API in C#
 
 This is an unofficial [Notion](https://notion.so) public API beta library and website template. You can, for example, get notion pages as a RSS feed. You can also use it as a simple CMS (Content Management System).
 
 [![NuGet][nuget-img]][nuget-link]  
-![Nuget](https://img.shields.io/nuget/dt/Softlion.NotionSharp)
+![Nuget](https://img.shields.io/nuget/dt/Softlion.NotionSharp.ApiClient)
 
 ![publish to nuget](https://github.com/softlion/NotionSharp/workflows/publish%20to%20nuget/badge.svg)
 
-[nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp/
-[nuget-img]: https://img.shields.io/nuget/v/Softlion.NotionSharp
+[nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp.ApiClient/
+[nuget-img]: https://img.shields.io/nuget/v/Softlion.NotionSharp.ApiClient
 
 ## Spawn a website displaying Notion pages in a few minutes
 
@@ -29,12 +35,15 @@ This is an unofficial [Notion](https://notion.so) public API beta library and we
   Copy the `Internal Integration Token`, this is your credential (named `Token` below).
 
   Go back to your content, and share your root page with the integration you just created (tap in the invite input zone to bring the integration selector).
+  
+  
+
 
 ### Option 1: Spawn the website with [kubernetes](https://kubernetes.io/)
 
 Run these commands after having setup kubernetes:
 
-```
+```powershell
 helm upgrade demonotionblog helm\notionsharpblog --install -f your-own-values.yaml
 start http://localhost:5080/
 ```
@@ -57,6 +66,10 @@ service:
   type: LoadBalancer
   port: 5080
 ```
+  
+  
+
+
 
 
 
@@ -65,13 +78,13 @@ service:
 Issue these commands to create your customized notion website. Replace the fake credentials with yours.  
 This requires the [dotnet sdk](https://dotnet.microsoft.com/download) v5+.
 
-```
+```powershell
 md DemoNotionBlog
 cd DemoNotionBlog
 dotnet new -i Softlion.NotionSharp.TemplateProjects
 ```
 
-```
+```powershell
 dotnet new blazorblog -p "MySite CMS"
 dotnet user-secrets init
 dotnet user-secrets set "Notion:Token" "secret_9BXXXxxxxxxxxxXXXXXXXXXXXxxxxxxxxxxxxxxx"
@@ -80,34 +93,42 @@ or
 
 dotnet new blazorblog -p "MySite CMS" --token secret_9BXXXxxxxxxxxxXXXXXXXXXXXxxxxxxxxxxxxxxx
 ```
-```
+```powershell
 dotnet run
 ```
 
 To uninstall the template:
-```
+```powershell
 dotnet new -u Softlion.NotionSharp.TemplateProject.Blog
 ```
 
 Use [Visual Studio](https://visualstudio.microsoft.com/), [VS Code](https://code.visualstudio.com/), or [Rider](https://www.jetbrains.com/rider/) to open the solution `.sln` file and customize the website.
+  
+  
+
+
 
 ### Option 3: Cloning the git repo
 
 Clone the git repo then install the template:
 
-```
+```powershell
 dotnet new -i Demos\DemoNotionBlog
 ```
 Then spawn a new website from this template:
-```
+```powershell
 dotnet new blazorblog -p "MySite CMS" --key secret_9BXXXxxxxxxxxxXXXXXXXXXXXxxxxxxxxxxxxxxx
 dotnet run
 ```
 
 To uninstall the template:
-```
+```powershell
 dotnet new -u Softlion.NotionSharp.TemplateProject.Blog
-```
+``` 
+  
+  
+
+
 
 ### Option 4: Using Docker
 
@@ -115,13 +136,17 @@ A dockerfile is included with the demo/template project.
 In Visual Studio, right click the demo project and choose "publish" to publish it using the UI.
 Or use these commands:
 
-```
+```powershell
 docker build -t yourdockerhub.com/demonotionblog:1.0.0 .
 docker run -p8080:5000 yourdockerhub.com/demonotionblog:1.0.0
 start http://localhost:8080/
 ```
 
 Note: the prebuilt docker image vapolia/demonotionblog:latest is made only for `helm` (ie: kubernetes) and is missing the appsettings-secrets.Production.json file.
+  
+  
+  
+
 
 ## SDK Usage
 
@@ -143,20 +168,9 @@ Example: load content and info of main `space`:
     var html = userContent.RecordMap.GetHtml(throwIfBlockMissing: false);
 ```
 
-## Notion high-level model
+## References
 
-Spaces  
-|- Pages  
-....|-- Sub-Pages
+[Notion official API docs](https://developers.notion.com/reference/intro)
+[Notion official API guides](https://developers.notion.com/docs)
+[Notion official API changelog](https://developers.notion.com/changelog)
 
-There seems to be only one space per (personal) account.  
-All pages are blocks. All paragraphs, photos, items in a page are also blocks. `Block.Type` contains the block's type.  
-For a `page` block, `Block.Content` contains the ids of the child pages.  
-All item's ids are Guids.
-
-Rendered block types:
-- page, collection_view_page
-- text, image, header, sub_header, sub_sub_header, bulleted_list, quote, column_list, column
-
-Unimplemented block types (yet):
-- code, bookmark
