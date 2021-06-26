@@ -161,7 +161,7 @@ Create a session:
     var session = new NotionSession(sessionInfo);
 ```
 
-Example: load content as an xml feed:
+Example: get the HTML content of a page
 
 ```csharp
     var page = await session.Search(filterOptions: FilterOptions.ObjectPage)
