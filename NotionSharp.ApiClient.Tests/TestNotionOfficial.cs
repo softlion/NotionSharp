@@ -21,16 +21,18 @@ namespace NotionSharp.ApiClient.Tests
             var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
 
             var totalItems = 0;
+            List<Page> pages = new ();
             await foreach (var item in session.Search(pageSize: 2))
             {
                 totalItems++;
+                pages.Add(item);
             }
 
             Assert.AreEqual(4, totalItems);
         }
 
         /// <summary>
-        /// Manual paging
+        /// Manual paging (obsolete)
         /// </summary>
         [TestMethod]
         public async Task TestSearchPaged()
@@ -40,7 +42,6 @@ namespace NotionSharp.ApiClient.Tests
             var pagingOptions = new PagingOptions {PageSize = 2};
             var searchResult = await session.SearchPaged(pagingOptions: pagingOptions);
             Assert.IsNotNull(searchResult?.Results);
-            Assert.IsTrue(searchResult.Results[0] is JsonElement);
 
             var totalItems = searchResult.Results.Count;
             var i = 10;
@@ -96,11 +97,10 @@ namespace NotionSharp.ApiClient.Tests
             var page = await session.Search(pageSize: 1, filterOptions: FilterOptions.ObjectPage).FirstAsync();
             Assert.IsNotNull(page);
 
-            var pageId = page.GetProperty("id").GetString();
-            Assert.IsNotNull(pageId);
+            Assert.IsNotNull(page.Id);
 
             //Get the page details
-            var pageProperties = await session.GetPage(pageId);
+            var pageProperties = await session.GetPage(page.Id);
             Assert.IsNotNull(pageProperties);
             Assert.IsNotNull(pageProperties.Parent);
             Assert.IsNotNull(pageProperties.Properties);

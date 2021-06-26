@@ -6,7 +6,6 @@ namespace NotionSharp.ApiClient
     /// <summary>
     /// https://developers.notion.com/reference/rich-text
     /// </summary>
-    //[JsonConverter(typeof(RichTextJsonConverter))]
     public class RichText
     {
         public const string TypeText = "text";
@@ -46,7 +45,7 @@ namespace NotionSharp.ApiClient
         public DateProp Date { get; set; } //type=date
     }
 
-    public class PageRef
+    public class PageRef : IBlockId
     {
         /// <summary>
         /// Page Id
@@ -54,7 +53,7 @@ namespace NotionSharp.ApiClient
         public string Id { get; set; }
     }
 
-    public class DatabaseRef
+    public class DatabaseRef : IBlockId
     {
         /// <summary>
         /// Database Id

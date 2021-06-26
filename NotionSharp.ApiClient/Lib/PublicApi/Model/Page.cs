@@ -7,7 +7,7 @@ using NotionSharp.ApiClient.Lib;
 
 namespace NotionSharp.ApiClient
 {
-    public class Page : BaseObject
+    public class Page : BaseObject, IBlockId
     {
         public string Id { get; set; }
             
@@ -82,7 +82,7 @@ namespace NotionSharp.ApiClient
         public class PropertyTitle
         {
             public string Type { get; set; } = "title";
-            public string Id { get; set; }
+            public string Id { get; set; } //This is not a block id
             public List<RichText> Title { get; set; }
         }
 

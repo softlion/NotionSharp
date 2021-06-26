@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
@@ -23,7 +23,8 @@ namespace NotionSharp.ApiClient
         /// Search indexing is not immediate.
         /// You should use HasMore+NextCursor to get more paged results with the same options.
         /// </remarks>
-        public static async Task<SearchResult?> SearchPaged(this NotionSession session,
+        [Obsolete("Use Search() instead of SearchPaged()")]
+        public static async Task<PaginationResult<Page>?> SearchPaged(this NotionSession session,
             string? query = null, SortOptions? sortOptions = null, FilterOptions? filterOptions = null, PagingOptions? pagingOptions = null,
             CancellationToken cancel = default)
         {
@@ -33,7 +34,7 @@ namespace NotionSharp.ApiClient
             };
             
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "search");
-            return await request.PostJsonAsync(searchRequest, cancel).ReceiveJson<SearchResult>().ConfigureAwait(false);
+            return await request.PostJsonAsync(searchRequest, cancel).ReceiveJson<PaginationResult<Page>>().ConfigureAwait(false);
         }
         
         /// <summary>
@@ -51,7 +52,7 @@ namespace NotionSharp.ApiClient
         /// await foreach(var item in SearchAsync().WithCancellation(cancel).ConfigureAwait(false))
         ///    DoSomething(item);
         /// </example>
-        public static async IAsyncEnumerable<JsonElement> Search(this NotionSession session,
+        public static async IAsyncEnumerable<Page> Search(this NotionSession session,
             string? query = null, SortOptions? sortOptions = null, FilterOptions? filterOptions = null, int pageSize = Constants.DefaultPageSize,
             [EnumeratorCancellation] CancellationToken cancel = default)
         {
@@ -60,12 +61,12 @@ namespace NotionSharp.ApiClient
             
             while(true)
             {
-                var result = await request.PostJsonAsync(searchRequest, cancel).ReceiveJson<SearchResult>().ConfigureAwait(false);
+                var result = await request.PostJsonAsync(searchRequest, cancel).ReceiveJson<PaginationResult<Page>>().ConfigureAwait(false);
                 if(result?.Results == null)
                     yield break;
                 foreach (var item in result.Results)
                     yield return item;
-                if(!result.HasMore)
+                if(!result.HasMore || result.NextCursor == null)
                     yield break;
                 
                 searchRequest.StartCursor = result.NextCursor;
@@ -84,10 +85,10 @@ namespace NotionSharp.ApiClient
                     yield break;
                 foreach (var item in result.Results)
                     yield return item;
-                if(!result.HasMore)
+                if(!result.HasMore || result.NextCursor == null)
                     yield break;
 
-                request.SetQueryParam("start_cursor", (string)result.NextCursor);
+                request.SetQueryParam("start_cursor", result.NextCursor);
             }
         }
 
@@ -120,53 +121,26 @@ namespace NotionSharp.ApiClient
         /// <summary>
         /// Get children of a block (ie: its content)
         /// A block is any object having an Id.
-        /// TODO: polymorphism?
         /// </summary>
-        public static async IAsyncEnumerable<JsonElement>? GetBlockChildren(this NotionSession session, string blockId, int pageSize = Constants.DefaultPageSize, [EnumeratorCancellation] CancellationToken cancel = default)
+        public static async IAsyncEnumerable<Block> GetBlockChildren(this NotionSession session, string blockId, int pageSize = Constants.DefaultPageSize, [EnumeratorCancellation] CancellationToken cancel = default)
         {
             var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "blocks/" + blockId + "/children")
                 .SetQueryParam("page_size", pageSize);
 
             while(true)
             {
-                var result = await request.GetJsonAsync<PaginationResult<JsonElement>>(cancel).ConfigureAwait(false);
+                var result = await request.GetJsonAsync<PaginationResult<Block>>(cancel).ConfigureAwait(false);
                 if(result?.Results == null)
                     yield break;
                 foreach (var item in result.Results)
                     yield return item;
-                if(!result.HasMore)
+                if(!result.HasMore || result.NextCursor == null)
                     yield break;
 
-                request.SetQueryParam("start_cursor", (string)result.NextCursor);
+                request.SetQueryParam("start_cursor", result.NextCursor);
             }
         }
 
-        // public static async Task<GetClientExperimentsResult> GetClientExperiments(this NotionSession session, Guid deviceId, CancellationToken cancel = default)
-        // {
-        //     var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "getClientExperiments");
-        //     return await request.PostJsonAsync(new { deviceId = deviceId.ToString("D") }, cancel).ReceiveJson<GetClientExperimentsResult>();
-        // }
-        //
-        // public static async Task<LoadUserContentResult> LoadUserContent(this NotionSession session, CancellationToken cancel = default)
-        // {
-        //     var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "loadUserContent");
-        //     return await request.PostJsonAsync(new object(), cancel).ReceiveJson<LoadUserContentResult>();
-        // }
-        //
-        //
-        // public static async Task<LoadPageChunkResult> LoadPageChunk(this NotionSession session, Guid pageId, int chunkNumber = 0, int limit = 50, CancellationToken cancel = default)
-        // {
-        //     var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "loadPageChunk");
-        //     return await request.PostJsonAsync(new LoadPageChunkRequest
-        //     {
-        //         ChunkNumber = chunkNumber,
-        //         Cursor = new Cursor { Stack = new List<List<CursorStack>> { new List<CursorStack> { new CursorStack { Id = pageId, Index = chunkNumber, Table = "block" } } } },
-        //         Limit = limit,
-        //         PageId = pageId,
-        //         VerticalColumns = false
-        //     }, cancel).ReceiveJson<LoadPageChunkResult>();
-        // }
-        //
         // public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
         // {
         //     var userContent = await session.LoadUserContent(cancel);

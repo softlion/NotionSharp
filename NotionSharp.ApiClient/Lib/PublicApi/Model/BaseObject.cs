@@ -7,6 +7,6 @@ namespace NotionSharp.ApiClient
         [JsonIgnore]
         public string? JsonOriginal { get; set; }
 
-        public string Object { get; set; } = null!; 
+        public virtual string Object { get; set; } = null!; 
     }
 }
