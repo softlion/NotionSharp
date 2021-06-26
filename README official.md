@@ -20,6 +20,29 @@ This is an unofficial [Notion](https://notion.so) public API beta library and we
 [nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp.ApiClient/
 [nuget-img]: https://img.shields.io/nuget/v/Softlion.NotionSharp.ApiClient
 
+
+## SDK Usage
+
+Create a session:
+
+```csharp
+    var sessionInfo = new NotionSessionInfo 
+    {
+        Token = "secret_9BXXXxxxxxxxxxXXXXXXXXXXXxxxxxxxxxxxxxxx"
+    };
+
+    var session = new NotionSession(sessionInfo);
+```
+
+Example: get the HTML content of a page
+
+```csharp
+    var page = await session.Search(filterOptions: FilterOptions.ObjectPage)
+        .FirstAsync(p => p.Title?.Title?.FirstOrDefault().PlainText == "Procrastination");
+
+    var html = await session.GetHtml(page);
+```
+
 ## Spawn a website displaying Notion pages in a few minutes
 
 ### Setup your Notion pages and get your credentials
@@ -148,27 +171,6 @@ Note: the prebuilt docker image vapolia/demonotionblog:latest is made only for `
   
 
 
-## SDK Usage
-
-Create a session:
-
-```csharp
-    var sessionInfo = new NotionSessionInfo 
-    {
-        Token = "secret_9BXXXxxxxxxxxxXXXXXXXXXXXxxxxxxxxxxxxxxx"
-    };
-
-    var session = new NotionSession(sessionInfo);
-```
-
-Example: get the HTML content of a page
-
-```csharp
-    var page = await session.Search(filterOptions: FilterOptions.ObjectPage)
-        .FirstAsync(p => p.Title?.Title?.FirstOrDefault().PlainText == "Procrastination");
-
-    var html = await session.GetHtml(page);
-```
 
 ## References
 
