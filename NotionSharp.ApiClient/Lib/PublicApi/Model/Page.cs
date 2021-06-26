@@ -34,10 +34,11 @@ namespace NotionSharp.ApiClient
         #region Parent polymorphism
         public abstract class PageParent
         {
-            /// <summary>
-            /// database_id, page_id, workspace
-            /// </summary>
             public string Type { get; set; }
+
+            public const string TypeWorkspace = "workspace";
+            public const string TypePage = "page_id";
+            public const string TypeDatabase = "database_id";
         }
 
         public class PageParentWorkspace : PageParent {}

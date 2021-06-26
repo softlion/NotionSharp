@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.ServiceModel.Syndication;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
 using NotionSharp.ApiClient.Lib;
+using NotionSharp.ApiClient.Lib.HtmlRendering;
 
 namespace NotionSharp.ApiClient
 {
@@ -141,82 +144,81 @@ namespace NotionSharp.ApiClient
             }
         }
 
-        // public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
-        // {
-        //     var userContent = await session.LoadUserContent(cancel);
-        //     var space = userContent.RecordMap.Space.First().Value;
-        //
-        //     //collection_view_page not supported
-        //     var pages = space.Pages.Where(pageId => userContent.RecordMap.Block[pageId].Type == "page");
-        //
-        //     var feed = await session.GetSyndicationFeed(pages, maxBlocks, stopBeforeFirstSubHeader, cancel);
-        //     feed.Id = space.Id.ToString("N");
-        //     feed.Title = new TextSyndicationContent(space.Name);
-        //     feed.Description = new TextSyndicationContent(space.Domain);
-        //     return feed;
-        // }
-        //
-        // /// <summary>
-        // /// Create a syndication feed from a list of page
-        // /// </summary>
-        // /// <param name="session">a session</param>
-        // /// <param name="pages">the pages</param>
-        // /// <param name="maxBlocks">limits the parsing of each page to the 1st 20 blocks. Max value: 100</param>
-        // /// <param name="stopBeforeFirstSubHeader">when true, stop parsing a page when a line containing a sub_header is found</param>
-        // /// <param name="cancel"></param>
-        // /// <returns>A SyndicationFeed containing one SyndicationItem per page</returns>
-        // /// <remarks>
-        // /// The created feed has no title/description
-        // /// </remarks>
-        // public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, IEnumerable<Guid> pages, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
-        // {
-        //     //notion's limitation
-        //     if (maxBlocks > 100)
-        //         throw new ArgumentOutOfRangeException(nameof(maxBlocks));
-        //
-        //     var feedItems = new List<SyndicationItem>();
-        //     foreach (var pageId in pages)
-        //     {
-        //         //get blocks and extract an html content
-        //         var chunks = await session.LoadPageChunk(pageId, 0, maxBlocks, cancel);
-        //         var pageBlock = chunks.RecordMap.Block[pageId];
-        //
-        //         //collection_view_page not supported
-        //         if (pageBlock.Permissions?.Any(p => p.Role == Permission.RoleReader && p.Type == Permission.TypePublic) == true
-        //             && pageBlock.Type == "page") 
-        //         {
-        //             //var content = chunks.RecordMap.GetHtmlAbstract(pageId);
-        //             var content = chunks.RecordMap.GetHtml(pageId, throwIfBlockMissing: false, stopBeforeFirstSubHeader: stopBeforeFirstSubHeader, throwIfCantDecodeTextData: false);
-        //             var pageUri = NotionUtils.GetPageUri(pageId, pageBlock.Title);
-        //
-        //             var item = new SyndicationItem(pageBlock.Title, content, pageUri)
-        //             {
-        //                 Id = pageId.ToString("N"),
-        //                 BaseUri = pageUri,
-        //                 Summary = new TextSyndicationContent(content),
-        //                 PublishDate = pageBlock.CreatedTime.EpochToDateTimeOffset(),
-        //                 LastUpdatedTime = pageBlock.LastEditedTime.EpochToDateTimeOffset(),
-        //             };
-        //
-        //             if (!String.IsNullOrWhiteSpace(pageBlock.Format?.PageIcon))
-        //             {
-        //                 if(Uri.TryCreate(pageBlock.Format.PageIcon, UriKind.Absolute, out _))
-        //                     item.AttributeExtensions.Add(new XmlQualifiedName("iconUrl"), pageBlock.Format.PageIcon);
-        //                 else
-        //                     item.AttributeExtensions.Add(new XmlQualifiedName("iconString"), pageBlock.Format.PageIcon);
-        //             }
-        //
-        //             feedItems.Add(item);
-        //         }
-        //     }
-        //
-        //     var feed = new SyndicationFeed(feedItems)
-        //     {
-        //         LastUpdatedTime = feedItems.DefaultIfEmpty().Max(item => item?.LastUpdatedTime ?? DateTimeOffset.MinValue),
-        //         //Copyright = 
-        //     };
-        //
-        //     return feed;
-        // }
+        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
+        {
+            var pages = await session.Search(filterOptions: FilterOptions.ObjectPage, cancel: cancel)
+                .Where(pageProp => pageProp.Parent.Type == Page.PageParent.TypeWorkspace) //Only top level pages
+                .Take(maxBlocks)
+                .ToListAsync(cancel).ConfigureAwait(false);
+
+            if (pages.Count == 0)
+                return new SyndicationFeed { LastUpdatedTime = DateTimeOffset.Now };
+                    
+            var feed = await session.GetSyndicationFeed(pages, maxBlocks, stopBeforeFirstSubHeader, cancel).ConfigureAwait(false);
+            //"workspace" data not available in API
+            //feed.Id = space.Id.ToString("N");
+            //feed.Title = new TextSyndicationContent(space.Name);
+            //feed.Description = new TextSyndicationContent(space.Domain);
+            feed.Id = pages[0].Id;
+            feed.Title = new TextSyndicationContent(pages[0].Title?.Title[0]?.Text?.Content ?? "");
+            return feed;
+        }
+
+        /// <summary>
+        /// Create a syndication feed from a list of page
+        /// </summary>
+        /// <param name="session">a session</param>
+        /// <param name="pages">the pages</param>
+        /// <param name="maxBlocks">limits the parsing of each page to the 1st 20 blocks. Max value: 100</param>
+        /// <param name="stopBeforeFirstSubHeader">when true, stop parsing a page when a line containing a sub_header is found</param>
+        /// <param name="cancel"></param>
+        /// <returns>A SyndicationFeed containing one SyndicationItem per page</returns>
+        /// <remarks>
+        /// The created feed has no title/description
+        /// </remarks>
+        public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, IEnumerable<Page> pages, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
+        {
+            var feedItems = new List<SyndicationItem>();
+            var htmlRenderer = new HtmlRenderer();
+            
+            foreach (var page in pages)
+            {
+                //get blocks and extract an html content
+                var blocks = await session.GetBlockChildren(page.Id, cancel: cancel)
+                    .Take(maxBlocks)
+                    .ToListAsync(cancel).ConfigureAwait(false);
+        
+                var content = htmlRenderer.GetHtml(blocks, stopBeforeFirstSubHeader);
+                var title = page.Title?.Title[0]?.PlainText;
+                var pageUri = NotionUtils.GetPageUri(page.Id, title);
+    
+                var item = new SyndicationItem(title, content, pageUri)
+                {
+                    Id = page.Id,
+                    BaseUri = pageUri,
+                    Summary = new TextSyndicationContent(content),
+                    PublishDate = page.CreatedTime,
+                    LastUpdatedTime = page.LastEditedTime,
+                };
+
+                // Property not yet available in API
+                // if (!String.IsNullOrWhiteSpace(page.Format?.PageIcon))
+                // {
+                //     if(Uri.TryCreate(page.Format.PageIcon, UriKind.Absolute, out _))
+                //         item.AttributeExtensions.Add(new XmlQualifiedName("iconUrl"), pageBlock.Format.PageIcon);
+                //     else
+                //         item.AttributeExtensions.Add(new XmlQualifiedName("iconString"), pageBlock.Format.PageIcon);
+                // }
+    
+                feedItems.Add(item);
+            }
+        
+            var feed = new SyndicationFeed(feedItems)
+            {
+                LastUpdatedTime = feedItems.DefaultIfEmpty().Max(item => item?.LastUpdatedTime ?? DateTimeOffset.MinValue),
+            };
+        
+            return feed;
+        }
     }
 }

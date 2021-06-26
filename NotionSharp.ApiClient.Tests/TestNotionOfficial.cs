@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotionSharp.ApiClient.Lib;
+using NotionSharp.ApiClient.Lib.HtmlRendering;
 using NotionSharp.ApiClient.Tests.Lib;
 
 namespace NotionSharp.ApiClient.Tests
@@ -133,6 +134,16 @@ namespace NotionSharp.ApiClient.Tests
                         break;
                 }
             }
+        }
+
+
+        [TestMethod]
+        public async Task TestGetSyndicationFeed()
+        {
+            var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+            var feed = await session.GetSyndicationFeed();
+            Assert.IsNotNull(feed?.Items);
+            Assert.AreNotEqual(0, feed.Items.Count());
         }
 
 

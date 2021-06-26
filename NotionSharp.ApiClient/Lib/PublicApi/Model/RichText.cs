@@ -13,6 +13,7 @@ namespace NotionSharp.ApiClient
         public const string TypeLink = "link";
         public const string TypeEquation = "equation";
         
+        #region common properties
         /// <summary>
         /// One of RichText.Type* value
         /// </summary>
@@ -24,7 +25,13 @@ namespace NotionSharp.ApiClient
         public string? Href { get; set; }
         
         [JsonPropertyName("annotations")] 
-        public RichTextAnnotation Annotation { get; set; }
+        public RichTextAnnotation? Annotation { get; set; }
+
+        [JsonIgnore]
+        public bool HasAttribute => Annotation?.HasAnnotation == true || !String.IsNullOrWhiteSpace(Href);
+        [JsonIgnore]
+        public bool HasStyle => !String.IsNullOrWhiteSpace(Annotation?.Color);
+        #endregion
 
         public RichTextText? Text { get; set; } //type=text
         public string? Url { get; set; } //type=link
@@ -79,6 +86,9 @@ namespace NotionSharp.ApiClient
         /// One of RichTextAnnotationColors.Colors
         /// </summary>
         public string? Color { get; set; }
+
+        [JsonIgnore] 
+        public bool HasAnnotation => Bold || Italic || Strikethrough || Underline || Code || (Color != null && Color != "default");
     }
 
     public static class RichTextAnnotationColors
