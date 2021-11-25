@@ -69,6 +69,7 @@ namespace DemoNotionBlog.Libs.Services
             isRefreshing = true;
             
             var option = notionOptions.CurrentValue;
+            logger.LogInformation($"refreshing notion data for title:'{option?.CmsPageTitle}'");
 
             try
             {
@@ -85,7 +86,7 @@ namespace DemoNotionBlog.Libs.Services
             }
             catch (Exception e)
             {
-                logger.LogError(e, $"Can't update notion cache or find page {option.CmsPageTitle}");
+                logger.LogError(e, $"Can't update notion data or find page {option?.CmsPageTitle}");
             }
             finally
             {
