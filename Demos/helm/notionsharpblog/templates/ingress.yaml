@@ -2,7 +2,7 @@
 {{- $serviceName := include "chart.fullname" . -}}
 {{- $servicePath := .Values.ingress.path -}}
 {{- $servicePort := .Values.service.port -}}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "chart.fullname" . }}

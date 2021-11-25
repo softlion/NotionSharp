@@ -55,3 +55,11 @@ deployment:
   #- ...
   #tolerations:
   #- ...
+
+persistence:
+  #existingClaim: 
+  accessMode: ReadWriteOnce
+  size: 100Ki
+  ## Set to "-" to result in storageClassName: "", which disables dynamic provisioning.
+  ## If undefined or null (default), no storageClassName is set. K8s will use the default provisioner.
+  # storageClass: "-"

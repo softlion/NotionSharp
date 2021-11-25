@@ -1,10 +1,8 @@
 using DemoNotionBlog.Libs.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Hangfire;
+using Hangfire.MemoryStorage;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
+using VapoliaFr.Blazorr;
 
 namespace DemoNotionBlog
 {
@@ -23,12 +21,18 @@ namespace DemoNotionBlog
             services.AddServerSideBlazor();
             services.AddHeadElementHelper();
 
-            services.Configure<NotionOptions>(Configuration.GetSection("Notion"));
+            services.AddHangfire(options =>
+                {
+                    //Le format de la connectionString ne lui conviens pas
+                    //options.UseSqlServerStorage(connectionString);
+                    options.UseStorage(new MemoryStorage());
+                });
 
+            services.Configure<NotionOptions>(Configuration.GetSection("Notion"));
             services.AddSingleton<NotionCmsService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -39,19 +43,24 @@ namespace DemoNotionBlog
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts(); //already handled by the reverse proxy
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection(); //already handled by the reverse proxy
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapBlazorHub();
+                endpoints.MapBlazorHub(); //default to _Blazor
                 endpoints.MapFallbackToPage("/_Host");
             });
+
+            //Use Hangfire to manage background tasks
+            GlobalConfiguration.Configuration.UseActivator(new HangfireActivator(serviceProvider));
+            app.UseHangfireServer();
         }
     }
 }

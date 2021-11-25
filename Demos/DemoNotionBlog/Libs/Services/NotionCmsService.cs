@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Subjects;
+﻿using System.Reactive.Subjects;
 using System.ServiceModel.Syndication;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+using Hangfire;
 using Microsoft.Extensions.Options;
 using NotionSharp;
 
@@ -12,7 +8,7 @@ namespace DemoNotionBlog.Libs.Services
 {
     public static class NotionCmsServiceExtensions
     {
-        public static string ToLink(this string title)
+        public static string? ToLink(this string? title)
         {
             if(title != null)
                 return Uri.EscapeDataString(title.Replace(" ", "_").ToLower());
@@ -20,17 +16,34 @@ namespace DemoNotionBlog.Libs.Services
         }
     }
 
+    public class NotionCmsServiceUpdateJob
+    {
+        private readonly NotionCmsService service;
+
+        public NotionCmsServiceUpdateJob(NotionCmsService service)
+        {
+            this.service = service;
+        }
+
+        public void Refresh()
+        {
+            _ = service.RefreshNotionData();
+        }
+    }
+
     public class NotionCmsService
     {
         private readonly ILogger<NotionCmsService> logger;
-        private readonly NotionOptions notionOptions;
+        private readonly IOptionsMonitor<NotionOptions> notionOptions;
 
-        public BehaviorSubject<List<SyndicationItem>> CmsArticles { get; }
-        public string CmsTitle { get; set; }
+        public BehaviorSubject<List<SyndicationItem>?> CmsArticles { get; }
+        public string? CmsTitle { get; set; }
 
-        public NotionCmsService(ILogger<NotionCmsService> logger, IOptions<NotionOptions> notionOptions)
+        public NotionCmsService(ILogger<NotionCmsService> logger, IOptionsMonitor<NotionOptions> notionOptions)
         {
             this.logger = logger;
+            this.notionOptions = notionOptions;
+            notionOptions.OnChange(options => _ = RefreshNotionData());
 
             //If you crash here, make sure you either:
             //- updated the notion session keys in appsettings-secrets.json
@@ -39,12 +52,12 @@ namespace DemoNotionBlog.Libs.Services
             //  dotnet user-secrets set "Notion:Key" "xxXxxXXxxXxxxXXxxx...xxXxxX"
             //  dotnet user-secrets set "Notion:BrowserId" "aabbccdd-aabb-aabb-aabb-aabbccddaabb"
             //  dotnet user-secrets set "Notion:UserId" "eeffeeff-eeff-eeff-eeff-eeffeeffeeff"
-            this.notionOptions = notionOptions.Value;
 
             //Load Startup Data
-            CmsArticles = new BehaviorSubject<List<SyndicationItem>>(null);
+            CmsArticles = new BehaviorSubject<List<SyndicationItem>?>(null);
 
             Task.Run(() => _ = RefreshNotionData().ConfigureAwait(false));
+            RecurringJob.AddOrUpdate<NotionCmsServiceUpdateJob>(swe => swe.Refresh(), Cron.HourInterval(4));
         }
 
         private bool isRefreshing;
@@ -57,12 +70,13 @@ namespace DemoNotionBlog.Libs.Services
 
             try
             {
-                var notionSession = new NotionSession(new NotionSessionInfo {TokenV2 = notionOptions.Key, NotionBrowserId = notionOptions.BrowserId, NotionUserId = notionOptions.UserId });
+                var option = notionOptions.CurrentValue;
+                var notionSession = new NotionSession(new NotionSessionInfo { TokenV2 = option.Key, NotionBrowserId = option.BrowserId, NotionUserId = option.UserId });
                 var userContent = await notionSession.LoadUserContent().ConfigureAwait(false);
                 var spacePages = userContent.RecordMap.Space.First().Value.Pages;
 
                 //Refresh CMS
-                var cmsPageId = spacePages.First(pageId => userContent.RecordMap.Block.TryGetValue(pageId, out var page) && page.Title == notionOptions.CmsPageTitle);
+                var cmsPageId = spacePages.First(pageId => userContent.RecordMap.Block.TryGetValue(pageId, out var page) && page.Title == option.CmsPageTitle);
                 var cmsPages = userContent.RecordMap.Block[cmsPageId].Content;
                 var cmsItems = await notionSession.GetSyndicationFeed(cmsPages, maxBlocks: 100, stopBeforeFirstSubHeader: false).ConfigureAwait(false);
                 CmsTitle = userContent.RecordMap.Block[cmsPageId].Title;
@@ -70,7 +84,7 @@ namespace DemoNotionBlog.Libs.Services
             }
             catch (Exception e)
             {
-                logger.LogError(e, "Can't update notion data");
+                logger.LogError(e, "Can't update notion cache");
             }
             finally
             {

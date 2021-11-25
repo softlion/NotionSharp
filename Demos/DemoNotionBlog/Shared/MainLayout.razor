@@ -1,4 +1,13 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.AspNetCore.WebUtilities
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using System.IO
+@using DemoNotionBlog.Libs.Services
+@using Microsoft.Extensions.Hosting
+@inherits LayoutComponentBase
+@inject NavigationManager navigation
+@inject IHostEnvironment hostEnvironment
+@implements IDisposable
 
 <div class="sidebar">
     <NavMenu />
@@ -9,3 +18,47 @@
         @Body
     </div>
 </div>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        navigation.LocationChanged += NavigationOnLocationChanged;
+        QueryStringChanged();
+    }
+    
+    private void NavigationOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        QueryStringChanged();
+    }
+    
+    public void Dispose()
+    {
+        navigation.LocationChanged -= NavigationOnLocationChanged;
+    }
+
+    //handles http://localhost:5000/?key=&browserid=&userid=
+    private void QueryStringChanged()
+    {
+        var uri = navigation.ToAbsoluteUri(navigation.Uri);
+        var qs = QueryHelpers.ParseQuery(uri.Query);
+        if (qs.TryGetValue("key", out var keys) && keys.Count == 1
+            && qs.TryGetValue("browserid", out var browserids) && browserids.Count == 1 && Guid.TryParse(browserids[0], out var browserId)
+            && qs.TryGetValue("userid", out var userids) && userids.Count == 1 && Guid.TryParse(userids[0], out var userId)
+            )
+        {
+            var options = new NotionOptions
+            {
+                Key = keys[0],
+                BrowserId = browserId,
+                UserId = userId
+            };
+
+            var json = JsonSerializer.Serialize(new { Notion = options }, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault });
+            File.WriteAllText(Path.Combine(hostEnvironment.ContentRootPath, "persist", "notionKeys.json"), json);
+            
+            StateHasChanged();
+        }
+    }
+}

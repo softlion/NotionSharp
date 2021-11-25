@@ -1,7 +1,4 @@
 using System.Reflection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 
 namespace DemoNotionBlog
 {
@@ -31,9 +28,19 @@ namespace DemoNotionBlog
                         config.AddUserSecrets(appAssembly, optional: true);
                     }
                 })
+                .ConfigureAppConfiguration(builder =>
+                {
+                    //Persistent storage folder on target
+                    builder.AddJsonFile(Path.Combine("persist", "notionKeys.json"), optional: true, reloadOnChange: true);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .ConfigureKestrel(options =>
+                        {
+                            options.AddServerHeader = false;
+                        })
+                        .UseStartup<Startup>();
                 });
     }
 }

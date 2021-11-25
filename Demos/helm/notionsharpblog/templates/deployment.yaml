@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
-    app.kubernetes.io/component: {{ .Values.component }}    
+    app.kubernetes.io/component: {{ .Values.component }}
     app.kubernetes.io/part-of: {{ .Values.application }}
 
 spec:
@@ -37,6 +37,8 @@ spec:
             path: /
             port: 5000
         volumeMounts:
+            - name: persist-folder
+              mountPath: /persist
             - name: app-settings-secrets
               mountPath: /app/appsettings-secrets.Production.json
               subPath: appsettings-secrets.Production.json
@@ -51,6 +53,9 @@ spec:
       {{- end }}          
 
       volumes:
+        - name: persist-folder
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "chart.fullname" .) }}
         - name: app-settings-secrets
           secret:
             secretName: {{ include "chart.fullname" . }}-appsettings-secrets

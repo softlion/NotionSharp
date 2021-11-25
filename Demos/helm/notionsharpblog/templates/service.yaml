@@ -12,9 +12,9 @@ metadata:
     app.kubernetes.io/part-of: {{ .Values.application }}
 spec:
   type: {{ .Values.service.type }}
-  ports:
-  - port: {{ .Values.service.port }}
-    targetPort: 5000
   selector:
     app.kubernetes.io/name: {{ template "chart.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+  ports:
+  - port: {{ .Values.service.port }}
+    targetPort: 5000
