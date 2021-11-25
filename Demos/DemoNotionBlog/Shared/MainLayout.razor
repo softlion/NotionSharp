@@ -56,9 +56,7 @@
             };
 
             var json = JsonSerializer.Serialize(new { Notion = options }, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault });
-	        var targetFolder = Path.Combine(hostEnvironment.ContentRootPath, "persist");
-	        Directory.CreateDirectory(targetFolder);
-            File.WriteAllText(Path.Combine(targetFolder, "notionKeys.json"), json);
+            File.WriteAllText(Path.Combine(hostEnvironment.ContentRootPath, "persist", "notionKeys.json"), json);
             
             StateHasChanged();
         }

@@ -16,10 +16,15 @@ namespace DemoNotionBlog
                 {
                     var env = hostingContext.HostingEnvironment;
 
-                    //This second settings file contains only secrets, and can be put in a kubernetes secret store.
                     config
-                        .AddJsonFile("appsettings-secrets.json", optional:false, reloadOnChange:true)
+                        //This second settings file contains only secrets, and can be put in a kubernetes secret store.
+                        .AddJsonFile("appsettings-secrets.json", optional: false, reloadOnChange: true)
                         .AddJsonFile($"appsettings-secrets.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+                    //Persistent storage folder on target, when a query string is used to refresh notion tokens
+                    var persistFolder = Path.Combine(env.ContentRootPath, "persist");
+                    Directory.CreateDirectory(persistFolder); //If directory is missing, AddJsonFile fails
+                    config.AddJsonFile(Path.Combine(persistFolder, "notionKeys.json"), optional: true, reloadOnChange: true);
 
                     //User secrets should still override appsettings-secrets
                     if (env.IsDevelopment() && !string.IsNullOrEmpty(env.ApplicationName))
@@ -27,11 +32,6 @@ namespace DemoNotionBlog
                         var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
                         config.AddUserSecrets(appAssembly, optional: true);
                     }
-                })
-                .ConfigureAppConfiguration(builder =>
-                {
-                    //Persistent storage folder on target
-                    builder.AddJsonFile(Path.Combine("persist", "notionKeys.json"), optional: true, reloadOnChange: true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

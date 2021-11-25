@@ -68,7 +68,7 @@ namespace DemoNotionBlog.Libs.Services
                 return;
             isRefreshing = true;
             
-            var option = notionOptions.CurrentValue;
+            var option = notionOptions?.CurrentValue;
             logger.LogInformation($"refreshing notion data for title:'{option?.CmsPageTitle}'");
 
             try

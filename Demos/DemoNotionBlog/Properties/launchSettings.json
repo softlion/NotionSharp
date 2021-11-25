@@ -11,8 +11,8 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://127.0.0.1:8080",
-      "DockerfileRunArguments": "-p8080:80  -v persist:/app/persist",
+      "launchUrl": "http://127.0.0.1:8080",
+      "DockerfileRunArguments": "-p8080:5000  -v persist:/app/persist",
       "publishAllPorts": true,
       "useSSL": false
     }
