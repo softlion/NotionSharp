@@ -43,8 +43,8 @@ ingress:
     ingress.kubernetes.io/ssl-redirect: "true"
 
 image:
-  repository: ghcr.io/softlion/notionsharp:publish
-  tag: latest
+  repository: ghcr.io/softlion/notionsharp
+  tag: publish
   pullPolicy: Always
 
 deployment:
