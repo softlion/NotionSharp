@@ -67,10 +67,11 @@ namespace DemoNotionBlog.Libs.Services
             if(isRefreshing)
                 return;
             isRefreshing = true;
+            
+            var option = notionOptions.CurrentValue;
 
             try
             {
-                var option = notionOptions.CurrentValue;
                 var notionSession = new NotionSession(new NotionSessionInfo { TokenV2 = option.Key, NotionBrowserId = option.BrowserId, NotionUserId = option.UserId });
                 var userContent = await notionSession.LoadUserContent().ConfigureAwait(false);
                 var spacePages = userContent.RecordMap.Space.First().Value.Pages;
@@ -84,7 +85,7 @@ namespace DemoNotionBlog.Libs.Services
             }
             catch (Exception e)
             {
-                logger.LogError(e, "Can't update notion cache");
+                logger.LogError(e, $"Can't update notion cache or find page {option.CmsPageTitle}");
             }
             finally
             {
