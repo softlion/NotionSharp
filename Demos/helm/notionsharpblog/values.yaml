@@ -43,7 +43,7 @@ ingress:
     ingress.kubernetes.io/ssl-redirect: "true"
 
 image:
-  repository: vapolia/demonotionblog
+  repository: ghcr.io/softlion/notionsharp:publish
   tag: latest
   pullPolicy: Always
 
