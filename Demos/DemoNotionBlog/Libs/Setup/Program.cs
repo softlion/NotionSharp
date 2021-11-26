@@ -22,6 +22,7 @@ namespace DemoNotionBlog
                         .AddJsonFile($"appsettings-secrets.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
                     //Persistent storage folder on target, when a query string is used to refresh notion tokens
+                    //notionKeys.json overrides appsettings-secrets
                     var persistFolder = Path.Combine(env.ContentRootPath, "persist");
                     Directory.CreateDirectory(persistFolder); //If directory is missing, AddJsonFile fails
                     config.AddJsonFile(Path.Combine(persistFolder, "notionKeys.json"), optional: true, reloadOnChange: true);

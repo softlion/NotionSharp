@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotionSharp", "NotionSharp\NotionSharp.csproj", "{5B717D05-BA5F-4F2A-9720-515E2E7DF65D}"
 EndProject
@@ -16,16 +16,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{86F9F72D-4539-4D23-B735-DC480D4DE2C3}"
 	ProjectSection(SolutionItems) = preProject
 		NotionSharp\pack.ps1 = NotionSharp\pack.ps1
-		README.md = README.md
 		README official.md = README official.md
 		README unofficial.md = README unofficial.md
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotionSharp.ApiClient", "NotionSharp.ApiClient\NotionSharp.ApiClient.csproj", "{8F152F27-58B5-437A-8B50-1F51D4F4DDB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotionSharp.ApiClient", "NotionSharp.ApiClient\NotionSharp.ApiClient.csproj", "{8F152F27-58B5-437A-8B50-1F51D4F4DDB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnofficialApi", "UnofficialApi", "{9499073C-5F3D-4D82-824E-2757DF207F7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotionSharp.ApiClient.Tests", "NotionSharp.ApiClient.Tests\NotionSharp.ApiClient.Tests.csproj", "{58AB6C43-E92B-4269-BD46-5D40B526DB8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotionSharp.ApiClient.Tests", "NotionSharp.ApiClient.Tests\NotionSharp.ApiClient.Tests.csproj", "{58AB6C43-E92B-4269-BD46-5D40B526DB8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +45,7 @@ Global
 		{18B6CD58-AA94-438F-9A68-94D6F86406E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18B6CD58-AA94-438F-9A68-94D6F86406E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5BA76B5-E6CA-4054-9C68-808BA2229608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5BA76B5-E6CA-4054-9C68-808BA2229608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5BA76B5-E6CA-4054-9C68-808BA2229608}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5BA76B5-E6CA-4054-9C68-808BA2229608}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F152F27-58B5-437A-8B50-1F51D4F4DDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F152F27-58B5-437A-8B50-1F51D4F4DDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F152F27-58B5-437A-8B50-1F51D4F4DDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,16 +53,15 @@ Global
 		{58AB6C43-E92B-4269-BD46-5D40B526DB8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58AB6C43-E92B-4269-BD46-5D40B526DB8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58AB6C43-E92B-4269-BD46-5D40B526DB8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58AB6C43-E92B-4269-BD46-5D40B526DB8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{18B6CD58-AA94-438F-9A68-94D6F86406E5} = {D7BC1C12-3063-47E8-BE70-7ED196ED36B3}
-		{E5BA76B5-E6CA-4054-9C68-808BA2229608} = {D7BC1C12-3063-47E8-BE70-7ED196ED36B3}
 		{5B717D05-BA5F-4F2A-9720-515E2E7DF65D} = {9499073C-5F3D-4D82-824E-2757DF207F7A}
 		{12DC1B9D-0523-474B-A17E-8424C605F167} = {9499073C-5F3D-4D82-824E-2757DF207F7A}
+		{18B6CD58-AA94-438F-9A68-94D6F86406E5} = {D7BC1C12-3063-47E8-BE70-7ED196ED36B3}
+		{E5BA76B5-E6CA-4054-9C68-808BA2229608} = {D7BC1C12-3063-47E8-BE70-7ED196ED36B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {522940C7-B401-4DC2-A960-98E94B2C7DD9}

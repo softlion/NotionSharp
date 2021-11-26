@@ -11,8 +11,11 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "http://127.0.0.1:8080",
-      "DockerfileRunArguments": "-p8080:5000  -v persist:/app/persist",
+      "launchUrl": "http://127.0.0.1:5999",
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "http://*:5000"
+      },
+      "DockerfileRunArguments": "-p5999:5000 -v persist:/app/persist",
       "publishAllPorts": true,
       "useSSL": false
     }

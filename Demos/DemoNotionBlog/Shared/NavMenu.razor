@@ -50,7 +50,7 @@
             if (items != null)
             {
                 CmsItems = items;
-                BlogTitle = CmsService.CmsTitle;
+                BlogTitle = CmsService.CmsTitle ?? "";
                 InvokeAsync(() => StateHasChanged());
             }
         });

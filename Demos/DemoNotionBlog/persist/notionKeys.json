@@ -1,0 +1,11 @@
+{
+  //Replaces appsettings-secrets.json to persist updated info when refreshed from the query string
+  //Do not set any value here, they are written automatically by the app
+  /*
+  "Notion": {
+    "Key": "Notion cookie 'token_v2'",
+    "BrowserId": "Notion cookie 'notion_browser_id'",
+    "UserId": "Notion cookie 'notion_user_id'"
+  }
+  */
+}

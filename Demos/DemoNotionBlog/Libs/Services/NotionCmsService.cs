@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Subjects;
 using System.ServiceModel.Syndication;
+using Flurl.Http;
 using Hangfire;
 using Microsoft.Extensions.Options;
 using NotionSharp;
@@ -69,7 +70,22 @@ namespace DemoNotionBlog.Libs.Services
             isRefreshing = true;
             
             var option = notionOptions?.CurrentValue;
-            logger.LogInformation($"refreshing notion data for title:'{option?.CmsPageTitle}'");
+            logger.LogInformation($"refreshing notion data for title '{option?.CmsPageTitle}'");
+            if (String.IsNullOrWhiteSpace(option?.Key))
+            {
+                logger.LogError($"Can not refresh notion data for title '{option?.CmsPageTitle}': key is missing");
+                return;
+            }
+            if (option.BrowserId == Guid.Empty)
+            {
+                logger.LogError($"Can not refresh notion data for title '{option?.CmsPageTitle}': browserId is missing");
+                return;
+            }
+            if (option.UserId == Guid.Empty)
+            {
+                logger.LogError($"Can not refresh notion data for title '{option?.CmsPageTitle}': userId is missing");
+                return;
+            }
 
             try
             {
@@ -83,6 +99,10 @@ namespace DemoNotionBlog.Libs.Services
                 var cmsItems = await notionSession.GetSyndicationFeed(cmsPages, maxBlocks: 100, stopBeforeFirstSubHeader: false).ConfigureAwait(false);
                 CmsTitle = userContent.RecordMap.Block[cmsPageId].Title;
                 CmsArticles.OnNext(cmsItems.Items.ToList());
+            }
+            catch (FlurlHttpException e) when(e.StatusCode == 401)
+            {
+                logger.LogError(e, $"Invalid notion credentials for page {option?.CmsPageTitle}");
             }
             catch (Exception e)
             {
