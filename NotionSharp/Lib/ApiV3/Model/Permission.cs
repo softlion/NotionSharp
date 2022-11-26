@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace NotionSharp.Lib.ApiV3.Model
 {
@@ -22,11 +22,11 @@ namespace NotionSharp.Lib.ApiV3.Model
         /// </summary>
         public string Type { get; set; }
 
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public Guid UserId { get; set; }
-        [JsonProperty("allow_duplicate")]
+        [JsonPropertyName("allow_duplicate")]
         public bool AllowDuplicate { get; set; }
-        [JsonProperty("allow_search_engine_indexing")]
+        [JsonPropertyName("allow_search_engine_indexing")]
         public bool AllowSearchEngineIndexing { get; set; }
     }
 }

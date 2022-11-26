@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace NotionSharp.Lib.ApiV3.Model
 {
@@ -8,22 +8,22 @@ namespace NotionSharp.Lib.ApiV3.Model
         /// <summary>
         /// Url or string of the icon
         /// </summary>
-        [JsonProperty("page_icon")]
+        [JsonPropertyName("page_icon")]
         public string PageIcon { get; set; }
 
-        [JsonProperty("page_cover_position")]
+        [JsonPropertyName("page_cover_position")]
         public double PageCoverPositon { get; set; }
 
         /// <summary>
         /// type=callout
         /// </summary>
-        [JsonProperty("block_color")]
+        [JsonPropertyName("block_color")]
         public string BlockColor { get; set; }
 
-        [JsonProperty("block_locked")]
+        [JsonPropertyName("block_locked")]
         public bool BlockLocked { get; set; }
 
-        [JsonProperty("block_locked_by")]
+        [JsonPropertyName("block_locked_by")]
         public Guid BlockLockedBy { get; set; }
     }
 }

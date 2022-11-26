@@ -1,15 +1,15 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace NotionSharp.Lib.ApiV3.Model
 {
     public class CursorStack
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public Guid Id { get; set; }
-        [JsonProperty("index")]
+        [JsonPropertyName("index")]
         public int Index { get; set; }
-        [JsonProperty("table")]
+        [JsonPropertyName("table")]
         public string Table { get; set; }
     }
 }

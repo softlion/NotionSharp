@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace NotionSharp.Lib.ApiV3.Model
 {
     public class Cursor
     {
-        [JsonProperty("stack")]
+        [JsonPropertyName("stack")]
         public List<List<CursorStack>> Stack { get; set; }
     }
 }

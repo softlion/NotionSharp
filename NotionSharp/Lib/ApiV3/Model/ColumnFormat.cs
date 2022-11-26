@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿
+using System.Text.Json.Serialization;
 
 namespace NotionSharp.Lib.ApiV3.Model
 {
     public class ColumnFormat
     {
-        [JsonProperty("column_ratio")]
+        [JsonPropertyName("column_ratio")]
         public float Ratio { get; set; }
     }
 }

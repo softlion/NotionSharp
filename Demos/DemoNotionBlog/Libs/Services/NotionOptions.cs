@@ -7,6 +7,7 @@ namespace DemoNotionBlog.Libs.Services
         public string? Key { get; set; }
         public Guid BrowserId { get; set; }
         public Guid UserId { get; set; }
+        public string UserAgent { get; set; }
         public string? CmsPageTitle { get; set; }
     }
 }

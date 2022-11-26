@@ -1,6 +1,6 @@
 ﻿using System.Reactive.Subjects;
 using System.ServiceModel.Syndication;
-using Flurl.Http;
+using FluentRest.Http;
 using Hangfire;
 using Microsoft.Extensions.Options;
 using NotionSharp;
@@ -89,18 +89,19 @@ namespace DemoNotionBlog.Libs.Services
 
             try
             {
-                var notionSession = new NotionSession(new NotionSessionInfo { TokenV2 = option.Key, NotionBrowserId = option.BrowserId, NotionUserId = option.UserId });
+                var notionSession = new NotionSession(new() { TokenV2 = option.Key, NotionBrowserId = option.BrowserId, NotionUserId = option.UserId, NotionUserAgent = option.UserAgent });
                 var userContent = await notionSession.LoadUserContent().ConfigureAwait(false);
-                var spacePages = userContent.RecordMap.Space.First().Value.Pages;
+                var space = userContent.RecordMap.Space.First().Value;
+                var spacePages = space.Pages;
 
                 //Refresh CMS
                 var cmsPageId = spacePages.First(pageId => userContent.RecordMap.Block.TryGetValue(pageId, out var page) && page.Title == option.CmsPageTitle);
                 var cmsPages = userContent.RecordMap.Block[cmsPageId].Content;
-                var cmsItems = await notionSession.GetSyndicationFeed(cmsPages, maxBlocks: 100, stopBeforeFirstSubHeader: false).ConfigureAwait(false);
+                var cmsItems = await notionSession.GetSyndicationFeed(space.Id, cmsPages, maxBlocks: 100, stopBeforeFirstSubHeader: false).ConfigureAwait(false);
                 CmsTitle = userContent.RecordMap.Block[cmsPageId].Title;
                 CmsArticles.OnNext(cmsItems.Items.ToList());
             }
-            catch (FlurlHttpException e) when(e.StatusCode == 401)
+            catch (FluentRestHttpException e) when(e.StatusCode == 401)
             {
                 logger.LogError(e, $"Invalid notion credentials for page {option?.CmsPageTitle}");
             }

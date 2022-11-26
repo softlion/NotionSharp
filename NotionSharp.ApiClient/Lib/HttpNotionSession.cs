@@ -1,107 +1,86 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Flurl.Http;
-using Flurl.Http.Configuration;
+using FluentRest.Http;
+using FluentRest.Http.Configuration;
 using Polly;
 using Polly.Retry;
 
-namespace NotionSharp.ApiClient.Lib
+namespace NotionSharp.ApiClient.Lib;
+
+internal class JsonLowerCaseNamingPolicy : JsonNamingPolicy
 {
-    /// <summary>
-    /// Flurl depends on newtonsoft json. Use System.Text.Json instead.
-    /// </summary>
-    internal class TextJsonSerializer : ISerializer
-    {
-        private readonly JsonSerializerOptions? options;
-
-        public TextJsonSerializer(JsonSerializerOptions? options = null) => this.options = options;
-        public T Deserialize<T>(string s) => JsonSerializer.Deserialize<T>(s, options)!;
-        public string Serialize(object obj) => JsonSerializer.Serialize(obj, options);
-
-        public T Deserialize<T>(Stream stream)
-        {
-            using var reader = new StreamReader(stream);
-            return Deserialize<T>(reader.ReadToEnd());
-        }
-    }
+    public override string ConvertName(string name) => name.ToLowerInvariant();
+}
     
-    internal class JsonLowerCaseNamingPolicy : JsonNamingPolicy
-    {
-        public override string ConvertName(string name) => name.ToLowerInvariant();
-    }
-    
-    public class HttpNotionSession
-    {
-        private readonly FlurlClient flurlClient;
+public class HttpNotionSession
+{
+    private readonly FluentRestClient flurlClient;
 
-        public static readonly JsonSerializerOptions NotionJsonSerializationOptions = new JsonSerializerOptions()
-        {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-            PropertyNameCaseInsensitive = true,
-            PropertyNamingPolicy = new JsonLowerCaseNamingPolicy()
-        };
+    public static JsonSerializerOptions NotionJsonSerializationOptions { get; } = new (JsonSerializerDefaults.Web)
+    {
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = new JsonLowerCaseNamingPolicy()
+    };
         
-        public HttpNotionSession(Action<FlurlClient> configure)
+    public HttpNotionSession(Action<FluentRestClient> configure)
+    {
+        flurlClient = new (new HttpClient(new PolicyHandler()))
         {
-            flurlClient = new FlurlClient(new HttpClient(new PolicyHandler()))
-            {
-                Settings = new ClientFlurlHttpSettings { 
-                    JsonSerializer = new TextJsonSerializer(NotionJsonSerializationOptions),
+            Settings = new () { 
+                JsonSerializer = new SystemTextJsonSerializer(NotionJsonSerializationOptions),
 #if DEBUG
-                    BeforeCall = call =>
-                    {
-                        var request = call.Request;
-                        var requestBody = call.RequestBody;
-                        var i = 0;
-                    }, 
-                    OnError = call =>
-                    {
-                        var exception = call.Exception;
-                        var response = call.Response;
-                        var i = 0;
-                    }, 
-                    AfterCall = call =>
-                    {
-                        var exception = call.Exception;
-                        var response = call.Response;
-                        //var tt = response.ResponseMessage.Content.ReadAsStringAsync();
-                        var i = 0;
-                    }  
+                BeforeCall = call =>
+                {
+                    var request = call.Request;
+                    var requestBody = call.RequestBody;
+                    var i = 0;
+                }, 
+                OnError = call =>
+                {
+                    var exception = call.Exception;
+                    var response = call.Response;
+                    var i = 0;
+                }, 
+                AfterCall = call =>
+                {
+                    var exception = call.Exception;
+                    var response = call.Response;
+                    //var tt = response.ResponseMessage.Content.ReadAsStringAsync();
+                    var i = 0;
+                }  
 #endif
-                },
-            };
-            configure(flurlClient);
-        }
+            },
+        };
+        configure(flurlClient);
+    }
 
-        public IFlurlRequest CreateRequest(Uri uri)
-            => new FlurlRequest(uri) { Client = flurlClient };
+    public IFluentRestRequest CreateRequest(Uri uri)
+        => new FluentRestRequest(uri) { Client = flurlClient };
 
-        public IFlurlRequest CreateRequest(string uri)
-            => new FlurlRequest(uri) { Client = flurlClient };
+    public IFluentRestRequest CreateRequest(string uri)
+        => new FluentRestRequest(uri) { Client = flurlClient };
 
-        class PolicyHandler : DelegatingHandler
+    class PolicyHandler : DelegatingHandler
+    {
+        private readonly AsyncRetryPolicy<HttpResponseMessage> retryPolicy;
+
+        public PolicyHandler()
         {
-            private readonly AsyncRetryPolicy<HttpResponseMessage> retryPolicy;
+            InnerHandler = new HttpClientHandler();
 
-            public PolicyHandler()
-            {
-                InnerHandler = new HttpClientHandler();
-
-                //retry on 502
-                retryPolicy = Policy
-                    .HandleResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.BadGateway)
-                    .WaitAndRetryAsync(5, retry => TimeSpan.FromSeconds(0.3));
-            }
-
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-                => retryPolicy.ExecuteAsync(ct => base.SendAsync(request, ct), cancellationToken);
+            //retry on 502
+            retryPolicy = Policy
+                .HandleResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.BadGateway)
+                .WaitAndRetryAsync(5, retry => TimeSpan.FromSeconds(0.3));
         }
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            => retryPolicy.ExecuteAsync(ct => base.SendAsync(request, ct), cancellationToken);
     }
 }

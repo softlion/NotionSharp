@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace NotionSharp.Lib.ApiV3.Model
 {
     public class Space : BaseModel
     {
-        public string Name => (string)Value["name"];
-        public string Domain => (string)Value["domain"];
-        public List<Guid> Pages => Value["pages"].ToObject<List<Guid>>();
-        public List<string> EmailDomains => Value["email_domains"].ToObject<List<string>>();
-        public Guid CreatedBy => (Guid)Value["created_by"];
-        public Guid CreatedById => (Guid)Value["created_by_id"];
-        public Guid LastEditedBy => (Guid)Value["last_edited_by"];
-        public Guid LastEditedById => (Guid)Value["last_edited_by_id"];
+        public string Name => Value.GetProperty("name").GetString();
+        public string Domain => Value.GetProperty("domain").GetString();
+        public List<Guid> Pages => Value.GetProperty("pages").Deserialize<List<Guid>>();
+        public List<string> EmailDomains => Value.GetProperty("email_domains").Deserialize<List<string>>();
+        public Guid CreatedBy => Value.GetProperty("created_by").GetGuid();
+        public Guid CreatedById => Value.GetProperty("created_by_id").GetGuid();
+        public Guid LastEditedBy => Value.GetProperty("last_edited_by").GetGuid();
+        public Guid LastEditedById => Value.GetProperty("last_edited_by_id").GetGuid();
 
-        public long ShardId => (long)Value["shard_id"];
-        public string InviteLinkCode => (string)Value["invite_link_code"];
-        public long CreatedTime => (long)Value["created_time"];
-        public long LastEditedTime => (long)Value["last_edited_time"];
-        public List<Permission> Permissions => Value["email_domains"].ToObject<List<Permission>>();
+        public long ShardId => Value.GetProperty("shard_id").GetInt64();
+        public string InviteLinkCode => Value.GetProperty("invite_link_code").GetString();
+        public long CreatedTime => Value.GetProperty("created_time").GetInt64();
+        public long LastEditedTime => Value.GetProperty("last_edited_time").GetInt64();
+        public List<Permission> Permissions => Value.GetProperty("email_domains").Deserialize<List<Permission>>();
 
         // "beta_enabled": false,
         // "created_by_table": "notion_user",

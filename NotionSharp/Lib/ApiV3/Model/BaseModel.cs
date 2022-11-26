@@ -1,13 +1,15 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace NotionSharp.Lib.ApiV3.Model
+namespace NotionSharp.Lib.ApiV3.Model;
+
+public class BaseModel
 {
-    public class BaseModel
-    {
-        public JObject Value { get; set; }
+    public JsonElement Value => Values["value"];
+        
+    [JsonExtensionData]
+    public Dictionary<string, JsonElement> Values { get; set; }
 
-        public Guid Id => Guid.Parse((string)Value["id"]);
-        public int Version => int.Parse((string)Value["version"]);
-    }
+    public Guid Id => Guid.Parse(Value.GetProperty("id").GetString());
+    public int Version => Value.GetProperty("version").GetInt32();
 }

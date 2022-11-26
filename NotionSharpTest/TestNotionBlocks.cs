@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using NotionSharp;
 using NotionSharp.Lib.ApiV3.Model;
 
@@ -14,7 +14,7 @@ namespace NotionSharpTest
         public void TestParseImage()
         {
             var json = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"..\..\..\JsonData\Blocks", "image.json"));
-            var block = JsonConvert.DeserializeObject<Block>(json);
+            var block = JsonSerializer.Deserialize<Block>(json);
             Assert.IsNotNull(block);
             Assert.AreEqual("image", block.Type);
             var imageData = block.ToImageData();
@@ -28,7 +28,7 @@ namespace NotionSharpTest
         public void TestParseCallout()
         {
             var json = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"..\..\..\JsonData\Blocks", "callout.json"));
-            var block = JsonConvert.DeserializeObject<Block>(json);
+            var block = JsonSerializer.Deserialize<Block>(json);
             Assert.IsNotNull(block);
             Assert.AreEqual("callout", block.Type);
 

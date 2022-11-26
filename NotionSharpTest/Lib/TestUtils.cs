@@ -1,22 +1,20 @@
 ﻿using NotionSharp;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace NotionSharpTest
+namespace NotionSharpTest;
+
+class TestUtils
 {
-    class TestUtils
+    public static NotionSessionInfo CreateUnofficialNotionSessionInfo()
     {
-        public static NotionSessionInfo CreateUnofficialNotionSessionInfo()
+        //notioncsharp@yopmail.com
+        //http://yopmail.com/notioncsharp
+        return new ()
         {
-            //notioncsharp@yopmail.com
-            //http://yopmail.com/notioncsharp
-            return new NotionSessionInfo
-            {
-                TokenV2 = "b630bfb31358f9aa11d511b655288fcd1ec49667ac29390e2428fb58f4dd02fbbb2d5d1c9294b471869a86e3d2d936a77744a5ff0b7a890563127fffe1fb52b82d2666e2f0032616084011620f81",
-                NotionBrowserId = Guid.Parse("592b443c-5ca9-425f-b519-9c040c922e61"),
-                NotionUserId = Guid.Parse("ab9257e1-d027-4494-8792-71d90b63dd35")
-            };
-        }
+            TokenV2 = "1711a84274494b70ad2619956336b5a3c6fd18abeab041e96f73e481ef915806060a159237a3a9315f4bcd35eaf766f9b390b62fa65cf2d413bed488549be82060f0328562cf14466c97584a080b",
+            NotionBrowserId = Guid.Parse("36eec975-2503-4480-89a7-7c8228a245e5"),
+            NotionUserId = Guid.Parse("ab9257e1-d027-4494-8792-71d90b63dd35"),
+            NotionUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.56"
+        };
     }
 }

@@ -10,5 +10,6 @@ namespace NotionSharp
         public Guid NotionBrowserId { get; set; }
         public string TokenV2 { get; set; }
         public Guid NotionUserId { get; set; }
+        public string NotionUserAgent { get; set; }
     }
 }

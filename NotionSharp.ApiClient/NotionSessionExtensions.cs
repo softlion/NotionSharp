@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.ServiceModel.Syndication;
 using System.Threading;
 using System.Threading.Tasks;
-using Flurl.Http;
+using FluentRest.Http;
 using NotionSharp.ApiClient.Lib;
 using NotionSharp.ApiClient.Lib.HtmlRendering;
 

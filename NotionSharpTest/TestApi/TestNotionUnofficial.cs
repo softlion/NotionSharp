@@ -31,7 +31,9 @@ namespace NotionSharpTest
             var sessionInfo = TestUtils.CreateUnofficialNotionSessionInfo();
             var session = new NotionSession(sessionInfo);
 
-            var pageChunk = await session.LoadPageChunk(Guid.Parse("4e4999b4-161a-449d-bbd1-bdbce690c7cb"), 0, 50);
+            var pageId = "4e4999b4-161a-449d-bbd1-bdbce690c7cb";
+            var spaceId = "da89a8e0-9c55-4c13-9966-796e0f0c1bac"; 
+            var pageChunk = await session.LoadPageChunk(Guid.Parse(pageId), Guid.Parse(spaceId), 0, 30);
             Assert.IsNotNull(pageChunk);
             Assert.IsTrue(pageChunk.RecordMap.Block.Count > 0);
         }

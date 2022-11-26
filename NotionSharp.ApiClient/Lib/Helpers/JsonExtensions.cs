@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Flurl.Http;
+using FluentRest.Http;
 
 namespace NotionSharp.ApiClient.Lib
 {
@@ -23,7 +23,7 @@ namespace NotionSharp.ApiClient.Lib
             return JsonSerializer.Deserialize(bufferWriter.WrittenSpan, targetType, options);
         }
         
-        public static async Task<T> GetJson<T>(this IFlurlRequest request, CancellationToken cancel = default) where T: BaseObject, new()
+        public static async Task<T> GetJson<T>(this IFluentRestRequest request, CancellationToken cancel = default) where T: BaseObject, new()
         {
             var response = await request.SendAsync(HttpMethod.Get, cancellationToken: cancel, completionOption: HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
             var json = await response.GetStringAsync().ConfigureAwait(false);

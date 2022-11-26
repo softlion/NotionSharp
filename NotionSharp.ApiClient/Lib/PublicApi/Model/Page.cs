@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using NotionSharp.ApiClient.Lib;
 
@@ -66,13 +67,18 @@ namespace NotionSharp.ApiClient
             
             public override bool CanConvert(Type typeToConvert) => typeof(PageParent).IsAssignableFrom(typeToConvert);
 
-            public override PageParent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override PageParent? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
-                var element = JsonSerializer.Deserialize<JsonElement>(ref reader);
-                var type = element.EnumerateObject().FirstOrDefault(p => p.Name == "type").Value.GetString();
-                if(type == null || !PolymorphismTypes.TryGetValue(type, out var parentType))
-                    throw new JsonException($"Error deserializing PageParent: unknown type '{type ?? "null"}'");
-                return (PageParent)element.ToObject(parentType, options);
+                var node = JsonNode.Parse(ref reader) as JsonObject;
+                if (node?.TryGetPropertyValue("type", out var oType) == true)
+                {
+                    var type = oType?.GetValue<string>();
+                    if (type == null || !PolymorphismTypes.TryGetValue(type, out var parentType))
+                        throw new JsonException($"Error deserializing PageParent: unknown type '{type ?? "null"}'");
+                    return (PageParent?)node.Deserialize(parentType, options);
+                }
+
+                return null;
             }
 
             public override void Write(Utf8JsonWriter writer, PageParent value, JsonSerializerOptions options)

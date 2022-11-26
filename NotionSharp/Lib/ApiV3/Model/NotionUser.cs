@@ -2,10 +2,10 @@
 {
     public class NotionUser : BaseModel
     {
-        public string Email => (string)Value["email"];
-        public string FirstName => (string)Value["given_name"];
-        public string LastName => (string)Value["family_name"];
-        public string ProfilePhoto => (string)Value["profile_photo"];
-        public bool OnboardingComplete => (bool)Value["onboarding_completed"];
+        public string Email => Value.GetProperty("email").GetString();
+        public string FirstName => Value.GetProperty("given_name").GetString();
+        public string LastName => Value.GetProperty("family_name").GetString();
+        public string ProfilePhoto => Value.GetProperty("profile_photo").GetString();
+        public bool OnboardingComplete => Value.GetProperty("onboarding_completed").GetBoolean();
     }
 }
