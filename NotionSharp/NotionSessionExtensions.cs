@@ -48,10 +48,6 @@ public static class NotionSessionExtensions
     public static async Task<LoadPageChunkResult> LoadPageChunk(this NotionSession session, Guid pageId, Guid spaceId, int chunkNumber = 0, int limit = 30, CancellationToken cancel = default)
     {
         var request = session.HttpSession.CreateRequest(Constants.ApiBaseUrl + "loadCachedPageChunk");
-        request.BeforeCall(detail =>
-        {
-            var i = 0;
-        });
         var result = await request.PostJsonAsync(new LoadCachedPageChunkRequest
         {
             Page = new () { Id = pageId, SpaceId = spaceId },

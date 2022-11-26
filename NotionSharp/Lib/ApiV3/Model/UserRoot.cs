@@ -6,6 +6,6 @@ namespace NotionSharp.Lib.ApiV3.Model
 {
     public class UserRoot : BaseModel
     {
-        public List<Guid> SpaceViews => Value.GetProperty("space_views").Deserialize<List<Guid>>();
+        public List<Guid> SpaceViews => TheValue.GetProperty("space_views").Deserialize<List<Guid>>();
     }
 }

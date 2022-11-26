@@ -236,7 +236,7 @@ namespace NotionSharp
             {
                 var data = new BlockImageData();
 
-                if(imageBlock.Value.TryGetProperty("format", out var format))
+                if(imageBlock.TheValue.TryGetProperty("format", out var format))
                 {
                     data.Format = format.Deserialize<BlockImageFormat>();
                     data.ImageUrl = data.Format!.DisplaySource;

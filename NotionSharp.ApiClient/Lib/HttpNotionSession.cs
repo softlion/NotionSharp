@@ -21,7 +21,7 @@ public class HttpNotionSession
 {
     private readonly FluentRestClient flurlClient;
 
-    public static JsonSerializerOptions NotionJsonSerializationOptions { get; } = new (JsonSerializerDefaults.Web)
+    public static JsonSerializerOptions NotionJsonSerializationOptions { get; } = new (JsonSerializerDefaults.General)
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         PropertyNameCaseInsensitive = true,

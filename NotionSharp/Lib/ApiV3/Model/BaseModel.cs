@@ -5,11 +5,11 @@ namespace NotionSharp.Lib.ApiV3.Model;
 
 public class BaseModel
 {
-    public JsonElement Value => Values["value"];
+    public JsonElement TheValue => Values["value"];
         
     [JsonExtensionData]
     public Dictionary<string, JsonElement> Values { get; set; }
 
-    public Guid Id => Guid.Parse(Value.GetProperty("id").GetString());
-    public int Version => Value.GetProperty("version").GetInt32();
+    public Guid Id => Guid.Parse(TheValue.GetProperty("id").GetString());
+    public int Version => TheValue.GetProperty("version").GetInt32();
 }
