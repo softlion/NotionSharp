@@ -67,6 +67,9 @@ namespace NotionSharp.ApiClient.Lib.HtmlRendering
                 case BlockTypes.NumberedListItem:
                     TransformNumberedListItem(block, sb);
                     break;
+                case BlockTypes.Image:
+                    TransformImage(block.Image, block.Id, sb);
+                    break;
                 
                 case BlockTypes.Unsupported:
                     break;
@@ -79,6 +82,14 @@ namespace NotionSharp.ApiClient.Lib.HtmlRendering
             return true;
         }
 
+        protected virtual void TransformImage(BlockImage data, string blockId, StringBuilder sb)
+        {
+            sb.Append("<div class=\"notion-image-block\">");
+            var imageUrl = $"{data.External.Url}?table=block&id={blockId}&cache=v2";
+            sb.Append("<img src=\"").Append(imageUrl).Append("\"/>");
+            sb.AppendLine("</div>");
+        }
+        
         protected virtual void TransformBulletedListItem(Block block, StringBuilder sb)
         {
              sb.Append("<ul><li>");
@@ -96,17 +107,17 @@ namespace NotionSharp.ApiClient.Lib.HtmlRendering
         protected virtual void TransformHeading1(Block block, StringBuilder sb)
         {
             sb.Append("<h1>");
-            Append(block.Heading1?.Text, sb).AppendLine("</h1>");
+            Append(block.Heading1?.RichText, sb).AppendLine("</h1>");
         }
         protected virtual void TransformHeading2(Block block, StringBuilder sb)
         {
             sb.Append("<h2>");
-            Append(block.Heading1?.Text, sb).AppendLine("</h2>");
+            Append(block.Heading1?.RichText, sb).AppendLine("</h2>");
         }
         protected virtual void TransformHeading3(Block block, StringBuilder sb)
         {
             sb.Append("<h3>");
-            Append(block.Heading1?.Text, sb).AppendLine("</h3>");
+            Append(block.Heading1?.RichText, sb).AppendLine("</h3>");
         }
         protected virtual void TransformParagraph(Block block, StringBuilder sb)
         {
@@ -118,7 +129,7 @@ namespace NotionSharp.ApiClient.Lib.HtmlRendering
                 
         protected virtual void Append(BlockTextAndChildren? block, StringBuilder sb)
         {
-            Append(block?.Text, sb);
+            Append(block?.RichText, sb);
             if (block?.Children != null)
             {
                 foreach (var child in block.Children)

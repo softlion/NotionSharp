@@ -9,9 +9,13 @@ namespace NotionSharp.ApiClient
         public const string Bot = "bot";
     }
     
-    public class User : BaseObject
+    public class User : NamedObject
     {
-        //Object = "user"
+        public User()
+        {
+            Object = "user";
+        }
+        
         public string Id { get; set; } //User id (not a block id)
         
         [JsonPropertyName("type")]

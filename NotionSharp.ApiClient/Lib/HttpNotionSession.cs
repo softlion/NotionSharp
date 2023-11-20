@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentRest.Http;
 using FluentRest.Http.Configuration;
+using FluentRest.Rest.Configuration;
 using Polly;
 using Polly.Retry;
 
@@ -16,16 +17,73 @@ internal class JsonLowerCaseNamingPolicy : JsonNamingPolicy
 {
     public override string ConvertName(string name) => name.ToLowerInvariant();
 }
-    
+
+[JsonSourceGenerationOptions(
+    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+    PropertyNameCaseInsensitive = true,
+    PropertyNamingPolicy = JsonKnownNamingPolicy.SnakeCaseLower,
+    GenerationMode = JsonSourceGenerationMode.Default
+    )]
+[JsonSerializable(typeof(Parent))]
+[JsonSerializable(typeof(RichText))]
+[JsonSerializable(typeof(Mention))]
+[JsonSerializable(typeof(PageRef))]
+[JsonSerializable(typeof(DatabaseRef))]
+[JsonSerializable(typeof(DateProp))]
+[JsonSerializable(typeof(RichTextAnnotation))]
+[JsonSerializable(typeof(RichTextText))]
+[JsonSerializable(typeof(RichTextLink))]
+[JsonSerializable(typeof(RichTextEquation))]
+#region Blocks
+[JsonSerializable(typeof(Block))]
+[JsonSerializable(typeof(BlockText))]
+[JsonSerializable(typeof(BlockTextAndChildren))]
+[JsonSerializable(typeof(BlockTextAndChildrenAndCheck))]
+[JsonSerializable(typeof(BlockChildPage))]
+[JsonSerializable(typeof(BlockImage))]
+[JsonSerializable(typeof(External))]
+#endregion
+[JsonSerializable(typeof(Bot))]
+[JsonSerializable(typeof(Page))]
+[JsonSerializable(typeof(Page.PageParentWorkspace))]
+[JsonSerializable(typeof(Page.PageParentPage))]
+[JsonSerializable(typeof(Page.PageParentDatabase))]
+[JsonSerializable(typeof(PropertyItem))]
+[JsonSerializable(typeof(Person))]
+[JsonSerializable(typeof(PropertyTitle))]
+[JsonSerializable(typeof(User))]
+#region Requests
+[JsonSerializable(typeof(FilterOptions))]
+[JsonSerializable(typeof(PagingOptions))]
+[JsonSerializable(typeof(SearchRequest))]
+[JsonSerializable(typeof(SortOptions))]
+#endregion
+[JsonSerializable(typeof(PaginationResult<Page>))]
+[JsonSerializable(typeof(PaginationResult<User>))]
+[JsonSerializable(typeof(PaginationResult<Block>))]
+[JsonSerializable(typeof(PaginationResult<PropertyItem>))]
+internal partial class NotionJsonContext : JsonSerializerContext { }
+
+
+
+/// <summary>
+/// Manage the connection to the Notion API
+/// </summary>
+/// <remarks>
+/// https://www.postman.com/notionhq/workspace/notion-s-api-workspace/collection/15568543-d990f9b7-98d3-47d3-9131-4866ab9c6df2
+/// https://developers.notion.com/reference/status-codes#error-codes
+/// </remarks>
 public class HttpNotionSession
 {
     private readonly FluentRestClient flurlClient;
+    public ISerializer JsonSerializer => flurlClient.Settings.JsonSerializer;
 
     public static JsonSerializerOptions NotionJsonSerializationOptions { get; } = new (JsonSerializerDefaults.General)
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         PropertyNameCaseInsensitive = true,
-        PropertyNamingPolicy = new JsonLowerCaseNamingPolicy()
+        PropertyNamingPolicy = new JsonLowerCaseNamingPolicy(),
+        TypeInfoResolver = NotionJsonContext.Default
     };
         
     public HttpNotionSession(Action<FluentRestClient> configure)

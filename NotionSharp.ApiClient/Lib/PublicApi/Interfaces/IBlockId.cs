@@ -2,6 +2,6 @@
 {
     public interface IBlockId
     {
-        string Id { get; set; }
+        string Id { get; init; }
     }
 }

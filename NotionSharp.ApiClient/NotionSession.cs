@@ -23,7 +23,6 @@ public class NotionSession
             {
                 {"Authorization", $"Bearer {sessionInfo.Token}"},
                 {"Notion-Version", Constants.NotionApiVersion}, //Required
-                //{"User-Agent", Constants.UserAgent },
             });
         });
     }
