@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentRest.Http;
@@ -81,10 +85,41 @@ public class HttpNotionSession
     public static JsonSerializerOptions NotionJsonSerializationOptions { get; } = new (JsonSerializerDefaults.General)
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-        PropertyNameCaseInsensitive = true,
-        PropertyNamingPolicy = new JsonLowerCaseNamingPolicy(),
-        TypeInfoResolver = NotionJsonContext.Default
+        //PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+        DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower,
+        TypeInfoResolver = NotionJsonContext.Default //JsonTypeInfoResolver.Combine(NotionJsonContext.Default) //.WithAddedModifier(AddNestedDerivedTypes))
     };
+    
+    // // Ne fait qu'ajouter JsonDerivedType au type de base. Ne peux pas changer le TypeDiscriminatorPropertyName.
+    // static void AddNestedDerivedTypes(JsonTypeInfo jsonTypeInfo)
+    // {
+        // if (jsonTypeInfo.PolymorphismOptions is null) 
+        //     return;
+        // var derivedTypes = ( 
+        //     from firstLevelType in jsonTypeInfo.PolymorphismOptions.DerivedTypes
+        //     let secondLevelType = firstLevelType.DerivedType
+        //     where Attribute.IsDefined(secondLevelType, typeof(JsonDerivedTypeAttribute))
+        //     let jsonTypeInfo2 = secondLevelType.GetCustomAttributes<JsonPolymorphicAttribute>().FirstOrDefault()
+        //     where jsonTypeInfo2 != null
+        //     let discriminator = jsonTypeInfo2.TypeDiscriminatorPropertyName
+        //     let attributes = secondLevelType.GetCustomAttributes<JsonDerivedTypeAttribute>()
+        //     select secondLevelType)
+        //     .ToList();
+        //
+        // var hashset = new HashSet<Type>(derivedTypes);
+        // var queue = new Queue<Type>(derivedTypes);
+        // while (queue.TryDequeue(out var derived))
+        // {
+        //     // Todo: handle discriminators
+        //     jsonTypeInfo.PolymorphismOptions.DerivedTypes.Add(new (derived, derived.FullName));
+        //     hashset.Add(derived); // FIXED: Add derived to the hashset in case it appears more than once.
+        //
+        //     var attribute = derived.GetCustomAttributes<JsonDerivedTypeAttribute>();
+        //     foreach (var jsonDerivedTypeAttribute in attribute) 
+        //         queue.Enqueue(jsonDerivedTypeAttribute.DerivedType);
+        // }
+    // }
         
     public HttpNotionSession(Action<FluentRestClient> configure)
     {

@@ -9,18 +9,13 @@ using Polly.Retry;
 
 namespace NotionSharp;
 
-internal class JsonLowerCaseNamingPolicy : JsonNamingPolicy
-{
-    public override string ConvertName(string name) => name.ToLowerInvariant();
-}
-
 internal class SystemTextJsonSerializer : ISerializer
 {
     private static readonly JsonSerializerOptions? DefaultOptions = new (JsonSerializerDefaults.General)
     {
         PropertyNameCaseInsensitive = true,
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-        PropertyNamingPolicy = new JsonLowerCaseNamingPolicy()
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
     };
     private readonly JsonSerializerOptions? options;
 

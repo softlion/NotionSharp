@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.ServiceModel.Syndication;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentRest.Http;
+using FluentRest.Http.Content;
 using NotionSharp.ApiClient.Lib;
 using NotionSharp.ApiClient.Lib.HtmlRendering;
 
@@ -61,10 +63,20 @@ public static class NotionSessionExtensions
     {
         var searchRequest = new SearchRequest { Query = query, Sort = sortOptions, Filter = filterOptions, PageSize = pageSize };
         var request = session.HttpSession.CreateRequest($"{Constants.ApiBaseUrl}search");
-            
+        
         while(true)
         {
-            var result = await request.PostJsonAsync(searchRequest, cancel).ReceiveJson<PaginationResult<Page>>().ConfigureAwait(false);
+            var response = await request.AllowAnyHttpStatus().PostJsonAsync(searchRequest, cancel);
+            
+            if (response.StatusCode is 400)
+            {
+                var errorResult = await response.GetStringAsync();
+                throw new NotionApiException(null, errorResult);
+            }
+            if (response.StatusCode is not (>= 200 and < 300))
+                yield break;
+
+            var result = await response.GetJsonAsync<PaginationResult<Page>>();
             if(result?.Results == null || cancel.IsCancellationRequested)
                 yield break;
             foreach (var item in result.Results)
@@ -72,7 +84,7 @@ public static class NotionSessionExtensions
             if(!result.HasMore || result.NextCursor == null)
                 yield break;
                 
-            searchRequest.StartCursor = result.NextCursor;
+            searchRequest = searchRequest with { StartCursor = result.NextCursor };
         }
     }
 
@@ -157,9 +169,18 @@ public static class NotionSessionExtensions
 
         while(true)
         {
-            var result = await request.GetJsonAsync<PaginationResult<PropertyItem>>(cancel).ConfigureAwait(false);
+            //var result = await request.AllowAnyHttpStatus().GetJsonAsync<PaginationResult<PropertyItem>>(cancel).ConfigureAwait(false);
+            var response = await request.AllowAnyHttpStatus().SendAsync(HttpMethod.Get, cancellationToken: cancel);
+            var result = await response.GetJsonAsync<PaginationResult<PropertyItem>>().ConfigureAwait(false);;
+
             if(result == null)
                 yield break;
+
+            if (response.StatusCode is 400)
+            {
+                var errorResult = await response.GetStringAsync();
+                throw new NotionApiException(null, errorResult);
+            }
 
             if (result.Object == "list")
             {

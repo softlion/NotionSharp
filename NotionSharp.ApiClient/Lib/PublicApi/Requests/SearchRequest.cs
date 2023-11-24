@@ -1,15 +1,10 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace NotionSharp.ApiClient;
 
-namespace NotionSharp.ApiClient
+public record SearchRequest
 {
-    public struct SearchRequest
-    {
-        public string? Query { get; set; }
-        public SortOptions? Sort { get; set; }
-        public FilterOptions? Filter { get; set; }
-        [JsonPropertyName("start_cursor")]
-        public string? StartCursor { get; set; }
-        [JsonPropertyName("page_size")]
-        public int PageSize { get; set; }
-    }
+    public string? Query { get; init; }
+    public SortOptions? Sort { get; init; }
+    public FilterOptions? Filter { get; init; }
+    public string? StartCursor { get; init; }
+    public int PageSize { get; init; }
 }

@@ -1,10 +1,6 @@
-using System.Text.Json.Serialization;
+namespace NotionSharp.ApiClient;
 
-namespace NotionSharp.ApiClient
+public enum SortTimestamp
 {
-    public enum SortTimestamp
-    {
-        [JsonPropertyName("last_edited_time")]
-        LastEditedTime
-    }
+    LastEditedTime
 }

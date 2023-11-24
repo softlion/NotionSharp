@@ -1,25 +1,24 @@
 using System;
 
-namespace NotionSharp.ApiClient
-{
-    public struct PagingOptions
-    {
-        private int pageSize;
-        
-        public string? StartCursor { get; set; }
+namespace NotionSharp.ApiClient;
 
-        /// <summary>
-        /// max: 100
-        /// </summary>
-        public int PageSize
+public record PagingOptions
+{
+    private int pageSize;
+        
+    public string? StartCursor { get; set; }
+
+    /// <summary>
+    /// max: 100
+    /// </summary>
+    public int PageSize
+    {
+        get => pageSize;
+        set
         {
-            get => pageSize;
-            set
-            {
-                if (value < 0 || value > 100)
-                    throw new ArgumentOutOfRangeException(nameof(PageSize));
-                pageSize = value;
-            }
+            if (value is < 0 or > 100)
+                throw new ArgumentOutOfRangeException(nameof(PageSize));
+            pageSize = value;
         }
     }
 }

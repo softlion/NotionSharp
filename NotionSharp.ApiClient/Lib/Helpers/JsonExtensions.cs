@@ -47,7 +47,7 @@ namespace NotionSharp.ApiClient.Lib
 
     public class NotionApiException : Exception
     {
-        public NotionApiException(Exception inner, string? message) : base(message, inner) {}
+        public NotionApiException(Exception? innerException, string? message) : base(message, innerException) {}
         
         public IFluentRestRequest Request { get; init; } 
         public string Json { get; init; }

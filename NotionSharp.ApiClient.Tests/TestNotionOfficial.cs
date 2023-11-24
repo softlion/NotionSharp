@@ -135,6 +135,14 @@ public class TestNotionOfficial
         }
     }
 
+    [TestMethod]
+    public async Task TestJsonCase()
+    {
+        var searchRequest = new SearchRequest { Query = "theQuery", Sort = SortOptions.LastEditedTimeDescending, 
+            Filter = new () { Property = "page" }, PageSize = 50 };
+        var jsonString = JsonSerializer.Serialize(searchRequest, HttpNotionSession.NotionJsonSerializationOptions);
+        Assert.AreEqual(  """{"query":"theQuery","sort":{"direction":1,"timestamp":0},"filter":{"property":"page"},"page_size":50}""", jsonString);
+    }
 
         
     [TestMethod]
