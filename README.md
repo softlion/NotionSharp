@@ -15,7 +15,7 @@ This is an unofficial [Notion](https://notion.so) APIv3 library and website temp
 
 [nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp/
 [nuget-img]: https://img.shields.io/nuget/v/Softlion.NotionSharp
-[notion-img]: https://github.com/softlion/NotionSharp/raw/master/cover.png
+[notion-img]: https://github.com/softlion/NotionSharp/raw/main/cover.png
 
 ## Use Cases
 
