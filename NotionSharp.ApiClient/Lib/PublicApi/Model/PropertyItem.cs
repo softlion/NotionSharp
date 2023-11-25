@@ -40,10 +40,6 @@ namespace NotionSharp.ApiClient;
 public class PropertyItem : ApiObject
 {
     public string Id { get; set; }
-    /// <summary>
-    /// "rich_text", "number", "title", 
-    /// TODO: "select", "multi_select", "date", "formula", "relation", "rollup", "people", "files", "checkbox", "url", "email", "phone_number", "created_time", "created_by", "last_edited_time", and "last_edited_by"
-    /// </summary>
     public string Type { get; set; }
         
     //public Relation? Relation { get; set; }
