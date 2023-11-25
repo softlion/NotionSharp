@@ -7,7 +7,22 @@ name: publish to nuget
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+      - '.github/**/*.*'
+  workflow_dispatch:
 
+permissions:
+  contents: read
+
+env:
+  DOTNETVERSION: 8.0
+  DOTNET_NOLOGO: true                     # Disable the .NET logo
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
+  DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +34,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0
+          dotnet-version: '${{env.DOTNETVERSION}}'
 
       - name: Restore dependencies
         run: dotnet restore
