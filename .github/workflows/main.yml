@@ -1,9 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: publish to nuget
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: [ main ]
@@ -22,6 +18,7 @@ env:
   DOTNET_NOLOGO: true                     # Disable the .NET logo
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
   DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
+  NuGetDirectory: ${{ github.workspace}}/nuget
     
 jobs:
   build:
@@ -43,53 +40,19 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Pack
-        run: dotnet pack --configuration Release --no-build
+        run: dotnet pack --configuration Release --no-build --output "${{ env.NuGetDirectory }}"
   
   publish:
     runs-on: ubuntu-latest
     needs: build
     steps:
-#      - name: Set up NuGet CLI
-#        run: dotnet tool install --global NuGet.CommandLine
-
+      - uses: actions/download-artifact@v3
+        with:
+          name: nuget
+          path: ${{ env.NuGetDirectory }}
+        
       - name: Push NuGet package
         run: |
-          dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}
-          
-#  publish:
-#    name: build, pack & publish
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      # - name: Setup dotnet
-#      #   uses: actions/setup-dotnet@v1
-#      #   with:
-#      #     dotnet-version: 3.1.200
-#
-#      # Publish
-#      - name: publish NotionSharp on nuget on change
-#        id: publish_nuget_notionsharp
-#        uses: rohith/publish-nuget@v2
-#        with:
-#          # Filepath of the project to be packaged, relative to root of repository
-#          PROJECT_FILE_PATH: NotionSharp/NotionSharp.csproj
-#          
-#          # NuGet package id, used for version detection & defaults to project name
-#          PACKAGE_NAME: Softlion.NotionSharp
-#
-#          # API key to authenticate with NuGet server
-#          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-#
-#      - name: publish NotionSharp project templates on nuget on change
-#        id: publish_nuget_notionsharp_projecttemplates
-#        uses: rohith/publish-nuget@v2
-#        with:
-#          # Filepath of the project to be packaged, relative to root of repository
-#          PROJECT_FILE_PATH: Demos/PackTemplateProjects.csproj
-#          
-#          # NuGet package id, used for version detection & defaults to project name
-#          PACKAGE_NAME: Softlion.NotionSharp.TemplateProjects
-#
-#          # API key to authenticate with NuGet server
-#          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+      - name: Push NuGet package
+        run: |
+          dotnet nuget push "${{ env.NuGetDirectory }}/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}}
