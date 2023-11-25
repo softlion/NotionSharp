@@ -41,13 +41,10 @@ public class Block : NamedObject, IBlockId
     /// </summary>
     public string Type { get; init; }
         
-    [JsonPropertyName("created_time")]
     public DateTimeOffset CreatedTime { get; init; }
 
-    [JsonPropertyName("last_edited_time")]
     public DateTimeOffset LastEditedTime { get; init; }
 
-    [JsonPropertyName("has_children")]
     public bool HasChildren { get; init; }
     #endregion
 
@@ -59,15 +56,11 @@ public class Block : NamedObject, IBlockId
     public BlockText? Heading2 { get; init; }
     [JsonPropertyName("heading_3")]
     public BlockText? Heading3 { get; init; }
-    [JsonPropertyName("bulleted_list_item")]
     public BlockTextAndChildren? BulletedListItem { get; init; } 
-    [JsonPropertyName("numbered_list_item")]
     public BlockTextAndChildren? NumberedListItem { get; init; } 
-    [JsonPropertyName("to_do")]
     public BlockTextAndChildrenAndCheck? ToDo { get; init; }
     public BlockTextAndChildren? Toggle { get; init; }
         
-    [JsonPropertyName("child_page")]
     public BlockChildPage? ChildPage { get; init; }
         
     //[JsonPropertyName("image")]
@@ -83,5 +76,5 @@ public record BlockTextAndChildrenAndCheck(List<Block> Children, List<RichText> 
     public bool Checked { get; init; }
 }
 public record BlockChildPage(string Title);
-public record BlockImage(External External);
+public record BlockImage(External? External);
 public record External(string Url);

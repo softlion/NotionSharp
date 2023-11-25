@@ -76,6 +76,8 @@ public static class NotionSessionExtensions
             if (response.StatusCode is not (>= 200 and < 300))
                 yield break;
 
+            var s = await response.GetStringAsync();
+            
             var result = await response.GetJsonAsync<PaginationResult<Page>>();
             if(result?.Results == null || cancel.IsCancellationRequested)
                 yield break;
@@ -149,8 +151,17 @@ public static class NotionSessionExtensions
 
         while(true)
         {
-            var result = await request.GetJsonAsync<PaginationResult<Block>>(cancel).ConfigureAwait(false);
-            if(result?.Results == null)
+            //var result = await request.GetJsonAsync<PaginationResult<Block>>(cancel).ConfigureAwait(false);
+            var response = await request.AllowAnyHttpStatus().SendAsync(HttpMethod.Get, cancellationToken: cancel);
+            var result = await response.GetJsonAsync<PaginationResult<Block>>().ConfigureAwait(false);;
+            
+            if (result == null || response.StatusCode is 400)
+            {
+                var errorResult = await response.GetStringAsync();
+                throw new NotionApiException(null, errorResult);
+            }
+            
+            if(result.Results == null)
                 yield break;
             foreach (var item in result.Results)
                 yield return item;
@@ -161,9 +172,22 @@ public static class NotionSessionExtensions
         }
     }
     
-    
+    /// <summary>
+    /// Page properties are most useful when interacting with a page that is an entry in a database, represented as a row in the Notion UI.
+    /// If a page is not part of a database, then its only available property is its title.
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="pageId"></param>
+    /// <param name="propertyId"></param>
+    /// <param name="pageSize"></param>
+    /// <param name="cancel"></param>
+    /// <returns></returns>
+    /// <exception cref="NotionApiException"></exception>
     public static async IAsyncEnumerable<PropertyItem> GetPageProperty(this NotionSession session, string pageId, string propertyId, int pageSize = Constants.DefaultPageSize, [EnumeratorCancellation] CancellationToken cancel = default)
     {
+        if (propertyId == "title")
+            throw new NotionApiException(null, "Can't get property 'title', it is always available on the Page itself");
+        
         var request = session.HttpSession.CreateRequest($"{Constants.ApiBaseUrl}pages/{pageId}/properties{propertyId}")
             .SetQueryParam("page_size", pageSize);
 
@@ -173,13 +197,10 @@ public static class NotionSessionExtensions
             var response = await request.AllowAnyHttpStatus().SendAsync(HttpMethod.Get, cancellationToken: cancel);
             var result = await response.GetJsonAsync<PaginationResult<PropertyItem>>().ConfigureAwait(false);;
 
-            if(result == null)
-                yield break;
-
-            if (response.StatusCode is 400)
+            if (result == null || response.StatusCode is 400)
             {
                 var errorResult = await response.GetStringAsync();
-                throw new NotionApiException(null, errorResult);
+                throw new NotionApiException(new(errorResult), $"GetPageProperty(propertyId:{propertyId}) failed");
             }
 
             if (result.Object == "list")
@@ -198,7 +219,7 @@ public static class NotionSessionExtensions
             else
             {
 #if DEBUG
-                throw new NotSupportedException($"Unknown object type {result.Object}");
+                throw new NotionApiException(null, $"Unknown object type {result.Object}");
 #endif
                 yield break;
             }
@@ -250,16 +271,15 @@ public static class NotionSessionExtensions
                     
         var feed = await session.GetSyndicationFeed(childPages, maxBlocks, stopBeforeFirstSubHeader, cancel).ConfigureAwait(false);
         
-        var title = await session.GetPageProperty(page.Id, "titleProperty", cancel: cancel)
-            .Where(p => p.Type == "title")
-            .FirstOrDefaultAsync(cancel).ConfigureAwait(false);
+        var title = page.Title();
         
         //"workspace" data not available in API
         //feed.Id = space.Id.ToString("N");
         //feed.Title = new TextSyndicationContent(space.Name);
         //feed.Description = new TextSyndicationContent(space.Domain);
         feed.Id = page.Id;
-        feed.Title = new ((title as TitlePropertyItem)?.Title.Title.FirstOrDefault()?.PlainText);
+        feed.Title = new (title.Title.FirstOrDefault()?.PlainText);
+        //feed.Description = ??
         return feed;
     }
 

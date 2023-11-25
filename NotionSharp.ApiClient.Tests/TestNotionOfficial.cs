@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -143,6 +144,41 @@ public class TestNotionOfficial
         var jsonString = JsonSerializer.Serialize(searchRequest, HttpNotionSession.NotionJsonSerializationOptions);
         Assert.AreEqual(  """{"query":"theQuery","sort":{"direction":1,"timestamp":0},"filter":{"property":"page"},"page_size":50}""", jsonString);
     }
+    
+    //GetBlockChildren.json
+    [TestMethod]
+    public async Task TestGetBlockChildrenJson()
+    {
+        var getBlockChildren = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "JsonData", "GetBlockChildren.json"));
+        var json = JsonSerializer.Deserialize<PaginationResult<Block>>(getBlockChildren, HttpNotionSession.NotionJsonSerializationOptions);
+        
+        Assert.IsNotNull(json);
+    }
+
+    [TestMethod]
+    public async Task TestJsonPolymorphicDeserialization()
+    {
+        var searchPageResultJson = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "JsonData", "SearchPageResult.json"));
+        var json = JsonSerializer.Deserialize<PaginationResult<Page>>(searchPageResultJson, HttpNotionSession.NotionJsonSerializationOptions);
+        Assert.IsNotNull(json);
+        Assert.IsNotNull(json.Results);
+        Assert.AreEqual(3, json.Results.Count);
+        
+        var page = json.Results[0];
+        Assert.IsNotNull(page.Id);
+        Assert.IsNotNull(page.Url);
+        Assert.AreEqual("https://wise-spirit-737.notion.site/Procrastination-4e4999b4161a449dbbd1bdbce690c7cb",page.PublicUrl);
+        Assert.IsNotNull(page.Title());
+        Assert.AreNotEqual(0, page.Title()!.Title.Count);
+        Assert.AreEqual("Procrastination", page.Title()!.Title[0].PlainText);
+        Assert.AreEqual("Procrastination", page.Title()!.Title[0].Text!.Content);
+
+        page = json.Results[1];
+        Assert.IsNotNull(page.Id);
+        Assert.IsNotNull(page.Url);
+        Assert.IsNotNull(page.Title());
+        Assert.AreEqual("Public blog", page.Title()!.Title[0].PlainText);
+    }
 
         
     [TestMethod]
@@ -152,11 +188,12 @@ public class TestNotionOfficial
         var pages = await session.GetTopLevelPages().ToListAsync();
         Assert.IsNotNull(pages);
         Assert.AreNotEqual(0, pages.Count);
+        Assert.AreNotEqual(null, pages[0].Title());
 
-        var firstPage = pages[0];
-        var propertyId = "";
-        var pages0property = await session.GetPageProperty(firstPage.Id, propertyId).FirstOrDefaultAsync();
-        Assert.IsNotNull((pages0property as TitlePropertyItem)?.Title.Title[0].PlainText);
+        //var firstPage = pages[0];
+        //var titlePropertyId = firstPage.Properties!.First().Value.Id;
+        //var titleProperty = await session.GetPageProperty(firstPage.Id, titlePropertyId).FirstOrDefaultAsync();
+        //Assert.IsNotNull((titleProperty as TitlePropertyItem)?.Title[0].PlainText);
     }
         
         
@@ -165,13 +202,7 @@ public class TestNotionOfficial
     {
         var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
         var pages = await session.GetTopLevelPages()
-            .WhereAwait(async p =>
-            {
-                throw new NotImplementedException("propertyId not set");
-                var propertyId = "";
-                var titleProp = await session.GetPageProperty(p.Id, propertyId).FirstOrDefaultAsync();
-                return (titleProp as TitlePropertyItem)?.Title?.Title?.FirstOrDefault().PlainText == "Public blog";
-            })
+            .WhereAwait(async p => p.Title().Title[0].PlainText == "Public blog")
             .ToListAsync();
         Assert.IsNotNull(pages);
         Assert.AreEqual(1, pages.Count);
@@ -186,13 +217,7 @@ public class TestNotionOfficial
     {
         var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
         var page = await session.Search(filterOptions: FilterOptions.ObjectPage)
-            .WhereAwait(async p =>
-            {
-                throw new NotImplementedException("propertyId not set");
-                var propertyId = "";
-                var titleProp = await session.GetPageProperty(p.Id, propertyId).FirstOrDefaultAsync();
-                return (titleProp as TitlePropertyItem)?.Title?.Title?.FirstOrDefault().PlainText == "Procrastination";
-            })
+            .WhereAwait(async p => p.Title().Title[0].PlainText == "Procrastination")
             .FirstAsync();
         Assert.IsNotNull(page);
 
@@ -209,46 +234,6 @@ public class TestNotionOfficial
         Assert.IsNotNull(pages);
         Assert.AreNotEqual(0, pages.Count);
 
-        throw new NotImplementedException("propertyId not set");
-        var propertyId = "";
-        var pages0property = await session.GetPageProperty(pages[0].Id, propertyId).FirstOrDefaultAsync();
-        Assert.IsNotNull((pages0property as TitlePropertyItem).Title.Title[0].PlainText);
-    }
-
-
-    [TestMethod]
-    public void TestDeserializeDictionary()
-    {
-        var json = "{\"title\": \"id\"}";
-        var p1 = JsonSerializer.Deserialize<Dictionary<string,object>>(json, HttpNotionSession.NotionJsonSerializationOptions);
-        Assert.IsNotNull(p1);
-            
-        json = "{\"properties\":{\"title\": \"id\"}}";
-        var p2 = JsonSerializer.Deserialize<ObjectWithProperties>(json, HttpNotionSession.NotionJsonSerializationOptions);
-        Assert.IsNotNull(p2);
-        Assert.IsNotNull(p2.Properties);
-        Assert.AreEqual(1, p2.Properties.Count);
-        Assert.AreEqual("id", p2.Properties["title"].GetString());
-
-        json = "{\"object\":\"page\",\"id\":\"18dfbe55-5d7c-416e-9485-7855d4a3949e\",\"created_time\":\"2020-04-30T13:42:00.000Z\",\"last_edited_time\":\"2021-06-22T09:58:00.000Z\",\"parent\":{\"type\":\"workspace\",\"workspace\":true},\"archived\":false,\"properties\":{\"title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"Public blog\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Public blog\",\"href\":null}]}}}";
-        var p3 = JsonSerializer.Deserialize<ObjectWithProperties>(json, HttpNotionSession.NotionJsonSerializationOptions);
-        Assert.IsNotNull(p3);
-        Assert.IsNotNull(p3.Properties);
-        var p4 = JsonSerializer.Deserialize<Page>(json, HttpNotionSession.NotionJsonSerializationOptions);
-        Assert.IsNotNull(p4);
-        Assert.IsNotNull(p4.Parent);
-        //Assert.IsNotNull(p4.Properties);
-        //Assert.IsNotNull(p4.Title);
-        //var title = p4.Properties["title"];
-        //Assert.IsNotNull(title);
-        //var tt = title.ToObject<Page.PropertyTitle>(HttpNotionSession.NotionJsonSerializationOptions);
-        // Assert.IsNotNull(tt);
-        // Assert.IsNotNull(tt.Title);
-        // Assert.AreNotEqual(0, tt.Title.Count);
-    }
-        
-    class ObjectWithProperties
-    {
-        public Dictionary<string,JsonElement> Properties { get; set; }
+        Assert.IsNotNull((pages[0].Properties["title"] as TitlePropertyItem).Title[0].PlainText);
     }
 }

@@ -1,1 +1,327 @@
-﻿{"object":"list","results":[{"object":"block","id":"05ff1fbd-0fce-4b14-9b39-60ed54d870e3","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-05-25T12:31:00.000Z","last_edited_time":"2020-05-27T10:17:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[{"type":"text","text":{"content":"This article describes a tool: the map of procrastination.","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"This article describes a tool: the map of procrastination.","href":null}]}},{"object":"block","id":"d9276245-a7ca-404a-9bad-320d86c2875d","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-05-25T12:30:00.000Z","last_edited_time":"2020-05-27T10:18:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"heading_1","heading_1":{"is_toggleable":false,"color":"default","text":[{"type":"text","text":{"content":"❓ What is procrastination","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"❓ What is procrastination","href":null}]}},{"object":"block","id":"f017c6d5-5a47-4608-8b9d-d9a53a7e7087","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-30T13:43:00.000Z","last_edited_time":"2020-05-27T10:18:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[{"type":"text","text":{"content":"Simply read the map 🤗","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Simply read the map 🤗","href":null}]}},{"object":"block","id":"e8ba007d-70f0-4ef8-bacc-51a7cf70d5ab","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-05-25T12:59:00.000Z","last_edited_time":"2022-02-23T12:31:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"image","image":{"caption":[{"type":"text","text":{"content":"A V","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"A V","href":null}],"type":"file","file":{"url":"https://s3.us-west-2.amazonaws.com/secure.notion-static.com/7ffa67da-e1d1-46c4-80d9-a582cc3f1aef/procrastinationMap.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221126%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221126T222244Z&X-Amz-Expires=3600&X-Amz-Signature=a1ccf210b8de7e818511217ead959827805247ffb01f6dce29c1588b9a83a412&X-Amz-SignedHeaders=host&x-id=GetObject","expiry_time":"2022-11-26T23:22:44.548Z"}}},{"object":"block","id":"94d9b729-92ee-4e0f-8c7a-9dcc68f1b23a","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-05-25T12:59:00.000Z","last_edited_time":"2020-05-25T12:59:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[]}},{"object":"block","id":"ed1b7471-4c02-4837-bc20-624c7a20df9b","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-29T07:46:00.000Z","last_edited_time":"2020-05-27T10:19:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"heading_1","heading_1":{"is_toggleable":false,"color":"default","text":[{"type":"text","text":{"content":"Next chapter","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Next chapter","href":null}]}},{"object":"block","id":"dabefad7-fdc2-4614-8229-2270d8d08bdf","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-29T07:47:00.000Z","last_edited_time":"2020-04-29T07:47:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[{"type":"text","text":{"content":"I love this stuf!","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"I love this stuf!","href":null}]}},{"object":"block","id":"e58fe5e9-d02b-4b53-9f8d-c50d31c46213","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-29T07:47:00.000Z","last_edited_time":"2020-04-29T07:47:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[]}},{"object":"block","id":"b35b6266-1e80-41ca-9aa2-e30667d45d2e","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-29T07:47:00.000Z","last_edited_time":"2020-05-27T10:19:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"heading_1","heading_1":{"is_toggleable":false,"color":"default","text":[{"type":"text","text":{"content":"Another chapter","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Another chapter","href":null}]}},{"object":"block","id":"1a878642-54fd-4b89-af6d-cafe933af53c","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-29T07:47:00.000Z","last_edited_time":"2020-04-29T07:48:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[{"type":"text","text":{"content":"It's the best stuf of this world.","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"It's the best stuf of this world.","href":null}]}},{"object":"block","id":"2a436124-a82e-4590-b595-7a8e33f29006","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-29T07:48:00.000Z","last_edited_time":"2020-04-29T07:48:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[{"type":"text","text":{"content":"I love writing so much !","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"I love writing so much !","href":null}]}},{"object":"block","id":"9de0bf72-cd49-467a-bf7e-6966bb793cba","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-29T07:48:00.000Z","last_edited_time":"2020-04-29T07:48:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[]}},{"object":"block","id":"24f5b571-ebc6-420f-8cf1-f723f9176385","parent":{"type":"page_id","page_id":"4e4999b4-161a-449d-bbd1-bdbce690c7cb"},"created_time":"2020-04-29T07:47:00.000Z","last_edited_time":"2020-04-29T07:47:00.000Z","created_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"last_edited_by":{"object":"user","id":"ab9257e1-d027-4494-8792-71d90b63dd35"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"color":"default","text":[]}}],"next_cursor":null,"has_more":false}
+﻿{
+  "results": [
+    {
+      "id": "05ff1fbd-0fce-4b14-9b39-60ed54d870e3",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-05-25T12:31:00+00:00",
+      "last_edited_time": "2020-05-27T10:17:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "plain_text": "This article describes a tool: the map of procrastination.",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "text": {
+              "content": "This article describes a tool: the map of procrastination."
+            }
+          }
+        ]
+      },
+      "object": "block"
+    },
+    {
+      "id": "d9276245-a7ca-404a-9bad-320d86c2875d",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "heading_1",
+      "created_time": "2020-05-25T12:30:00+00:00",
+      "last_edited_time": "2020-05-27T10:18:00+00:00",
+      "has_children": false,
+      "heading_1": {
+        "rich_text": [
+          {
+            "type": "text",
+            "plain_text": "\u2753 What is procrastination",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "text": {
+              "content": "\u2753 What is procrastination"
+            }
+          }
+        ]
+      },
+      "object": "block"
+    },
+    {
+      "id": "f017c6d5-5a47-4608-8b9d-d9a53a7e7087",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-04-30T13:43:00+00:00",
+      "last_edited_time": "2020-05-27T10:18:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "plain_text": "Simply read the map \uD83E\uDD17",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "text": {
+              "content": "Simply read the map \uD83E\uDD17"
+            }
+          }
+        ]
+      },
+      "object": "block"
+    },
+    {
+      "id": "e8ba007d-70f0-4ef8-bacc-51a7cf70d5ab",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "image",
+      "created_time": "2020-05-25T12:59:00+00:00",
+      "last_edited_time": "2022-02-23T12:31:00+00:00",
+      "has_children": false,
+      "image": {},
+      "object": "block"
+    },
+    {
+      "id": "94d9b729-92ee-4e0f-8c7a-9dcc68f1b23a",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-05-25T12:59:00+00:00",
+      "last_edited_time": "2020-05-25T12:59:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": []
+      },
+      "object": "block"
+    },
+    {
+      "id": "ed1b7471-4c02-4837-bc20-624c7a20df9b",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "heading_1",
+      "created_time": "2020-04-29T07:46:00+00:00",
+      "last_edited_time": "2020-05-27T10:19:00+00:00",
+      "has_children": false,
+      "heading_1": {
+        "rich_text": [
+          {
+            "type": "text",
+            "plain_text": "Next chapter",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "text": {
+              "content": "Next chapter"
+            }
+          }
+        ]
+      },
+      "object": "block"
+    },
+    {
+      "id": "dabefad7-fdc2-4614-8229-2270d8d08bdf",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-04-29T07:47:00+00:00",
+      "last_edited_time": "2020-04-29T07:47:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "plain_text": "I love this stuf!",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "text": {
+              "content": "I love this stuf!"
+            }
+          }
+        ]
+      },
+      "object": "block"
+    },
+    {
+      "id": "e58fe5e9-d02b-4b53-9f8d-c50d31c46213",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-04-29T07:47:00+00:00",
+      "last_edited_time": "2020-04-29T07:47:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": []
+      },
+      "object": "block"
+    },
+    {
+      "id": "b35b6266-1e80-41ca-9aa2-e30667d45d2e",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "heading_1",
+      "created_time": "2020-04-29T07:47:00+00:00",
+      "last_edited_time": "2020-05-27T10:19:00+00:00",
+      "has_children": false,
+      "heading_1": {
+        "rich_text": [
+          {
+            "type": "text",
+            "plain_text": "Another chapter",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "text": {
+              "content": "Another chapter"
+            }
+          }
+        ]
+      },
+      "object": "block"
+    },
+    {
+      "id": "1a878642-54fd-4b89-af6d-cafe933af53c",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-04-29T07:47:00+00:00",
+      "last_edited_time": "2020-04-29T07:48:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "plain_text": "It\u0027s the best stuf of this world.",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "text": {
+              "content": "It\u0027s the best stuf of this world."
+            }
+          }
+        ]
+      },
+      "object": "block"
+    },
+    {
+      "id": "2a436124-a82e-4590-b595-7a8e33f29006",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-04-29T07:48:00+00:00",
+      "last_edited_time": "2020-04-29T07:48:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "plain_text": "I love writing so much !",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "text": {
+              "content": "I love writing so much !"
+            }
+          }
+        ]
+      },
+      "object": "block"
+    },
+    {
+      "id": "9de0bf72-cd49-467a-bf7e-6966bb793cba",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-04-29T07:48:00+00:00",
+      "last_edited_time": "2020-04-29T07:48:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": []
+      },
+      "object": "block"
+    },
+    {
+      "id": "24f5b571-ebc6-420f-8cf1-f723f9176385",
+      "parent": {
+        "type": "page_id",
+        "page_id": "4e4999b4-161a-449d-bbd1-bdbce690c7cb"
+      },
+      "type": "paragraph",
+      "created_time": "2020-04-29T07:47:00+00:00",
+      "last_edited_time": "2020-04-29T07:47:00+00:00",
+      "has_children": false,
+      "paragraph": {
+        "rich_text": []
+      },
+      "object": "block"
+    }
+  ],
+  "has_more": false,
+  "object": "list"
+}

@@ -17,10 +17,7 @@ using Polly.Retry;
 
 namespace NotionSharp.ApiClient.Lib;
 
-internal class JsonLowerCaseNamingPolicy : JsonNamingPolicy
-{
-    public override string ConvertName(string name) => name.ToLowerInvariant();
-}
+
 
 [JsonSourceGenerationOptions(
     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
@@ -48,10 +45,15 @@ internal class JsonLowerCaseNamingPolicy : JsonNamingPolicy
 [JsonSerializable(typeof(External))]
 #endregion
 [JsonSerializable(typeof(Bot))]
+
 [JsonSerializable(typeof(Page))]
 [JsonSerializable(typeof(Page.PageParentWorkspace))]
 [JsonSerializable(typeof(Page.PageParentPage))]
 [JsonSerializable(typeof(Page.PageParentDatabase))]
+[JsonSerializable(typeof(TitlePropertyItem))]
+[JsonSerializable(typeof(RichTextPropertyItem))]
+[JsonSerializable(typeof(NumberPropertyItem))]
+
 [JsonSerializable(typeof(PropertyItem))]
 [JsonSerializable(typeof(Person))]
 [JsonSerializable(typeof(PropertyTitle))]
@@ -88,9 +90,19 @@ public class HttpNotionSession
         //PropertyNameCaseInsensitive = true,
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
         DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower,
-        TypeInfoResolver = NotionJsonContext.Default //JsonTypeInfoResolver.Combine(NotionJsonContext.Default) //.WithAddedModifier(AddNestedDerivedTypes))
+        TypeInfoResolver = NotionJsonContext.Default.WithAddedModifier(AddModifiers) //JsonTypeInfoResolver.Combine(NotionJsonContext.Default) //.WithAddedModifier(AddNestedDerivedTypes))
     };
-    
+
+    private static void AddModifiers(JsonTypeInfo jsonTypeInfo)
+    {
+        if (jsonTypeInfo.Type == typeof(PropertyItem))
+        {
+            //JsonDerivedType ignores JsonConverter on target type
+            var c = jsonTypeInfo.Converter;
+            var i = 0;
+        }
+    }
+
     // // Ne fait qu'ajouter JsonDerivedType au type de base. Ne peux pas changer le TypeDiscriminatorPropertyName.
     // static void AddNestedDerivedTypes(JsonTypeInfo jsonTypeInfo)
     // {

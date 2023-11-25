@@ -21,4 +21,11 @@
       <ProjectReference Include="..\NotionSharp.ApiClient\NotionSharp.ApiClient.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Remove="JsonData/**/*.json" />
+        <Content Include="JsonData/**/*.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
 </Project>

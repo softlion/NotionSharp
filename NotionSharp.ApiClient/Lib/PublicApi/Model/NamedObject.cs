@@ -11,7 +11,7 @@ public abstract class ApiObject
     public Exception? Exception { get; set; }
 }
     
-[JsonPolymorphic(TypeDiscriminatorPropertyName = nameof(Object),
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "object",
     UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType,
     IgnoreUnrecognizedTypeDiscriminators = true
 )]

@@ -16,7 +16,7 @@ public static class JsonTextSerializerOptions
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         PropertyNameCaseInsensitive = true,
-        PropertyNamingPolicy = new JsonLowerCaseNamingPolicy()
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
     };
 }
 

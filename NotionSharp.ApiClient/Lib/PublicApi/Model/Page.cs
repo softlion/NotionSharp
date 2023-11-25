@@ -6,6 +6,21 @@ using System.Text.Json.Serialization;
 
 namespace NotionSharp.ApiClient;
 
+public static class PageExtensions
+{
+    /// <summary>
+    /// If false, then the only property in Properties is "title"
+    /// </summary>
+    public static bool PageParentIsDatabase(this Page page) => page.Parent.Type == "database_id";
+
+    public static TitlePropertyItem? Title(this Page page)
+    {
+        if (page.Properties?.TryGetValue("title", out var item) == true && item is TitlePropertyItem title)
+            return title;
+        return null;
+    }
+}
+
 public class Page : NamedObject, IBlockId
 {
     public Page()
@@ -17,53 +32,32 @@ public class Page : NamedObject, IBlockId
     public DateTimeOffset CreatedTime { get; init; }
     public DateTimeOffset LastEditedTime { get; init; }
     public bool Archived { get; init; }
-        
+    
+    public User CreatedBy { get; init; }
+    public User LastEditedBy { get; init; }
+
+    public string Url { get; init; }
+    public string PublicUrl { get; init; }
+
     /// <summary>
     /// TODO: polymorph converter (for type=database)
     /// </summary>
     [JsonConverter(typeof(PageParentJsonConverter))]
     public PageParent Parent { get; init; }
-    public string Url { get; init; }
-    public string PublicUrl { get; init; }
-            
+
+
     /// <remarks>
     /// Removed, instead use https://developers.notion.com/reference/retrieve-a-page-property 
     /// If parent.type is "page_id" or "workspace", then the only valid key is "title".
     /// If parent.type is "database_id", then the keys and values of this field are determined by the properties of the database this page belongs to.
     /// </remarks>
-    public Dictionary<string, NamedObject>? Properties { get; init; }
-    //public Dictionary<string, PagePropertyValue>? Properties { get; set; }
+    public Dictionary<string, PropertyItem>? Properties { get; init; }
 
-    // "properties": {
-    //     "title": {
-    //         "id": "title",
-    //         "type": "title",
-    //         "title": [
-    //         {
-    //             "type": "text",
-    //             "text": {
-    //                 "content": "Procrastination",
-    //                 "link": null
-    //             },
-    //             "annotations": {
-    //                 "bold": false,
-    //                 "italic": false,
-    //                 "strikethrough": false,
-    //                 "underline": false,
-    //                 "code": false,
-    //                 "color": "default"
-    //             },
-    //             "plain_text": "Procrastination",
-    //             "href": null
-    //         }
-    //         ]
-    //     }
-    // },
-    
     // [JsonIgnore]
     // public PropertyTitle? Title => Properties != null ? Properties.TryGetValue("title", out var title) ? title.ToObject<PropertyTitle>(HttpNotionSession.NotionJsonSerializationOptions) : default : default;
             
     #region Parent polymorphism
+    //TODO: replace with integrated polymorphism
     public abstract class PageParent
     {
         public string Type { get; init; }

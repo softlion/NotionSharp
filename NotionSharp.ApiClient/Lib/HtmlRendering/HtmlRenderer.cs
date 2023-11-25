@@ -84,10 +84,13 @@ namespace NotionSharp.ApiClient.Lib.HtmlRendering
 
         protected virtual void TransformImage(BlockImage data, string blockId, StringBuilder sb)
         {
-            sb.Append("<div class=\"notion-image-block\">");
-            var imageUrl = $"{data.External.Url}?table=block&id={blockId}&cache=v2";
-            sb.Append("<img src=\"").Append(imageUrl).Append("\"/>");
-            sb.AppendLine("</div>");
+            if (data.External != null)
+            {
+                sb.Append("<div class=\"notion-image-block\">");
+                var imageUrl = $"{data.External?.Url}?table=block&id={blockId}&cache=v2";
+                sb.Append("<img src=\"").Append(imageUrl).Append("\"/>");
+                sb.AppendLine("</div>");
+            }
         }
         
         protected virtual void TransformBulletedListItem(Block block, StringBuilder sb)

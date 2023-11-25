@@ -17,7 +17,7 @@ namespace NotionSharp.ApiClient
         }
         
         public string Id { get; set; } //User id (not a block id)
-        
+
         [JsonPropertyName("type")]
         public string UserType { get; set; } //"person", "bot"
         
