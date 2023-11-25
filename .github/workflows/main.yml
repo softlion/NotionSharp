@@ -41,7 +41,15 @@ jobs:
 
       - name: Pack
         run: dotnet pack --configuration Release --no-build --output "${{ env.NuGetDirectory }}"
-  
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nuget
+          if-no-files-found: error
+          retention-days: 7
+          path: ${{ env.NuGetDirectory }}/*.nupkg
+            
   publish:
     runs-on: ubuntu-latest
     needs: build
