@@ -76,9 +76,12 @@ public static class NotionSessionExtensions
             if (response.StatusCode is not (>= 200 and < 300))
                 yield break;
 
-            var s = await response.GetStringAsync();
-            
+#if DEBUG
+            var jsonOriginal = await response.GetStringAsync();
+#endif
+
             var result = await response.GetJsonAsync<PaginationResult<Page>>();
+
             if(result?.Results == null || cancel.IsCancellationRequested)
                 yield break;
             foreach (var item in result.Results)
@@ -153,6 +156,9 @@ public static class NotionSessionExtensions
         {
             //var result = await request.GetJsonAsync<PaginationResult<Block>>(cancel).ConfigureAwait(false);
             var response = await request.AllowAnyHttpStatus().SendAsync(HttpMethod.Get, cancellationToken: cancel);
+#if DEBUG
+            var jsonOriginal = await response.GetStringAsync();
+#endif
             var result = await response.GetJsonAsync<PaginationResult<Block>>().ConfigureAwait(false);;
             
             if (result == null || response.StatusCode is 400)
@@ -160,7 +166,7 @@ public static class NotionSessionExtensions
                 var errorResult = await response.GetStringAsync();
                 throw new NotionApiException(null, errorResult);
             }
-            
+
             if(result.Results == null)
                 yield break;
             foreach (var item in result.Results)
@@ -226,18 +232,37 @@ public static class NotionSessionExtensions
         }
     }
 
+    /// <summary>
+    /// Fetch the child blocks of this block
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="block"></param>
+    /// <param name="cancel"></param>
+    public static async Task GetChildren(this NotionSession session, Block block, CancellationToken cancel = default)
+    {
+        block.Children = await session.GetBlockChildren(block.Id, cancel: cancel)
+            .Where(childBlock => BlockTypes.SupportedBlocks.Contains(childBlock.Type))
+            .ToListAsync(cancel).ConfigureAwait(false);
+    }
         
     public static async Task<string> GetHtml(this NotionSession session, Page page, CancellationToken cancel = default)
     {
         var blocks = await session.GetBlockChildren(page.Id, cancel: cancel)
-            .Where(b => b.Type != BlockTypes.ChildPage)
+            .Where(childBlock => BlockTypes.SupportedBlocks.Contains(childBlock.Type))
             .ToListAsync(cancel).ConfigureAwait(false);
 
         if (blocks.Count == 0)
             return string.Empty;
 
-        var htmlRenderer = new HtmlRenderer();
-        return htmlRenderer.GetHtml(blocks);
+        var blockWithChildren = blocks.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type)).ToList();
+        foreach (var block in blockWithChildren)
+        {
+            await session.GetChildren(block, cancel);
+            //recursive
+            blockWithChildren.AddRange(block.Children.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type)));
+        }
+
+        return new HtmlRenderer().GetHtml(blocks);
     }
 
 

@@ -11,7 +11,7 @@ using NotionSharp.ApiClient.Tests.Lib;
 namespace NotionSharp.ApiClient.Tests;
 
 [TestClass]
-public class TestNotionOfficial
+public class TestNotionBase
 {
     /// <summary>
     /// Automatic paging
@@ -145,7 +145,6 @@ public class TestNotionOfficial
         Assert.AreEqual(  """{"query":"theQuery","sort":{"direction":1,"timestamp":0},"filter":{"property":"page"},"page_size":50}""", jsonString);
     }
     
-    //GetBlockChildren.json
     [TestMethod]
     public async Task TestGetBlockChildrenJson()
     {
@@ -153,6 +152,9 @@ public class TestNotionOfficial
         var json = JsonSerializer.Deserialize<PaginationResult<Block>>(getBlockChildren, HttpNotionSession.NotionJsonSerializationOptions);
         
         Assert.IsNotNull(json);
+
+        var blockFile = json.Results.First(b => b.Type == "file");
+        Assert.AreEqual("https://testFileUrl", blockFile.File.File.Url);
     }
 
     [TestMethod]
@@ -236,4 +238,17 @@ public class TestNotionOfficial
 
         Assert.IsNotNull((pages[0].Properties["title"] as TitlePropertyItem).Title[0].PlainText);
     }
+    
+    [TestMethod]
+    public async Task TestPageAndChildrenDeserialization()
+    {
+        var pageJson = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.json"));
+        var page = JsonSerializer.Deserialize<PaginationResult<Page>>(pageJson, HttpNotionSession.NotionJsonSerializationOptions);
+        Assert.IsNotNull(page);
+
+        var blocksJson = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.Children.json"));
+        var blocks = JsonSerializer.Deserialize<PaginationResult<Block>>(blocksJson, HttpNotionSession.NotionJsonSerializationOptions);
+        Assert.IsNotNull(blocks);
+    }
+
 }

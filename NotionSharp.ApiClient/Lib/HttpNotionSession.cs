@@ -41,8 +41,10 @@ namespace NotionSharp.ApiClient.Lib;
 [JsonSerializable(typeof(BlockTextAndChildren))]
 [JsonSerializable(typeof(BlockTextAndChildrenAndCheck))]
 [JsonSerializable(typeof(BlockChildPage))]
-[JsonSerializable(typeof(BlockImage))]
-[JsonSerializable(typeof(External))]
+[JsonSerializable(typeof(NotionFile))]
+[JsonSerializable(typeof(NotionFileContent))]
+[JsonSerializable(typeof(NotionFileExternal))]
+[JsonSerializable(typeof(NotionEmoji))]
 #endregion
 [JsonSerializable(typeof(Bot))]
 

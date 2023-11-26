@@ -18,8 +18,8 @@
 
     <PropertyGroup>
         <!--  nuget configurable properties -->
-        <Version>1.0.14</Version>
-        <VersionSuffix></VersionSuffix>
+        <Version>2.0.0</Version>
+        <VersionSuffix>-pre1</VersionSuffix>
         <DefineConstants>$(DefineConstants);</DefineConstants>
     </PropertyGroup>
 
@@ -44,8 +44,8 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
         <PackageReleaseNotes>
-            1.0.0
-            initial version
+            1.0.14
+            initial version of the official NotionSharp API
         </PackageReleaseNotes>
         <Company />
     </PropertyGroup>

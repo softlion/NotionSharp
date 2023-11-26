@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
+using NotionSharp.ApiClient.Lib.Helpers;
 
 namespace NotionSharp.ApiClient;
 
+/// <summary>
+/// https://developers.notion.com/reference/block
+/// </summary>
 public static class BlockTypes
 {
     public const string Unsupported = "unsupported";
@@ -17,14 +22,81 @@ public static class BlockTypes
     public const string Toggle = "toggle";
     public const string ChildPage = "child_page";
     public const string Image = "image";
+    public const string Quote = "quote";
+    public const string File = "file";
+    public const string Callout = "callout";
+    public const string ColumnList = "column_list";
 
-    public static readonly string[] Types =
+    public static readonly string[] SupportedBlocks =
     {
-        Unsupported, Paragraph, Heading1, Heading2, Heading3, BulletedListItem, NumberedListItem, ToDo, Toggle, ChildPage,
-        Image
+        BulletedListItem, Callout, //ChildDatabase, 
+        //ChildPage, 
+        ColumnList,
+        //When the is_toggleable property is true
+        Heading1, Heading2, Heading3,
+        NumberedListItem, Paragraph, Image, Quote, File, //SyncedBlock, Table, Template,
+        ToDo, Toggle
+    };
+
+    public static readonly string[] BlocksWithChildren =
+    {
+        BulletedListItem, Callout, //ChildDatabase, 
+        ChildPage, ColumnList,
+        //When the is_toggleable property is true
+        Heading1, Heading2, Heading3,
+        NumberedListItem, Paragraph, Quote, //SyncedBlock, Table, Template,
+        ToDo, Toggle
     };
 }
 
+sealed class MyJsonStringEnumConverter() : JsonStringEnumConverter<NotionColor>(JsonNamingPolicy.SnakeCaseLower);
+
+[JsonConverter(typeof(MyJsonStringEnumConverter))]
+public enum NotionColor
+{
+    Default,
+    Blue,
+    BlueBackground,
+    Brown,
+    BrownBackground,
+    Gray,
+    GrayBackground,
+    Green,
+    GreenBackground,
+    Orange,
+    OrangeBackground,
+    Yellow,
+    YellowBackground,
+    Pink,
+    PinkBackground,
+    Purple,
+    PurpleBackground,
+    Red,
+    RedBackground,
+}
+
+
+/*
+Block types that support child blocks
+Some block types contain nested blocks. The following block types support child blocks:
+
+Bulleted list item
+Callout
+Child database
+Child page
+Column
+Heading 1, when the is_toggleable property is true
+Heading 2, when the is_toggleable property is true
+Heading 3, when the is_toggleable property is true
+Numbered list item
+Paragraph
+Quote
+Synced block
+Table
+Template
+To do
+Toggle
+*/
 public class Block : NamedObject, IBlockId
 {
     #region common props
@@ -42,10 +114,20 @@ public class Block : NamedObject, IBlockId
     public string Type { get; init; }
         
     public DateTimeOffset CreatedTime { get; init; }
+    
+    /// <summary>
+    /// Partial User
+    /// </summary>
+    public User CreatedBy { get; init; }
 
     public DateTimeOffset LastEditedTime { get; init; }
+    public User LastEditedBy { get; init; }
 
+    public bool Archived { get; init; }
     public bool HasChildren { get; init; }
+    
+    [JsonIgnore]
+    public List<Block> Children { get; set; }
     #endregion
 
     #region Only one of those is set. Depends on Type.
@@ -63,18 +145,47 @@ public class Block : NamedObject, IBlockId
         
     public BlockChildPage? ChildPage { get; init; }
         
-    //[JsonPropertyName("image")]
-    public BlockImage? Image { get; init; }
+    public NotionFile? Image { get; init; }
+    public NotionFile? File { get; init; }
+    public BlockTextAndChildrenAndColor? Quote { get; set; }
+    public BlockCallout? Callout { get; init; }
     #endregion
 }
 
-public record BlockText([property: JsonPropertyName("rich_text")] List<RichText> RichText);
+public record BlockText(List<RichText> RichText);
 
 public record BlockTextAndChildren(List<Block> Children, List<RichText> RichText) : BlockText(RichText);
 public record BlockTextAndChildrenAndCheck(List<Block> Children, List<RichText> RichText) : BlockTextAndChildren(Children, RichText)
 {
     public bool Checked { get; init; }
 }
+public record BlockTextAndChildrenAndColor(List<Block> Children, List<RichText> RichText) : BlockTextAndChildren(Children, RichText)
+{
+    public NotionColor Color { get; init; }
+}
 public record BlockChildPage(string Title);
-public record BlockImage(External? External);
-public record External(string Url);
+
+public record BlockCallout(List<RichText> RichText, NotionColor Color, NotionBaseType Icon)
+{
+    /// <summary>
+    /// File or Emoji
+    /// </summary>
+    public NotionBaseType Icon { get; init; } = Icon;
+}
+
+#region File and Emoji
+public record NotionFile(string Type, NotionFileContent? File, NotionFileExternal? External) : NotionBaseType(Type);
+public record NotionFileExternal(string Url);
+public record NotionFileContent(string Url, string ExpiryTime);
+
+public record NotionEmoji(string Type, string Emoji) : NotionBaseType(Type);
+#endregion
+
+[JsonConverter(typeof(BufferedJsonPolymorphicConverterFactory))]
+[BufferedJsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+[BufferedJsonDerivedType(typeof(NotionFile), "file")]
+[BufferedJsonDerivedType(typeof(NotionEmoji), "emoji")]
+public abstract record NotionBaseType(string Type);
+
+// public record BlockColumnList(List<BlockColumnData> Columns);
+// public record BlockColumnData(Block ColumnBlock, float Ratio);
