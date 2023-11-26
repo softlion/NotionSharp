@@ -157,7 +157,7 @@ public class HtmlRenderer
 
         var columnIndex = 0;
         var totalColumns = block.Children.Count;
-        foreach (var columnBlock in block.Children)
+        foreach (var columnBlock in block.Children) //type=BlockTypes.Column
         {
             var endColumn = result.StartColumn(columnIndex);
             foreach (var contentBlock in columnBlock.Children)

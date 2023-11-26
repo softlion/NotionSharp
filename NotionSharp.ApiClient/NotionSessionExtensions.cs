@@ -254,13 +254,17 @@ public static class NotionSessionExtensions
         if (blocks.Count == 0)
             return string.Empty;
 
-        var blockWithChildren = blocks.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type)).ToList();
-        foreach (var block in blockWithChildren)
+        var blockWithChildren = new Queue<Block>(blocks.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type)));
+        while (blockWithChildren.Count != 0)
         {
+            var block = blockWithChildren.Dequeue();
             await session.GetChildren(block, cancel);
             //recursive
-            blockWithChildren.AddRange(block.Children.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type)));
+            var children = block.Children.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type));
+            foreach (var child in children)
+                blockWithChildren.Enqueue(child);
         }
+
 
         return new HtmlRenderer().GetHtml(blocks);
     }

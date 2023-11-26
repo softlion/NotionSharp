@@ -26,12 +26,13 @@ public static class BlockTypes
     public const string File = "file";
     public const string Callout = "callout";
     public const string ColumnList = "column_list";
+    public const string Column = "column";
 
     public static readonly string[] SupportedBlocks =
     {
         BulletedListItem, Callout, //ChildDatabase, 
         //ChildPage, 
-        ColumnList,
+        ColumnList, Column,
         //When the is_toggleable property is true
         Heading1, Heading2, Heading3,
         NumberedListItem, Paragraph, Image, Quote, File, //SyncedBlock, Table, Template,
@@ -41,7 +42,7 @@ public static class BlockTypes
     public static readonly string[] BlocksWithChildren =
     {
         BulletedListItem, Callout, //ChildDatabase, 
-        ChildPage, ColumnList,
+        ChildPage, ColumnList, Column,
         //When the is_toggleable property is true
         Heading1, Heading2, Heading3,
         NumberedListItem, Paragraph, Quote, //SyncedBlock, Table, Template,
@@ -76,27 +77,7 @@ public enum NotionColor
 }
 
 
-/*
-Block types that support child blocks
-Some block types contain nested blocks. The following block types support child blocks:
 
-Bulleted list item
-Callout
-Child database
-Child page
-Column
-Heading 1, when the is_toggleable property is true
-Heading 2, when the is_toggleable property is true
-Heading 3, when the is_toggleable property is true
-Numbered list item
-Paragraph
-Quote
-Synced block
-Table
-Template
-To do
-Toggle
-*/
 public class Block : NamedObject, IBlockId
 {
     #region common props
@@ -186,6 +167,3 @@ public record NotionEmoji(string Type, string Emoji) : NotionBaseType(Type);
 [BufferedJsonDerivedType(typeof(NotionFile), "file")]
 [BufferedJsonDerivedType(typeof(NotionEmoji), "emoji")]
 public abstract record NotionBaseType(string Type);
-
-// public record BlockColumnList(List<BlockColumnData> Columns);
-// public record BlockColumnData(Block ColumnBlock, float Ratio);
