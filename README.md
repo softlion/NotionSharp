@@ -15,7 +15,7 @@ This is an unofficial [Notion](https://notion.so) APIv3 library and website temp
 
 [nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp/
 [nuget-img]: https://img.shields.io/nuget/v/Softlion.NotionSharp
-[notion-img]: https://github.com/softlion/NotionSharp/raw/master/cover.png
+[notion-img]: https://github.com/softlion/NotionSharp/raw/main/cover.png
 
 ## Use Cases
 
@@ -51,10 +51,8 @@ Get a RSS representation from the sub-pages of a page:
   When you encounter `CmsPageTitle` below in this setup, replace it with the exact title of your root page.
 
 #### Next steps
-- Using the [unofficial integration](README%20unofficial.md)
-  
-
-- Using the [notion's public api beta](README%20official.md) (new: official integration)
+- Using the [notion's public api](README%20official.md) (Using the official API)
+- Using the [unofficial integration](README%20unofficial.md) (legacy, using the unofficial API)
 
 ## Sponsors
 
