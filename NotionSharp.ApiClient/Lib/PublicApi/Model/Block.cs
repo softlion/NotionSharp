@@ -146,24 +146,24 @@ public record BlockTextAndChildrenAndColor(List<Block> Children, List<RichText> 
 }
 public record BlockChildPage(string Title);
 
-public record BlockCallout(List<RichText> RichText, NotionColor Color, NotionBaseType Icon)
+public record BlockCallout(List<RichText> RichText, NotionColor Color, NotionIcon Icon)
 {
     /// <summary>
     /// File or Emoji
     /// </summary>
-    public NotionBaseType Icon { get; init; } = Icon;
+    public NotionIcon Icon { get; init; } = Icon;
 }
 
 #region File and Emoji
-public record NotionFile(string Type, NotionFileContent? File, NotionFileExternal? External) : NotionBaseType(Type);
+public record NotionFile(string Type, NotionFileContent? File, NotionFileExternal? External) : NotionIcon(Type);
 public record NotionFileExternal(string Url);
 public record NotionFileContent(string Url, string ExpiryTime);
 
-public record NotionEmoji(string Type, string Emoji) : NotionBaseType(Type);
+public record NotionEmoji(string Type, string Emoji) : NotionIcon(Type);
 #endregion
 
 [JsonConverter(typeof(BufferedJsonPolymorphicConverterFactory))]
 [BufferedJsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
 [BufferedJsonDerivedType(typeof(NotionFile), "file")]
 [BufferedJsonDerivedType(typeof(NotionEmoji), "emoji")]
-public abstract record NotionBaseType(string Type);
+public abstract record NotionIcon(string Type);

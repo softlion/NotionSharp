@@ -38,4 +38,12 @@ public class TestNotionBlocks
         var column2 = JsonSerializer.Deserialize<PaginationResult<Block>>(column2Json, HttpNotionSession.NotionJsonSerializationOptions);
         Assert.IsNotNull(column2.Results);
     }
+
+    [TestMethod]
+    public async Task TestVapoliaFr()
+    {
+        var vapoliaCmsJson = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "JsonData", "VapoliaCms.json"));
+        var page = JsonSerializer.Deserialize<PaginationResult<Page>>(vapoliaCmsJson, HttpNotionSession.NotionJsonSerializationOptions);
+        Assert.IsNotNull(page);
+    }
 }

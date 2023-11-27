@@ -7,6 +7,9 @@ using System.Text.Json.Serialization;
 namespace NotionSharp.ApiClient.Lib.Helpers;
 
 
+/// <summary>
+/// Don't forget to also add [JsonConverter(typeof(BufferedJsonPolymorphicConverterFactory))]
+/// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = false)]
 public sealed class BufferedJsonPolymorphicAttribute : JsonAttribute
 {

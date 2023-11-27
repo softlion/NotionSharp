@@ -10,7 +10,6 @@ public class RichText
 {
     public const string TypeText = "text";
     public const string TypeMention = "mention";
-    public const string TypeLink = "link";
     public const string TypeEquation = "equation";
         
     #region common properties
@@ -19,7 +18,6 @@ public class RichText
     /// </summary>
     public string Type { get; init; }
         
-    [JsonPropertyName("plain_text")] 
     public string PlainText { get; init; }
         
     public string? Href { get; init; }
@@ -28,13 +26,12 @@ public class RichText
     public RichTextAnnotation? Annotation { get; init; }
 
     [JsonIgnore]
-    public bool HasAttribute => Annotation?.HasAnnotation == true || !String.IsNullOrWhiteSpace(Href);
+    public bool HasAttribute => Annotation?.HasAnnotation == true || !string.IsNullOrWhiteSpace(Href);
     [JsonIgnore]
-    public bool HasStyle => !String.IsNullOrWhiteSpace(Annotation?.Color);
+    public bool HasStyle => Annotation?.HasColor  == true;
     #endregion
 
     public RichTextText? Text { get; init; } //type=text
-    public string? Url { get; init; } //type=link
     public Mention? Mention { get; init; } //type=mention
     public RichTextEquation? Equation { get; init; } //type=equation
 }
@@ -82,22 +79,19 @@ public class RichTextAnnotation
     public bool Underline { get; init; }
     public bool Code { get; init; }
 
-    /// <summary>
-    /// One of RichTextAnnotationColors.Colors
-    /// </summary>
-    public string? Color { get; init; }
+    public NotionColor? Color { get; init; }
 
     [JsonIgnore] 
-    public bool HasAnnotation => Bold || Italic || Strikethrough || Underline || Code || (Color != null && Color != "default");
+    public bool HasAnnotation => Bold || Italic || Strikethrough || Underline || Code || (Color != null && Color != NotionColor.Default);
+
+    [JsonIgnore] 
+    public bool HasColor => Color != null && Color != NotionColor.Default;
 }
 
-public static class RichTextAnnotationColors
+public record RichTextText
 {
-    public static readonly string[] Colors = {"default", "gray", "brown", "orange", "yellow", "green", "blue", "purple", "pink", "red", "gray_background", "brown_background", "orange_background", "yellow_background", "green_background", "blue_background", "purple_background", "pink_background", "red_background"};
-}
+    public string Content { get; init; }
 
-public record RichTextText(string Content)
-{
     public RichTextLink? Link { get; init; }
 }
 

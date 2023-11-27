@@ -95,7 +95,7 @@ public static class NotionSessionExtensions
 
     public static IAsyncEnumerable<Page> GetTopLevelPages(this NotionSession session, CancellationToken cancel = default)
         => session.Search(filterOptions: FilterOptions.ObjectPage, cancel: cancel)
-            .Where(pageProp => pageProp.Parent.Type == Page.PageParent.TypeWorkspace);
+            .Where(page => page.ParentIsWorkspace());
 
 
     public static async IAsyncEnumerable<User> GetUsers(this NotionSession session, int pageSize = Constants.DefaultPageSize, [EnumeratorCancellation] CancellationToken cancel = default)
@@ -247,26 +247,50 @@ public static class NotionSessionExtensions
         
     public static async Task<string> GetHtml(this NotionSession session, Page page, CancellationToken cancel = default)
     {
+        var blocks = await session.LoadPageBlocks(page, cancel).ConfigureAwait(false);
+        if (blocks.Count == 0)
+            return string.Empty;
+        
+        return new HtmlRenderer().GetHtml(blocks);
+    }
+
+    /// <summary>
+    /// Load recursively the Children property of the given page and its child blocks recursively
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="page"></param>
+    /// <param name="cancel"></param>
+    /// <returns>the child blocks of the page</returns>
+    public static async Task<List<Block>> LoadPageBlocks(this NotionSession session, Page page, CancellationToken cancel = default)
+    {
         var blocks = await session.GetBlockChildren(page.Id, cancel: cancel)
             .Where(childBlock => BlockTypes.SupportedBlocks.Contains(childBlock.Type))
             .ToListAsync(cancel).ConfigureAwait(false);
 
         if (blocks.Count == 0)
-            return string.Empty;
+            return new ();
+        await session.LoadChildBlocks(blocks, cancel).ConfigureAwait(false);
+        return blocks;
+    }
 
+    /// <summary>
+    /// Loads recursively the Children property of the given blocks
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="blocks"></param>
+    /// <param name="cancel"></param>
+    public static async Task LoadChildBlocks(this NotionSession session, List<Block> blocks, CancellationToken cancel = default)
+    {
         var blockWithChildren = new Queue<Block>(blocks.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type)));
         while (blockWithChildren.Count != 0)
         {
             var block = blockWithChildren.Dequeue();
-            await session.GetChildren(block, cancel);
+            await session.GetChildren(block, cancel).ConfigureAwait(false);
             //recursive
             var children = block.Children.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type));
             foreach (var child in children)
                 blockWithChildren.Enqueue(child);
         }
-
-
-        return new HtmlRenderer().GetHtml(blocks);
     }
 
 
@@ -324,22 +348,25 @@ public static class NotionSessionExtensions
     /// <remarks>
     /// The created feed has no title/description
     /// </remarks>
-    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, IEnumerable<Block> childPages, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
+    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, List<Block> childPages, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
     {
         var feedItems = new List<SyndicationItem>();
         var htmlRenderer = new HtmlRenderer();
-            
+
+        //Load everything
+        await session.LoadChildBlocks(childPages, cancel).ConfigureAwait(false);
+
         foreach (var page in childPages)
         {
             if (page.Type != BlockTypes.ChildPage)
                 throw new ArgumentException("All childPages must be of type BlockTypes.ChildPage", nameof(childPages));
 
             //get blocks and extract an html content
-            var blocks = await session.GetBlockChildren(page.Id, cancel: cancel)
-                .Take(maxBlocks)
-                .ToListAsync(cancel).ConfigureAwait(false);
+            // var blocks = await session.GetBlockChildren(page.Id, cancel: cancel)
+            //     .Take(maxBlocks)
+            //     .ToListAsync(cancel).ConfigureAwait(false);
         
-            var content = htmlRenderer.GetHtml(blocks, stopBeforeFirstSubHeader);
+            var content = htmlRenderer.GetHtml(page.Children, stopBeforeFirstSubHeader);
             var title = page.ChildPage!.Title;
             var pageUri = NotionUtils.GetPageUri(page.Id, title);
     

@@ -49,9 +49,10 @@ namespace NotionSharp.ApiClient.Lib;
 [JsonSerializable(typeof(Bot))]
 
 [JsonSerializable(typeof(Page))]
-[JsonSerializable(typeof(Page.PageParentWorkspace))]
-[JsonSerializable(typeof(Page.PageParentPage))]
-[JsonSerializable(typeof(Page.PageParentDatabase))]
+[JsonSerializable(typeof(PageParent))]
+[JsonSerializable(typeof(PageParentWorkspace))]
+[JsonSerializable(typeof(PageParentPage))]
+[JsonSerializable(typeof(PageParentDatabase))]
 [JsonSerializable(typeof(TitlePropertyItem))]
 [JsonSerializable(typeof(RichTextPropertyItem))]
 [JsonSerializable(typeof(NumberPropertyItem))]

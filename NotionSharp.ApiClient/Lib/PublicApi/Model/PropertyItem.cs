@@ -48,7 +48,7 @@ public class PropertyItem : ApiObject
 
 public class RichTextPropertyItem : PropertyItem
 {
-    public RichText RichText { get; init; }
+    public List<RichText> RichText { get; init; }
 }
 public class NumberPropertyItem : PropertyItem
 {

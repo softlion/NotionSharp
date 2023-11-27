@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotionSharp.ApiClient.Lib.HtmlRendering;
 
-namespace NotionSharpTest;
+namespace NotionSharp.ApiClient.Tests;
 
 public static class JsonTextSerializerOptions
 {

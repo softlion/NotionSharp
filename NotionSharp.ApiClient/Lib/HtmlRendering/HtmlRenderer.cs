@@ -304,9 +304,6 @@ public class HtmlRenderer
                 case RichText.TypeEquation:
                     Append(line.Equation, sb);
                     break;
-                case RichText.TypeLink:
-                    AppendUrl(line.Url, sb);
-                    break;
                 case RichText.TypeMention:
                     Append(line.Mention, sb);
                     break;
