@@ -251,4 +251,14 @@ public class TestNotionBase
         Assert.IsNotNull(blocks);
     }
 
+    [TestMethod]
+    public void TestNotionUtils()
+    {
+        var baseUri = new Uri("https://vapolia.notion.site");
+        var title = "Creating a good Xamarin Forms Control Part 2 UI Day 3";
+        var pageId = "a1744f66-81bf-41a5-b93d-70cbdf6bc3db";
+        var url = NotionUtils.GetPageUri(pageId, title, baseUri).ToString();
+        Assert.AreEqual("https://vapolia.notion.site/Creating-a-good-Xamarin-Forms-Control-Part-2-UI-Day-3-a1744f6681bf41a5b93d70cbdf6bc3db", url);
+    }
+
 }

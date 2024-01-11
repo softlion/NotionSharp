@@ -13,7 +13,7 @@ namespace NotionSharp
         public static Uri GetPageUri(string pageId, string? title, Uri baseUrl)
         {
             var pageTitle = Uri.EscapeDataString(TrimSpaces.Replace(title ?? "", "-"));
-            pageId = pageId.Trim('-');
+            pageId = pageId.Replace("-", string.Empty);
             return new(baseUrl, $"{pageTitle}-{pageId}");
         }
 
