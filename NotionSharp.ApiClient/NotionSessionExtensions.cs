@@ -299,6 +299,7 @@ public static class NotionSessionExtensions
     /// </summary>
     /// <param name="session">a session</param>
     /// <param name="page">blocks of type ChildPage only</param>
+    /// <param name="baseUrl">URL of the Notion domain for published pages</param>
     /// <param name="maxItems">max number of child pages to return</param>
     /// <param name="maxBlocks">limit the parsing of each page to the first maxBlocks blocks</param>
     /// <param name="stopBeforeFirstSubHeader">when true, stop parsing a page when a line containing a sub_header is found</param>
@@ -309,10 +310,10 @@ public static class NotionSessionExtensions
     /// All child pages will go into this feed's items.
     /// 
     /// The created feed has the title and id of the page.
-    ///
+    /// 
     /// Are included only child pages which are not restricted with the "integration".
     /// </remarks>
-    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, Page page, int maxItems = 50, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
+    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, Page page, Uri baseUrl, int maxItems = 50, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
     {
         var childPages = await session.GetBlockChildren(page.Id, cancel: cancel)
             .Where(b => b is { Type: BlockTypes.ChildPage, ChildPage: { } }) //2 checks are redundant. We could keep only one.
@@ -322,7 +323,7 @@ public static class NotionSessionExtensions
         if (childPages.Count == 0)
             return new() { LastUpdatedTime = DateTimeOffset.Now };
                     
-        var feed = await session.GetSyndicationFeed(childPages, maxBlocks, stopBeforeFirstSubHeader, cancel).ConfigureAwait(false);
+        var feed = await session.GetSyndicationFeed(childPages, baseUrl, maxBlocks, stopBeforeFirstSubHeader, cancel).ConfigureAwait(false);
         
         var title = page.Title();
         
@@ -341,6 +342,7 @@ public static class NotionSessionExtensions
     /// </summary>
     /// <param name="session">a session</param>
     /// <param name="childPages">blocks of type ChildPage only</param>
+    /// <param name="baseUrl">URL of the Notion domain for published pages</param>
     /// <param name="maxBlocks">limits the parsing of each page to the first maxBlocks blocks</param>
     /// <param name="stopBeforeFirstSubHeader">when true, stop parsing a page when a line containing a sub_header is found</param>
     /// <param name="cancel"></param>
@@ -348,7 +350,7 @@ public static class NotionSessionExtensions
     /// <remarks>
     /// The created feed has no title/description
     /// </remarks>
-    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, List<Block> childPages, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
+    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, List<Block> childPages, Uri baseUrl, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
     {
         var feedItems = new List<SyndicationItem>();
         var htmlRenderer = new HtmlRenderer();
@@ -368,7 +370,7 @@ public static class NotionSessionExtensions
         
             var content = htmlRenderer.GetHtml(page.Children, stopBeforeFirstSubHeader);
             var title = page.ChildPage!.Title;
-            var pageUri = NotionUtils.GetPageUri(page.Id, title);
+            var pageUri = NotionUtils.GetPageUri(page.Id, title, baseUrl);
     
             var item = new SyndicationItem(title, content, pageUri)
             {

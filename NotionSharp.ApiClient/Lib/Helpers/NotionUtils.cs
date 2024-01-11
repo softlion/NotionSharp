@@ -7,11 +7,15 @@ namespace NotionSharp
     public static class NotionUtils
     {
         //RegexOptions options = RegexOptions.None;
-        static readonly Regex TrimSpaces = new Regex(@"[\s-:()/\\\W]+", RegexOptions.None);
+        static readonly Regex TrimSpaces = new (@"[\s-:()/\\\W]+", RegexOptions.None);
         //sentence = regex.Replace(sentence, " ");
 
-        public static Uri GetPageUri(string pageId, string? title)
-            => new Uri(new Uri(Constants.BaseUrl), $"{Uri.EscapeUriString(TrimSpaces.Replace(title ?? "", "-"))}-{pageId}");
+        public static Uri GetPageUri(string pageId, string? title, Uri baseUrl)
+        {
+            var pageTitle = Uri.EscapeDataString(TrimSpaces.Replace(title ?? "", "-"));
+            pageId = pageId.Trim('-');
+            return new(baseUrl, $"{pageTitle}-{pageId}");
+        }
 
         /// <summary>
         /// Extract the block/page ID from a Notion.so URL
@@ -25,7 +29,7 @@ namespace NotionSharp
         /// </example>
         public static Guid? ExtractId(string urlOrId)
         {
-            if (urlOrId.StartsWith(Constants.BaseUrl))
+            if (urlOrId.StartsWith("http"))
                 urlOrId = new Uri(urlOrId).GetLeftPart(UriPartial.Path).Split('-').Last().Split('#').Last();
 
             if (Guid.TryParse(urlOrId, out var guid))

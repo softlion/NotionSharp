@@ -209,7 +209,7 @@ public class TestNotionBase
         Assert.IsNotNull(pages);
         Assert.AreEqual(1, pages.Count);
 
-        var feed = await session.GetSyndicationFeed(pages[0]);
+        var feed = await session.GetSyndicationFeed(pages[0], new ("https://"));
         Assert.IsNotNull(feed?.Items);
         Assert.AreNotEqual(0, feed.Items.Count());
     }
