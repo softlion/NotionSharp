@@ -1,12 +1,11 @@
 # WORK IN PROGRESS  
 
-State 2021/06/26: all APIs are working except:
+State 2024/01/11: all APIs are working except:
 - block/append
 - page/create and update
 - database/get, query and list
 
 Those are not priority and up for grabs.
-
 
 # NotionSharp.ApiClient - client for official Notion API in C#
 
@@ -89,8 +88,9 @@ service:
   type: LoadBalancer
   port: 5080
 ```
-  
-  
+
+
+
 
 
 
