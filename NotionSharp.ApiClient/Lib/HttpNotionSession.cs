@@ -90,19 +90,34 @@ public class HttpNotionSession
     public static JsonSerializerOptions NotionJsonSerializationOptions { get; } = new (JsonSerializerDefaults.General)
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-        //PropertyNameCaseInsensitive = true,
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
         DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower,
-        TypeInfoResolver = NotionJsonContext.Default.WithAddedModifier(AddModifiers) //JsonTypeInfoResolver.Combine(NotionJsonContext.Default) //.WithAddedModifier(AddNestedDerivedTypes))
+        TypeInfoResolver = NotionJsonContext.Default.WithAddedModifier(ModifierIgnoreBlockChildren) 
+        //JsonTypeInfoResolver.Combine(NotionJsonContext.Default) //.WithAddedModifier(AddNestedDerivedTypes))
     };
 
-    private static void AddModifiers(JsonTypeInfo jsonTypeInfo)
+    public static JsonSerializerOptions NotionJsonFullSerializationOptions { get; } = new (JsonSerializerDefaults.General)
     {
-        if (jsonTypeInfo.Type == typeof(PropertyItem))
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+        DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower,
+        TypeInfoResolver = NotionJsonContext.Default 
+    };
+
+    private static void ModifierIgnoreBlockChildren(JsonTypeInfo jsonTypeInfo)
+    {
+        // if (jsonTypeInfo.Type == typeof(PropertyItem))
+        // {
+        //     //JsonDerivedType ignores JsonConverter on target type
+        //     var c = jsonTypeInfo.Converter;
+        //     var i = 0;
+        // }
+
+        if (jsonTypeInfo.Type.IsAssignableTo(typeof(Block)))
         {
-            //JsonDerivedType ignores JsonConverter on target type
-            var c = jsonTypeInfo.Converter;
-            var i = 0;
+            var prop = jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == nameof(Block.Children));
+            if (prop is not null)
+                prop.ShouldSerialize = (_, _) => false;
         }
     }
 

@@ -208,6 +208,11 @@ public class HtmlRenderer
     {
         sb.Append("<ul><li>");
         Append(block.BulletedListItem, sb);
+        if (block?.Children != null)
+        {
+            foreach (var child in block.Children)
+                Transform(child, sb, false);
+        }
         sb.AppendLine("</li></ul>");
     }
 
@@ -215,6 +220,11 @@ public class HtmlRenderer
     {
         sb.Append("<ol><li>");
         Append(block.NumberedListItem, sb);
+        if (block?.Children != null)
+        {
+            foreach (var child in block.Children)
+                Transform(child, sb, false);
+        }
         sb.AppendLine("</li></ol>");
     }
 
@@ -268,19 +278,21 @@ public class HtmlRenderer
             return sb;
 
         sb.Append("<div class=\"notion-line\">");
-        var tag = line.HasAttribute ? (line.Href != null ? "a" : "span") : null;
+        var hasAnnotations = line.Annotation?.HasAnnotation == true;
+        var hasLink = !string.IsNullOrWhiteSpace(line.Href);
+        var tag = hasLink ? "a" : hasAnnotations ? "span" : null;
 
         if (tag != null)
         {
             sb.Append("<").Append(tag);
 
-            if (line.Href != null)
+            if (hasLink)
                 sb.Append(" href=\"").Append(Uri.EscapeUriString(line.Href)).Append("\"");
 
-            if (line.HasStyle)
+            if (hasAnnotations)
             {
                 sb.Append(" class=\"");
-                if (line.Annotation.Bold)
+                if (line.Annotation!.Bold)
                     sb.Append(" notion-bold");
                 if (line.Annotation.Italic)
                     sb.Append(" notion-italic");
@@ -288,9 +300,9 @@ public class HtmlRenderer
                     sb.Append(" notion-strikethrough");
                 if (line.Annotation.Underline)
                     sb.Append(" notion-underline");
-                if (line.Annotation.Color != null)
+                if (line.Annotation.Color is not null and not NotionColor.Default)
                     sb.Append(" notion-color-").Append(line.Annotation.Color);
-                if (line.Annotation?.Code != null)
+                if (line.Annotation.Code)
                     sb.Append(" notion-code");
                 sb.Append("\"");
             }

@@ -54,7 +54,7 @@ public class TestNotionHtml
     public async Task TestGetHtml_Link()
     {
         var blocksJson = await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.full.children.json"));
-        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonSerializationOptions);
+        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonFullSerializationOptions);
 
         var expectedFilePath = "AboutThis.blocks.link.html";
         var blockIndex = 0;
@@ -69,7 +69,7 @@ public class TestNotionHtml
     public async Task TestGetHtml_Title1()
     {
         var blocksJson = await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.full.children.json"));
-        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonSerializationOptions);
+        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonFullSerializationOptions);
 
         var blockIndex = 2;
 
@@ -83,13 +83,49 @@ public class TestNotionHtml
     public async Task TestGetHtml_Title2()
     {
         var blocksJson = await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.full.children.json"));
-        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonSerializationOptions);
+        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonFullSerializationOptions);
 
         var blockIndex = 3;
 
         var block = blocks.Skip(blockIndex).Take(1).ToList();
         var html = new HtmlRenderer().GetHtml(block);
         var expectedHtml = """<h2><div class="notion-line">Title 2</div></h2>""" + "\r\n";
+        Assert.AreEqual(expectedHtml, html);
+    }
+    
+    [TestMethod]
+    public async Task TestGetHtml_Bold()
+    {
+        var blocksJson = await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.full.children.json"));
+        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonFullSerializationOptions);
+
+        var blockIndex = 4;
+
+        var block = blocks.Skip(blockIndex).Take(1).ToList();
+        var html = new HtmlRenderer().GetHtml(block);
+        var expectedHtml = """<div class="notion-paragraph"><div class="notion-line"><span class=" notion-bold">Bold text</span></div></div>""" + "\r\n";
+        Assert.AreEqual(expectedHtml, html);
+    }
+    
+        
+    [TestMethod]
+    public async Task TestGetHtml_Bullet_Levels2()
+    {
+        var blocksJson = await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.full.children.json"));
+        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonFullSerializationOptions);
+
+        var blockIndex = 5;
+
+        var block = blocks.Skip(blockIndex).Take(1).ToList();
+        var html = new HtmlRenderer().GetHtml(block);
+        var expectedHtml = @"<ul><li><div class=""notion-line"">Level1</div><ul><li><div class=""notion-line"">Level 2</div><ul><li><div class=""notion-line"">Level 3</div><ul><li><div class=""notion-line"">Level 4</div><ul><li><div class=""notion-line"">Level 5</div><ul><li><div class=""notion-line"">Level 6</div><ul><li><div class=""notion-line"">Level 7</div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+";
         Assert.AreEqual(expectedHtml, html);
     }
 

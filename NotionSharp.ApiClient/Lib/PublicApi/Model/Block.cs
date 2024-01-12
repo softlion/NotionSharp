@@ -107,7 +107,9 @@ public class Block : NamedObject, IBlockId
     public bool Archived { get; init; }
     public bool HasChildren { get; init; }
     
-    [JsonIgnore]
+    //Ignore when reading from or writing to Notion api
+    //Don't ignore for unit testing, as we save and load json files
+    //Note: Ignored using the Modifiers in HttpNotionSession
     public List<Block> Children { get; set; }
     #endregion
 

@@ -25,10 +25,8 @@ public class RichText
     [JsonPropertyName("annotations")] 
     public RichTextAnnotation? Annotation { get; init; }
 
-    [JsonIgnore]
-    public bool HasAttribute => Annotation?.HasAnnotation == true || !string.IsNullOrWhiteSpace(Href);
-    [JsonIgnore]
-    public bool HasStyle => Annotation?.HasColor  == true;
+    //[JsonIgnore]
+    //public bool HasStyle => Annotation?.HasColor  == true;
     #endregion
 
     public RichTextText? Text { get; init; } //type=text
