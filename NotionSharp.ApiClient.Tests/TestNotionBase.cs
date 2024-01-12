@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -249,6 +250,39 @@ public class TestNotionBase
         var blocksJson = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.Children.json"));
         var blocks = JsonSerializer.Deserialize<PaginationResult<Block>>(blocksJson, HttpNotionSession.NotionJsonSerializationOptions);
         Assert.IsNotNull(blocks);
+    }
+    
+    [TestMethod]
+    [Ignore("Run this manually to create the json files")]
+    public async Task TestPageAndChildrenSerialization()
+    {
+        var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
+        var page = await session.Search(query: "About this", filterOptions: FilterOptions.ObjectPage).FirstAsync();
+        Assert.AreEqual("About this", page?.Title()?.Title.FirstOrDefault()?.PlainText);
+
+        var blocks = await session.GetBlockChildren(page.Id).ToListAsync();
+        var blockWithChildren = new Queue<Block>(blocks.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type)));
+        while (blockWithChildren.Count != 0)
+        {
+            var block = blockWithChildren.Dequeue();
+            await session.GetChildren(block);
+            //recursive
+            var children = block.Children.Where(b => b.HasChildren && BlockTypes.BlocksWithChildren.Contains(b.Type));
+            foreach (var child in children)
+                blockWithChildren.Enqueue(child);
+        }
+
+        var pageJson = JsonSerializer.Serialize(page, HttpNotionSession.NotionJsonSerializationOptions);
+        var blocksJson = JsonSerializer.Serialize(blocks, HttpNotionSession.NotionJsonSerializationOptions);
+        var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        await File.WriteAllTextAsync(Path.Combine(path, "AboutThis.full.json"), pageJson);
+        await File.WriteAllTextAsync(Path.Combine(path, "AboutThis.full.children.json"), blocksJson);
+        
+        var page2 = JsonSerializer.Deserialize<Page>(pageJson, HttpNotionSession.NotionJsonSerializationOptions);
+        Assert.IsNotNull(page2);
+        var blocks2 = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonSerializationOptions);
+        Assert.IsNotNull(blocks2);
+        Assert.AreEqual(blocks.Count,blocks2.Count);
     }
 
     [TestMethod]

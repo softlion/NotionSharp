@@ -226,12 +226,12 @@ public class HtmlRenderer
     protected virtual void TransformHeading2(Block block, StringBuilder sb)
     {
         sb.Append("<h2>");
-        Append(block.Heading1?.RichText, sb).AppendLine("</h2>");
+        Append(block.Heading2?.RichText, sb).AppendLine("</h2>");
     }
     protected virtual void TransformHeading3(Block block, StringBuilder sb)
     {
         sb.Append("<h3>");
-        Append(block.Heading1?.RichText, sb).AppendLine("</h3>");
+        Append(block.Heading3?.RichText, sb).AppendLine("</h3>");
     }
     protected virtual void TransformParagraph(Block block, StringBuilder sb)
     {
@@ -328,12 +328,12 @@ public class HtmlRenderer
         if (text == null)
             return sb;
 
-        var hasLink = text.Link?.Url != null;
-        if (hasLink)
-            sb.Append("<a href=\"").Append(Uri.EscapeUriString(text.Link.Url)).Append("\">");
+        // var hasLink = text.Link?.Url != null;
+        // if (hasLink)
+        //     sb.Append("<a href=\"").Append(Uri.EscapeUriString(text.Link.Url)).Append("\">");
         sb.Append(text.Content);
-        if (hasLink)
-            sb.Append("</a>");
+        // if (hasLink)
+        //     sb.Append("</a>");
 
         return sb;
     }

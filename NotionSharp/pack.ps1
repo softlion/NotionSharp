@@ -1,3 +1,12 @@
+#===================
+#OBSOLETE
+#Instead use the github action
+#Which currently builds and publishes a new version on each push
+#===================
+echo "Obsolete. Instead use the github action"
+return
+
+
 #####set /p nugetServer=Enter base nuget server url (with /): 
 if ($IsMacOS) {
     $msbuild = "msbuild"
