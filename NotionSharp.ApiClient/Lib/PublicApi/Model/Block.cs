@@ -128,7 +128,7 @@ public class Block : NamedObject, IBlockId
         
     public BlockChildPage? ChildPage { get; init; }
         
-    public NotionFile? Image { get; init; }
+    public NotionFile? Image { get; set; }
     public NotionFile? File { get; init; }
     public BlockTextAndChildrenAndColor? Quote { get; set; }
     public BlockCallout? Callout { get; init; }

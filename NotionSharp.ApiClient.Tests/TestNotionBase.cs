@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotionSharp.ApiClient.Lib;
@@ -210,9 +211,16 @@ public class TestNotionBase
         Assert.IsNotNull(pages);
         Assert.AreEqual(1, pages.Count);
 
-        var feed = await session.GetSyndicationFeed(pages[0], new ("https://"));
+        var feed = await session.GetSyndicationFeed(pages[0], new ("https://test.com"), 
+            cacheImage: LocalCacheImage);
+
         Assert.IsNotNull(feed?.Items);
         Assert.AreNotEqual(0, feed.Items.Count());
+
+        static async Task<string?> LocalCacheImage(string imageId, string imageUrl, CancellationToken cancel)
+        {
+            return imageUrl;
+        }
     }
         
     [TestMethod]

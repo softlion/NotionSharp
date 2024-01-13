@@ -293,7 +293,29 @@ public static class NotionSessionExtensions
         }
     }
 
+    /// <summary>
+    /// imageId: unique image ID
+    /// imageUrl: current temporary url
+    /// return: new static url, or null
+    /// </summary>
+    public delegate Task<string?> CacheImageDelegate(string imageId, string imageUrl, CancellationToken cancel);
 
+    /// <summary>
+    /// Cache images contained into the blocks
+    /// </summary>
+    /// <param name="blocks">List of child blocks of a page</param>
+    /// <param name="cacheImage">Your caching system</param>
+    /// <param name="cancel"></param>
+    public static async Task CacheImages(IEnumerable<Block> blocks, CacheImageDelegate cacheImage, CancellationToken cancel = default)
+    {
+        await Parallel.ForEachAsync(blocks.Where(b => b is { Type: BlockTypes.Image, Image.File.Url: not null }), cancel, async (block, localCancel) =>
+        {
+            var newUrl = await cacheImage.Invoke(block.Id, block.Image!.File!.Url, localCancel);
+            if (newUrl != null)
+                block.Image = block.Image with { File = block.Image.File with { Url = newUrl } };
+        });
+    }
+    
     /// <summary>
     /// Create a syndication feed from the child pages of this page.
     /// </summary>
@@ -303,6 +325,7 @@ public static class NotionSessionExtensions
     /// <param name="maxItems">max number of child pages to return</param>
     /// <param name="maxBlocks">limit the parsing of each page to the first maxBlocks blocks</param>
     /// <param name="stopBeforeFirstSubHeader">when true, stop parsing a page when a line containing a sub_header is found</param>
+    /// <param name="cacheImage">optionally used to transform the url of images, as notion API returns URLs that expire quickly</param>
     /// <param name="cancel"></param>
     /// <returns>A SyndicationFeed containing one SyndicationItem per child page</returns>
     /// <remarks>
@@ -313,17 +336,17 @@ public static class NotionSessionExtensions
     /// 
     /// Are included only child pages which are not restricted with the "integration".
     /// </remarks>
-    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, Page page, Uri baseUrl, int maxItems = 50, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
+    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, Page page, Uri baseUrl, int maxItems = 50, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CacheImageDelegate? cacheImage = null, CancellationToken cancel = default)
     {
         var childPages = await session.GetBlockChildren(page.Id, cancel: cancel)
-            .Where(b => b is { Type: BlockTypes.ChildPage, ChildPage: { } }) //2 checks are redundant. We could keep only one.
+            .Where(b => b is { Type: BlockTypes.ChildPage, ChildPage: not null }) //2 checks are redundant. We could keep only one.
             .Take(maxItems)
             .ToListAsync(cancel).ConfigureAwait(false);
 
         if (childPages.Count == 0)
             return new() { LastUpdatedTime = DateTimeOffset.Now };
-                    
-        var feed = await session.GetSyndicationFeed(childPages, baseUrl, maxBlocks, stopBeforeFirstSubHeader, cancel).ConfigureAwait(false);
+
+        var feed = await session.GetSyndicationFeed(childPages, baseUrl, maxBlocks, stopBeforeFirstSubHeader, cacheImage, cancel).ConfigureAwait(false);
         
         var title = page.Title();
         
@@ -332,10 +355,11 @@ public static class NotionSessionExtensions
         //feed.Title = new TextSyndicationContent(space.Name);
         //feed.Description = new TextSyndicationContent(space.Domain);
         feed.Id = page.Id;
-        feed.Title = new (title.Title.FirstOrDefault()?.PlainText);
+        feed.Title = new (title?.Title.FirstOrDefault()?.PlainText);
         //feed.Description = ??
         return feed;
     }
+
 
     /// <summary>
     /// Create a syndication feed from a list of page
@@ -345,12 +369,13 @@ public static class NotionSessionExtensions
     /// <param name="baseUrl">URL of the Notion domain for published pages</param>
     /// <param name="maxBlocks">limits the parsing of each page to the first maxBlocks blocks</param>
     /// <param name="stopBeforeFirstSubHeader">when true, stop parsing a page when a line containing a sub_header is found</param>
+    /// <param name="cacheImage">optionally used to transform the url of images, as notion API returns URLs that expire quickly</param>
     /// <param name="cancel"></param>
     /// <returns>A SyndicationFeed containing one SyndicationItem per page</returns>
     /// <remarks>
     /// The created feed has no title/description
     /// </remarks>
-    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, List<Block> childPages, Uri baseUrl, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CancellationToken cancel = default)
+    public static async Task<SyndicationFeed> GetSyndicationFeed(this NotionSession session, List<Block> childPages, Uri baseUrl, int maxBlocks = 20, bool stopBeforeFirstSubHeader = true, CacheImageDelegate? cacheImage = null, CancellationToken cancel = default)
     {
         var feedItems = new List<SyndicationItem>();
         var htmlRenderer = new HtmlRenderer();
@@ -363,10 +388,8 @@ public static class NotionSessionExtensions
             if (page.Type != BlockTypes.ChildPage)
                 throw new ArgumentException("All childPages must be of type BlockTypes.ChildPage", nameof(childPages));
 
-            //get blocks and extract an html content
-            // var blocks = await session.GetBlockChildren(page.Id, cancel: cancel)
-            //     .Take(maxBlocks)
-            //     .ToListAsync(cancel).ConfigureAwait(false);
+            if (cacheImage != null)
+                await CacheImages(page.Children, cacheImage, cancel);
         
             var content = htmlRenderer.GetHtml(page.Children, stopBeforeFirstSubHeader);
             var title = page.ChildPage!.Title;
@@ -376,19 +399,23 @@ public static class NotionSessionExtensions
             {
                 Id = page.Id,
                 BaseUri = pageUri,
-                Summary = new TextSyndicationContent(content),
+                Summary = new (content),
                 PublishDate = page.CreatedTime,
                 LastUpdatedTime = page.LastEditedTime,
             };
 
-            // Property not yet available in API
-            // if (!String.IsNullOrWhiteSpace(page.Format?.PageIcon))
-            // {
-            //     if(Uri.TryCreate(page.Format.PageIcon, UriKind.Absolute, out _))
-            //         item.AttributeExtensions.Add(new XmlQualifiedName("iconUrl"), pageBlock.Format.PageIcon);
-            //     else
-            //         item.AttributeExtensions.Add(new XmlQualifiedName("iconString"), pageBlock.Format.PageIcon);
-            // }
+
+            var pageIconImageUrl = page.Image?.File?.Url;
+            if (!String.IsNullOrWhiteSpace(pageIconImageUrl))
+            {
+                if (cacheImage != null)
+                    pageIconImageUrl = await cacheImage(page.Id, pageIconImageUrl, cancel) ?? pageIconImageUrl;
+
+                if(Uri.TryCreate(pageIconImageUrl, UriKind.Absolute, out _))
+                    item.AttributeExtensions.Add(new ("iconUrl"), pageIconImageUrl);
+                // else
+                //     item.AttributeExtensions.Add(new XmlQualifiedName("iconString"), pageBlock.Format.PageIcon);
+            }
     
             feedItems.Add(item);
         }
