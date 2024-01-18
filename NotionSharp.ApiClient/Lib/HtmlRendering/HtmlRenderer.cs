@@ -150,8 +150,10 @@ public class HtmlRenderer
 
         sb.Append("""<div class="notion-code-block" />""");
 
-        sb.Append($"""<code class="language-{code.Language}" />""");
-        Append(code.RichText, sb);
+        sb.AppendLine($"""<code class="language-{code.Language}">""");
+        var sb1 = new StringBuilder(code.RichText.FirstOrDefault()?.Text?.Content)
+            .Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("\r", "");
+        sb.Append(sb1).AppendLine();
         sb.AppendLine("</code>");
 
         if (code.Caption?.Count > 0)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -127,6 +128,55 @@ public class TestNotionHtml
 </li></ul>
 ";
         Assert.AreEqual(expectedHtml, html);
+    }
+
+    /// <summary>
+    /// Test Code blocks
+    /// </summary>
+    /// <remarks>
+    /// AppendLine appends \r\n on windows, \r on linux 
+    /// </remarks>
+    [TestMethod]
+    public async Task TestGetHtml_Code()
+    {
+        var blocksJson = await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "JsonData", "AboutThis.full.children.json"));
+        var blocks = JsonSerializer.Deserialize<List<Block>>(blocksJson, HttpNotionSession.NotionJsonFullSerializationOptions);
+
+        var block = blocks.Where(b => b.Type == "code").Take(1).ToList();
+        Assert.AreEqual(1, block.Count);
+
+        var html = new HtmlRenderer().GetHtml(block).Replace("\r", "");
+        var expectedHtml = """
+<div class="notion-code-block" /><code class="language-c#">
+&lt;svg:SvgImage Svg=&quot;res:images.logo&quot; HeighRequest=&quot;32&quot; /&gt;
+
+XamSvg.Shared.Config.ResourceAssemblies = new [] { typeof(App).Assembly };
+</code>
+</div>
+
+""".Replace("\r", "");
+
+        var i = FindDifferingIndex(expectedHtml, html);
+        Assert.AreEqual(-1, i);
+        
+        Assert.AreEqual(expectedHtml, html);
+    }
+
+    static int FindDifferingIndex(string str1, string str2)
+    {
+        var minLength = Math.Min(str1.Length, str2.Length);
+
+        for (var i = 0; i < minLength; i++)
+        {
+            if (str1[i] != str2[i])
+                return i; // Found the differing index
+        }
+
+        // If the loop completes, check if one string is longer than the other
+        if (str1.Length != str2.Length)
+            return minLength; // Strings are different in length
+
+        return -1; // Strings are identical
     }
 
 //     [TestMethod]

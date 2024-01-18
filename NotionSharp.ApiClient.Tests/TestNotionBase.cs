@@ -261,7 +261,7 @@ public class TestNotionBase
     }
     
     [TestMethod]
-    //[Ignore("Run this manually to create the json files")]
+    [Ignore("Run this manually to create the json files")]
     public async Task TestPageAndChildrenSerialization()
     {
         var session = new NotionSession(TestUtils.CreateOfficialNotionSessionInfo());
