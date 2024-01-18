@@ -84,6 +84,9 @@ public class HtmlRenderer
             case BlockTypes.ColumnList:
                 TransformColumnList(block, sb);
                 break;
+            case BlockTypes.Code:
+                TransformCode(block, sb);
+                break;
                 
             case BlockTypes.Unsupported:
                 break;
@@ -138,6 +141,23 @@ public class HtmlRenderer
             sb.AppendLine($"""<img class="notion-icon" src="{iconUrl}" />""");
 
         Append(callout.RichText, sb);
+        sb.AppendLine("</div>");
+    }
+    
+    protected virtual void TransformCode(Block block, StringBuilder sb)
+    {
+        var code = block.Code!;
+
+        sb.Append("""<div class="notion-code-block" />""");
+
+        sb.Append("""<div class="notion-code-caption" />""");
+        Append(code.Caption, sb);
+        sb.Append("""</div>""");
+
+        sb.Append($"""<div class="notion-code language-{code.Language}" />""");
+        Append(code.RichText, sb);
+        sb.AppendLine("</div>");
+
         sb.AppendLine("</div>");
     }
 

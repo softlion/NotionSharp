@@ -27,6 +27,7 @@ public static class BlockTypes
     public const string Callout = "callout";
     public const string ColumnList = "column_list";
     public const string Column = "column";
+    public const string Code = "code";
 
     public static readonly string[] SupportedBlocks =
     {
@@ -36,7 +37,7 @@ public static class BlockTypes
         //When the is_toggleable property is true
         Heading1, Heading2, Heading3,
         NumberedListItem, Paragraph, Image, Quote, File, //SyncedBlock, Table, Template,
-        ToDo, Toggle
+        ToDo, Toggle, Code
     };
 
     public static readonly string[] BlocksWithChildren =
@@ -125,6 +126,7 @@ public class Block : NamedObject, IBlockId
     public BlockTextAndChildren? NumberedListItem { get; init; } 
     public BlockTextAndChildrenAndCheck? ToDo { get; init; }
     public BlockTextAndChildren? Toggle { get; init; }
+    public BlockCode? Code { get; init; }
         
     public BlockChildPage? ChildPage { get; init; }
         
@@ -146,6 +148,9 @@ public record BlockTextAndChildrenAndColor(List<Block> Children, List<RichText> 
 {
     public NotionColor Color { get; init; }
 }
+public record BlockCode(string Language, List<RichText> Caption, List<RichText> RichText) : BlockText(RichText);
+
+
 public record BlockChildPage(string Title);
 
 public record BlockCallout(List<RichText> RichText, NotionColor Color, NotionIcon Icon)
