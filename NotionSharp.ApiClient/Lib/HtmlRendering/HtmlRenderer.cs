@@ -150,13 +150,16 @@ public class HtmlRenderer
 
         sb.Append("""<div class="notion-code-block" />""");
 
-        sb.Append("""<div class="notion-code-caption" />""");
-        Append(code.Caption, sb);
-        sb.Append("""</div>""");
-
-        sb.Append($"""<div class="notion-code language-{code.Language}" />""");
+        sb.Append($"""<code class="language-{code.Language}" />""");
         Append(code.RichText, sb);
-        sb.AppendLine("</div>");
+        sb.AppendLine("</code>");
+
+        if (code.Caption?.Count > 0)
+        {
+            sb.Append("""<div class="notion-code-caption" />""");
+            Append(code.Caption, sb);
+            sb.Append("""</div>""");
+        }
 
         sb.AppendLine("</div>");
     }

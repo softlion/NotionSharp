@@ -148,7 +148,7 @@ public record BlockTextAndChildrenAndColor(List<Block> Children, List<RichText> 
 {
     public NotionColor Color { get; init; }
 }
-public record BlockCode(string Language, List<RichText> Caption, List<RichText> RichText) : BlockText(RichText);
+public record BlockCode(string Language, List<RichText>? Caption, List<RichText> RichText) : BlockText(RichText);
 
 
 public record BlockChildPage(string Title);
