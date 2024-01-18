@@ -12,12 +12,12 @@ Those are not priority and up for grabs.
 This is an unofficial [Notion](https://notion.so) public API beta library and website template. You can, for example, get notion pages as a RSS feed. You can also use it as a simple CMS (Content Management System).
 
 [![NuGet][nuget-img]][nuget-link]  
-![Nuget](https://img.shields.io/nuget/dt/Softlion.NotionSharp.ApiClient)
+![Nuget](https://img.shields.io/nuget/dt/Softlion.NotionSharp)
 
 ![publish to nuget](https://github.com/softlion/NotionSharp/workflows/publish%20to%20nuget/badge.svg)
 
-[nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp.ApiClient/
-[nuget-img]: https://img.shields.io/nuget/v/Softlion.NotionSharp.ApiClient
+[nuget-link]: https://www.nuget.org/packages/Softlion.NotionSharp/
+[nuget-img]: https://img.shields.io/nuget/v/Softlion.NotionSharp
 
 
 ## SDK Usage
@@ -37,7 +37,8 @@ Example: get the HTML content of a page
 
 ```csharp
     var page = await session.Search(filterOptions: FilterOptions.ObjectPage)
-        .FirstAsync(p => p.Title?.Title?.FirstOrDefault().PlainText == "Procrastination");
+            .WhereAwait(async p => p.Title().Title[0].PlainText == "Procrastination")
+            .FirstAsync();
 
     var html = await session.GetHtml(page);
 ```
