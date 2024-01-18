@@ -117,7 +117,7 @@ public class HtmlRenderer
  
         sb.Append("<div class=\"notion-quote-block");
         if(color != null)
-            sb.Append($" notion-block-color-{color}>");
+            sb.Append($" notion-color-{color}>");
         sb.Append("\">");
 
         Append(quote, sb);
@@ -131,7 +131,7 @@ public class HtmlRenderer
 
         sb.Append("""<div class="notion-callout-block""");
         if(color != null)
-            sb.Append($""" notion-block-color-{color}""");
+            sb.Append($""" notion-color-{color}""");
         sb.Append("\">");
 
         if (callout.Icon is NotionEmoji emoji)
@@ -325,8 +325,9 @@ public class HtmlRenderer
                     sb.Append(" notion-strikethrough");
                 if (line.Annotation.Underline)
                     sb.Append(" notion-underline");
-                if (line.Annotation.Color is not null and not NotionColor.Default)
-                    sb.Append(" notion-color-").Append(line.Annotation.Color);
+                var color = line.Annotation.Color.GetColor();
+                if (color != null)
+                    sb.Append(" notion-color-").Append(line.Annotation.Color.GetColor());
                 if (line.Annotation.Code)
                     sb.Append(" notion-code");
                 sb.Append("\"");
@@ -416,7 +417,7 @@ public class HtmlRenderer
 //                 },
 //                 TransformCallout = (data, block) =>
 //                 {
-//                     sb.AppendLine(@$"<div class=""notion-callout-block notion-block-color-{data.Format.BlockColor}"">");
+//                     sb.AppendLine(@$"<div class=""notion-callout-block notion-color-{data.Format.BlockColor}"">");
 //
 //                     if (Uri.TryCreate(data.Format.PageIcon, UriKind.Absolute, out var iconUrl))
 //                         sb.AppendLine(@$"<img class=""notion-icon"" src=""{iconUrl}"" />");

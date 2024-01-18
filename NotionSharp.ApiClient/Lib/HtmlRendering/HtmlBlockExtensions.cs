@@ -7,10 +7,15 @@ public static class HtmlBlockExtensions
 {
     public static string? GetColor(this NotionColor color)
     {
+        if (color == NotionColor.Default)
+            return null;
+        
         //TODO: replace tolower by ToSnakeCase
         return ((string?)TypeDescriptor.GetConverter(color).ConvertTo(color, typeof(string)))?.ToLower();
     }
-    
+
+    public static string? GetColor(this NotionColor? color) => color?.GetColor();
+
     /// <summary>
     /// TODO: switch to https://github.com/twitter/twemoji
     /// </summary>
