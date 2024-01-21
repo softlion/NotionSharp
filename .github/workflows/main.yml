@@ -39,28 +39,31 @@ jobs:
           dotnet build --configuration Release
           dotnet pack --configuration Release --no-build --output "${{ env.NuGetDirectory }}"
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: nuget
-          if-no-files-found: error
-          retention-days: 2
-          path: ${{ env.NuGetDirectory }}/*.nupkg
+# Github artifact have storage costs even after you delete them
+# Disable, now that the build process is stable.
+
+#      - name: Upload Artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: nuget
+#          if-no-files-found: error
+#          retention-days: 2
+#          path: ${{ env.NuGetDirectory }}/*.nupkg
             
-  publish:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: nuget
-          path: ${{ env.NuGetDirectory }}
+#  publish:
+#    runs-on: ubuntu-latest
+#    needs: build
+#    steps:
+#      - uses: actions/download-artifact@v3
+#        with:
+#          name: nuget
+#          path: ${{ env.NuGetDirectory }}
         
       - name: Push NuGet package
         run: |
           dotnet nuget push "${{ env.NuGetDirectory }}/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}}
 
-      - name: Delete artifact
-        uses: geekyeggo/delete-artifact@v4
-        with:
-          name: nuget
+#      - name: Delete artifact
+#        uses: geekyeggo/delete-artifact@v4
+#        with:
+#          name: nuget
