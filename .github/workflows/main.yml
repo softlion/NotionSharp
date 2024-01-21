@@ -33,21 +33,18 @@ jobs:
         with:
           dotnet-version: '${{env.DOTNETVERSION}}'
 
-      - name: Restore dependencies
-        run: dotnet restore
-
       - name: Build
-        run: dotnet build --configuration Release
-
-      - name: Pack
-        run: dotnet pack --configuration Release --no-build --output "${{ env.NuGetDirectory }}"
+        run: |
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet pack --configuration Release --no-build --output "${{ env.NuGetDirectory }}"
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nuget
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 2
           path: ${{ env.NuGetDirectory }}/*.nupkg
             
   publish:
@@ -61,6 +58,9 @@ jobs:
         
       - name: Push NuGet package
         run: |
-      - name: Push NuGet package
-        run: |
           dotnet nuget push "${{ env.NuGetDirectory }}/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}}
+
+      - name: Delete artifact
+        uses: geekyeggo/delete-artifact@v4
+        with:
+          name: nuget
