@@ -59,3 +59,5 @@ Get a RSS representation from the sub-pages of a page:
 Big Thanks to those sponsors for supporting this project and keeping it free.
 
 - [vapolia.eu](https://vapolia.eu)
+
+![Alt](https://repobeats.axiom.co/api/embed/ca0dd8bbd02e02732b50fa0ca934dabe506cfde7.svg "Repobeats analytics image")
