@@ -50,7 +50,7 @@ Get a RSS representation from the sub-pages of a page:
 
   When you encounter `CmsPageTitle` below in this setup, replace it with the exact title of your root page.
 
-#### Next steps
+### Documentation
 - Using the [notion's public api](README%20official.md) (Using the official API)
 - Using the [unofficial integration](README%20unofficial.md) (legacy, using the unofficial API)
 
