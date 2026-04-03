@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Polly" Version="8.2.1" />
+    <PackageReference Include="Polly" Version="8.6.6" />
     <PackageReference Include="Softlion.FluentRest" Version="1.0.7" />
-    <PackageReference Include="System.ServiceModel.Syndication" Version="8.0.0" />
-    <PackageReference Include="System.Text.Json" Version="8.0.1" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.5" />
+    <PackageReference Include="System.Text.Json" Version="10.0.5" />
   </ItemGroup>
 
   <PropertyGroup>
     <!--  nuget configurable properties -->
-    <Version>1.0.13</Version>
+    <Version>1.1.0</Version>
     <VersionSuffix></VersionSuffix>
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
@@ -41,6 +41,9 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/softlion/NotionSharp</PackageProjectUrl>
     <PackageReleaseNotes>
+      1.1.0
+      net10, bump nugets.
+      
       1.0.14
       Bump versions.
 
